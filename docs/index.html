@@ -23,14 +23,24 @@
   <script>
     window.$docsify = {
       logo: 'http://static.wkclz.com/img/logo.png',
-      loadSidebar: true,
       name: 'L.Z.',
       relativePath: true,
       loadNavbar: true,
       coverpage: true,
       auto2top: true,
+      loadSidebar: true,
+      subMaxLevel: 2,
       name: '',
-      repo: ''
+      repo: '',
+      alias: {
+        '/.*/_navbar.md': '/_navbar.md',
+        '/.*/_sidebar.md': '/_sidebar.md',
+        // '/.*/_coverpage.md': '/_coverpage.md'
+      },
+      coverpage: {
+        '/': '_coverpage.md',
+        '/md/': '_coverpage.md'
+      }
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>

@@ -7,4 +7,4 @@
 
 [GitHub](https://github.com/lz-cloud/)
 [Gitee](http://gitee.com/wkclz/cms-core)
-[Get Started](#)
+[Get Started](/md/summary.md)
