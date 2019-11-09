@@ -1,5 +1,3 @@
-![logo](img/favicon.png)
-
 <img src="http://static.wkclz.com/img/logo.png" width="400" >
 
 # SpringCloud 微服务开发框架【建设中..】
