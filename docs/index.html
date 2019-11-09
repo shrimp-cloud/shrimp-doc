@@ -7,7 +7,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
-  <link rel="shortcut icon" href="./img/favicon.png">
+  <link rel="shortcut icon" href="./img/favicon.svg">
   <script>
     var _hmt = _hmt || [];
     (function() {
@@ -29,7 +29,7 @@
       coverpage: true,
       auto2top: true,
       loadSidebar: true,
-      subMaxLevel: 2,
+      subMaxLevel: 3,
       name: '',
       repo: '',
       alias: {
@@ -40,9 +40,17 @@
       coverpage: {
         '/': '_coverpage.md',
         '/md/': '_coverpage.md'
+      },
+      search: {
+        maxAge: 86400000,               // 过期时间，单位毫秒，默认一天
+        paths: [],                      // or 'auto'，匹配文件路径
+        placeholder: 'Type to search',  // 搜索提示框文字，
+        noData: 'No Results!',          // 找不到结果文字提示，
+        depth: 6,                       // 搜索标题的最大程级, 1 - 6
       }
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
 </body>
 </html>

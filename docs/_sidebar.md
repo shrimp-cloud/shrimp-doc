@@ -1,4 +1,4 @@
-* 概览
+* 简介
   * [summary](/md/summary.md "概览")
 * 核心包
     * [core](/md/core.md "核心包")
