@@ -48,5 +48,22 @@
   - RocketMQ
   - ...
 
+## 仓库
+- lz-doc (当前文档)
+- lz-parent
+- lz-core
+- lz-sdk
+- lz-spring-boot-starter
+- lz-soa
+  - lz-eureka
+  - lz-config
+  - lz-admin
+  - lz-zuul
+- lz-sys
+- lz-cas
+- lz-gov
+- lz-pay
+
+
 ## 起步
 - 请转向 脚手架
