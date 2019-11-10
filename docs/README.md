@@ -1,12 +1,14 @@
 # LZ-cloud SpringCloud 微服务开发框架
 
-> 一套[完整]的SpringCloud微服务框架
+> 一套[完整]的SpringCloud微服务框架. 文档完成进度：基本完成《基础》部分
+
 
 ## 地址
 * [GitHub: https://github.com/lz-cloud/](https://github.com/lz-cloud/)
 * [Gitee: http://gitee.com/lz-cloud/](http://gitee.com/lz-cloud/)
 * [文档: http://lz-cloud.wkclz.com/](http://lz-cloud.wkclz.com/)
 * [文档(备用): http://lz-cloud.wkclz.com/](http://lz-cloud.wkclz.com/)
+* github 为主要仓库，再同步到 gitee 做国内的访问加速。【文档】是静态化的文档，有利于 seo，【文档(备用)】是原始文档，直接读git 仓库。
 
 
 ## 项目由来
