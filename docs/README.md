@@ -52,19 +52,20 @@
 
 ## 仓库
 - lz-doc (当前文档)
-- lz-parent
-- lz-core
-- lz-sdk
-- lz-spring-boot-starter
-- lz-soa
-  - lz-eureka
-  - lz-config
-  - lz-admin
-  - lz-zuul
-- lz-sys
-- lz-cas
-- lz-gov
-- lz-pay
+- lz-parent 父工程
+- lz-core 核心工程
+- lz-sdk SDK
+- lz-spring-boot-starter 启动器
+- config-repo 配置仓库
+- lz-soa 服务治理
+  - lz-eureka 注册中心
+  - lz-config 配置中心
+  - lz-admin 监控
+  - lz-zuul 网关
+- lz-sys 系统服务
+- lz-cas 用户及权限服务
+- lz-gov 服务管理
+- lz-pay 支付
 
 
 ## 起步
