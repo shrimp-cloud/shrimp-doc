@@ -7,14 +7,14 @@
   * [Nginx](/base/nginx.md "Nginx")
   * [持续集成](/base/jenkins.md "持续集成")
 * 核心包
-  * [core](/md/core.md "核心包")
+  * [文档未完成](/md/core.md "核心包")
 * 脚手架
-  * [demo](/md/demo.md "脚手架")
+  * [文档未完成](/md/demo.md "脚手架")
 * 代码生成器
-  * [gen](/md/gen.md "代码生成器")
+  * [文档未完成](/md/gen.md "代码生成器")
 * 数据库
-  * [db](/md/db.md "数据库")
+  * [文档未完成](/md/db.md "数据库")
 * 系统模块
-  * [sys](/md/sys.md "系统模块")
+  * [文档未完成](/md/sys.md "系统模块")
 * 用户及权限
-  * [cas](/md/cas.md "用户及权限")
+  * [文档未完成](/md/cas.md "用户及权限")
