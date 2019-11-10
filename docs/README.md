@@ -2,6 +2,13 @@
 
 > 一套[完整]的SpringCloud微服务框架
 
+## 地址
+* [GitHub: https://github.com/lz-cloud/](https://github.com/lz-cloud/)
+* [Gitee: http://gitee.com/lz-cloud/](http://gitee.com/lz-cloud/)
+* [文档: http://lz-cloud.wkclz.com/](http://lz-cloud.wkclz.com/)
+* [文档(备用): http://lz-cloud.wkclz.com/](http://lz-cloud.wkclz.com/)
+
+
 ## 项目由来
 当前项目，从自己接触的第一个项目开始，慢慢累积的成果。其中，有技术选型的不合理而不再回头，也有感觉成功而不断完善。从开始认识 java到现在，已经1500多个日夜。 \
 将这些东西整理出来，可以让大家一起使用，更希望可以让大家提一些意见，让系统更完善，一起学习一起进步。

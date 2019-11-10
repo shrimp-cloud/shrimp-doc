@@ -13,7 +13,7 @@ pageSize | 每页数 | Integer | 10
 orderBy | 排序字段 | String | id desc
 timeFrom | 时间范围开始 | yyyy-MM-dd HH:mm:ss | NaN
 timeTo | 时间范围结束 | yyyy-MM-dd HH:mm:ss | NaN
-dateRangeType | 时间范围类型 | HOUR("时"),DAY("天"),YESTERDAY("周"),MONTH("月"),QUATER("季"), YEAR("年"); | NaN
+dateRangeType | 时间范围类型 | HOUR("时"),DAY("天"),YESTERDAY("周"), MONTH("月"),QUATER("季"),YEAR("年"); | NaN
 
 
 # 接口的返回值
@@ -26,7 +26,7 @@ code |-1 | 系统错误，需要开发人员处理
 requestTime | 请求时间 | 请求进入  controller 的时间
 responeTime | 响应时间 | 请求在Controller 进行set 结果的时间
 costTime | 时间消耗 | 在 Controller 内消耗的时间，单位为毫秒
-data  | 详情 | 错误时为错误内容，提示时为用户提示，正常返回时为业务数据【无具体业务数据时返回 true】
+data  | 详情 | 正常返回时为业务数据【无具体业务数据时返回 true】
 ==分页== | ==查询== | ==有返回== 
 pageNo | Integer | 页码
 pageSize | Integer | 每页数

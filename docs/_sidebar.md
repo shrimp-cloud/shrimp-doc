@@ -1,7 +1,11 @@
 * 基础
   * [仓库](/base/repo.md "仓库")
   * [父工程](/base/parent.md "父工程")
+  * [SDK](/base/sdk.md "SDK")
+  * [启动器](/base/starter.md "启动器")
   * [规范](/base/standard.md "规范")
+  * [Nginx](/base/nginx.md "Nginx")
+  * [持续集成](/base/jenkins.md "持续集成")
 * 核心包
   * [core](/md/core.md "核心包")
 * 脚手架
