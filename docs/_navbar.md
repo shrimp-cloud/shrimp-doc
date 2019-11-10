@@ -1,6 +1,5 @@
 * [主页](https://www.wkclz.com)
 * [文档](/)
-
-* SCM
+* 项目
   * [GitHub](https://github.com/lz-cloud/)
-  * [Gitee](http://gitee.com/wkclz/cms-core)
+  * [Gitee](http://gitee.com/lz-cloud/)

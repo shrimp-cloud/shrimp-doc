@@ -6,5 +6,5 @@
 - 助您快速起步，快速部署。
 
 [GitHub](https://github.com/lz-cloud/)
-[Gitee](http://gitee.com/wkclz/cms-core)
-[Get Started](/md/summary.md)
+[Gitee](http://gitee.com/lz-cloud/)
+[Get Started](/README.md)
