@@ -6,8 +6,9 @@
   * [规范](/base/standard.md "规范")
   * [Nginx](/base/nginx.md "Nginx")
   * [持续集成](/base/jenkins.md "持续集成")
-* 核心包
-  * [文档未完成](/md/core.md "核心包")
+* 微服务
+  * [核心包-未完成](/md/core.md "核心包")
+  * [跟踪信息传递](/micro/trace.md "跟踪信息传递")
 * 脚手架
   * [文档未完成](/md/demo.md "脚手架")
 * 代码/项目生成器
