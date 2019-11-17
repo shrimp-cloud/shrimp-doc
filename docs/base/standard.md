@@ -104,9 +104,6 @@ rows | Array | 具体的业务数据
   3. 多表中的相同列，必须保证列定义一致
   4. 每个表都要有
     - 排序（sort）
-    - 可用状态（enable_flag）
-    - 可用开始（enable_begin）
-    - 可用结束（enable_end）
     - 创建时间（create_time）
     - 创建人（create_by）
     - 修改时间（update_time）
