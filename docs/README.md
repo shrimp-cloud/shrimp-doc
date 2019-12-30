@@ -6,7 +6,7 @@
 ## 地址
 * [GitHub: https://github.com/lz-cloud/](https://github.com/lz-cloud/)
 * [Gitee: http://gitee.com/lz-cloud/](http://gitee.com/lz-cloud/)
-* [文档: http://lz-cloud.wkclz.com/](http://lz-cloud.wkclz.com/)
+* [文档: http://doc.wkclz.com/](http://doc.wkclz.com/)
 * [文档(备用): http://lz-cloud.wkclz.com/](http://lz-cloud.wkclz.com/)
 * github 为主要仓库，再同步到 gitee 做国内的访问加速。【文档】是静态化的文档，有利于 seo，【文档(备用)】是原始文档，直接读git 仓库。
 
@@ -66,6 +66,21 @@
 - lz-cas 用户及权限服务
 - lz-gov 服务管理
 - lz-pay 支付
+- lz-pms 商品管理
+- lz-cms 内容管理
+
+
+## 接口文档
+
+模块 | 含意 | 地址
+---|---|---
+demo | 示例项目 | [文档](http://doc.wkclz.com/demo)
+gen | 代码生成 | [文档](http://doc.wkclz.com/gen)
+sys | 系统管理 | [文档](http://doc.wkclz.com/sys)
+cas | 用户/权限/资源 | [文档](http://doc.wkclz.com/cas)
+pay | 支付 | [文档](http://doc.wkclz.com/pay)
+pms | 产品 | [文档](http://doc.wkclz.com/pms)
+cms | 内容 | [文档](http://doc.wkclz.com/cms)
 
 
 ## 起步
