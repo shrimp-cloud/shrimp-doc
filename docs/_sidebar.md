@@ -7,7 +7,7 @@
   * [Nginx](/base/nginx.md "Nginx")
   * [持续集成(CI)](/base/jenkins.md "CI")
 * 微服务
-  * [核心包-未完成](/md/core.md "核心包")
+  * [核心包](/micro/core.md "核心包")
   * [跟踪信息传递](/micro/trace.md "跟踪信息传递")
 * 脚手架
   * [文档未完成](/md/demo.md "脚手架")
