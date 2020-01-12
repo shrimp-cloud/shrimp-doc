@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.wkclz.parent</groupId>
         <artifactId>lz-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>3.1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 ```
