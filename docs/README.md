@@ -62,9 +62,11 @@
   - lz-config 配置中心
   - lz-admin 监控
   - lz-zuul 网关
+- lz-demo 示例项目
+- lz-gen 代码生成
+- lz-gov 服务管理
 - lz-sys 系统服务
 - lz-cas 用户及权限服务
-- lz-gov 服务管理
 - lz-pay 支付
 - lz-pms 商品管理
 - lz-cms 内容管理
@@ -76,6 +78,7 @@
 ---|---|---
 demo | 示例项目 | [文档](http://doc.wkclz.com/demo)
 gen | 代码生成 | [文档](http://doc.wkclz.com/gen)
+gov | 服务管理 | [文档](http://doc.wkclz.com/gov)
 sys | 系统管理 | [文档](http://doc.wkclz.com/sys)
 cas | 用户/权限/资源 | [文档](http://doc.wkclz.com/cas)
 pay | 支付 | [文档](http://doc.wkclz.com/pay)
