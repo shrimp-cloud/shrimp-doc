@@ -68,7 +68,7 @@ rows | Array | 具体的业务数据
 
 # 规范推荐
 - [阿里巴巴Java开发规约](https://github.com/alibaba/p3c)
-- 已经包含 规范条例，ide 的检查插件
+- 已经包含 规范条例，idea 的检查插件
 
 # 自定义规范
 ```
