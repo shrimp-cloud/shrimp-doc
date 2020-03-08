@@ -6,44 +6,58 @@
 # 原理
 - 使用 github 做包存储 (本质是一个 git仓库)
 - 访问使用 raw，就可以把 git 仓库作为 mvn 仓库使用
+- 服务器 repo 目录直接开放
+- 以上五种方法，都各种问题，还得用 nexus
 
 # 使用
-1. 克隆(创建)仓库项目
+1. 搭建 nexus
 ```
-git clone https://github.com/wkclz/mvn-repository.git
+http://mvn.wkclz.com
 ```
 2. 需要部署的项目上，添加配置 【自行修改路径】
 ```
     <distributionManagement>
         <repository>
-            <id>nexus</id>
-            <name>nexus</name>
-            <url>file:${user.home}/path/to/mvn-repository</url>
+            <id>wkclz-release</id>
+            <name>wkclz-release</name>
+            <url>http://mvn.wkclz.com/repository/wkclz-release/</url>
         </repository>
         <snapshotRepository>
-            <id>Nexus Snapshot</id>
-            <url>file:${user.home}/path/to/mvn-repository</url>
+            <id>wkclz-snapshot</id>
+            <name>wkclz-snapshot</name>
+            <url>http://mvn.wkclz.com/repository/wkclz-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
 ```
-3. 需要部署的项目上，执行 deploy
-4. push mvn-repository 项目
+3. 添加账号配置
+```
+        <server>
+            <id>wkclz-release</id>
+            <username>username</username>
+            <password>passwd</password>
+        </server>
+        <server>
+            <id>wkclz-snapshot</id>
+            <username>username</username>
+            <password>passwd</password>
+        </server>
+
+```
+4. 需要部署的项目上，执行 deploy
 5. 在需要引用包的项目上，添加配置
 ```
     <repositories>
         <repository>
-            <id>github-mvn</id>
-            <url>https://github.com/wkclz/mvn-repository/raw/master</url>
+            <id>wkclz-public</id>
+            <url>http://mvn.wkclz.com/repository/wkclz-public/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
     </repositories>
+
 ```
 6. 为方便全部项目可用此仓库，可以将此仓库加入到 mvn 的 setting 中。
-6. 强制使用快照是为了更好的进行包管理，当然也影响了包获取的速度和成功率。
+7. 强制使用快照是为了更好的进行包管理，当然也影响了包获取的速度和成功率。
 
-# 可选升级方案
-1. 自行搭建 nexus 进行包管理
-2. 项目足够成熟之后，发布 release 包到 mvn 中央仓库
