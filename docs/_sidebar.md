@@ -6,6 +6,8 @@
   * [规范](/base/standard.md "规范")
   * [Nginx](/base/nginx.md "Nginx")
   * [持续集成(CI)](/base/jenkins.md "CI")
+* 服务器
+  * [初始化](/server/init.md "服务器初始化")
 * 微服务
   * [核心包](/micro/core.md "核心包")
   * [跟踪信息传递](/micro/trace.md "跟踪信息传递")
