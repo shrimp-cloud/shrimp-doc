@@ -121,3 +121,15 @@ systemctl start nginx
 systemctl enable nginx
 
 ```
+
+## 开机执行指定脚本
+```shell script
+# vim   /etc/rc.d/rc.local 
+# 以 apps 执行 /opt/tomcat-jenkins-9012/bin/startup.sh
+
+su - apps -c '/bin/sh /opt/tomcat-jenkins-9012/bin/startup.sh'
+
+:wq
+
+chmod +x /etc/rc.d/rc.local
+```
