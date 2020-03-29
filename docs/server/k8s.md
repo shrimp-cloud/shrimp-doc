@@ -88,11 +88,26 @@ yum clean all
 yum makecache
 yum install -y kubelet kubeadm kubectl
 
+# 修改docker Cgroup Driver为systemd
+vim /usr/lib/systemd/system/docker.service
+添加 【见下图】 ： --exec-opt native.cgroupdriver=systemd
+
+
+
+
 
 systemctl start kubelet
 systemctl enable kubelet
+
+
+kubeadm init --image-repository registry.aliyuncs.com/google_containers
+
+
 # 启动没成功
+
+# 启动失败， journalctl -xefu kubelet 可以看到错误详情
 ```
+![](../img/k8s_01.png)
 
 
 

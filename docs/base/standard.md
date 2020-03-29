@@ -21,8 +21,8 @@ dateRangeType | 时间范围类型 | HOUR("时"),DAY("天"),YESTERDAY("周"), MO
 code |-1 | 系统错误，需要开发人员处理 
 - | 0 | 业务提示，只需反馈给页面
 - | 1 | 功能无异常，有业务状态返回
+- | \> 1 | 请看code 对照表
 msg | 异常消息 | code不为1时有返回
-requestTime | 请求时间 | 请求进入  controller 的时间
 requestTime | 请求时间 | 请求进入  controller 的时间
 responeTime | 响应时间 | 请求在Controller 进行set 结果的时间
 costTime | 时间消耗 | 在 Controller 内消耗的时间，单位为毫秒
@@ -37,7 +37,7 @@ rows | Array | 具体的业务数据
 
 
 
-# 返回特殊 code 代码对应表
+# 返回特殊 code 代码对照表
 
 代码 | 提示语 | 说明
 ---|---|---

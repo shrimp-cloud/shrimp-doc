@@ -22,7 +22,7 @@ hostnamectl set-hostname lzser
 yum remove mariadb-libs -y
 # 安装工具： 
 yum install -y epel-release yum-utils
-yum install -y vim net-tools numactl lrzsz zip unzip wget htop git nodejs
+yum install -y vim net-tools numactl lrzsz zip unzip wget htop git nodejs telnet
 
 ```
 
