@@ -8,6 +8,7 @@
   * [CI/CD](/base/jenkins.md "CI/CD")
 * 服务器
   * [初始化](/server/init.md "服务器初始化")
+  * [K8S](/server/k8s.md "K8S")
 * 微服务
   * [核心包](/micro/core.md "核心包")
   * [跟踪信息传递](/micro/trace.md "跟踪信息传递")
