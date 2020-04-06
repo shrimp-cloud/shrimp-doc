@@ -109,7 +109,7 @@ KUBELET_EXTRA_ARGS="--fail-swap-on=false"
 
 # 统一 cgroup 为 systemd
 vim /var/lib/kubelet/kubeadm-flags.env
-Environment=KUBELET_EXTRA_ARGS=--cgroup-driver=systemd
+KUBELET_KUBEADM_ARGS="--cgroup-driver=systemd --network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.2"
 :wq
 
 

@@ -16,6 +16,7 @@
   * [代码生成器-未完成](/md/gen.md "代码/项目生成器")
 * 系统设计
   * [灰度发布](/design/gray_release.md "灰度发布")
+  * [JPath](/design/jpath.md "JPath")
 * 数据库
   * [文档未完成](/md/db.md "数据库")
 * 系统模块
