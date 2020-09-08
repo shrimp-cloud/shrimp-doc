@@ -28,7 +28,7 @@ export LUAJIT_INC=/usr/local/luajit/include/luajit-2.0
 
 source /etc/profile
 ```
-### lua 环境处理
+### lua 环境处理【是否不必要呢】
 ```shell script
 # vim /etc/ld.so.conf.d/lua.conf
 /usr/local/luajit/lib
@@ -49,6 +49,7 @@ wget https://github.com/openresty/lua-nginx-module/archive/v0.10.17.tar.gz
 mv v0.10.17.tar.gz lua-nginx-module-0.10.17.tar.gz
 tar -zxvf lua-nginx-module-0.10.17.tar.gz
 ```
+> 这里有一个大坑, lua-nginx-module-v0.10.17.tar.gz 安装会报错。更换 0.10.9rc7 后解决
 
 ### 源码安装 nginx
 ```shell script
@@ -104,9 +105,25 @@ cd /opt/download/nginx-1.18.0
 
 make && make install
 
+```
 
+### 测试
+```shell script
+server {
+    listen       80;
+    server_name lua.51.wkclz.com;
+
+    location /lua {
+        set $test "hello,world";
+        content_by_lua '
+        ngx.header.content_type="text/plain"
+        ngx.say(ngx.var.test)';
+    }
+}
 
 ```
+
+
 ### 其他处理/
 ```shell script
 # 查看动态连接库

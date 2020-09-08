@@ -9,6 +9,7 @@
 * 服务器
   * [初始化](/server/init.md "服务器初始化")
   * [Nginx](/server/nginx.md "Nginx")
+  * [Nginx-lua](/server/nginx-lua.md "Nginx-Lua")
   * [K8S](/server/k8s.md "K8S")
 * 微服务
   * [核心包](/micro/core.md "核心包")
