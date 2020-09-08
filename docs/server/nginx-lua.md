@@ -111,7 +111,7 @@ make && make install
 ```shell script
 server {
     listen       80;
-    server_name lua.51.wkclz.com;
+    server_name lua.test.wkclz.com;
 
     location /lua {
         set $test "hello,world";
