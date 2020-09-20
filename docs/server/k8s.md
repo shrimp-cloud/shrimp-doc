@@ -1,8 +1,63 @@
-# K8S
+# K8S 安装
 
-## 系统
+***
 
+[toc]
+
+## 系统要求
 - CentOS 7.x
+
+***
+
+## 前期准备
+
+- 修改主机名，使得每个节点都有自己的名称
+```shell script
+hostnamectl set-hostname ser01
+```
+
+- 关闭防火墙
+```shell script
+systemctl stop firewalld
+systemctl disable firewalld
+```
+
+- 关闭 selinux
+```shell script
+# vim /etc/selinux/config
+SELINUX=disabled
+# :wq
+# setenforce 0
+```
+
+-  关闭 swap
+```shell script
+# vim /etc/fstab
+注释掉 swap
+```
+
+- host 解析
+```shell script
+# vim /etc/hosts
+172.12.12.230 dev02.test.com
+172.12.12.208 dev02.test.com
+```
+
+- sysctl
+ ```shell script
+# vim /etc/sysctl.conf
+vm.swappiness = 0  #     （尽量不使用交换分区，注意不是禁用）
+net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+net.ipv6.conf.all.forwarding = 1
+# :wq
+# swapoff -a && swapon -a  # 可以执行命令刷新一次SWAP（将SWAP里的数据转储回内存，并清空SWAP里的数据）
+# sysctl -p  #  (执行这个使其生效，不用重启)
+```
 
 
 
@@ -19,66 +74,59 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 # 使用以下命令来设置稳定的仓库。
 yum install -y docker-ce docker-ce-cli containerd.io
 
-
+# mkdir -p /etc/docker
 # 修改或创建/etc/docker/daemon.json，加入下面的内容：
+# vim /etc/docker/daemon.json
 {
-  "exec-opts": ["native.cgroupdriver=systemd"]
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ],
+  "registry-mirrors": [
+  	"https://t1gbabbr.mirror.aliyuncs.com",
+  	"https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn"
+  ]
 }
 
-
+# :wq
 systemctl start docker
+systemctl daemon-reload
 systemctl enable docker
 ```
 
 
-## keepalived安装 【可不可以不使用】
-
+## 安装  nfs-utils 用于挂载 nfs 网络存储
 ```shell script
-yum install -y keepalived
+yum install -y nfs-utils
 ```
 
-## keepalived 配置 【可不可以不使用】
-
+## 卸载 k8s, kube* 方便重装
 ```shell script
-# vim /etc/keepalived/keepalived.conf
-
-global_defs {
-   router_id dev_master_01
-}
-vrrp_instance dev001 {
-    state MASTER 
-    interface ens160
-    virtual_router_id 50
-    priority 100
-    advert_int 1
-    authentication {
-        auth_type PASS
-        auth_pass 1111
-    }
-    virtual_ipaddress {
-        172.12.12.250
-    }
-}
+kubeadm reset -f
+modprobe -r ipip
+lsmod
+rm -rf ~/.kube/
+rm -rf /etc/kubernetes/
+rm -rf /etc/systemd/system/kubelet.service.d
+rm -rf /etc/systemd/system/kubelet.service
+rm -rf /usr/bin/kube*
+rm -rf /etc/cni
+rm -rf /opt/cni
+rm -rf /var/lib/etcd
+rm -rf /var/etcd
+yum clean all
+yum remove -y kube*
 ```
 
-
-
-
-## 安装 K8S
-
- ```shell script
-vim /etc/sysctl.conf
-add:
-vm.swappiness = 0  #     （尽量不使用交换分区，注意不是禁用）
-net.ipv4.ip_forward = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-:wq
-
-
-swapoff -a && swapon -a  # 可以执行命令刷新一次SWAP（将SWAP里的数据转储回内存，并清空SWAP里的数据）
-sysctl -p  #  (执行这个使其生效，不用重启)
-
+## 重新安装 k8s
+```shell script
 
 # vim /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -88,12 +136,22 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-:wq
-
+# :wq
 
 yum clean all
 yum makecache
 yum install -y kubelet kubeadm kubectl
+
+systemctl enable kubelet
+systemctl start kubelet
+```
+
+
+# 到这里了
+
+
+***
+
 
 # 修改docker Cgroup Driver为systemd [deprecated]
 vim /usr/lib/systemd/system/docker.service
@@ -147,40 +205,5 @@ kubeadm join 172.12.12.189:6443 --token td2rt7.ps4q2ndl131s1hkb  \
 
 
 
-## 依赖
-
-```shell script
-yum install -y golang
-
-# vim /etc/profile.d/go.sh
-
-# GOROOT
-export GOROOT=/usr/lib/golang
-# GOPATH
-export GOPATH=/opt/go/Work/
-# GOPATH bin
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-:wq
-
-source /etc/profile
-```
 
 
-
-
-
-## 安装 wayne【下载失败】
-
-```shell script
-go get github.com/Qihoo360/wayne
-
-1.创建数据库
-CREATE DATABASE `wayne` CHARACTER SET utf8 COLLATE utf8_general_ci;
-GRANT ALL PRIVILEGES ON wayne.* TO 'lz'@'%'  WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-2.生成创建表结构 SQL
-make sqlall
-3.生成数据库初始化 SQL
-make initdata
-
-```
