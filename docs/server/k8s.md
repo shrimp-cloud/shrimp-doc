@@ -140,7 +140,7 @@ gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors
 
 yum clean all
 yum makecache
-yum install -y kubelet kubeadm kubectl
+yum install -y kubelet-1.17.3 kubeadm-1.17.3 kubectl-1.17.3
 
 systemctl enable kubelet
 systemctl start kubelet
@@ -148,6 +148,42 @@ systemctl start kubelet
 
 
 # 到这里了
+
+
+```
+
+#1、下载master节点需要的镜像【选做】
+#创建一个.sh文件，内容如下，
+#!/bin/bash
+images=(
+	kube-apiserver:v1.17.3
+    kube-proxy:v1.17.3
+	kube-controller-manager:v1.17.3
+	kube-scheduler:v1.17.3
+	coredns:1.6.5
+	etcd:3.4.3-0
+    pause:3.1
+)
+for imageName in ${images[@]} ; do
+    docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/$imageName
+done
+
+
+kubeadm init \
+--apiserver-advertise-address=172.12.12.230 \
+--image-repository registry.cn-hangzhou.aliyuncs.com/google_containers \
+--kubernetes-version v1.17.3 \
+--service-cidr=10.96.0.0/16 \
+--pod-network-cidr=10.244.0.0/16
+
+
+# 如果报错， kubeadm reset -f 后可重复执行
+
+kubeadm join 172.12.12.230:6443 --token 5anm8z.haifjr9f7efh5fa4 \
+    --discovery-token-ca-cert-hash sha256:b835513e919b6998ef09d75364d2f77c2f48ab6056ffa7351c1071ca4701f46d
+
+
+```
 
 
 ***
