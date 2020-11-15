@@ -25,3 +25,14 @@
   * [文档未完成](/md/sys.md "系统模块")
 * 用户及权限
   * [文档未完成](/md/cas.md "用户及权限")
+* 三方支持
+  * [服务器](/third/server.md "服务器")
+  * [数据库](/third/database.md "数据库")
+  * [域名/备案](/third/domain.md "域名/备案")
+  * [OSS](/third/oss.md "OSS")
+  * [短信](/third/sms.md "短信")
+  * [服务邮箱](/third/email.md "服务邮箱")
+  * [微信](/third/wechat.md "微信")
+  * [小程序](/third/miniapp.md "小程序")
+  * [支付宝](/third/alipay.md "支付宝")
+  * [微信支付](/third/wxpay.md "微信支付")
