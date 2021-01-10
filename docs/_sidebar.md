@@ -22,10 +22,9 @@
   * [JPath](/design/jpath.md "JPath")
 * 数据库
   * [文档未完成](/md/db.md "数据库")
-* 系统模块
-  * [文档未完成](/md/sys.md "系统模块")
-* 用户及权限
-  * [文档未完成](/md/cas.md "用户及权限")
+* 应用模块
+  * [系统管理](/md/sys.md "系统管理")
+  * [用户/权限](/md/cas.md "用户/权限")
 * 三方支持
   * [服务器](/third/server.md "服务器")
   * [数据库](/third/database.md "数据库")
