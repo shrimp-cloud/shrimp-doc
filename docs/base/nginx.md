@@ -56,7 +56,7 @@ server {
     listen       80;
     server_name jenkins.wkclz.com;
     location / {
-        rewrite ^/(.*)$ http://11.22.33.44:9012/$1 permanent;
+        rewrite ^/(.*)$ http://127.0.0.1:9012/$1 permanent;
     }
 }
 ```
@@ -142,6 +142,43 @@ server {
         break;
     }
 }
+
+```
+
+## nginx 域名验证
+
+```
+server {
+    listen       80;
+    server_name  api.example.com;
+    location ^~ /.well-known/pki-validation/fileauth.txt {
+        add_header Content-Type 'text/html; charset=utf-8';
+        return 200 'xxxxxxxxxx';
+    }
+}
+```
+
+##  开启 base 认证
+```
+server {
+    listen       80;
+    server_name admin.wkclz.com;
+
+    auth_basic "User Authentication";
+    auth_basic_user_file conf.d/pass.db;
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header Cookie $http_cookie;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://127.0.0.1:8031;
+        break;
+    }
+}
+
+# pass.db
+admin:xxxxxxxxx
 
 ```
 
