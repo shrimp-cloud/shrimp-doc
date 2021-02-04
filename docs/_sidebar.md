@@ -4,12 +4,14 @@
   * [SDK](/base/sdk.md "SDK")
   * [启动器](/base/starter.md "启动器")
   * [规范](/base/standard.md "规范")
-  * [Nginx](/base/nginx.md "Nginx")
   * [CI/CD](/base/jenkins.md "CI/CD")
+* 专题
+  * nginx
+    * [nginx安装](/nginx/nginx_install.md "Nginx 安装")
+    * [nginx-lua](/nginx/nginx_lua.md "Nginx Lua")
+    * [nginx常用配置](/nginx/nginx_config.md "Nginx 配置")
 * 服务器
   * [初始化](/server/init.md "服务器初始化")
-  * [Nginx](/server/nginx.md "Nginx")
-  * [Nginx-lua](/server/nginx-lua.md "Nginx-Lua")
   * [K8S](/server/k8s.md "K8S")
 * 微服务
   * [核心包](/micro/core.md "核心包")
