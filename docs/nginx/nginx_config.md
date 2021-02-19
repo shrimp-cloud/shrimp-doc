@@ -158,6 +158,20 @@ server {
 }
 ```
 
+
+## nginx 微信服务器校验
+```
+server {
+    listen       80;
+    server_name  api.example.com;
+    location /MP_verify_xxxxxxxxxx.txt {
+        add_header Content-Type 'text/html; charset=utf-8';
+        return 200 'xxxxxxxxxx';
+    }
+}
+```
+
+
 ##  开启 base 认证
 ```
 server {

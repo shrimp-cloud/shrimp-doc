@@ -1,10 +1,9 @@
 * 基础
   * [仓库](/base/repo.md "仓库")
   * [父工程](/base/parent.md "父工程")
-  * [SDK](/base/sdk.md "SDK")
   * [启动器](/base/starter.md "启动器")
   * [规范](/base/standard.md "规范")
-  * [CI/CD](/base/jenkins.md "CI/CD")
+  * [CI/CD](/base/cicd.md "CI/CD")
 * 专题
   * nginx
     * [nginx安装](/nginx/nginx_install.md "Nginx 安装")

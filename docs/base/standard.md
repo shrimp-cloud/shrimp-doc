@@ -10,8 +10,8 @@ token | [header]用户token | String | NaN
 pageNo | 页码 | Integer | 1
 pageSize | 每页数 | Integer | 10
 orderBy | 排序字段 | String | id desc
-timeFrom | 时间范围开始 | yyyy-MM-dd HH:mm:ss | NaN
-timeTo | 时间范围结束 | yyyy-MM-dd HH:mm:ss | NaN
+timeFrom | 时间范围开始 | yyyy-MM-dd HH\:mm\:ss | NaN
+timeTo | 时间范围结束 | yyyy-MM-dd HH\:mm\:ss | NaN
 dateRangeType | 时间范围类型 | HOUR("时"),DAY("天"),YESTERDAY("周"), MONTH("月"),QUATER("季"),YEAR("年"); | NaN
 
 
