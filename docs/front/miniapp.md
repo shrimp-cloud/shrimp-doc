@@ -3,6 +3,6 @@
 > 鉴于微信小程序的诸多优势(什么好处自己使用了去体会)，故小程序作为主推的客户终端形式，完成基础功能。
 
 ## 小程序功能逻辑【lz-cloud-front-miniapp】
-> 以下为小程序的功能思维图 \
+> 以下为小程序的功能思维图
 >
 ![miniapp](http://processon.com/chart_image/60240cf3e401fd48f29cf938.png)
