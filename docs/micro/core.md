@@ -42,6 +42,32 @@
         - exception  异常
           - BizException 自定义异常类
         - helper  系统辅助类【内容太多了，将一点点添加】
+          - cache 缓存方案，见[这里](/design/cache.md)
+          - gen 生成器
+            - RedisIdGenHelper 基于redis的ID生成器，可用于生成订单号
+            - SystemClock 辅助生成器的锁
+          - redis 基于redis实现的队列
+          - AccessHelper rest请求的处理，鉴权
+          - ApiDomainHelper API域名拦截处理
+          - AppHelper 系统启动时的辅助类
+          - AuthHelper 鉴权相关方法
+          - BaseHelper 一些常用辅助方法
+          - DebugHelper 调试辅助类，包含日志打印，耗时计算等
+          - DictHelper 字典辅助类，主要为字典内容缓存
+          - ExcelHelper Excel响应推流
+          - GenHelper 代码生成器辅助，主要为生成器客户端逻辑
+          - IpHelper IP辅助类，获取客户IP，服务器IP
+          - LogTraceHelper 日志跟踪辅助类
+          - MyBatisHelper MyBatis操作辅助类
+          - OssHelper OSS上传相关封装
+          - RedisLockHelper 基于Redis的分布式锁实现
+          - RequestHelper 方便在静态方法中提出HttpServletRequest
+          - RestTemplateHelper 组装Rest请求
+          - ServiceHelper 使用服务名及URI请求微服务内某个Rest
+          - SmsHelper 阿里短信发送封装
+          - SnowflakeHelper 雪花算法ID生成器
+          - SystemConfigHelper 系统配置缓存辅助
+          - TenantDomainHelper 租户域名解析
         - plugins 插件
           - MybatisConfiguration MyBatis 插件配置
           - MybatisUpdateInterceptor MyBatis 更新时的拦截插件，处理更新时的基础信息。唯一启用的插件
