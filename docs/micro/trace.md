@@ -10,19 +10,19 @@
 ---|---|---
 upstreamServiceId | 上游 serviceId | 作为跟踪信息，但不在 teaceInfo内
 upstreamInstanceId | 上游 instanceId | 作为跟踪信息，但不在 teaceInfo内
-- | - | -
-applicationGroup | 应用组 | -
-serviceId | 应用名称 | -
-instanceId | 应用实例 | -
+ * | * | *
+applicationGroup | 应用组 | *
+serviceId | 应用名称 | *
+instanceId | 应用实例 | *
 serverIp | 所在服务IP | 当前服务器
-envType | 环境 | -
-traceId | 跟踪ID | -
+envType | 环境 | *
+traceId | 跟踪ID | *
 spanId | 跟踪序列号 | 每请求到一个服务，都自增1
 upstreamIp | 上游IP | 来源服务器ip
 remoteIp | 来源upstream | 来源服务器ip
-tenantId | 租户ID | -
-authId | 认证ID | -
-userId | 用户ID | -
+tenantId | 租户ID | *
+authId | 认证ID | *
+userId | 用户ID | *
 user | 用户 | 包含用户的所有信息
 
 
