@@ -95,4 +95,4 @@ cms | 内容 | [文档](http://doc.wkclz.com/cms/)
 
 
 ## 起步
-- 请转向 脚手架
+- 请转向 [脚手架](/micro/demo.md "脚手架")
