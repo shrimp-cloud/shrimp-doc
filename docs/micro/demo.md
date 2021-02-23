@@ -15,34 +15,34 @@
   - main
     - java
       - com.wkcl.demo
-        - config
-        - dao
-          - mapper
-            - DemoMapper.xml
-          - DemoMapper.java
-          - DemoMapper.xml
-        - helper
-        - pojo
-          - dto
-          - entity
-        - rest
-          - core
-          - custom
-        - service
-          - core
-          - custom
-        - util
-        - Application
-    - resources
-      - bin
-        - deploy.sh
-        - service.sh
-      - config
-        - application.yml
-        - application-dev.yml
-        - bootstrap.yml
-      - banner-txt
-      - logback-spring.xml
-- .editorconfig
-- .gitignore
-- pom.xml
+        - config 项目配置
+        - dao DB接口及xml【xml定义在 resource更适合，但为了更快找到xml,还是将期放到了java中】
+          - mapper 生成的 xml目录
+            - DemoMapper.xml 自动生成的 xml
+          - DemoMapper.java 扩展的dao接口，继承了基础dao接口
+          - DemoMapper.xml 扩展的 xml sql
+        - helper 系统辅助类
+        - pojo 实例类
+          - dto 数据库实例扩展类
+          - entity 数据库实例
+        - rest 接口类
+          - core 生成的接口代码示例，仅为示例，不对外服务
+          - custom 自定义的业务接口
+        - service 服务
+          - core 生成的服务扩展类，默认继承了系统默认的基本服务类
+          - custom 完全自定义的服务类
+        - util 扩展静态工具
+        - Application 应用主函数
+    - resources 服务的资源文件
+      - bin 服务相关脚本
+        - deploy.sh 服务部署脚本
+        - service.sh 服务启停脚本
+      - config 服务配置
+        - application.yml 项目配置，滞后于bootstrap加载，属性可被覆盖，一般为通用配置
+        - application-dev.yml 项目环境配置，只对具体环境生效。只配置环境差异部分
+        - bootstrap.yml 项目配置，优先于application加载，属性不能被覆盖
+      - banner.txt springboot启动图案
+      - logback-spring.xml logback日志配置
+- .editorconfig 定义一些编码风格
+- .gitignore git忽略不提交的内容定义
+- pom.xml 项目是基于maven的，pom为依赖maven配置
