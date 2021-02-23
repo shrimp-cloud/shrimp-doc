@@ -18,7 +18,7 @@
   * [核心包](/micro/core.md "核心包")
   * [跟踪信息传递](/micro/trace.md "跟踪信息传递")
   * [代码生成器](/micro/gen.md "代码/项目生成器")
-  * [脚手架-未完成](/md/demo.md "脚手架")
+  * [脚手架](/micro/demo.md "脚手架")
 * 前端模块
   * [console控制台](/front/console.md "console控制台")
   * [manager管理后台](/front/manager.md "manager管理后台")
