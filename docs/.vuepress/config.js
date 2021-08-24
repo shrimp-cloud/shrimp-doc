@@ -12,11 +12,12 @@ module.exports = {
     themeConfig: {
         logo: '/favicon.svg',
         search: false,
-        lastUpdated: 'Last Updated', // string | boolean
+        lastUpdated: '上次更新', // string | boolean
         smoothScroll: true,
         repo: 'lz-cloud/lz-doc',
         docsDir: 'docs',
         editLinks: true,
+        editLinkText: '编辑此页面',
         nav: [
             { text: 'Home', link: '/'},
             {
