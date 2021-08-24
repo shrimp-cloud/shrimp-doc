@@ -14,6 +14,9 @@ module.exports = {
         search: false,
         lastUpdated: 'Last Updated', // string | boolean
         smoothScroll: true,
+        repo: 'lz-cloud/lz-doc',
+        docsDir: 'docs',
+        editLinks: true,
         nav: [
             { text: 'Home', link: '/'},
             {
