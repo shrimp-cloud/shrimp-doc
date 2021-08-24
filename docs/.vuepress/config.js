@@ -1,8 +1,11 @@
 module.exports = {
     dest: 'dist',
     title: 'Shrimp Workstudio',
-    description: 'Shrimp Workstudio by Shrimp',
+    description: 'Shrimp Workstudio',
     logo: '/favicon.svg',
+    plugins: [
+        'vuepress-plugin-mermaidjs'
+    ],
     head: [
         ['link', { rel: 'icon', href: '/favicon.svg' }]
     ],
@@ -90,6 +93,6 @@ module.exports = {
              '/': [
                 '',
             ]
-        }
+        },
     },
 }
