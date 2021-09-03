@@ -18,3 +18,8 @@ n latest
 n stable
 ```
 
+
+### 升级 node 版本到指定版
+```shell
+n 14.17.6
+```
