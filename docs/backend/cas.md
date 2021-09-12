@@ -102,16 +102,7 @@ R3{学生} --> T4(被骂)
     - 查询
     - 删除
 
-
-
-
-
-#### 用户管理【用户增删改查，用户授权角色，查看用户的资源】
-#### 角色管理【角色增删改查，角色绑定资源，角色授予用户】
-#### 资源管理【资源增删改查，资源授予角色，查看有资源的用户】
-
-
-
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:1200px; height:1200px;" src="https://www.processon.com/embed/613d8823f346fb070b9a89de"></iframe>
 
 ## 跨域登录传递
 
