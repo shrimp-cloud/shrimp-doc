@@ -77,6 +77,7 @@ module.exports = {
                 '',
                 'init',
                 'k8s',
+                'emqx',
             ],
             '/third/': [
                 '',
