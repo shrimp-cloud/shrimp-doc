@@ -36,8 +36,9 @@ module.exports = {
                 text: '前端',
                 ariaLabel: '前端',
                 items: [
-                    { text: 'VUE', link: '/vue/' },
-                    { text: '前端功能', link: '/front/' },
+                    { text: 'VUE', link: '/front/vue/' },
+                    { text: '规范', link: '/front/standard/' },
+                    { text: '客户端', link: '/front/client/' },
                 ]
             },
         ],
@@ -91,15 +92,20 @@ module.exports = {
                 'wechat',
                 'wxpay',
             ],
-            '/vue/': [
+            '/front/vue/': [
                 '',
                 'node_update',
             ],
-            '/front/': [
+            '/front/standard/': [
+                '',
+                'standard',
+            ],
+
+            '/front/client/': [
                 '',
                 'miniapp',
             ],
-             '/': [
+             '/front/': [
                 '',
             ]
         },
