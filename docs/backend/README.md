@@ -3,5 +3,5 @@
 
 本栏的主要内容如下：
 
-- [资源权限](./cas.md)
-- [系统](./sys.md)
+- [后端架构](docs/backend/framework/)
+- [后端模块](docs/backend/modules/)

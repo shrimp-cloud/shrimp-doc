@@ -24,8 +24,8 @@ module.exports = {
                 text: '后端',
                 ariaLabel: '后端',
                 items: [
-                    { text: '后端基础组件', link: '/backend_base/' },
-                    { text: '后端组件', link: '/backend/' },
+                    { text: '后端架构', link: '/backend/framework/' },
+                    { text: '后端模块', link: '/backend/modules/' },
                     { text: '后端设计', link: '/design/' },
                     { text: 'nginx', link: '/nginx/' },
                     { text: '服务器', link: '/server/' },
@@ -44,7 +44,7 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
-            '/backend_base/': [
+            '/backend/framework/': [
                 '',
                 'repo',
                 'parent',
@@ -52,15 +52,17 @@ module.exports = {
                 'starter',
                 'standard',
                 'cicd',
-            ],
-            '/backend/': [
-                '',
+                'trace',
                 'core',
+            ],
+            '/backend/modules/': [
+                '',
                 'demo',
-                'gen',
                 'sys',
                 'cas',
-                'trace',
+                'cms',
+                'pms',
+                'gen',
             ],
             '/design/': [
                 '',
