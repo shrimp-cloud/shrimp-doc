@@ -68,7 +68,6 @@ module.exports = {
                 '',
                 'cache',
                 'gray_release',
-                'jpath',
             ],
             '/nginx/': [
                 '',
