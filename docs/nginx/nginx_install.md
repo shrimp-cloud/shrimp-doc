@@ -66,6 +66,11 @@ cd /opt/download/nginx-1.18.0
 make && make install
 
 mkdir /opt/nginx/cache # 这个傻x 不会自己创建的
+
+chown -R apps:apps /otp/nginx/
+chown root:apps /otp/nginx/sbin/nginx
+chmod u+s /otp/nginx/sbin/nginx
+
 ```
 
 ---
