@@ -6,7 +6,7 @@
 - Element-Plus
 - vite
 
-## 项目规范
+## 目录规范
 
 - public  公共静态文件
 - src  项目源码
