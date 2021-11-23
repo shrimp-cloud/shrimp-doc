@@ -50,10 +50,17 @@ module.exports = {
                 'parent',
                 'sdk',
                 'starter',
-                'standard',
                 'cicd',
                 'trace',
                 'core',
+            ],
+            '/backend/standard/': [
+                '',
+                'principle',
+                'code',
+                'named',
+                'api',
+                'database',
             ],
             '/backend/modules/': [
                 '',
@@ -64,16 +71,16 @@ module.exports = {
                 'pms',
                 'gen',
             ],
-            '/design/': [
-                '',
-                'cache',
-                'gray_release',
-            ],
-            '/nginx/': [
+            '/backend/nginx/': [
                 '',
                 'nginx_config',
                 'nginx_install',
                 'nginx_lua',
+            ],
+            '/design/': [
+                '',
+                'cache',
+                'gray_release',
             ],
             '/server/': [
                 '',
