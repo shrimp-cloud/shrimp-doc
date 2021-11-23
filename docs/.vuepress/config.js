@@ -24,13 +24,12 @@ module.exports = {
                 text: '后端',
                 ariaLabel: '后端',
                 items: [
-                    { text: '后端架构', link: '/backend/framework/' },
-                    { text: '后端规范', link: '/backend/standard/' },
-                    { text: '后端模块', link: '/backend/modules/' },
+                    { text: '架构', link: '/backend/framework/' },
+                    { text: '规范', link: '/backend/standard/' },
+                    { text: '模块', link: '/backend/modules/' },
                     { text: 'nginx', link: '/backend/nginx/' },
-                    { text: '后端设计', link: '/design/' },
-                    { text: '服务器', link: '/server/' },
-                    { text: '三方集成', link: '/third/' },
+                    { text: '服务器', link: '/backend/server/' },
+                    { text: '三方集成', link: '/backend/third/' },
                 ]
             },
             {
@@ -54,6 +53,8 @@ module.exports = {
                 'cicd',
                 'trace',
                 'core',
+                'cache',
+                'gray_release',
             ],
             '/backend/standard/': [
                 '',
@@ -78,18 +79,14 @@ module.exports = {
                 'nginx_install',
                 'nginx_lua',
             ],
-            '/design/': [
-                '',
-                'cache',
-                'gray_release',
-            ],
-            '/server/': [
+            '/backend/server/': [
                 '',
                 'init',
-                'k8s',
+                'docker_install',
+                'k8s_install',
                 'emqx',
             ],
-            '/third/': [
+            '/backend/third/': [
                 '',
                 'alipay',
                 'database',
