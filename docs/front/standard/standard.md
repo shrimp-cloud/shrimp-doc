@@ -36,6 +36,7 @@
 - .eslintignore  eslint忽略配置
 - .eslintrc.js  eslint配置
 - .gitignore  GIT提交忽略
+- index.html
   
 
 ## 命名规范
