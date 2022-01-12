@@ -21,6 +21,13 @@ module.exports = {
         nav: [
             { text: 'Home', link: '/'},
             {
+                text: '基础',
+                ariaLabel: '基础',
+                items: [
+                    { text: '规范', link: '/base/standard/' },
+                ]
+            },
+            {
                 text: '后端',
                 ariaLabel: '后端',
                 items: [
@@ -44,6 +51,10 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
+            '/base/standard/': [
+                '',
+                'git',
+            ],
             '/backend/framework/': [
                 '',
                 'repo',
