@@ -22,7 +22,7 @@ hostnamectl set-hostname lzser
 yum remove mariadb-libs -y
 # 安装工具： 
 yum install -y epel-release yum-utils
-yum install -y vim net-tools numactl lrzsz zip unzip wget htop git nodejs telnet
+yum install -y vim net-tools numactl lrzsz zip unzip wget htop git telnet fontconfig
 yum install -y gcc automake autoconf libtool make
 
 ```
@@ -70,11 +70,15 @@ jdk, maven 自行下载
 
 ## mysql
 ```shell script
-mysql-community 5.7:
-rpm -ivh mysql-community-common-5.7.26-1.el7.x86_64.rpm
-rpm -ivh mysql-community-libs-5.7.26-1.el7.x86_64.rpm
-rpm -ivh mysql-community-client-5.7.26-1.el7.x86_64.rpm
-rpm -ivh mysql-community-server-5.7.26-1.el7.x86_64.rpm
+yum install libaio.x86_64 -y
+
+mysql-community 8.0:
+rpm -ivh mysql-community-common-8.0.28-1.el7.x86_64.rpm
+rpm -ivh mysql-community-client-plugins-8.0.28-1.el7.x86_64.rpm
+rpm -ivh mysql-community-libs-8.0.28-1.el7.x86_64.rpm
+rpm -ivh mysql-community-client-8.0.28-1.el7.x86_64.rpm
+rpm -ivh mysql-community-icu-data-files-8.0.28-1.el7.x86_64.rpm
+rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm
 
 systemctl start mysqld
 systemctl enable mysqld

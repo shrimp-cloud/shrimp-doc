@@ -45,9 +45,9 @@ wget https://github.com/simpl/ngx_devel_kit/archive/v0.3.1.tar.gz
 mv v0.3.1.tar.gz ngx_devel_kit-0.3.1.tar.gz
 tar -zxvf ngx_devel_kit-0.3.1.tar.gz
 
-wget https://github.com/openresty/lua-nginx-module/archive/v0.10.17.tar.gz
-mv v0.10.17.tar.gz lua-nginx-module-0.10.17.tar.gz
-tar -zxvf lua-nginx-module-0.10.17.tar.gz
+wget https://github.com/openresty/lua-nginx-module/archive/v0.10.9rc7.tar.gz
+mv v0.10.9rc7.tar.gz lua-nginx-module-0.10.9rc7.tar.gz
+tar -zxvf lua-nginx-module-0.10.9rc7.tar.gz
 ```
 > 这里有一个大坑, lua-nginx-module-v0.10.17.tar.gz 安装会报错。更换 0.10.9rc7 后解决
 
@@ -101,9 +101,14 @@ cd /opt/download/nginx-1.18.0
 --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' \
 --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie -Wl,-rpath,/usr/local/include/lib' \
 --add-module=/opt/download/ngx_devel_kit-0.3.1 \
---add-module=/opt/download/lua-nginx-module-0.10.17
+--add-module=/opt/download/lua-nginx-module-0.10.9rc7
 
 make && make install
+
+# 权限
+chown -R apps:apps /opt/nginx
+chown root:apps /opt/nginx/sbin/nginx
+chmod u+s /opt/nginx/sbin/nginx
 
 ```
 
