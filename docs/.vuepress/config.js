@@ -31,6 +31,7 @@ module.exports = {
                 text: '后端',
                 ariaLabel: '后端',
                 items: [
+                    { text: 'Spring', link: '/backend/spring/' },
                     { text: '架构', link: '/backend/framework/' },
                     { text: '规范', link: '/backend/standard/' },
                     { text: '模块', link: '/backend/modules/' },
@@ -51,9 +52,11 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
-            '/base/standard/': [
+            '/backend/spring/': [
                 '',
-                'git',
+                'reflect',
+                'BeanPostProcessor',
+                'ApplicationListener',
             ],
             '/backend/framework/': [
                 '',
@@ -66,6 +69,10 @@ module.exports = {
                 'core',
                 'cache',
                 'gray_release',
+            ],
+            '/base/standard/': [
+                '',
+                'git',
             ],
             '/backend/standard/': [
                 '',
