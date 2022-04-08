@@ -4,7 +4,7 @@ heroImage: /favicon.svg
 heroText: SpringCloud + Vue -> web平台套件
 tagline: 模块化，自动化，一体化的解决方案。
 actionText: 快速上手 →
-actionLink: /backend/
+actionLink: /backend/framework/
 features:
 - title: 后端模块化
   details: 自动生成基础代码，功能模块化，自由组合。
