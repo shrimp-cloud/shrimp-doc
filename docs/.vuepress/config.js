@@ -32,6 +32,7 @@ module.exports = {
                 ariaLabel: '后端',
                 items: [
                     { text: 'Spring', link: '/backend/spring/' },
+                    { text: '组件', link: '/backend/component/' },
                     { text: '架构', link: '/backend/framework/' },
                     { text: '规范', link: '/backend/standard/' },
                     { text: '模块', link: '/backend/modules/' },
@@ -57,6 +58,10 @@ module.exports = {
                 'reflect',
                 'BeanPostProcessor',
                 'ApplicationListener',
+            ],
+            '/backend/component/': [
+                '',
+                'mqtt',
             ],
             '/backend/framework/': [
                 '',
