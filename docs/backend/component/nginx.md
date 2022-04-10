@@ -1,4 +1,4 @@
-# Nginx安装
+# Nginx
 
 
 ## yum 安装
@@ -280,6 +280,21 @@ cd ~
 - 后端接口做跨域支持
 - 此处提供多个配置 demo，需要组合使用
 
+
+### gzip压缩
+```
+# 开启 gzip 压缩
+gzip  on;
+gzip_min_length 1k;
+gzip_buffers 4 16k;
+gzip_http_version 1.0;
+gzip_comp_level 6;
+gzip_types text/plain application/javascript application/x-javascript text/javascript text/xml text/css;
+gzip_disable "MSIE [1-6]\.";
+gzip_vary on;
+```
+
+> 可独立成 gzip.conf 再 include 到 nginx.conf 内
 
 ### 纯静态文件
 ```
