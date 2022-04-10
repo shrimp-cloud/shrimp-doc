@@ -106,7 +106,6 @@ module.exports = {
                 'init',
                 'docker_install',
                 'k8s_install',
-                'emqx',
             ],
             '/backend/third/': [
                 '',
