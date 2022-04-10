@@ -100,7 +100,6 @@ module.exports = {
                 '',
                 'nginx_config',
                 'nginx_install',
-                'nginx_lua',
             ],
             '/backend/server/': [
                 '',

@@ -1,4 +1,4 @@
-# Nginx 配置
+# Nginx 常用配置
 
 ## 概述
 > Nginx 作为反向代理，静态页面server.

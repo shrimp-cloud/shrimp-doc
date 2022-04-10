@@ -1,6 +1,35 @@
-# Nginx
+# Nginx安装
 
-## 系统,基础依赖
+
+## yum 安装
+```shell script
+vim /etc/yum.repos.d/nginx.repo
+[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+
+[nginx-mainline]
+name=nginx mainline repo
+baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+
+yum install nginx -y
+systemctl start nginx
+systemctl enable nginx
+
+```
+
+## 源码安装
+
+
+### 系统,基础依赖
 
 - CentOS 7.x
 ```shell script
@@ -11,6 +40,61 @@ yum install -y pcre-devel openssl openssl-devel
 ```
 
 ---
+
+### 安装 LuaJIT
+
+> 若不需要 lua 支持，可忽略此过程
+
+```shell script
+
+wget http://luajit.org/download/LuaJIT-2.0.5.tar.gz
+tar -zxvf  LuaJIT-2.0.5.tar.gz
+cd LuaJIT-2.0.5
+make install PREFIX=/usr/local/luajit
+
+# /etc/profile 文件中加入环境变量
+vim /etc/profile.d/LuaJIT.sh
+export LUAJIT_LIB=/usr/local/luajit/lib
+export LUAJIT_INC=/usr/local/luajit/include/luajit-2.0
+
+source /etc/profile
+```
+ ---
+
+
+### lua 环境处理
+
+> 若不需要 lua 支持，可忽略此过程
+
+```shell script
+# vim /etc/ld.so.conf.d/lua.conf
+/usr/local/luajit/lib
+# ldconfig
+```
+
+---
+
+###  ngx_devel_kit 和 lua-nginx-module
+
+> 若不需要 lua 支持，可忽略此过程
+> 
+```shell script
+cd /opt/download
+
+wget https://github.com/simpl/ngx_devel_kit/archive/v0.3.1.tar.gz
+mv v0.3.1.tar.gz ngx_devel_kit-0.3.1.tar.gz
+tar -zxvf ngx_devel_kit-0.3.1.tar.gz
+
+wget https://github.com/openresty/lua-nginx-module/archive/v0.10.9rc7.tar.gz
+mv v0.10.9rc7.tar.gz lua-nginx-module-0.10.9rc7.tar.gz
+tar -zxvf lua-nginx-module-0.10.9rc7.tar.gz
+```
+> 这里有一个大坑, lua-nginx-module-v0.10.17.tar.gz 安装会报错。更换 0.10.9rc7 后解决
+
+
+---
+
+
 
 ### 源码安装 nginx
 ```shell script
@@ -61,12 +145,17 @@ cd /opt/download/nginx-1.18.0
 --with-stream_ssl_module \
 --with-stream_ssl_preread_module \
 --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' \
---with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie'
+--with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie -Wl,-rpath,/usr/local/include/lib' \
+--add-module=/opt/download/ngx_devel_kit-0.3.1 \
+--add-module=/opt/download/lua-nginx-module-0.10.9rc7
+
+# 若不需要 lua 支持，请移除最后两个 module
 
 make && make install
 
-mkdir /opt/nginx/cache # 这个傻x 不会自己创建的
+mkdir /opt/nginx/cache # 这个傻x 居然不会自己创建 cache 目录
 
+# 权限
 chown -R apps:apps /otp/nginx/
 chown root:apps /otp/nginx/sbin/nginx
 chmod u+s /otp/nginx/sbin/nginx
@@ -84,6 +173,33 @@ cd /opt/nginx/sbin
 
 ---
 
+
+### 测试
+```shell script
+server {
+    listen       80;
+    server_name lua.test.wkclz.com;
+
+    location /lua {
+        set $test "hello,world";
+        content_by_lua '
+        ngx.header.content_type="text/plain"
+        ngx.say(ngx.var.test)';
+    }
+}
+
+```
+ ---
+
+
+
+### 其他处理
+```shell script
+# 查看动态连接库
+ ldd $(which /otp/nginx/sbin/nginx)
+```
+
+---
 
 ### nginx 自动部署:
 > 为方便完成 nginx 的自动部署，需要配置规范化，并放置脚本到 git 仓库中，下属服务器后自动化部署。具体规范过一次sh 脚本即可
