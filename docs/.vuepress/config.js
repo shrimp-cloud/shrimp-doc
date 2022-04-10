@@ -36,9 +36,9 @@ module.exports = {
                     { text: '架构', link: '/backend/framework/' },
                     { text: '规范', link: '/backend/standard/' },
                     { text: '模块', link: '/backend/modules/' },
-                    { text: 'nginx', link: '/backend/nginx/' },
                     { text: '服务器', link: '/backend/server/' },
                     { text: '三方集成', link: '/backend/third/' },
+                    { text: '其他(未完成/未分类)', link: '/backend/others/' },
                 ]
             },
             {
@@ -62,6 +62,7 @@ module.exports = {
             '/backend/component/': [
                 '',
                 'mqtt',
+                'nginx',
             ],
             '/backend/framework/': [
                 '',
@@ -96,11 +97,6 @@ module.exports = {
                 'pms',
                 'gen',
             ],
-            '/backend/nginx/': [
-                '',
-                'nginx_config',
-                'nginx_install',
-            ],
             '/backend/server/': [
                 '',
                 'init',
@@ -119,6 +115,10 @@ module.exports = {
                 'sms',
                 'wechat',
                 'wxpay',
+            ],
+            '/backend/others/': [
+                '',
+                'nginx_docker',
             ],
             '/front/vue/': [
                 '',
