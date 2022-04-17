@@ -9,7 +9,6 @@
     - java
       - com.wkclz.core
         - aop  AOP 拦截器
-          - DaoAop 拦截 Dao 方法，包含：查询时的空参处理，查询时间处理，排序条件处理等
           - DebugAop 调试拦截器，在需要调试的方法上添加注解 @Debug，则对应的方法就可以使用 DebugHelper 内所提供的快速打日志的方法，自动添加序列及计算耗时
           - RestAop 拦截所有 rest 请求。打印请求日志，计算请求耗时，debug 模式下打印返回参数，
         - base  业务代码编写过程中所依赖的最基本的包
@@ -17,11 +16,7 @@
             - Debug 调试辅助注解，结合 DebugAop，DebugHelper 使用
             - Desc 只为方便在类，方法，变量上打注释
             - Routers 用于标识这是一个编写路由的接口类，方便提取路由上的注释
-          - BaseMapper Mapper父类，包含基本的CRUD操作
           - BaseModel 所有实体类的基类，包含基础字段
-          - BaseService Service的父类，包含基本的CURD的封装
-          - PageData 分页对象
-          - PageHandle 分页辅助类
           - Result 标准Rest返回对象
           - Sys 系统启动信息辅助类
         - config  全局配置
@@ -30,7 +25,6 @@
             - AuthHandler 鉴权拦截器，包含 api域名拦截，uri 白名单拦截，token 拦截，uri权限拦截【暂未实现】
             - LogTraceHandler 日志检测处理 【已转移到 GwFilter 去实现】
           - AppInterceptor 拦截器定义 【已完成由 GwFilter 替代】
-          - DruidStatView druid过滤器定义
           - FeignHeadConfiguration Feign请求header透传定义，选择性透传，防止污染
           - GwFilter 网关拦截器【在非微服务情况下启用】，包含：日志检测处理，请求日志记录，鉴权拦截，uri 路由前缀处理
           - LzConfig 所有自定义配置字段信息
@@ -58,7 +52,6 @@
           - GenHelper 代码生成器辅助，主要为生成器客户端逻辑
           - IpHelper IP辅助类，获取客户IP，服务器IP
           - LogTraceHelper 日志跟踪辅助类
-          - MyBatisHelper MyBatis操作辅助类
           - OssHelper OSS上传相关封装
           - RedisLockHelper 基于Redis的分布式锁实现
           - RequestHelper 方便在静态方法中提出HttpServletRequest
@@ -68,9 +61,6 @@
           - SnowflakeHelper 雪花算法ID生成器
           - SystemConfigHelper 系统配置缓存辅助
           - TenantDomainHelper 租户域名解析
-        - plugins 插件
-          - MybatisConfiguration MyBatis 插件配置
-          - MybatisUpdateInterceptor MyBatis 更新时的拦截插件，处理更新时的基础信息。唯一启用的插件
         - pojo  实体，枚举
           - dto 实体类
           - entity 实体类
@@ -82,24 +72,14 @@
           - Routes 系统全局生效的Rest路由
         - util  静态工具【有各种常用工具，均为静态工具】
 
-
 ## 自定义扩展
 自定义扩展，主要为自行封装的一些扩展方法，方便业务系统实现
 
 ### AOP
 切面，当前主要用到 rest 接口的切面，方向统计调用耗时，接口调用日志打印
 
-### base.BaseMapper
-脚手回/代码生成器所能实现的常用 单表增删改查
-
 ### base.BaseModel
 实体类都要求继承的一个父实体类。
-
-### base.BaseService
-从 BaseModel 延伸出来的单表的增删改查接口
-
-### base.PageData
-分页查询数据结构
 
 ### base.Result
 默认返回结果对象。具体的返回结果需要放到 Result.data 中。

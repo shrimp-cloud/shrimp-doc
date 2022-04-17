@@ -1,4 +1,4 @@
-# MQTT 组件封装
+# MQTT
 
 ## 安装EMQX
 
@@ -45,7 +45,6 @@ netstat -ntlp | grep emqx
 ```yaml
 lz:
   mqtt:
-    # 公共
     client-id-prefix: server # 服务器作为 client接入的id前缀。后缀将是服务器IP
     end-point: tcp://mqtt.server.domain.or.ip:1883 # mqtt 服务器域名或IP
     username: username # mqtt用户名

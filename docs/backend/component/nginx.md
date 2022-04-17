@@ -281,17 +281,125 @@ cd ~
 - 此处提供多个配置 demo，需要组合使用
 
 
+### 全局配置
+```
+user apps apps;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+#pid        logs/nginx.pid;
+
+worker_processes        auto; #工作进程数，auto即为cpu核心数
+worker_rlimit_nofile    65535; #每个 worker 可用的句柄数【注意系统支持的最大值】
+worker_cpu_affinity     01 10; #【需要与CPU配置】强制 CPU 亲和性，降低多核CPU切换带来的性能损耗
+
+events {
+    use                 epoll; # select/poll/epoll/kqueue, linux内核在2.6以上，就是为了能使用epoll函数来优化Nginx
+    worker_connections  1024; # 用来配置单个worker进程最大的连接数，nginx 默认连接数是1024，`cat /proc/sys/fs/file-max` 获取系统最大句柄数
+    multi_accept        on; # 用来设置是否允许同时接收多个网络连接
+    accept_mutex        on; # "惊群"问题
+}
+
+
+http {
+    include         mime.types;
+    charset         UTF-8;
+     
+    log_format main '{"@timestamp":"$time_iso8601",'
+                    '"http_trace_id":"$http_trace_id",' # 需要结合前端的 trace-id 使用
+                    '"http_x_forwarded_for":"$http_x_forwarded_for",'
+                    '"server_addr":"$server_addr",'
+                    '"remote_user":"$remote_user",' # 需要结合 ldap 模块才能获取到
+                    '"remote_addr":"$remote_addr",'
+                    '"bytes_sent":"$bytes_sent",'
+                    '"body_bytes_sent":"$body_bytes_sent",'
+                    '"request_length":"$request_length",'
+                    '"request_time":"$request_time",'
+                    '"request_method":"$request_method",'
+                    '"server_protocol":"$server_protocol",'
+                    '"scheme_host_request_uri":"$scheme://$host$request_uri",'
+                    '"status":"$status",'
+                    '"upstream_addr":"$upstream_addr",'
+                    '"upstream_status":"$upstream_status",'
+                    '"upstream_response_time":"$upstream_response_time",'
+                    '"http_referer":"$http_referer",'
+                    '"http_user_agent":"$http_user_agent"'
+                    '}';
+ 
+    access_log logs/access.log main;
+ 
+    default_type    application/octet-stream;
+ 
+    client_body_buffer_size     1024m; # 读取客户端请求体时的缓冲区
+    client_max_body_size        0;  # 允许的客户端最大请求体大小, 0为不限制。Content-Length 超过此值将收到 413
+ 
+    keepalive_disable           none; # 对某些浏览器不再使用keepalive，默认 msie6
+    keepalive_requests          10000; # 一个TCP连接上最多执行多少个HTTP请求
+    keepalive_timeout           65; # HTTP请求连接完成以后，最多经过timeout时间，如果还是没有新的请求，就会关闭连接，默认 75秒
+    server_tokens               off; # 隐藏 nginx 版本号
+    underscores_in_headers      on; # off 表示当客户端请求头中带有下划线的字段默认将会被标识为无效字段。
+ 
+    sendfile                    on; # sendfile是 Linux2.0+以后的推出的一个系统调用,不但能减少切换次数而且还能减少拷贝次数。
+    tcp_nodelay                 on; # 关闭Nagle算法（启用不延时）
+    tcp_nopush                  on; # 与 tcp_nodelay 互斥。Nagle 需要等待0.2s, 此处只需要等待数据包大小到达一定值即可推送。依赖 sendfile
+ 
+    server {
+        server_name localhost;
+        # 使用了 reuse_port 特性以后，多个 worker 进程可以分别用自己不同的 socket 去监听，避免对同一个 socket 进行 accept 时的锁的开销
+        # 参数backlog 限制了用于存放处于挂起状态连接的队列最大长度. 默认-1。太大会导致"Broken pipe"，太小会导致"502 Bad Gateway"，建议值：backlog=QPS
+        listen 80 reuseport backlog=10240;
+ 
+        access_log logs/localhost.access.log  main; # 按 server 配置日志
+ 
+        # 这个时间不够，代码写得太烂了。。
+        proxy_connect_timeout       60s;
+        proxy_read_timeout          60s;
+        proxy_send_timeout          60s;
+ 
+        location / {
+            # 默认1.0, 不支持文件分块传递。1.1 之后才支持keepalive
+            proxy_http_version      1.1;
+            proxy_buffering          on;
+            proxy_request_buffering  on;
+ 
+            # 常用 http 头
+            proxy_set_header        Host               $host;
+            proxy_set_header        X-Real-IP          $remote_addr;
+            proxy_set_header        X-Forwarded-For    $http_x_forwarded_for;
+            
+            # websocket 支持必需
+            proxy_set_header        Upgrade            $http_upgrade;
+            proxy_set_header        Connection         "upgrade";
+ 
+            # 当传输大文件时，建议优化此参数
+            proxy_buffering             on;
+            proxy_buffer_size           64k;
+            proxy_buffers               4 128k;
+            proxy_busy_buffers_size     256k;
+            proxy_max_temp_file_size    0;
+ 
+            # localhost表示本机的名字，127.0.0.1是经过系统的映射的本机IP。所以实际来说大部分情况建议直接使用localhost
+            proxy_pass              http://localhost:8088;
+        }
+    }
+    # 将多 server 拆解，方便维护
+    include conf.d/*.conf;
+}
+```
+
+
 ### gzip压缩
 ```
 # 开启 gzip 压缩
-gzip  on;
-gzip_min_length 1k;
-gzip_buffers 4 16k;
-gzip_http_version 1.0;
-gzip_comp_level 6;
-gzip_types text/plain application/javascript application/x-javascript text/javascript text/xml text/css;
-gzip_disable "MSIE [1-6]\.";
-gzip_vary on;
+gzip                on;
+gzip_vary           on;
+gzip_types          text/plain application/javascript application/x-javascript text/javascript text/xml text/css;
+gzip_disable        "MSIE [1-6]\."; #请求头中的 UserAgent 字段满足此正则时不启用压缩
+gzip_buffers        4 16k;
+gzip_min_length     1k;
+gzip_comp_level     6; # gzip的压缩率，1-9，数字越大，压缩率越高，占用cpu也越高
+gzip_http_version   1.1; # 部分早期的 HTTP/1.0 客户端在处理 GZip 时有 Bug
 ```
 
 > 可独立成 gzip.conf 再 include 到 nginx.conf 内
@@ -487,3 +595,40 @@ if ($request_uri = / ) {
     return 403;
 }
 ```
+
+---
+
+## 其他知识
+
+### try_files
+
+> Checks the existence of files in the specified order and uses the first found file for request processing; the processing is performed in the current context. The path to a file is constructed from the fileparameter according to the root and alias directives. It is possible to check directory’s existence by specifying a slash at the end of a name, e.g. “$uri/”. If none of the files were found, an internal redirect to the uri specified in the last parameter is made.
+
+翻译：
+1. 按指定的file顺序查找存在的文件，并使用第一个找到的文件进行请求处理，处理过程仅在当前上下文有效。
+2. 查找路径是按照给定的root或alias为根路径来查找的
+3. 如果给出的file都没有匹配到，则重新请求最后一个参数给定的uri，就是新的location匹配
+
+使用：
+1. 在 vue 或 react 内，若 router 使用了 hash 模式，最好配置 try_files 来确保请求能找到处理文件。同时内部要自行解决路由匹配的404问题
+2. 若服务没法使用 try_files, 则必需配置默认页面，并且需要引导用户，不能访问到其他 uri
+
+### root&alias
+
+- [root]
+1. 语法：root path
+2. 默认值：root html
+3. 配置段：http、server、location、if
+4. root会根据完整的URI请求来映射，也就是/path/uri
+
+- [alias]
+1. 语法：alias path
+2. 配置段：location
+3. alias会把location后面配置的路径丢弃掉，把当前匹配到的目录指向到指定的目录
+
+使用注意：
+1. 使用alias时，目录名后面一定要加"/"。
+2. alias可以指定任何名称。
+3. alias在使用正则匹配时，必须捕捉要匹配的内容并在指定的内容处使用。
+4. alias只能位于location块中。
+

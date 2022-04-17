@@ -36,6 +36,7 @@ module.exports = {
                     { text: '架构', link: '/backend/framework/' },
                     { text: '规范', link: '/backend/standard/' },
                     { text: '模块', link: '/backend/modules/' },
+                    { text: '设计', link: '/backend/design/' },
                     { text: '服务器', link: '/backend/server/' },
                     { text: '三方集成', link: '/backend/third/' },
                     { text: '其他(未完成/未分类)', link: '/backend/others/' },
@@ -58,10 +59,12 @@ module.exports = {
                 'reflect',
                 'BeanPostProcessor',
                 'ApplicationListener',
+                'local_jar',
             ],
             '/backend/component/': [
                 '',
                 'mqtt',
+                'mybatis',
                 'nginx',
             ],
             '/backend/framework/': [
@@ -97,6 +100,10 @@ module.exports = {
                 'pms',
                 'gen',
             ],
+            '/backend/design/': [
+                '',
+                'andor',
+            ],
             '/backend/server/': [
                 '',
                 'init',
@@ -123,6 +130,7 @@ module.exports = {
             '/front/vue/': [
                 '',
                 'node_update',
+                'components',
             ],
             '/front/standard/': [
                 '',
