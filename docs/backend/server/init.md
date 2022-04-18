@@ -32,7 +32,8 @@ yum install -y gcc automake autoconf libtool make
 vim /etc/selinux/config
 SELINUX=disabled
 ```
-
+- 仅改配置，重启后生效
+- 当前生效：setenforce 0 【不是配置生效，是临时关闭 SELINUX】
 
 ## 生成公钥
 ```shell script
