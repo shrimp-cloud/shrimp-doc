@@ -107,9 +107,9 @@ module.exports = {
             '/backend/server/': [
                 '',
                 'init',
-                'docker_install',
-                'k8s_install',
                 'kernel',
+                'docker_install',
+                'kubenetes',
             ],
             '/backend/third/': [
                 '',
