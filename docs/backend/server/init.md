@@ -3,7 +3,6 @@
 ## 系统安装
 - CentOS 7.x
 
-
 ## 添加用户/组
 ```shell scrip
 groupadd apps
@@ -24,7 +23,21 @@ yum remove mariadb-libs -y
 yum install -y epel-release yum-utils
 yum install -y vim net-tools numactl lrzsz zip unzip wget htop git telnet fontconfig
 yum install -y gcc automake autoconf libtool make
+```
 
+## 时间同步
+```shell
+# 安装时间同步工具
+yum install -y ntp
+# 设置及启动时间同步工具
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+systemctl start ntpd
+systemctl enable ntpd
+# 进行一次时间同步
+ntpdate -u time.nist.gov
+# 重启时间相关组件
+systemctl restart rsyslog
+systemctl restart crond
 ```
 
 ## selinux

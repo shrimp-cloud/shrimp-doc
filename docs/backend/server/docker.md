@@ -21,6 +21,7 @@ Tips: device-mapper-persistent-data lvm2: 存储驱动
 mkdir -p /etc/docker
 tee /etc/docker/daemon.json <<-'EOF'
 {
+  "exec-opts": ["native.cgroupdriver=systemd"],
   "registry-mirrors": ["https://xxxxxxxx.mirror.aliyuncs.com"]
 }
 EOF
@@ -30,6 +31,13 @@ registry-mirrors 地址为阿里云镜像服务申请的镜像加速地址，阿
 1. 镜像加速地址获取：https://cr.console.aliyun.com/cn-shenzhen/instances/mirrors
 2. 登录账号密码设置：https://cr.console.aliyun.com/cn-shenzhen/instance/credentials
 3. 创建仓库并推送镜像：https://cr.console.aliyun.com/cn-shenzhen/instance/repositories
+
+systemd:
+systemd是系统自带的cgroup管理器, 系统初始化就存在的, 和cgroups联系紧密,为每一个进程分配cgroups, 用它管理就行了. 如果设置成cgroupfs就存在2个cgroup控制管理器, 实验证明在资源有压力的情况下,会存在不稳定的情况. 
+确认 systemd 配置是否生效：
+```shell
+docker info | grep Cgroup
+```
 
 ### 启动 Docker 后台服务
 ```shell
