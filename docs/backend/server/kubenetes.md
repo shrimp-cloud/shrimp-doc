@@ -93,4 +93,49 @@ yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable kubelet
 ```
 
+## 初始化master
+
+### 默认配置
+```shell
+kubeadm config print init-defaults > kubeadm-init.yaml
+```
+### 修改配置：
+将advertiseAddress: 1.2.3.4修改为本机IP地址
+将imageRepository: k8s.gcr.io修改为imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers , 这里是修改成阿里云的仓库。
+修改节点名称，如果不修改就是默认的’node'
+修改podSubnet，如果采用calico作为网络插件，需要改为192.168.0.0/16
+
+```
+advertiseAddress: 192.168.1.12
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+kubernetesVersion: v1.23.5
+# 在 networking.dnsDomain 同一级下添加
+podSubnet: 172.12.0.0/16
+
+# 否需要改呢？疑问
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+featureGates:
+  SupportIPVSProxyMode: true
+mode: ipvs
+```
+
 ### 初始化
+```shell
+kubeadm init --config kubeadm-init.yaml
+```
+异常汇总：
+- [ERROR NumCPU]: the number of available CPUs 1 is less than the required 2 【穷逼】
+- [ERROR Mem]: the system RAM (983 MB) is less than the minimum 1700 MB【穷逼】
+- Get "http://localhost:10248/healthz": dial tcp 127.0.0.1:10248: connect: connection refused. 【删除配置重试就成功了。。】
+- Container runtime network not ready 【删除配置重试就成功了。。】
+警告汇总：
+- [WARNING Firewalld]: firewalld is active, please ensure ports [6443 10250] are open or your cluster may not function correctly
+- [WARNING Swap]: swap is enabled; production deployments should disable swap unless testing the NodeSwap feature gate of the kubelet
+- [WARNING Hostname]: hostname "master01" could not be reached
+- [WARNING Hostname]: hostname "master01": lookup master01 on 192.168.2.1:53: no such host
+
+异常日志查看：
+- systemctl status kubelet
+- journalctl -xeu kubelet
