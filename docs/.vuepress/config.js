@@ -54,9 +54,6 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
-            '/base/': [
-                '',
-            ],
             '/base/standard-base/': [
                 '',
                 'git',
@@ -73,9 +70,6 @@ module.exports = {
                 'framework',
             ],
 
-            '/backend/': [
-                '',
-            ],
             '/backend/spring/': [
                 '',
                 'reflect',
@@ -139,9 +133,6 @@ module.exports = {
                 'nginx_docker',
             ],
 
-            '/front/': [
-                '',
-            ],
             '/front/vue/': [
                 '',
                 'node_update',
