@@ -139,3 +139,21 @@ kubeadm init --config kubeadm-init.yaml
 异常日志查看：
 - systemctl status kubelet
 - journalctl -xeu kubelet
+
+### node状态
+```shell
+kubectl get node
+```
+
+### 网络插件
+> 未完待续
+
+
+### master完成
+```shell
+kubeadm join 192.168.2.253:6443 --token abcdef.0123456789abcdef \
+	--discovery-token-ca-cert-hash sha256:51acfbe0edf776d312de133722f8372de6590a0209ec65ee9535c61d2b09133f
+```
+
+## node初始化
+> 未完待续
