@@ -65,7 +65,7 @@ module.exports = {
                 'database',
                 'named',
             ],
-            '/base/standard-base/': [
+            '/base/standard-frontend/': [
                 '',
                 'framework',
             ],
