@@ -24,7 +24,9 @@ module.exports = {
                 text: '基础',
                 ariaLabel: '基础',
                 items: [
-                    { text: '规范', link: '/base/standard/' },
+                    { text: '基础规范', link: '/base/standard-base/' },
+                    { text: '前端规范', link: '/base/standard-frontend/' },
+                    { text: '后端规范', link: '/base/standard-backend/' },
                 ]
             },
             {
@@ -34,7 +36,6 @@ module.exports = {
                     { text: 'Spring', link: '/backend/spring/' },
                     { text: '组件', link: '/backend/component/' },
                     { text: '架构', link: '/backend/framework/' },
-                    { text: '规范', link: '/backend/standard/' },
                     { text: '模块', link: '/backend/modules/' },
                     { text: '设计', link: '/backend/design/' },
                     { text: '服务器', link: '/backend/server/' },
@@ -47,13 +48,34 @@ module.exports = {
                 ariaLabel: '前端',
                 items: [
                     { text: 'VUE', link: '/front/vue/' },
-                    { text: '规范', link: '/front/standard/' },
                     { text: '客户端', link: '/front/client/' },
                 ]
             },
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
+            '/base/': [
+                '',
+            ],
+            '/base/standard-base/': [
+                '',
+                'git',
+                'principle',
+            ],
+            '/base/standard-backend/': [
+                '',
+                'api',
+                'database',
+                'named',
+            ],
+            '/base/standard-base/': [
+                '',
+                'framework',
+            ],
+
+            '/backend/': [
+                '',
+            ],
             '/backend/spring/': [
                 '',
                 'reflect',
@@ -78,18 +100,6 @@ module.exports = {
                 'core',
                 'cache',
                 'gray_release',
-            ],
-            '/base/standard/': [
-                '',
-                'git',
-            ],
-            '/backend/standard/': [
-                '',
-                'principle',
-                'code',
-                'named',
-                'api',
-                'database',
             ],
             '/backend/modules/': [
                 '',
@@ -128,23 +138,19 @@ module.exports = {
                 '',
                 'nginx_docker',
             ],
+
+            '/front/': [
+                '',
+            ],
             '/front/vue/': [
                 '',
                 'node_update',
                 'components',
             ],
-            '/front/standard/': [
-                '',
-                'standard',
-            ],
-
             '/front/client/': [
                 '',
                 'miniapp',
             ],
-             '/front/': [
-                '',
-            ]
         },
     },
 }

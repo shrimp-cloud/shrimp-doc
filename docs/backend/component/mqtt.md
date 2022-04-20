@@ -25,7 +25,7 @@ netstat -ntlp | grep emqx
 > http://127.0.0.1:18083 (用户名密码在安装之后使用 emqx_ctl设定) 
 > 配置 nginx 转发以开发控制台
 
-### 认证：
+### 认证
 - MySQL 认证：https://www.emqx.io/docs/zh/v4.4/advanced/auth-mysql.html#mysql-连接信息
 
 
