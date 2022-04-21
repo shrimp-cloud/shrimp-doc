@@ -118,6 +118,14 @@ public class MqttProducerDemo {
     
 }
 ```
+### 监听系统事件
+1. 开放服务器允许订阅系统主题
+```shell
+# vim etc/acl.conf
+# 看着修改就好，不难，不说明了
+```
+2. 监听 topic: $SYS/# 这里包含很多事件，可以自行精细化监听来达到需求
+
 
 ## 组件封装
 
