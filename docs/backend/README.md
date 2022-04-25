@@ -3,9 +3,11 @@
 本栏的主要内容如下：
 
 - [Spring](docs/backend/spring/)
-- [后端架构](docs/backend/framework/)
-- [后端模块](docs/backend/modules/)
-- [后端规范](docs/backend/standard/)
-- [后端服务器](docs/backend/server/)
-- [Nginx](docs/backend/nginx/)
+- [组件](docs/backend/component/)
+- [架构](docs/backend/framework/)
+- [模块](docs/backend/modules/)
+- [设计](docs/backend/design/)
+- [服务器](docs/backend/server/)
 - [三方集成](docs/backend/third/)
+- [其他](docs/backend/others/)
+
