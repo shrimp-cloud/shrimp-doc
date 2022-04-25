@@ -37,3 +37,17 @@ func main() {
 }
 # go run test.go
 ```
+
+### 编译执行
+编译
+```shell
+go build test.go
+```
+执行
+```shell
+./test
+```
+
+
+### 开发工具
+> https://www.jetbrains.com/go/
