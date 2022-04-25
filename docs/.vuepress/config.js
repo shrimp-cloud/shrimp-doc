@@ -30,6 +30,14 @@ module.exports = {
                 ]
             },
             {
+                text: '前端',
+                ariaLabel: '前端',
+                items: [
+                    { text: 'VUE', link: '/front/vue/' },
+                    { text: '客户端', link: '/front/client/' },
+                ]
+            },
+            {
                 text: '后端',
                 ariaLabel: '后端',
                 items: [
@@ -44,11 +52,10 @@ module.exports = {
                 ]
             },
             {
-                text: '前端',
-                ariaLabel: '前端',
+                text: 'GO',
+                ariaLabel: 'GO',
                 items: [
-                    { text: 'VUE', link: '/front/vue/' },
-                    { text: '客户端', link: '/front/client/' },
+                    { text: 'GO基础', link: '/go/' },
                 ]
             },
         ],
@@ -141,6 +148,10 @@ module.exports = {
             '/front/client/': [
                 '',
                 'miniapp',
+            ],
+            '/go/': [
+                '',
+                'init',
             ],
         },
     },
