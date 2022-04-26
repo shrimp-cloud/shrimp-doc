@@ -54,3 +54,20 @@ module.exports = {
     ],
 }
 ```
+
+
+### 内容区域扩展到100
+问题：
+内容区域只在整体页面的中间位置，期待让内容靠左。
+
+解决方案：
+
+创建styl文件并放入以下内容：
+```shell
+vim ./docs/palette.styl
+```
+```css
+.page .theme-default-content:not(.custom) {
+    max-width: none;
+}
+```
