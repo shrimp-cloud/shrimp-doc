@@ -33,3 +33,22 @@ yarn docs:dev
 
 ### 坑
 - 如果你的现有项目依赖了 webpack 3.x，我们推荐使用 Yarn (opens new window)而不是 npm 来安装 VuePress。因为在这种情形下，npm 会生成错误的依赖树。
+
+## 扩展
+
+### mermaid 支持
+1. package 追加 mermaidjs
+```json
+{
+    "devDependencies": {
+        "vuepress-plugin-mermaidjs": "^1.8.1"
+    }
+}
+```
+
+2. config 配置插件
+```json
+plugins: [
+    'vuepress-plugin-mermaidjs'
+],
+```
