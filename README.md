@@ -47,8 +47,10 @@ yarn docs:dev
 ```
 
 2. config 配置插件
-```json
-plugins: [
-    'vuepress-plugin-mermaidjs'
-],
+```js
+module.exports = {
+    plugins: [
+        'vuepress-plugin-mermaidjs'
+    ],
+}
 ```
