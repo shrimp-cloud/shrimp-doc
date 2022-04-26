@@ -1,4 +1,4 @@
-# go 环境初始化
+# GO 环境初始化
 
 ### SDK
 
@@ -51,3 +51,10 @@ go build test.go
 
 ### 开发工具
 > https://www.jetbrains.com/go/
+
+
+### 代理
+go 依赖下载的默认代理为：https://proxy.golang.org。在国内访问不了，可更换代理
+```shell
+go env -w GOPROXY=https://goproxy.cn
+```
