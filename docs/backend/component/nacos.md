@@ -53,10 +53,26 @@ cp cluster.conf.example cluster.conf
 sh startup.sh
 ```
 
+- 在nacos上层配置nginx的upstream完成nacos的负载均衡。
+
+
 ### 控制台
 - 地址：http://ip:8848/nacos/index.html
 - 默认用户名密码：nacos/nacos
 
+
+### 异常处理
+- Caused by: java.net.UnknownHostException: jmenv.tbsite.net
+> 是因为nacos-server-2.X.X的conf目录下的cluster.conf.example导致，需要手动改为cluster.conf
+
+- Nacos Server did not start because dumpservice bean construction failure : No DataSource set】
+> 数据库连接失败导致。需要确认数据库连接失败的原因
+
+- 密码带#号导致识别错误
+> 在配置文件里面被当成注释符了。建议不要使用带#号的密码，否则需要进行转译
+
 ## NACOS 使用
 
+### Springcloud集成
 
+未完成

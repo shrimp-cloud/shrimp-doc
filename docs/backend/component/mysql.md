@@ -1,5 +1,7 @@
 # MySQL
 
+## 安装
+
 ### 环境准备
 
 移除mariadb的影响
@@ -54,3 +56,10 @@ firewall-cmd --permanent --zone=public --add-port=3306/tcp
 firewall-cmd --reload
 ```
 
+## 高级操作
+
+### 修改密码
+```shell
+ALTER USER `root`@`%` IDENTIFIED BY 'new_password';
+FLUSH PRIVILEGES;
+```
