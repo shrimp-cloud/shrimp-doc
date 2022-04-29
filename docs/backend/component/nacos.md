@@ -74,5 +74,98 @@ sh startup.sh
 ## NACOS 使用
 
 ### Springcloud集成
+1. 依赖
+```xml
+<!-- 启动配置管理 -->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+    <version>${latest.version}</version>
+</dependency>
+<!-- 启动服务发现 -->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+    <version>${latest.version}</version>
+</dependency>
+```
+2. 配置
+```yaml
+spring:
+  application:
+    name: applicationName
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        # 配置
+        server-addr: http://ip:port
+      discovery:
+        # 发现
+        server-addr: http://ip:port
 
-未完成
+```
+
+3. 开启注册发现
+- main 函数加上：@EnableDiscoveryClient
+
+4. 获取配置
+```java
+package com.your.pkg.path;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+
+@RefreshScope // 实现配置自动更新
+public class TourConfig {
+
+    @Value("${lz.config.deno:}")
+    private String configDemo;
+
+}
+```
+
+5. 服务消费
+```java
+package com.your.pkg.path;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@Component
+public class DemoRest {
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @RestController
+    public class TestController {
+
+        @Autowired
+        private RestTemplate restTemplate;
+
+        @GetMapping( "/echo/str")
+        public String echo() {
+            // 使用 Ribbon 的 LoadBalanced 消费 service-provider 的服务
+            return restTemplate.getForObject("http://service-provider/echo/data", String.class);
+        }
+    }
+}
+```
+
+### 比eureka的优势
+0. 自带配置中心
+1. 自带基于RBAC的权限
+2. 自带订阅者查询
+3. 支持命名空间
+4. 控制台自带集群管理
+5. 为什么还用 Eureka 呢
