@@ -106,8 +106,8 @@ Druid 监控视图配置
 6. 乐观锁校验：结合 service 使用。强制使用乐观锁场景将校验 version 字段
 7. 将校验异常结果转换为更友好的提示
 
-### uril.JdbcUtil
+### util.JdbcUtil
 JDBC 基本工具类
 
-### uril.ResultSetMapper
+### util.ResultSetMapper
 ResultSet 映射转换工具
