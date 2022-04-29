@@ -17,8 +17,6 @@ passwd apps
 yum update -y
 # 修改主机名：
 hostnamectl set-hostname lzser
-# 删除MariaDB工具：
-yum remove mariadb-libs -y
 # 安装工具： 
 yum install -y epel-release yum-utils
 yum install -y vim net-tools numactl lrzsz zip unzip wget htop git telnet fontconfig
@@ -79,30 +77,9 @@ firewall-cmd --list-all
 
 ## 其他工具
 ```shell script
-jdk, maven 自行下载
+maven 自行下载
 ```
 
-## mysql
-```shell script
-yum install libaio.x86_64 -y
-
-mysql-community 8.0:
-rpm -ivh mysql-community-common-8.0.28-1.el7.x86_64.rpm
-rpm -ivh mysql-community-client-plugins-8.0.28-1.el7.x86_64.rpm
-rpm -ivh mysql-community-libs-8.0.28-1.el7.x86_64.rpm
-rpm -ivh mysql-community-client-8.0.28-1.el7.x86_64.rpm
-rpm -ivh mysql-community-icu-data-files-8.0.28-1.el7.x86_64.rpm
-rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm
-
-systemctl start mysqld
-systemctl enable mysqld
-初始密码在 /var/log/mysqld.log 里面
-初始化：mysql_secure_installation
-
-CREATE USER 'lz'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON lz_dev.* TO 'lz'@'%'  WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-```
 
 ## redis
 ```shell script

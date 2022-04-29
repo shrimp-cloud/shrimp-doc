@@ -86,6 +86,9 @@ module.exports = {
             ],
             '/backend/component/': [
                 '',
+                'jdk',
+                'mysql',
+                'nacos',
                 'mqtt',
                 'mybatis',
                 'nginx',
