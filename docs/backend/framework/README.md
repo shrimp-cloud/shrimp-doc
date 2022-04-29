@@ -33,7 +33,7 @@
 - manager 总管理后台，面向于平台管理人员
 - admin 租户/模块管理后台，面向于使用系统客户，租户
 - customoer 用户终端，面向于终端用户
-- [miniapp](/front/miniapp.md) 小程序终端，面向终端用户
+- miniapp 小程序终端，面向终端用户
 
 ## 后端组件
 - 基础工程
@@ -41,12 +41,12 @@
   - core 核心工程
   - starter 启动器
   - gen 代码生成
-  - Jenkins
+  - Jenkins CICD
 - Springcloud 工程
   - eureka
   - config
   - admin
-  - zuul
+  - gateway
 - 中间件
   - Redis
   - Nginx
@@ -72,10 +72,9 @@
 - lz-spring-boot-starter 启动器
 - config-repo 配置仓库
 - lz-soa 服务治理
-  - lz-eureka 注册中心
-  - lz-config 配置中心
+  - nacos 注册中心
   - lz-admin 监控
-  - lz-zuul 网关
+  - lz-gateway 网关
 - lz-demo 示例项目
 - lz-gen 代码生成
 - lz-gov 服务管理
@@ -84,7 +83,6 @@
 - lz-pay 支付
 - lz-pms 商品管理
 - lz-cms 内容管理
-
 
 ## 接口文档
 
@@ -95,10 +93,11 @@ gen | 代码生成 | [文档](http://doc.wkclz.com/gen/)
 gov | 服务管理 | [文档](http://doc.wkclz.com/gov/)
 sys | 系统管理 | [文档](http://doc.wkclz.com/sys/)
 cas | 用户/权限/资源 | [文档](http://doc.wkclz.com/cas/)
-pay | 支付 | [文档](http://doc.wkclz.com/pay/)
 pms | 产品 | [文档](http://doc.wkclz.com/pms/)
 cms | 内容 | [文档](http://doc.wkclz.com/cms/)
+oms | 订单 | [文档](http://doc.wkclz.com/oms/)
+pay | 支付 | [文档](http://doc.wkclz.com/pay/)
 
 
 ## 起步
-- 请转向 [脚手架](/micro/demo.md "脚手架")
+- 请转向 [脚手架](/modules/demo.md "脚手架")
