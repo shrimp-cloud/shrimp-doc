@@ -20,6 +20,7 @@ module.exports = {
         editLinkText: '编辑此页面',
         nav: [
             { text: 'Home', link: '/'},
+            { text: 'DEMO', link: '/demo/'},
             {
                 text: '基础',
                 ariaLabel: '基础',
