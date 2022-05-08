@@ -62,6 +62,10 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
+            '/demo/': [
+                '',
+                'lectotype',
+            ],
             '/base/standard-base/': [
                 '',
                 'git',
