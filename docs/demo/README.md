@@ -19,8 +19,8 @@ vue-element-admin | Element UI | js | npm | webpack | vue2 | MIT | https://githu
 RuoYi | Element UI | js | npm | webpack | vue2 | MIT | https://gitee.com/y_project/RuoYi-Vue
 RuoYi-Vue3  | Element Plus | js | yarn | vite | vue3 | MIT | https://github.com/yangzongzhuan/RuoYi-Vue3
 mall | Element UI | js | npm | webpack | vue2 | Apache | https://github.com/macrozheng/mall-admin-web
-Vben Admin | Ant-Design | ts | yarn | vite | vue3 | MIT | https://github.com/vbenjs/vue-vben-admin
-antdv | Ant-Design | js | npm | webpack | vue3 | MIT | https://github.com/vueComponent/ant-design-vue-pro
+Vben Admin | Ant Design Vue | ts | yarn | vite | vue3 | MIT | https://github.com/vbenjs/vue-vben-admin
+antdv | Ant Design Vue | js | npm | webpack | vue3 | MIT | https://github.com/vueComponent/ant-design-vue-pro
 
 ### 以下未完成
 
