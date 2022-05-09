@@ -85,6 +85,7 @@ module.exports = {
             '/backend/spring/': [
                 '',
                 'reflect',
+                'PostConstruct',
                 'BeanPostProcessor',
                 'ApplicationListener',
                 'local_jar',
