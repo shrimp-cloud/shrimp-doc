@@ -8,6 +8,7 @@
 - [用户权限](docs/backend/modules/cas.md)
 - [内容管理](docs/backend/modules/cms.md)
 - [商品管理](docs/backend/modules/pms.md)
+- [数据可视](docs/backend/modules/bi.md)
 - [支付管理](docs/backend/modules/pay.md)
 - [订单管理](docs/backend/modules/oms.md)
 - [代码生成](docs/backend/modules/gen.md)
