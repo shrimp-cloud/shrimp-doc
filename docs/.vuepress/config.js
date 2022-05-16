@@ -118,6 +118,7 @@ module.exports = {
                 'cas',
                 'cms',
                 'pms',
+                'bi',
                 'gen',
             ],
             '/backend/design/': [
