@@ -13,16 +13,20 @@
 4. 发布完成：从 release 分支合并到 master，完成一个周期
 
 ### 提交记录规范
-- feat：新功能的开发
-- fix：bug的修复
-- docs：文档格式的改动
-- style：代码格式改变
-- refactor：对已有的功能进行重构
-- perf：性能优化
-- test：增加测试
-- build：改变了build工具
-- revert：撤销上一次的commit提交
-- chore：构建过程或辅助工具的变动
+- `feat` 新功能的开发
+- `fix` 修复问题/BUG
+- `style` 代码风格相关无影响运行结果的
+- `perf` 优化/性能提升
+- `refactor` 对已有的功能进行重构
+- `revert` 撤销修改，撤销上一次的commit提交
+- `test` 测试相关
+- `docs` 文档/注释及格式的改动
+- `chore` 依赖更新/脚手架配置修改等
+- `workflow` 工作流改进
+- `ci` 持续集成
+- `types` 类型定义文件更改
+- `build` 改变了build工具
+- `wip` 开发中
 
 #### 示例
 ```shell
