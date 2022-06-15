@@ -110,8 +110,14 @@ FROM image.wkclz.com/lz-cloud/centos7:latest
 MAINTAINER wkclz
  
 WORKDIR /apps
-ADD ./target/lz-demo.jar app.jar
+ADD ./target/*.jar app.jar
 ```
+
+## Idea插件连接服务端Docker并打包
+- IntelliJ IDEA 2022 (Ultimate Edition)
+- 安装插件： Docker
+- 配置 Docker,通过 ssh 连接到已经安装Docker的服务器
+- 进入 Server 工具窗口，即可远程操作 Docker
 
 
 ## springboot插件打包docker
