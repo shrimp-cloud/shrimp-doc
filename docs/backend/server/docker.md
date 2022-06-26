@@ -72,7 +72,7 @@ WORKDIR /apps
 ADD jdk17 jdk17
 
 # 安装基本依赖
-RUN yum install -y zsh vim less openssh-clients net-tools numactl zip unzip wget telnet bind-utils && \
+RUN yum install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
   yum clean all
 
 # 环境变量
@@ -89,6 +89,12 @@ docker build -t image.wkclz.com/lz-cloud/centos7:0.0.1 .
 docker build -t image.wkclz.com/lz-cloud/centos7:latest .
 # 运行并进入 img:
 docker run -it image.wkclz.com/lz-cloud/centos7:0.0.1 /bin/bash
+# 查看正在运行的容器
+docker ps
+# 进入正在运行的容器
+docker attach 容器id #Ctrl + P + Q 退出
+# 进入正在运行的容器
+docker exec -it 容器id /bin/bash
 ```
 Tips: 
 1. 同一个Dockerfile 使用不同的 tag 标签进行打包，不会重新打包，只会新增标签。推送也将是一样的效果。故可用此方式打出多个标签，方便通过 vpc 网络推送镜像

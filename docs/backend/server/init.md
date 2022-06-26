@@ -19,7 +19,7 @@ yum update -y
 hostnamectl set-hostname lzser
 # 安装工具： 
 yum install -y epel-release yum-utils
-yum install -y vim net-tools numactl lrzsz zip unzip wget htop git telnet fontconfig
+yum install -y vim net-tools numactl fontconfig lrzsz zip unzip wget htop git telnet
 yum install -y gcc automake autoconf libtool make
 ```
 
