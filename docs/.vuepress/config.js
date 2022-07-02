@@ -170,6 +170,8 @@ module.exports = {
 
             '/front/vue/': [
                 '',
+                'node_base',
+                'base_image',
                 'node_update',
                 'components',
             ],
