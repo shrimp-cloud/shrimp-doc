@@ -20,7 +20,16 @@ module.exports = {
         editLinkText: '编辑此页面',
         nav: [
             { text: 'Home', link: '/'},
-            { text: 'DEMO', link: '/demo/'},
+            {
+                text: '生态',
+                ariaLabel: '生态',
+                items: [
+                    { text: 'DEMO', link: '/ecology/demo/' },
+                    { text: '代码生成', link: '/ecology/gen/' },
+                    { text: '权限', link: '/ecology/cas/' },
+                    { text: '报表', link: '/ecology/report/' },
+                ]
+            },
             {
                 text: '基础',
                 ariaLabel: '基础',
@@ -62,9 +71,22 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
-            '/demo/': [
+            '/ecology/demo/': [
                 '',
                 'lectotype',
+                'demo',
+            ],
+            '/ecology/gen/': [
+                '',
+                'gen',
+            ],
+            '/ecology/cas/': [
+                '',
+                'cas',
+            ],
+            '/ecology/report/': [
+                '',
+                'report',
             ],
             '/base/standard-base/': [
                 '',
@@ -113,13 +135,9 @@ module.exports = {
             ],
             '/backend/modules/': [
                 '',
-                'demo',
                 'sys',
-                'cas',
                 'cms',
                 'pms',
-                'bi',
-                'gen',
             ],
             '/backend/design/': [
                 '',
