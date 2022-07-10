@@ -24,6 +24,7 @@ module.exports = {
                 text: '生态',
                 ariaLabel: '生态',
                 items: [
+                    { text: '后端架构', link: '/ecology/cloud/' },
                     { text: 'DEMO', link: '/ecology/demo/' },
                     { text: '代码生成', link: '/ecology/gen/' },
                     { text: '权限', link: '/ecology/cas/' },
@@ -71,6 +72,9 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示2级
         sidebar: {
+            '/ecology/cloud/': [
+                '',
+            ],
             '/ecology/demo/': [
                 '',
                 'lectotype',
