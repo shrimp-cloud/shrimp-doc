@@ -113,6 +113,7 @@ module.exports = {
                 'reflect',
                 'PostConstruct',
                 'BeanPostProcessor',
+                'IocBeanLifeCycle',
                 'ApplicationListener',
                 'local_jar',
             ],
