@@ -111,3 +111,142 @@ JDBC 基本工具类
 
 ### util.ResultSetMapper
 ResultSet 映射转换工具
+
+
+## MyBatis四大组件
+
+### 组件
+- Executor：一个 SqlSession 对应一个 Executor 对象，这个对象负责增删改查的具体操作
+- ParameterHandler：mybatis 提供的 参数处理器, 没有过多的类关联关系, 只有一个默认的实现类
+- StatementHandler：StatementHandler 是 mybatis 创建 Statement 的处理器, 会负责 Statement 的创建工作, 在 JDBC 中 Statement 执行 SQL 语句时主要分为两个主要对象。 一个是平常大家都知道的 Statement 和 PrepareStatement, 都是在 java.sql 包下提供的对象
+- ResultSetHandler：同 ParameterHandler 一致, 都只有一个默认的实现类。ResultSetHandler 作用域只有一个, 那就是负责处理 Statement 返回的结果, 根据定义返回类型进行封装返回
+- 参考：https://zhuanlan.zhihu.com/p/186261260
+
+### 执行SQL过程
+Mybatis执行SQL的完整过程， 参考：https://www.bbsmax.com/A/B0zqre03Jv/
+
+### 拦截器
+
+拦截器示例
+#### 拦截参数处理
+```java
+import org.apache.ibatis.executor.parameter.ParameterHandler;
+import org.apache.ibatis.plugin.*;
+
+import java.sql.PreparedStatement;
+import java.util.Properties;
+
+@Intercepts({@Signature(type = ParameterHandler.class, method = "setParameters", args = PreparedStatement.class)})
+public class MybatisParameterInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截参数设置
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+#### 拦截查询执行
+```java
+import org.apache.ibatis.cache.CacheKey;
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.mapping.BoundSql;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.RowBounds;
+
+import java.util.Properties;
+
+@Intercepts({
+    @Signature(type = Executor.class,method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+    @Signature(type = Executor.class,method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})
+})
+public class MybatisQueryInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截查询执行
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+#### 拦截入库执行
+```java
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.plugin.*;
+
+import java.util.Properties;
+
+@Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})})
+public class MybatisUpdateInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截入库执行
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+#### 拦截结果处理
+```java
+import org.apache.ibatis.executor.resultset.ResultSetHandler;
+import org.apache.ibatis.plugin.*;
+
+import java.sql.Statement;
+import java.util.Properties;
+
+@Intercepts({@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})})
+public class MybatisResultSetInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截查询结果
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+#### 拦截其他
+- 指定 Signature 的 类型，方法，和参数。即可完成拦截
+拦截器执行顺序参考：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/Interceptor.md 
