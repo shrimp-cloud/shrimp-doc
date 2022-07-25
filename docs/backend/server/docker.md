@@ -121,6 +121,11 @@ WORKDIR /apps
 ADD ./target/*.jar app.jar
 ```
 
+### 异常处理
+- 镜像占用空间太大需要清理：docker system prune -a
+
+
+
 ## Idea插件连接服务端Docker并打包
 - IntelliJ IDEA 2022 (Ultimate Edition)
 - 安装插件： Docker
