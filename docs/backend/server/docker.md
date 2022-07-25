@@ -104,6 +104,8 @@ Tips:
 ```shell
 # 登录，根据提示完成登录
 docker login image.wkclz.com
+# 带密码登录
+cat /xx/xx/docker.pwd | docker login --username=${username} --password-stdin image.wkclz.com
 # 推送
 docker push image.wkclz.com/lz-cloud/centos7:0.0.1
 ```

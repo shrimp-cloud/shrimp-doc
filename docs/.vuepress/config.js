@@ -120,6 +120,7 @@ module.exports = {
             '/backend/component/': [
                 '',
                 'jdk',
+                'redis',
                 'mysql',
                 'nacos',
                 'mqtt',

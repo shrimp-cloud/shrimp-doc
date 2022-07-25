@@ -81,18 +81,6 @@ maven 自行下载
 ```
 
 
-## redis
-```shell script
-yum install -y redis
-vim /etc/redis.conf
-daemonize yes  # 进程守护
-# bind 127.0.0.1	# 需要注释掉
-requirepass redispassword # 需要密码
-systemctl start redis
-systemctl enable redis
-
-```
-
 ## 开机执行指定脚本
 ```shell script
 # vim   /etc/rc.d/rc.local 
