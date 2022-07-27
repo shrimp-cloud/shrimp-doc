@@ -151,7 +151,7 @@ module.exports = {
             ],
             '/backend/server/': [
                 '',
-                'init',
+                'centos7',
                 'kernel',
                 'docker',
                 'kubenetes',
