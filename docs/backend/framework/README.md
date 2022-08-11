@@ -65,7 +65,7 @@
   - ...
 
 ## 仓库
-- lz-doc (当前文档)
+- shrimp-doc (当前文档)
 - lz-parent 父工程
 - lz-core 核心工程
 - lz-sdk SDK【弃用】

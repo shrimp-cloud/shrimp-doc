@@ -51,7 +51,6 @@ cat /etc/grub2-efi.cfg | grep ^menuentry
 
 设置开机从新内核启动
 ```shell
-
 grub2-set-default "CentOS Linux (5.4.189-1.el7.elrepo.x86_64) 7 (Core)"
 ```
 

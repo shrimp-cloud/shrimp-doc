@@ -1,7 +1,7 @@
-# lz-doc
+# shrimp-doc
 
 ### 创建目录
-mkdir lz-doc && cd lz-doc
+mkdir shrimp-doc && cd shrimp-doc
 
 ### 使用yarn初始化
 yarn init

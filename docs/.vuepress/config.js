@@ -14,7 +14,7 @@ module.exports = {
         search: false,
         lastUpdated: '上次更新', // string | boolean
         smoothScroll: true,
-        repo: 'lz-cloud/lz-doc',
+        repo: 'shrimp-cloud/shrimp-doc',
         docsDir: 'docs',
         editLinks: true,
         editLinkText: '编辑此页面',
