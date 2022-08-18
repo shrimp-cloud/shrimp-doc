@@ -45,6 +45,7 @@ module.exports = {
                 ariaLabel: '前端',
                 items: [
                     { text: 'VUE', link: '/front/vue/' },
+                    { text: 'ruoyi', link: '/front/ruoyi/' },
                     { text: '客户端', link: '/front/client/' },
                 ]
             },
@@ -180,6 +181,10 @@ module.exports = {
                 'base_image',
                 'node_update',
                 'components',
+            ],
+            '/front/ruoyi/': [
+                '',
+                'init',
             ],
             '/front/client/': [
                 '',
