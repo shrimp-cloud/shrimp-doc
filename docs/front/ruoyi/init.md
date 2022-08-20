@@ -23,3 +23,17 @@ git clone https://github.com/yangzongzhuan/RuoYi-Vue3.git
    1. 注释 src/utils/request.js 中 isToken 相关代码
    2. 注释 src/api/login.js中 isToken 相关代码
    3. token 机制在后缀有补充。将会改造此部分代码
+
+### 标题，LOGO, 三方链接等
+1. LOGO
+   1. 新 icon: public/favicon.svg，并删除旧的 ico
+   2. 删除旧 src/assets/logo/logo.png：若 logo 和 icon 不共用，也可以替换掉
+   3. 更换 favicon: index.html
+   4. 更换登录后菜单上方 logo为icon: src/layout/components/Sidebar/Logo.vue
+2. 标题
+   1. Copyright: src/views/login.vue
+   2. 登录页标题: src/views/login.vue
+   3. 菜单上方标题: src/layout/components/Sidebar/Logo.vue
+3. 登录页右上方git链接: src/layout/components/Navbar.vue
+4. 登录页右上方文档链接: src/components/RuoYi/Doc/index.vue
+5. Dashboard: src/views/index.vue

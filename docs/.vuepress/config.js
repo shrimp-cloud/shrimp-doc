@@ -185,6 +185,8 @@ module.exports = {
             '/front/ruoyi/': [
                 '',
                 'init',
+                'api',
+                'login',
             ],
             '/front/client/': [
                 '',
