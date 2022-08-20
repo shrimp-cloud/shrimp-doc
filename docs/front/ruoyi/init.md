@@ -11,7 +11,7 @@ git clone https://github.com/yangzongzhuan/RuoYi-Vue3.git
 ### 基本信息
 1. package.json 内的 名称/版本/描述/作者/
 2. .env.* 内的系统名称。建议在TITLE 上直接附带环境标识
-
+3. 全局风格：src/settings.js
 
 ### 基本配置
 1. 删除 bin 目录【只有windows脚本，不会部署在windows中】
@@ -31,9 +31,10 @@ git clone https://github.com/yangzongzhuan/RuoYi-Vue3.git
    3. 更换 favicon: index.html
    4. 更换登录后菜单上方 logo为icon: src/layout/components/Sidebar/Logo.vue
 2. 标题
-   1. Copyright: src/views/login.vue
-   2. 登录页标题: src/views/login.vue
-   3. 菜单上方标题: src/layout/components/Sidebar/Logo.vue
+   1. 默认页面标题：index.html
+   2. Copyright: src/views/login.vue
+   3. 登录页标题: src/views/login.vue
+   4. 菜单上方标题: src/layout/components/Sidebar/Logo.vue
 3. 登录页右上方git链接: src/layout/components/Navbar.vue
 4. 登录页右上方文档链接: src/components/RuoYi/Doc/index.vue
 5. Dashboard: src/views/index.vue

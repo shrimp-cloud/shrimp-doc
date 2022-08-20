@@ -31,7 +31,6 @@ pageSize | 每页数 | Integer | 10
 orderBy | 排序字段 | String | id desc
 timeFrom | 时间范围开始 | yyyy-MM-dd HH\:mm\:ss | NaN
 timeTo | 时间范围结束 | yyyy-MM-dd HH\:mm\:ss | NaN
-dateRangeType | 时间范围类型 | HOUR("时"),DAY("天"),YESTERDAY("周"), MONTH("月"),QUATER("季"),YEAR("年"); | NaN
 
 
 ### 接口的返回值规范
@@ -43,7 +42,7 @@ x | 1 | 功能无异常，有业务状态返回
 x | \> 1 | 请看code 对照表
 msg | 异常消息 | code不为1时有返回
 requestTime | 请求时间 | 请求进入  controller 的时间
-responeTime | 响应时间 | 请求在Controller 进行set 结果的时间
+responseTime | 响应时间 | 请求在Controller 进行set 结果的时间
 costTime | 时间消耗 | 在 Controller 内消耗的时间，单位为毫秒
 data  | 详情 | 正常返回时为业务数据【无具体业务数据时返回 true】
 ==分页== | ==查询== | ==有返回== 

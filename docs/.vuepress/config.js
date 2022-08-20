@@ -187,6 +187,7 @@ module.exports = {
                 'init',
                 'api',
                 'login',
+                'crud',
             ],
             '/front/client/': [
                 '',
