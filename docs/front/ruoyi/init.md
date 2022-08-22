@@ -12,7 +12,7 @@ git clone https://github.com/yangzongzhuan/RuoYi-Vue3.git
 1. package.json 内的 名称/版本/描述/作者/
 2. .env.* 内的系统名称。建议在TITLE 上直接附带环境标识
 3. 全局风格：src/settings.js
-
+4. 修改为 hash 模式：src/router/index.js，createWebHistory 改为 createWebHashHistory。部署在 oss 上, history 模式会404
 ### 基本配置
 1. 删除 bin 目录【只有windows脚本，不会部署在windows中】
 2. 后端接口调用配置代理：修改 vite.config.js -> server.proxy.target 为自己的后端服务地址
