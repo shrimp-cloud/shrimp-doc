@@ -9,4 +9,5 @@
 4. src/views/login.vue 移除验证码逻辑【后面章节再加上】，Cookies 改为 localStorage。登录返回若 res.code=1才设置 token
 5. src/store/modules/user.js login更换为新的登录接口，logOut只需要简单的清除缓存。若要注销token，待后续完善
 6. src/store/modules/permission.js 的getRouters 更换为 mock 数据。使用json字义菜单
+7. src/store/modules/permission.js 的filterAsyncRouter，增强component适配。
 
