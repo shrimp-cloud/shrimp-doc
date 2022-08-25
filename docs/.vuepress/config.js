@@ -156,6 +156,7 @@ module.exports = {
                 'kernel',
                 'docker',
                 'kubenetes',
+                'vuepress',
             ],
             '/backend/third/': [
                 '',

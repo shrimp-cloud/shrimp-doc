@@ -1,20 +1,31 @@
 # shrimp-doc
 
 ### 创建目录
+```shell
 mkdir shrimp-doc && cd shrimp-doc
+```
 
 ### 使用yarn初始化
+```shell
 yarn init
+```
 
 ### 修改 npm 源，解决依赖拉取问题
-- npm config set registry https://registry.npm.taobao.org
-- npm config set disturl https://npm.taobao.org/dist
+```shell
+npm config set registry https://registry.npm.taobao.org
+npm config set disturl https://npm.taobao.org/dist
+```
 
 ### 引入 vuepress
+```shell
 yarn add -D vuepress
+```
 
 ### 创建第一个文件
+```shell
 mkdir docs && echo '# Hello VuePress' > docs/README.md
+```
+
 
 ### 添加启动命令，编译命令
 ```json
@@ -24,7 +35,11 @@ mkdir docs && echo '# Hello VuePress' > docs/README.md
     "docs:build": "vuepress build docs"
   }
 }
+```
 
+### 安装依赖
+```shell
+yarn install
 ```
 
 ### 本地启动项目
