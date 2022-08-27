@@ -10,4 +10,5 @@
 5. src/store/modules/user.js login更换为新的登录接口，logOut只需要简单的清除缓存。若要注销token，待后续完善
 6. src/store/modules/permission.js 的getRouters 更换为 mock 数据。使用json字义菜单
 7. src/store/modules/permission.js 的filterAsyncRouter，增强component适配。
+8. src/permission.js 所有的 isRelogin.show 都赋值 false, 框架bug,在登录失效后页面刷新不跳转登录页面
 
