@@ -39,9 +39,14 @@ const props = defineProps({
 ```javascript
 const emit = defineEmits(['update:value', 'change']);
 ```
-组件回调方法调用
+组件回调方法调用【组件】
 ```javascript
 emit("change", data);
+```
+
+组件回调方法调用【父页面】
+```html
+<component @change="functionName"/>
 ```
 
 ### defineExpose
