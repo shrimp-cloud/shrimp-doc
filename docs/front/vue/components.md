@@ -54,7 +54,7 @@ emit("change", data);
 ```javascript
 defineExpose({getList})
 ```
-外部引用组件暴露无遗的方法
+外部引用组件暴露的方法
 1. 组件定义 ref="componentsRef"
    2 引用方法：
 ```javascript

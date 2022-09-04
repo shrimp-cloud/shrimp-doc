@@ -75,6 +75,8 @@ module.exports = {
         sidebar: {
             '/ecology/cloud/': [
                 '',
+                'annotation',
+                'page',
             ],
             '/ecology/demo/': [
                 '',
