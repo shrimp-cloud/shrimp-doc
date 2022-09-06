@@ -85,6 +85,7 @@ module.exports = {
             ],
             '/ecology/gen/': [
                 '',
+                'sql2code',
                 'gen',
             ],
             '/ecology/cas/': [
