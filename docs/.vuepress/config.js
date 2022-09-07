@@ -134,6 +134,8 @@ module.exports = {
                 'mqtt',
                 'mybatis',
                 'nginx',
+                'samba',
+                'squid',
             ],
             '/backend/framework/': [
                 '',
