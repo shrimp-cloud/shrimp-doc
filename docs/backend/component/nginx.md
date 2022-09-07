@@ -416,6 +416,22 @@ server {
 }
 ```
 
+
+### 读取文件列表
+```
+server {
+    listen       80;
+    server_name  static.wkclz.com;
+    location / {
+        autoindex on;
+        autoindex_exact_size on;
+        autoindex_localtime on;
+        root /opt/dist/static;
+    }
+}
+```
+
+
 ### 纯反向代理配置
 ```
 server {

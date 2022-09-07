@@ -96,6 +96,10 @@ module.exports = {
                 '',
                 'report',
             ],
+            '/base/common/': [
+                '',
+                'regular',
+            ],
             '/base/standard-base/': [
                 '',
                 'git',

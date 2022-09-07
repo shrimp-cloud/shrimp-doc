@@ -131,3 +131,17 @@ VBoxManage.exe modifyhd "/path/to/vdi" --resize 40960
 
 #### 感谢
 - 感谢何老板的指导，扩充了对磁盘卷的认知，也搞明白了不换磁盘也能扩充磁盘空间的原理
+
+
+### 命令别名
+命令别名可以简化常用的复杂命令，提高效率
+方法适用于 Linux, Mac 等类Unix
+# vim ~/.bash_profile
+```shell
+alias ll='ls -alF'
+alias la='ls -A' 
+alias l='ls -CF' 
+```
+```shell
+source .bash_profile
+```

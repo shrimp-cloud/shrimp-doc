@@ -2,7 +2,7 @@
 
 > 分页查询，要写那么多代码，看着就烦。。此处，提供了一些快捷的分页查询方案
 
-## 单表极简分页查询
+## 单表极简分页
 ```java
 PageData<Entity> pageData = entityService.page(entity)
 ```
@@ -15,7 +15,7 @@ PageData<Entity> pageData = entityService.page(entity)
 6. 返回参数不包含 Blob 字段【大小不可预测】
 7. 查询条件为 "" 时自动替换成 null 【框架特性：get 请求的 "" 都会转换成 null】
 
-## 自定义sql简单查询
+## 自定义sql简单分页
 - 定义 sql 语句: 只需要定义  list 查询
 ```xml
   <select id="getDataList" parameterType="path.to.entity" resultType="path.to.entity">
