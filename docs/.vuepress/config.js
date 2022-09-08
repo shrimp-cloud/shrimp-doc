@@ -181,10 +181,6 @@ module.exports = {
                 'wechat',
                 'wxpay',
             ],
-            '/backend/others/': [
-                '',
-                'nginx_docker',
-            ],
 
             '/front/vue/': [
                 '',

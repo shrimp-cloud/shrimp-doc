@@ -272,6 +272,33 @@ cd ~
 
 ---
 
+## Docker 安装
+
+### Dockerfile
+```shell
+FROM nginx
+MAINTAINER shrimp
+WORKDIR /home/apps
+
+# 时区
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
+
+# 配置
+COPY nginx.conf /etc/nginx/nginx.conf
+# 编译产物
+COPY dist /home/apps
+
+# 日志挂载
+RUN mkdir /home/apps/logs && ln -sf /home/apps/logs /var/log/nginx
+```
+
+### 项目打包
+1. 项目根目录需要维护 nginx.conf
+2. nginx location 的静态文件，需要指向 /home/apps
+
+
+
 ## Nginx 常用配置
 
 ### 配置
