@@ -41,6 +41,8 @@ systemctl enable mysqld
 CREATE USER 'user_name'@'%' IDENTIFIED BY 'password';
 # 给用户授权
 GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%'  WITH GRANT OPTION;
+# 创建并授权用户
+GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%' IDENTIFIED BY 'user_password' WITH GRANT OPTION;
 # 刷新权限
 FLUSH PRIVILEGES;
 ```
