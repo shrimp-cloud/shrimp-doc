@@ -100,6 +100,7 @@ module.exports = {
             '/base/common/': [
                 '',
                 'regular',
+                'centos7',
             ],
             '/base/standard-base/': [
                 '',
