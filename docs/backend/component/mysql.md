@@ -56,10 +56,120 @@ firewall-cmd --permanent --zone=public --add-port=3306/tcp
 firewall-cmd --reload
 ```
 
-## 高级操作
+
+### 编译安装
+```shell
+# 安装依赖
+yum install gcc gcc‐c++ make cmake ncurses‐devel  autoconf
+# 新建MySQL用户
+groupadd mysql
+useradd ‐r ‐g mysql ‐s /bin/false mysql
+# 安装
+tar ‐xf mysql‐5.6.26.tar.gz
+cd mysql‐5.6.26
+cmake . ‐DENABLED_LOCAL_INFILE=1 ‐DCMAKE_INSTALL_PREFIX=/usr/local/mysql && make && make install
+# 目录规划
+数据目录:$lvm分区/$项目名称/data
+日志目录:$lvm分区/$项目名称/log
+tmp目录:$lvm分区/$项目名称/tmp
+```
+
+
+## 运维
+
+### 常用命令
+
+- 查询是否锁表: show OPEN TABLES where In_use > 0;
+- 查询进程:show processlist
+- kill 进程: kill    id
+- 查看进行中的事务: SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;
+- 查看正在锁的事务: SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS;
+- 查看等待锁的事务: SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
+- 当前运行的所有事务: information_schema.innodb_trx
+- 当前出现的锁: information_schema.innodb_locks
+- 锁等待的对应关系: information_schema.innodb_lock_waits
+
+### 慢查询记录
+```shell
+[mysqld]
+slow_query_log = ON
+slow_query_log_file = /var/lib/mysql/lztest-slow.log
+long_query_time = 1
+# 测试
+select sleep(2);
+```
+
+## 配置
 
 ### 修改密码
 ```shell
 ALTER USER `root`@`%` IDENTIFIED BY 'new_password';
 FLUSH PRIVILEGES;
+```
+
+### 强制修改密码
+```shell
+# vim /etc/my.cnf 
+[mysqld]
+skip-grant-tables
+
+# 登录并修改密码
+# MySQL 5.6 及以下
+UPDATE user SET Password = password ( ‘new-password’ ) WHERE User = ‘root’ ; 
+
+# MySQL:5.7
+UPDATE mysql.user set authentication_string=password('123qwe') where user='root' and Host = 'localhost';
+
+flush privileges;
+```
+
+### only_full_group_by
+> 建议更严格的模式
+```shell
+[mysqld]
+sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
+```
+
+### 安装 Mariadb
+```shell
+yum install mariadb-server -y
+systemctl enable/start/stop/restart mariadb
+mysql_secure_installation # 初始化
+```
+
+### 大小写敏感
+```shell
+[mysqld]
+lower_case_table_names=1 # 【1不敏感，0敏感】
+```
+
+## 使用
+
+### 产生随机数
+
+sql 产生
+```sql
+SELECT
+	(@i :=@i + 1) i,
+	table_name.*
+FROM
+    table_name,
+	(SELECT @i := 0) AS it
+```
+
+存储过程产生
+```sql
+CREATE DEFINER= CURRENT_USER FUNCTION `rand_string`(n INT) RETURNS varchar(255) CHARSET utf8
+    COMMENT '获取随机数'
+BEGIN
+	
+    DECLARE chars_str varchar(100) DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    DECLARE return_str varchar(255) DEFAULT '';
+    DECLARE i INT DEFAULT 0;
+    WHILE i < n DO
+        SET return_str = concat(return_str,substring(chars_str , FLOOR(1 + RAND()*62 ),1));
+        SET i = i +1;
+    END WHILE;
+    RETURN return_str;
+END
 ```

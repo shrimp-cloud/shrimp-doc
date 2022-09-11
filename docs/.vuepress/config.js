@@ -35,6 +35,7 @@ module.exports = {
                 text: '基础',
                 ariaLabel: '基础',
                 items: [
+                    { text: '常用', link: '/base/common/' },
                     { text: '基础规范', link: '/base/standard-base/' },
                     { text: '前端规范', link: '/base/standard-frontend/' },
                     { text: '后端规范', link: '/base/standard-backend/' },
