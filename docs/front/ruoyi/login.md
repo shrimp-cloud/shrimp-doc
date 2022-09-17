@@ -5,6 +5,7 @@
 ### 整体维护
 1. 移除 js-cookie， 将涉及到的存储全部改 localStorage (可批量替换)
 2. src/utils/auth.js，TokenKey 改为标准的 token
+3. env 维护 APP_CODE 信息，在登录接口需要添加此信息到 headers
 
 ### 验证码改造
 1. 登录页面：src/views/login.vue
@@ -47,17 +48,20 @@ this.roles = ['ROLE_DEFAULT']
 ```
 
 ### 登出
-Jwt 无状态，直接清楚缓存即可。后面变成有状态了再调接口登出
+Jwt 无状态，直接清除缓存即可。后端若有状态，需要调后端完成退出
 ```javascript
-this.token = ''
-this.roles = []
-this.permissions = []
-removeToken()
-localStorage.clear();
+publicSsologout({}).then(() => {
+    this.token = ''
+    this.roles = []
+    this.permissions = []
+    removeToken()
+    resolve()
+}).catch(error => {
+    reject(error)
+})
 ```
 
 ### 路由
-6. src/store/modules/permission.js 的getRouters 更换为 mock 数据。使用json字义菜单
-7. src/store/modules/permission.js 的filterAsyncRouter，增强component适配。
-8. src/permission.js 所有的 isRelogin.show 都赋值 false, 框架bug,在登录失效后页面刷新不跳转登录页面
-
+只是登录成功了，是没法进入到页面的，还需要拿到路由信息
+1. 若没有强烈的动态路由需求，将 src/store/modules/permission.js 的getRouters 更换为 mock 数据即可
+2. 若需要接入动态路由，请看路由章节

@@ -198,6 +198,7 @@ module.exports = {
                 'request',
                 'api',
                 'login',
+                'router',
                 'crud',
                 'monaco',
             ],
