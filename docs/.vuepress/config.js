@@ -195,6 +195,7 @@ module.exports = {
                 '',
                 'init',
                 'env',
+                'request',
                 'api',
                 'login',
                 'crud',
