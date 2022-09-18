@@ -48,12 +48,16 @@ const usePermissionStore = defineStore('permission', {
 })
 
 ```
-- 将资源树转换成 Ruoyi 的资源树
+- 将资源树转换成 Ruoyi 的资源树【注意，在按钮权限处理时，此逻辑有增强】
 ```javascript
 function tree2RuoyiTree(reses) {
   const menus = [];
   for (let i = 0; i < reses.length; i++) {
     const d = reses[i];
+    // 只有MENU是用来展示的
+    if (d.resType !== 'MENU') {
+        continue;
+    }
     const menu = {};
     menu.path = !!d.routePath ? d.routePath : '';
     menu.name = i + '-' + d.resName + menu.path;
