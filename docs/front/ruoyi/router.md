@@ -1,4 +1,4 @@
-# 路由
+# 菜单路由
 
 ### 说明
 
@@ -21,7 +21,7 @@ const usePermissionStore = defineStore('permission', {
         generateRoutes(roles) {
             return new Promise(resolve => {
                 // 向后端请求路由数据
-                userMenuList().then(res => {
+                userResList().then(res => {
                     // console.log('router.res', res);
                     // 将原始资源列表转换成资源树
                     const tree = handleTree(res.data, 'resCode', 'pcode');
@@ -62,7 +62,7 @@ function tree2RuoyiTree(reses) {
     menu.path = !!d.routePath ? d.routePath : '';
     menu.name = i + '-' + d.resName + menu.path;
     menu.hidden = d.hidden;
-    menu.redirect = 'noRedirect';
+    menu.redirect = '/index';
     menu.component = d.component ? d.component : 'error/index';
     menu.alwaysShow = false;
     const meta = {};
@@ -82,6 +82,21 @@ function tree2RuoyiTree(reses) {
 ```
 
 
-7. src/store/modules/permission.js 的filterAsyncRouter，增强component适配。
-8. src/permission.js 所有的 isRelogin.show 都赋值 false, 框架bug,在登录失效后页面刷新不跳转登录页面
+### 根据component配置查找组件
+- 位置：src/store/modules/permission.js # filterAsyncRouter内
+- 修改：
+```javascript
+let component = route.component;
+if (component.indexOf("views/") !== -1) {
+    component = component.substring(component.indexOf("views/") + 6);
+}
+if (component.indexOf(".vue") === component.length -4) {
+    component = component.substring(0, component.length -4);
+}
+route.component = loadView(component)
+```
+
+### 其他
+
+- src/permission.js 所有的 isRelogin.show 都赋值 false, 框架bug,在登录失效后页面刷新不跳转登录页面
 
