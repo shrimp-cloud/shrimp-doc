@@ -76,8 +76,8 @@
       <pagination 
           v-show="total > 0" 
           :total="total" 
-          v-model:page="queryParams.pageNo" 
-          v-model:limit="queryParams.pageSize" 
+          v-model:page="queryParams.current" 
+          v-model:limit="queryParams.size" 
           @pagination="getList"
       />
 
@@ -94,8 +94,8 @@ const dataList = ref([]);
 const loading = ref(true);
 const total = ref(0);
 const queryParams = ref({
-  pageNo: 1,
-  pageSize: 20,
+  current: 1,
+  size: 20,
   appCode: undefined,
   appName: undefined,
   domain: undefined
@@ -109,7 +109,7 @@ function init() {
     parseTime(new Date(), '{y}-{m}-{d}') + ' 23:59:59'
   ];
   */
-  queryParams.value.pageNo = 1;
+  queryParams.value.current = 1;
 }
 
 /** 查询参数列表 */
@@ -126,7 +126,7 @@ function getList() {
 
 /** 搜索按钮操作 */
 function handleQuery() {
-  queryParams.value.pageNo = 1;
+  queryParams.value.current = 1;
   getList();
 }
 

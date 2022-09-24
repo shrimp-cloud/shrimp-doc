@@ -201,6 +201,7 @@ module.exports = {
                 'router',
                 'hasPermi',
                 'crud',
+                'dict',
                 'monaco',
             ],
             '/front/client/': [
