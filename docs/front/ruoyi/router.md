@@ -90,6 +90,9 @@ let component = route.component;
 if (component.indexOf("views/") !== -1) {
     component = component.substring(component.indexOf("views/") + 6);
 }
+if (component.startsWith("/")) {
+    component = component.substring(1);
+}
 if (component.indexOf(".vue") === component.length -4) {
     component = component.substring(0, component.length -4);
 }

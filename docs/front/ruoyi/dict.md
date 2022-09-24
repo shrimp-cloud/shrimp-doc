@@ -39,6 +39,13 @@ const { DICT_TYPE1, DICT_TYPE2 } = proxy.useDict("DICT_TYPE1", "DICT_TYPE2");
  </el-form-item>
 ```
 
+### 单选使用
+```html
+<el-radio-group v-model="form.type" class="ml-4" :disabled="!!form.id">
+    <el-radio v-for="dict in DICT_TYPE1" :label="dict.value">{{dict.label}}</el-radio>
+</el-radio-group>
+```
+
 ### 标签展示修理
 - 用途：在 table 内展示 `dict-tag` 时，数字枚举无法匹配
 - 位置：src/components/DictTag/index.vue
