@@ -17,13 +17,16 @@ export function restToDict(params) {
 
 ### 页面引入
 ```javascript
+// 单个枚举
+const { DICT_TYPE } = proxy.useDict("DICT_TYPE");
+// 多个枚举
 const { DICT_TYPE1, DICT_TYPE2 } = proxy.useDict("DICT_TYPE1", "DICT_TYPE2");
 ```
 
-### 列表内使用
+### 列表(table)内使用
 ```html
  <el-table-column label="枚举" align="center" prop="type" min-width="80">
-    <template #default="scope"><dict-tag :options="DICT_TYPE1" :value="scope.row.configType" /></template>
+    <template #default="scope"><dict-tag :options="DICT_TYPE1" :value="scope.row.type" /></template>
  </el-table-column>
 ```
 
@@ -35,4 +38,8 @@ const { DICT_TYPE1, DICT_TYPE2 } = proxy.useDict("DICT_TYPE1", "DICT_TYPE2");
     </el-select>
  </el-form-item>
 ```
-`
+
+### 标签展示修理
+- 用途：在 table 内展示 `dict-tag` 时，数字枚举无法匹配
+- 位置：src/components/DictTag/index.vue
+- 修改：`String(props.value)` 移除 String 包装，直接使用 `props.value`
