@@ -203,6 +203,7 @@ module.exports = {
                 'crud',
                 'dict',
                 'monaco',
+                'bugs',
             ],
             '/front/client/': [
                 '',
