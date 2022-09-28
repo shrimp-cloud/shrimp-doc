@@ -291,6 +291,9 @@ COPY dist /home/apps
 
 # 日志挂载
 RUN mkdir /home/apps/logs && ln -sf /home/apps/logs /var/log/nginx
+
+# 启动命令【注意需要前台启动】
+CMD ["nginx", "-g", "daemon off;"]
 ```
 
 ### 项目打包
