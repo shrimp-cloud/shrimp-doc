@@ -1,11 +1,16 @@
 # 请求和返回拦截
 
 ### token
+const appCode = import.meta.env.VITE_APP_APP_CODE;
+
 service.interceptors.request.use 添加 token 获取及附带
 ```javascript
 const token = getToken();
 if (token) {
-config.headers['token'] = token;
+  config.headers['token'] = token;
+}
+if (appCode) {
+  config.headers['app-code'] = appCode;
 }
 ```
 

@@ -126,6 +126,7 @@ module.exports = {
                 'IocBeanLifeCycle',
                 'ApplicationListener',
                 'local_jar',
+                'not_only_java',
             ],
             '/backend/component/': [
                 '',

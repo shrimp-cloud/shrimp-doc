@@ -23,8 +23,15 @@ const usePermissionStore = defineStore('permission', {
                 // 向后端请求路由数据
                 userResList().then(res => {
                     // console.log('router.res', res);
+                    const data = res.data;
+                    if (!data || data.length === 0) {
+                        const msg = '您没有此系统的任何权限！';
+                        ElMessage({message: msg, type: 'error', duration: 5 * 1000})
+                        reject(msg);
+                        return;
+                    }
                     // 将原始资源列表转换成资源树
-                    const tree = handleTree(res.data, 'resCode', 'pcode');
+                    const tree = handleTree(data, 'resCode', 'pcode');
                     // console.log('router.tree', tree);
                     // 将资源树，转换成 ruoyi 所要求的资源树
                     const ruoyiTree = tree2RuoyiTree(tree);
