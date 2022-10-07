@@ -71,7 +71,7 @@ function tree2RuoyiTree(reses, currentRoute) {
     // 【当前方法重点】当前路径 cr 预处理
     let cr = currentRoute || '';
     let p = d.routePath || '';
-    cr = cr + (p.startsWith('/') ? p : '/' + p);
+    cr = p.startsWith('/') ? p : cr + '/' + p;
 
     const menu = {};
     menu.path = !!d.routePath ? d.routePath : '';
