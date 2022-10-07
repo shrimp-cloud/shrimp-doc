@@ -50,15 +50,23 @@ this.roles = ['ROLE_DEFAULT']
 ### 登出
 Jwt 无状态，直接清除缓存即可。后端若有状态，需要调后端完成退出
 ```javascript
-publicSsologout({}).then(() => {
-    this.token = ''
-    this.roles = []
-    this.permissions = []
-    removeToken()
-    resolve()
-}).catch(error => {
-    reject(error)
-})
+logOut() {
+  return new Promise((resolve, reject) => {
+    publicSsoLogout({}).then(() => {
+      this.token = ''
+      // 后面再移除
+      this.roles = []
+      this.permissions = []
+      resolve()
+    }).catch(error => {
+      reject(error)
+    }).finally(val => {
+      // 无论如何前端均需要清除 token
+      removeToken()
+      localStorage.clear();
+    });
+  })
+}
 ```
 
 ### 路由
