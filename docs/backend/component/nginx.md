@@ -642,6 +642,40 @@ if ($request_uri = / ) {
 }
 ```
 
+
+### TCP转发
+```
+# 在 http 之外配置
+stream {
+    server {
+        listen 8888;
+        proxy_pass 127.0.0.1:8889;
+    }
+}
+stream {
+    server {
+        listen 8809;
+        proxy_pass proxy_2_8809;
+    }
+}
+upstream proxy_2_8809 {
+    server 127.0.0.1:8811;
+    server 127.0.0.1:8812;
+
+```
+
+### UDP转发
+```
+# 在 http 之外配置
+stream {
+    server {
+        listen 8888 udp;
+        proxy_pass 127.0.0.1:8889;
+    }
+}
+```
+
+
 ### 安全配置
 注解标签 | 注解值 | 可选值 | 说明
 ---|---|---|---
