@@ -85,7 +85,7 @@
    </div>
 </template>
 
-<script setup name="AppManager">
+<script setup name="AppPage">
 import {appPage, appRemove} from "@/api/ops";
 import Edit from "./components/edit"
 
@@ -147,7 +147,7 @@ function handleUpdate(row) {
 /** 删除按钮操作 */
 function handleDelete(row) {
   proxy.$modal.confirm('是否确认删除应用: "' + row.appCode + '"？').then(() => {
-    appRemove({id: row.id,}).then(res => {
+    appRemove({id: row.id}).then(res => {
       if (res.code === 1) {
         getList();
         proxy.$modal.msgSuccess("删除成功");
@@ -194,7 +194,7 @@ getList();
   </el-dialog>
 </template>
 
-<script setup name="AppManagerEdit">
+<script setup name="AppEdit">
 import { appInfo, appUpdate, appCreate } from "@/api/ops";
 
 defineExpose({handleEdit})
@@ -228,6 +228,7 @@ function handleEdit(row) {
     open.value = true;
     title.value = "添加";
   } else {
+    // form.value = JSON.parse(JSON.stringify(row));
     appInfo({id:row.id}).then(res => {
       form.value = res.data;
       open.value = true;
