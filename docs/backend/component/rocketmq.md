@@ -14,7 +14,8 @@
   - cd rocketmq
 - 启动
   - 启动 NameServer：`nohup sh bin/mqnamesrv &`
-  - 启动 启动Broker+Proxy：`nohup sh bin/mqbroker -n localhost:9876 --enable-proxy &`
+  - 启动 Broker+Proxy：`nohup sh bin/mqbroker -n localhost:9876 --enable-proxy &`
+  - 代理端口：8081 【没有找到改端口的地方】
 
 ### 控制台 console
 - 源码文档有使用方式
@@ -25,8 +26,31 @@
 - 配置和启动
   - 创建 `users.properties` 用于配置用户名密码信息。可热更新【见源码中的使用文档】
   - 启动命令: namesrv 地址，开启登录，指定用户信息配置文件
+  - 端口：8080
 ```shell
 nohup java -server -Drocketmq.namesrv.addr=127.0.0.1:9876 -jar rocketmq-dashboard-1.0.1-SNAPSHOT.jar --rocketmq.config.loginRequired=true --rocketmq.config.dataPath=/home/apps/rocketmq-dashboard &
+```
+
+### 防火墙
+```shell
+# 开启
+firewall-cmd --permanent --zone=public --add-port=8080/tcp
+firewall-cmd --permanent --zone=public --add-port=8081/tcp
+firewall-cmd --permanent --zone=public --add-port=9876/tcp
+firewall-cmd --permanent --zone=public --add-port=10909/tcp
+firewall-cmd --permanent --zone=public --add-port=10911/tcp
+firewall-cmd --permanent --zone=public --add-port=10912/tcp
+firewall-cmd --reload
+firewall-cmd --list-ports
+# 移除
+firewall-cmd --permanent --zone=public --remove-port=8080/tcp
+firewall-cmd --permanent --zone=public --remove-port=8081/tcp
+firewall-cmd --permanent --zone=public --remove-port=9876/tcp
+firewall-cmd --permanent --zone=public --remove-port=10909/tcp
+firewall-cmd --permanent --zone=public --remove-port=10911/tcp
+firewall-cmd --permanent --zone=public --remove-port=10912/tcp
+firewall-cmd --reload
+firewall-cmd --list-ports
 ```
 
 ## 5.0特性
