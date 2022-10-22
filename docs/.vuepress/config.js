@@ -55,13 +55,12 @@ module.exports = {
                 ariaLabel: '后端',
                 items: [
                     { text: 'Spring', link: '/backend/spring/' },
-                    { text: '组件', link: '/backend/component/' },
-                    { text: '架构', link: '/backend/framework/' },
-                    { text: '模块', link: '/backend/modules/' },
-                    { text: '设计', link: '/backend/design/' },
-                    { text: '服务器', link: '/backend/server/' },
-                    { text: '三方集成', link: '/backend/third/' },
-                    { text: '其他(未完成/未分类)', link: '/backend/others/' },
+                    { text: '中间件安装与使用', link: '/backend/component/' },
+                    { text: '架构设计', link: '/backend/framework/' },
+                    { text: '模块设计', link: '/backend/modules/' },
+                    { text: '逻辑设计', link: '/backend/design/' },
+                    { text: '服务器运维', link: '/backend/server/' },
+                    { text: '三方服务集成', link: '/backend/third/' },
                 ]
             },
             {
@@ -72,7 +71,7 @@ module.exports = {
                 ]
             },
         ],
-        sidebarDepth: 3, // 侧边栏显示2级
+        sidebarDepth: 3, // 侧边栏显示3级
         sidebar: {
             '/ecology/cloud/': [
                 '',
