@@ -99,6 +99,7 @@ module.exports = {
             '/base/common/': [
                 '',
                 'regular',
+                'forwardProxy',
                 'centos7',
             ],
             '/base/standard-base/': [
