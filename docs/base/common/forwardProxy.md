@@ -31,6 +31,19 @@ unset no_proxy
 
 
 ## Java 具体业务代理
+okhttp
+```java
+kHttpClient.Builder builder = new OkHttpClient.Builder();
+
+// 设置代理地址
+SocketAddress sa = new InetSocketAddress("代理服地址", 代理端口);
+builder.proxy(new Proxy(Proxy.Type.HTTP, sa));
+
+OkHttpClient client = builder.build();
+Request.Builder requestBuilder = new Request.Builder();
+requestBuilder.url("目标服务器地址");
+client.newCall(requestBuilder.build());
+```
 
 
 
