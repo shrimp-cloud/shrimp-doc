@@ -118,6 +118,10 @@ module.exports = {
                 'framework',
             ],
 
+            '/backend/java/': [
+                '',
+                'cache',
+            ],
             '/backend/spring/': [
                 '',
                 'reflect',
