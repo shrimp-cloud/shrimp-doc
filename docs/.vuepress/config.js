@@ -123,6 +123,7 @@ module.exports = {
                 '',
                 'cache',
                 'jvm',
+                'dubbo',
             ],
             '/backend/spring/': [
                 '',
