@@ -10,7 +10,7 @@ jmap -histo:live pid
 
 dump 全量 heap: 
 ```shell
-jmap -dump:format=b,file=/opt/tmp/heapdump.hprof pid
+jmap -dump:format=b,file=~/heapdump.hprof pid
 ```
 
 dump 全量 heap:
