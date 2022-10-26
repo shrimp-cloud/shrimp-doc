@@ -10,6 +10,15 @@ if(!mobileReg.test(mobile)){
 }
 ```
 
+```javascript
+// console中，两行 ：
+var patt = /e/;
+patt.test("The best things in life are free!");
+// console中，一行: 
+/e/.test("The best things in life are free!")
+```
+
+
 ## VUE 表单验证正则
 ```javascript
 const rules = ref({
@@ -89,8 +98,9 @@ html 标签
 　　^[1-9]\d*$　 　 //匹配正整数
 　　^-[1-9]\d*$ 　 //匹配负整数
 　　^-?[1-9]\d*$　　 //匹配整数
-　　^[1-9]\d*|0$　 //匹配非负整数（正整数 + 0）
+　　^[1-9]\d*|0$　 //匹配非负整数（正整数 + 0） 【有bug,参照后第二个】
 　　^-[1-9]\d*|0$　　 //匹配非正整数（负整数 + 0）
+   ^([1-9][0-9]*|0)$  匹配非负整数（正整数 + 0）
    ^\d+(\.{0,1}\d+){0,1}$ // 非负数【0，正整数，正小数】
    -?[0-9]+.?[0-9]+  // 识别小数【正负】
    [0-9]+.?[0-9]+  // 识别小数【正】
