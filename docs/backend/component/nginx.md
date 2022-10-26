@@ -561,7 +561,7 @@ server {
             add_header Access-Control-Allow-Origin "$http_origin";
             add_header Access-Control-Allow-Credentials "true";
             add_header Access-Control-Allow-Methods "GET, POST, OPTIONS";
-            add_header Access-Control-Allow-Headers "DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,token";
+            add_header Access-Control-Allow-Headers "Content-Type,token";
             add_header Access-Control-Max-Age 1728000;
             return 204;
         }
@@ -677,12 +677,12 @@ stream {
 
 
 ### 安全配置
-注解标签 | 注解值 | 可选值 | 说明
----|---|---|---
-X-Frame-Options | SAMEORIGIN | DENY/SAMEORIGIN/ALLOW-FROM uri | 浏览器指示允许一个页面可否在 <frame>, </iframe> 或者 <object> 中展现的标记
-X-XSS-Protection | 1; mode=block | 0/1/1; mode=block | 检测到跨站脚本攻击 (XSS)时，浏览器将停止加载页面
-X-Content-Type-Options | nosniff | nosniff | Content-Type是错的或者未定义时，可以禁用浏览器的类型猜测
-Content-Security-Policy | default-src 'self' | 可选值有点多，需要再查询 | 定义一套页面资源加载白名单规则，浏览器使用csp规则去匹配所有资源，禁止加载不符合规则的资源，同时将非法资源请求进行上报。
+| 注解标签                    | 注解值                | 可选值                            | 说明                                                            |
+|-------------------------|--------------------|--------------------------------|---------------------------------------------------------------|
+| X-Frame-Options         | SAMEORIGIN         | DENY/SAMEORIGIN/ALLOW-FROM uri | 浏览器指示允许一个页面可否在 <frame>, </iframe> 或者 <object> 中展现的标记          |
+| X-XSS-Protection        | 1; mode=block      | 0/1/1; mode=block              | 检测到跨站脚本攻击 (XSS)时，浏览器将停止加载页面                                   |
+| X-Content-Type-Options  | nosniff            | nosniff                        | Content-Type是错的或者未定义时，可以禁用浏览器的类型猜测                            |
+| Content-Security-Policy | default-src 'self' | 可选值有点多，需要再查询                   | 定义一套页面资源加载白名单规则，浏览器使用csp规则去匹配所有资源，禁止加载不符合规则的资源，同时将非法资源请求进行上报。 |
 
 #### 配置示例
 ```
