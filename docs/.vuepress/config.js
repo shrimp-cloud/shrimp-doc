@@ -132,8 +132,9 @@ module.exports = {
                 'BeanPostProcessor',
                 'IocBeanLifeCycle',
                 'ApplicationListener',
-                'local_jar',
-                'not_only_java',
+                'LocalJar',
+                'NotOnlyJava',
+                'OverrideSpringBean',
             ],
             '/backend/component/': [
                 '',
