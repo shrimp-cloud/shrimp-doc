@@ -21,7 +21,7 @@ const usePermissionStore = defineStore('permission', {
         generateRoutes(roles) {
             return new Promise(resolve => {
                 // 向后端请求路由数据
-                userResList().then(res => {
+                userResTree().then(res => {
                     // console.log('router.res', res);
                     const data = res.data;
                     if (!data || data.length === 0) {
@@ -30,11 +30,12 @@ const usePermissionStore = defineStore('permission', {
                         reject(msg);
                         return;
                     }
-                    // 将原始资源列表转换成资源树
-                    const tree = handleTree(data, 'resCode', 'pcode');
+                    // 将原始资源列表转换成资源树 【若后端帮完成树转换，前端可省】
+                    // const tree = handleTree(data, 'resCode', 'pcode');
                     // console.log('router.tree', tree);
                     // 将资源树，转换成 ruoyi 所要求的资源树
-                    const ruoyiTree = tree2RuoyiTree(tree);
+                    // const ruoyiTree = tree2RuoyiTree(tree);
+                    const ruoyiTree = tree2RuoyiTree(data);
                     // console.log('router.ruoyiTree', ruoyiTree);
 
                     const sdata = JSON.parse(JSON.stringify(ruoyiTree))
@@ -67,9 +68,9 @@ function tree2RuoyiTree(reses) {
     }
     const menu = {};
     menu.path = !!d.routePath ? d.routePath : '';
-    menu.name = i + '-' + d.resName + menu.path;
+    menu.name = i + '-' + d.resName;
     menu.hidden = d.hidden;
-    menu.redirect = '/index';
+    menu.redirect = (p === '' || p === '/') ? '/index': 'noRedirect';
     menu.component = d.component ? d.component : 'error/index';
     menu.alwaysShow = false;
     const meta = {};

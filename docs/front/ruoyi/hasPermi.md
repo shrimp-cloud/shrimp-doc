@@ -74,10 +74,10 @@ function tree2RuoyiTree(reses, currentRoute) {
     cr = p.startsWith('/') ? p : cr + '/' + p;
 
     const menu = {};
-    menu.path = !!d.routePath ? d.routePath : '';
-    menu.name = i + '-' + d.resName + menu.path;
+    menu.path = p;
+    menu.name = i + '-' + d.resName;
     menu.hidden = d.hidden;
-    menu.redirect = (!p || p === '' || p === '/') ? '/index': 'noRedirect';
+    menu.redirect = (p === '' || p === '/') ? '/index': 'noRedirect';
     menu.component = d.component ? d.component : 'error/index';
     menu.alwaysShow = false;
     const meta = {};

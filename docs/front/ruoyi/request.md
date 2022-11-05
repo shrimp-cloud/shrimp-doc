@@ -12,6 +12,7 @@ if (token) {
 if (appCode) {
   config.headers['app-code'] = appCode;
 }
+config.headers['trace-id'] = guid();
 ```
 
 
@@ -32,6 +33,17 @@ if (code === 10001 /* 所有判定为需要重新登录的code */) {
     } else {
         // 原有重新登录逻辑
     }
+}
+```
+
+guid 获取
+```javascript
+function guid() {
+  return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'.replace(/[x]/g, (c) => {
+    const r = (Math.random() * 16) || 0;
+    const integer = Math.trunc(r);
+    return integer.toString(16);
+  });
 }
 ```
 
