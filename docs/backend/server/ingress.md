@@ -21,3 +21,8 @@
 ```
 nginx.ingress.kubernetes.io/ssl-redirect=false
 ```
+
+### 自定义 location逻辑
+| 注解标签                                           | 注解值                                                            |
+|------------------------------------------------|----------------------------------------------------------------|
+| nginx.ingress.kubernetes.io/configuration-snippet        | if ($schema = http ) { return 301 https://$host/$request_uri;} |
