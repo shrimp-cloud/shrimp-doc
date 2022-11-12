@@ -24,7 +24,7 @@ git clone https://github.com/yangzongzhuan/RuoYi-Vue3.git
    1. 注释 src/utils/request.js 中 isToken 相关代码
    2. 注释 src/api/login.js中 isToken 相关代码
    3. token 机制在后缀有补充。将会改造此部分代码
-5. request.js 中， logout 之后只能跳转 /,以兼容 部署在 oss 的 hash 模式场景
+5. request.js 中， logout 之后只能跳转 /,以兼容 部署在 oss 的 hash 模式场景【有多处 logout】
 6. README.md
 
 ### 标题，LOGO, 三方链接等
