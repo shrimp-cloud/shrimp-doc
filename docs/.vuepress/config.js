@@ -208,6 +208,8 @@ module.exports = {
                 'request',
                 'api',
                 'login',
+                'redirect_login',
+                'iframe_login',
                 'router',
                 'hasPermi',
                 'crud',
