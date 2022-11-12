@@ -2,36 +2,6 @@
 
 > 页面跳转到 cas 完成登录的方式进行。登录完成后，再跳转回原来的页面
 
-### 接入方系统处理
-
-文件：src/permission.js
-1. 获取 token 和 url 上的 tocket
-```javascript
-const token = getToken();
-const href = window.location.href;
-const ticketIdx = href.indexOf('ticket=');
-const ticket = ticketIdx > 0 ? href.substring(ticketIdx+7) : undefined;
-```
-2. 若存在 token, 正常完成业务逻辑
-3. 若不存在 token, 但存在 ticket, 需要使用 ticket 完成token 兑换，再跳转回原地址
-```javascript
-publicSsoTicketLogin({ticket}).then(res => {
-  if (res.data.token) {
-    setToken(res.data.token);
-    next({ path: '/', replace: true })
-  } else {
-    ElMessage.error('登录失败：' + res.data.msg || res.msg)
-  }
-})
-```
-4. 若不存在 token, 也不存在 ticket, 跳转到 cas 登录页面即可
-```javascript
-const loginUrl = CAS + '/#/login?redirect=' + href;
-console.log('auth.login.casUrl', loginUrl);
-window.open(loginUrl, '_self');
-// next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
-NProgress.done()
-```
 
 ### 单点登录方处理
 
@@ -83,3 +53,34 @@ if (redirectIndex > 0 && ticket) {
 ```
 
 
+
+### 接入方系统处理
+
+文件：src/permission.js
+1. 获取 token 和 url 上的 tocket
+```javascript
+const token = getToken();
+const href = window.location.href;
+const ticketIdx = href.indexOf('ticket=');
+const ticket = ticketIdx > 0 ? href.substring(ticketIdx+7) : undefined;
+```
+2. 若存在 token, 正常完成业务逻辑
+3. 若不存在 token, 但存在 ticket, 需要使用 ticket 完成token 兑换，再跳转回原地址
+```javascript
+publicSsoTicketLogin({ticket}).then(res => {
+  if (res.data.token) {
+    setToken(res.data.token);
+    next({ path: '/', replace: true })
+  } else {
+    ElMessage.error('登录失败：' + res.data.msg || res.msg)
+  }
+})
+```
+4. 若不存在 token, 也不存在 ticket, 跳转到 cas 登录页面即可
+```javascript
+const loginUrl = CAS + '/#/login?redirect=' + href;
+console.log('auth.login.casUrl', loginUrl);
+window.open(loginUrl, '_self');
+// next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
+NProgress.done()
+```
