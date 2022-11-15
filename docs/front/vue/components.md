@@ -64,7 +64,7 @@ proxy.$refs.componentsRef.getList();
 ### 子组件初始化方法只调用一次
 场景：el-dialog弹框里引入的组件只会触发一次组件里面的方法，再次打开不起作用
 原因：el-dialog弹框因为是用display：none和display：block来控制显示隐藏的，dom元素不会被删除，所以dialog弹框里面的内容只会初始化的时候创建dom元素渲染页面，如果里面有组件且组件在初始化时候会调用方法，那么这个方法只会在第一次打开弹框时调用！
-解决1：选择给dialog弹框加个v-if 
+解决1：选择给dialog弹框加个v-if, 或者 destroy-on-close
 - 优点：弹框每次打开会会重新创建里面的元素包括引入的组件
 - 缺点：不利于底层的diff算法，性能受到影响
 解决2：对外暴露方法，自行调用子组件的方法

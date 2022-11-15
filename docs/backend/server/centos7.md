@@ -74,6 +74,18 @@ firewall-cmd --list-ports
 firewall-cmd --list-all
 ```
 
+## yiptables-services
+安装
+```shell
+yum install iptables-services
+```
+操作
+```shell
+systemctl start iptables
+systemctl enable iptables
+```
+
+
 
 ## 其他工具
 ```shell script
