@@ -177,6 +177,8 @@ module.exports = {
                 'kernel',
                 'docker',
                 'kubenetes',
+                'Kuboard',
+                'rancher',
                 'ingress',
                 'vuepress',
             ],
