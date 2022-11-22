@@ -20,5 +20,4 @@ docker logs container-id 2>&1 | grep "Bootstrap Password:"
 # 新用户名 admin
 # 新密码 即时设置
 
-tqrjwk494t4wlpb4kbshgtwbhz64nkcqmh8sffxhvwj56pc87gsclg
 ```

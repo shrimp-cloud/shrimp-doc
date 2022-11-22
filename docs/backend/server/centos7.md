@@ -74,10 +74,10 @@ firewall-cmd --list-ports
 firewall-cmd --list-all
 ```
 
-## yiptables-services
+## iptables-services
 安装
 ```shell
-yum install iptables-services
+yum install -y iptables-services
 ```
 操作
 ```shell
