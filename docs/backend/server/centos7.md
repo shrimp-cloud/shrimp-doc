@@ -39,12 +39,36 @@ systemctl restart crond
 ```
 
 ## selinux
+关闭原因：非常容易出错且难以定位。可以不使用【有其他的安全策略保证系统安全】
 ```shell script
 vim /etc/selinux/config
 SELINUX=disabled
 ```
 - 仅改配置，重启后生效
 - 当前生效：setenforce 0 【不是配置生效，是临时关闭 SELINUX】
+
+
+
+## 关闭 swap
+swap 交换分区，在内存不足时，可以将部分内存数据交换到磁盘内，缓解内存不足问题。磁盘的读写效率比内存小太多，故使用了 swap 后，如果产生内存交换，整个系统将受到影响。
+
+关闭 swap:
+```shell
+# vim /etc/fstab
+注释掉 swap
+```
+
+Tips:
+1. swapoff -a && swapon -a  # 可以执行命令刷新一次SWAP（将SWAP里的数据转储回内存，并清空SWAP里的数据）
+2. sysctl -p  #  (执行这个使其生效，不用重启)
+
+安装 k8s 时，如果仍然想使用 swap, 可配置【不建议】：
+```shell
+vim /etc/sysconfig/kubelet
+KUBELET_EXTRA_ARGS="--fail-swap-on=false"
+```
+
+
 
 ## 生成公钥
 ```shell script
