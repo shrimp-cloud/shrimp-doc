@@ -13,27 +13,24 @@
 - 设置 hosts 保证使用主机名可互通
 - 配置免密访问
 - 关闭 swap
+- 关闭 firewalld
+- 时间同步
 
 ### 网段规划
 - node 网段：192.168.0.0/16
 - pod 网段：172.16.0.0/16
 
 
-## 以下未整理
-
-
-
-### 升级内核
-- 见：【kernel内核】章节
-
-
-### Linux内核参数
+### 修改机器内核参数
+```shell
+modprobe br_netfilter
+```
 
 ```shell
-# vim /etc/sysctl.d/kubernetes.conf
+# vim /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward=1 # 其值为0,说明禁止进行IP转发；如果是1,则说明IP转发功能已经打开。
 net.bridge.bridge-nf-call-iptables=1 # 二层的网桥在转发包时也会被iptables的FORWARD规则所过滤，这样有时会出现L3层的iptables rules去过滤L2的帧的问题
 net.bridge.bridge-nf-call-ip6tables=1 # 是否在ip6tables链中过滤IPv6包
-net.ipv4.ip_forward=1 # 其值为0,说明禁止进行IP转发；如果是1,则说明IP转发功能已经打开。
 vm.swappiness=0 # 禁止使用 swap 空间，只有当系统 OOM 时才允许使用它
 vm.overcommit_memory=1 # 不检查物理内存是否够用
 vm.panic_on_oom=0 # 开启 OOM
@@ -44,26 +41,111 @@ fs.nr_open=52706963 #设置最大微博号打开数
 net.ipv6.conf.all.disable_ipv6=1 #禁用IPv6，修为0为启用IPv6
 net.netfilter.nf_conntrack_max=2310720 #连接跟踪表的大小，建议根据内存计算该值CONNTRACK_MAX = RAMSIZE (in bytes) / 16384 / (x / 32)，并满足nf_conntrack_max=4*nf_conntrack_buckets，默认262144
 ```
-- sysctl -p  : (执行这个使其生效，不用重启)
+```shell
+# sysctl -p  : (执行这个使其生效，不用重启)
+sysctl -p /etc/sysctl.d/k8s.conf
+```
+
+
+### 配置 yum 源
+
+安装 docker repo
+```shell
+yum install -y yum-utils
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+配置 k8s repo
+```shell
+# vim /etc/yum.repos.d/k8s.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=0
+```
+
+安装基础软件包
+```shell
+yum install -y device-mapper-persistent-data lvm2 wget net-tools nfs-utils lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel wget vim ncurses-devel autoconf automake zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack telnet ipvsadm
+```
+
+### 安装 containerd 服务
+
+配置文件
+```shell
+yum install -y containerd.io
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+```
+
+修改配置
+```shell
+# vim /etc/containerd/config.toml
+SystemdCgroup = true
+sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.7"
+# systemctl enable containerd --now
+```
+
+修改配置
+```shell
+# vim /etc/crictl.yaml
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+timeout: 10
+debug: false
+# systemctl restart containerd
+```
+
+
+### 安装 docker
+为了能执行 dockerfile 打包
+
+```shell
+yum install -y docker-ce
+systemctl enable docker --now
+```
+
+
+### 配置 containerd 镜像加速
+```shell
+# vim /etc/containerd/config.toml
+config_path = "/etc/containerd/certs.d"
+# mkdir -p /etc/containerd/certs.d/docker.io/
+# vim /etc/containerd/certs.d/docker.io/hosts.toml
+[host."https://xxxx.mirror.aliyuncs.com",host."https://registry.docker-cn.com"]
+ capabilities = ["pull"]
+# systemctl restart containerd
+```
+
+### 配置 docker 镜像加速器
+
+```shell
+# vim /etc/docker/daemon.json
+{
+  "registry-mirrors": ["https://xxxx.mirror.aliyuncs.com"]
+}
+# systemctl restart docker
+```
+
+
+
+
+
+
+## 以下未整理
+
+
+
+### 升级内核
+- 见：【kernel内核】章节
+
 
 ---
 
 
 ## kubeadm
 
-### yum源
-
-```shell
-cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=0
-repo_gpgcheck=0
-gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-EOF
-```
 
 ### 安装
 ```shell

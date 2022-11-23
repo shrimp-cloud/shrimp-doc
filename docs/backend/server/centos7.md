@@ -32,10 +32,16 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 systemctl start ntpd
 systemctl enable ntpd
 # 进行一次时间同步
-ntpdate -u time.nist.gov
+ntpdate -u cn.pool.ntp.org
 # 重启时间相关组件
 systemctl restart rsyslog
 systemctl restart crond
+```
+
+```shell
+# crontab -e
+* */1 * * * /usr/sbin/ntpdate cn.pool.ntp.org
+# systemctl restart crond
 ```
 
 ## selinux
