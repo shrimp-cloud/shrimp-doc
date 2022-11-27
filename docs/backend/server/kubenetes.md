@@ -128,96 +128,40 @@ config_path = "/etc/containerd/certs.d"
 # systemctl restart docker
 ```
 
-
-
-
-
-
-## 以下未整理
-
-
-
-### 升级内核
-- 见：【kernel内核】章节
-
-
----
-
-
-## kubeadm
-
-
-### 安装
+### 安装初始化 k8s
 ```shell
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
-```
-
-### 开机启动
-```shell
+yum install -y kubelet kubeadm kubectl
 systemctl enable kubelet
+crictl config runtime-endpoint /run/containerd/containerd.sock
+kubeadm config print init-defaults > kubeadm.yaml
+vim kubeadm.yaml
+# 暂时省略 kubeadm.yaml 要修改的内容
+# 导入镜像：
+ctr -n=k8s.io images import k8s_1.25.0.tar.gz
+# 查看镜像
+crictl images
+# 初始化集群【仅 master】
+kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 ```
 
-## 初始化master
 
-### 默认配置
+### 加入集群
 ```shell
-kubeadm config print init-defaults > kubeadm-init.yaml
-```
-### 修改配置：
-将advertiseAddress: 1.2.3.4修改为本机IP地址
-将imageRepository: k8s.gcr.io修改为imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers , 这里是修改成阿里云的仓库。
-修改节点名称，如果不修改就是默认的’node'
-修改podSubnet，如果采用calico作为网络插件，需要改为192.168.0.0/16
-
-```
-advertiseAddress: 192.168.1.12
-imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
-kubernetesVersion: v1.23.5
-# 在 networking.dnsDomain 同一级下添加
-podSubnet: 172.12.0.0/16
-
-# 否需要改呢？疑问
----
-apiVersion: kubeproxy.config.k8s.io/v1alpha1
-kind: KubeProxyConfiguration
-featureGates:
-  SupportIPVSProxyMode: true
-mode: ipvs
+# master 上获取加入获取集群的命令
+kubeadm token create --print-join-command
+# node 加入集群
+kubeadm master_ip:master_port --token xx.xxx --discovery-token-ca-cert-hash sha256:xxxx
+# master 查看集群节点
+kubectl get nodes
+# 给节点打标签
+kubectl label nodes ecs1 node-role.kubernetes.io/work=work
+kubectl get nodes
 ```
 
-### 初始化
+### 安装k8s网络组件-Calico
 ```shell
-kubeadm init --config kubeadm-init.yaml
-```
-异常汇总：
-- [ERROR NumCPU]: the number of available CPUs 1 is less than the required 2 【穷逼】
-- [ERROR Mem]: the system RAM (983 MB) is less than the minimum 1700 MB【穷逼】
-- Get "http://localhost:10248/healthz": dial tcp 127.0.0.1:10248: connect: connection refused. 【删除配置重试就成功了。。】
-- Container runtime network not ready 【删除配置重试就成功了。。】
-警告汇总：
-- [WARNING Firewalld]: firewalld is active, please ensure ports [6443 10250] are open or your cluster may not function correctly
-- [WARNING Swap]: swap is enabled; production deployments should disable swap unless testing the NodeSwap feature gate of the kubelet
-- [WARNING Hostname]: hostname "master01" could not be reached
-- [WARNING Hostname]: hostname "master01": lookup master01 on 192.168.2.1:53: no such host
-
-异常日志查看：
-- systemctl status kubelet
-- journalctl -xeu kubelet
-
-### node状态
-```shell
+ctr -n=k8s.io images import calico.tar.gz
+# master:
+kubectl apply -f calico.yaml
 kubectl get node
 ```
-
-### 网络插件
-> 未完待续
-
-
-### master完成
-```shell
-kubeadm join 192.168.2.253:6443 --token abcdef.0123456789abcdef \
-	--discovery-token-ca-cert-hash sha256:51acfbe0edf776d312de133722f8372de6590a0209ec65ee9535c61d2b09133f
-```
-
-## node初始化
-> 未完待续
