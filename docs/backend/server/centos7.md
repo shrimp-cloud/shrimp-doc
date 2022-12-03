@@ -40,7 +40,7 @@ systemctl restart crond
 
 ```shell
 # crontab -e
-* */1 * * * /usr/sbin/ntpdate cn.pool.ntp.org
+0-59/10 * * * * /usr/sbin/ntpdate cn.pool.ntp.org | logger -t NTP
 # systemctl restart crond
 ```
 
