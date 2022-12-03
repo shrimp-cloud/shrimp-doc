@@ -151,6 +151,8 @@ module.exports = {
             ],
             '/backend/k8s/': [
                 '',
+                '01.init',
+
                 'docker',
                 'kubenetes',
                 'Kuboard',
