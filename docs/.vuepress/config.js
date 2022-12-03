@@ -16,6 +16,7 @@ module.exports = {
         smoothScroll: true,
         repo: 'shrimp-cloud/shrimp-doc',
         docsDir: 'docs',
+        docsBranch: 'main',
         editLinks: true,
         editLinkText: '编辑此页面',
         nav: [
