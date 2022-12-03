@@ -149,6 +149,14 @@ module.exports = {
                 'samba',
                 'squid',
             ],
+            '/backend/k8s/': [
+                '',
+                'docker',
+                'kubenetes',
+                'Kuboard',
+                'rancher',
+                'ingress',
+            ],
             '/backend/framework/': [
                 '',
                 'repo',
@@ -175,11 +183,6 @@ module.exports = {
                 '',
                 'centos7',
                 'kernel',
-                'docker',
-                'kubenetes',
-                'Kuboard',
-                'rancher',
-                'ingress',
                 'vuepress',
             ],
             '/backend/third/': [

@@ -5,7 +5,7 @@
 官网 https://kuboard.cn/
 
 ## 前提
-- [安装Docker](docker.md)
+- [安装Docker](docs/backend/k8s/docker.mdend/k8s/docker.md)
 
 
 ## 安装 Kubernetes
