@@ -55,7 +55,7 @@ const CAS = import.meta.env.VITE_APP_CAS;
 const { query } = useRoute();
 const router = useRouter();
 const fullPath = computed(() => {
-    return `${CAS}#/login?redirect=${window.location.origin}${query.to}`
+    return `${CAS}/#/login`
 });
 window.addEventListener('message', function(e){
     var token=e.data;

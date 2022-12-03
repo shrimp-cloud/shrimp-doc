@@ -93,6 +93,7 @@ const { proxy } = getCurrentInstance();
 const dataList = ref([]);
 const loading = ref(true);
 const total = ref(0);
+// const dateRange = ref([]);
 const queryParams = ref({
   current: 1,
   size: 20,
@@ -132,7 +133,7 @@ function handleQuery() {
 
 /** 重置按钮操作 */
 function resetQuery() {
-  dateRange.value = [];
+  // dateRange.value = [];
   proxy.resetForm("queryRef");
   handleQuery();
 }
@@ -167,7 +168,7 @@ getList();
 ```html
 <template>
   <!-- 添加或修改参数配置对话框 -->
-  <el-dialog :title="title" v-model="open" width="600px" append-to-body>
+  <el-dialog :title="title" v-model="open" width="800px" append-to-body draggable :close-on-click-modal="false">
     <el-form ref="editRef" :model="form" :rules="rules" label-width="120px">
       <el-form-item label="应用编码" prop="appCode">
         <el-input v-model="form.appCode" :disabled="!!form.id" placeholder="请输入应用编码" />
@@ -187,7 +188,7 @@ getList();
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button type="primary" @click="submitForm" v-hasPermi="['create', 'update']">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </template>
