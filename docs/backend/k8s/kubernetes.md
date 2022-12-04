@@ -10,6 +10,11 @@
 - pod 网段：172.16.0.0/16
 
 
+安装基础软件包
+```shell
+yum install -y nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack ipvsadm
+```
+
 
 配置 k8s repo
 ```shell
@@ -20,51 +25,6 @@ baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
 enabled=1
 gpgcheck=0
 ```
-
-安装基础软件包
-```shell
-yum install -y nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack ipvsadm
-```
-
-### 安装 containerd 服务
-
-配置文件
-```shell
-yum install -y containerd.io
-mkdir -p /etc/containerd
-containerd config default > /etc/containerd/config.toml
-```
-
-修改配置
-```shell
-# vim /etc/containerd/config.toml
-SystemdCgroup = true
-sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.7"
-# systemctl enable containerd --now
-```
-
-修改配置
-```shell
-# vim /etc/crictl.yaml
-runtime-endpoint: unix:///run/containerd/containerd.sock
-image-endpoint: unix:///run/containerd/containerd.sock
-timeout: 10
-debug: false
-# systemctl restart containerd
-```
-
-
-### 配置 containerd 镜像加速
-```shell
-# vim /etc/containerd/config.toml
-config_path = "/etc/containerd/certs.d"
-# mkdir -p /etc/containerd/certs.d/docker.io/
-# vim /etc/containerd/certs.d/docker.io/hosts.toml
-[host."https://xxxx.mirror.aliyuncs.com",host."https://registry.docker-cn.com"]
- capabilities = ["pull"]
-# systemctl restart containerd
-```
-
 
 
 ### 安装初始化 k8s

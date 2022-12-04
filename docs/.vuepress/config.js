@@ -155,6 +155,7 @@ module.exports = {
                 '',
                 '01_init',
                 '02_docker',
+                '03_containerd',
 
                 'docker',
                 'kubernetes',
