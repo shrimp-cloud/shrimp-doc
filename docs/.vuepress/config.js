@@ -161,6 +161,7 @@ module.exports = {
                 '06_calico',
                 '11_ctl',
                 '12_ingress',
+                '13_nginx',
                 '21_docker_image',
                 '31_kuboard',
                 '32_rancher',
