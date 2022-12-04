@@ -1,22 +1,14 @@
-# Kubenetes
+# 安装 kubelet
 
-> 使用 kubeadm 安装  k8s
-
----
+> kubelet kubeadm kubectl 安装
 
 
-### 网段规划
-- node 网段：192.168.0.0/16
-- pod 网段：172.16.0.0/16
-
-
-安装基础软件包
+### 基础依赖
 ```shell
 yum install -y nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack ipvsadm
 ```
 
-
-配置 k8s repo
+### 配置 repo
 ```shell
 # vim /etc/yum.repos.d/k8s.repo
 [kubernetes]
@@ -28,13 +20,63 @@ gpgcheck=0
 
 
 ### 安装初始化 k8s
+
+安装 kubelet kubeadm kubectl
 ```shell
 yum install -y kubelet kubeadm kubectl
 systemctl enable kubelet
+```
+Tips:
+- Kubeadm: 初始化集群的工具包
+- kubelet: 安装在集群节点上，用于启动 Pod
+- kubectl: 命令行工具
+
+### master 上初始化
+
+配置
+```shell
+# 设置容器运行时
 crictl config runtime-endpoint /run/containerd/containerd.sock
+# 使用 kubeadm 初始化 k8s 集群
 kubeadm config print init-defaults > kubeadm.yaml
-vim kubeadm.yaml
-# 暂时省略 kubeadm.yaml 要修改的内容
+```
+
+修改 kubeadm.yaml 配置
+1. 修改控制节点的IP：advertiseAddress 为 master 地址
+2. 指定 containerd 容器运行时：criSocket: unix:///run/containerd/containerd.sock
+3. 修改镜像仓库地址为阿里云：imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+4. 指定Pod网段（在dnsDomain下方添加）：podSubnet: 10.12.0.0/16
+5. 配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
+```shell
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+mode: ipvs
+---
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+cgroupDriver: systemd
+```
+
+初始化
+```shell
+kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
+```
+
+> 报错了，没法往下跑
+
+
+
+
+### 网段规划
+- node 网段：192.168.0.0/16
+- pod 网段：10.12.0.0/16
+
+
+
+
+### 安装初始化 k8s
+```shell
 # 导入镜像：
 ctr -n=k8s.io images import k8s_1.25.0.tar.gz
 # 查看镜像

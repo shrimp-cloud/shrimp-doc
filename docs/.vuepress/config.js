@@ -156,9 +156,9 @@ module.exports = {
                 '01_init',
                 '02_docker',
                 '03_containerd',
+                '04_kubelet',
 
                 'docker',
-                'kubernetes',
                 'kuboard',
                 'rancher',
                 'ingress',
