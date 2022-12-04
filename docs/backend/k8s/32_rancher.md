@@ -15,10 +15,10 @@ helm fetch rancher-latest/rancher
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 # 获取 cert-manager Chart
-helm fetch jetstack/cert-manager --version v1.7.1
+helm fetch jetstack/cert-manager --version v1.10.1
 # 为 cert-manager 下载所需的 CRD 文件
 mkdir cert-manager
-curl -L -o cert-manager/cert-manager-crd.yaml https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
+curl -L -o cert-manager/cert-manager-crd.yaml https://github.com/cert-manager/cert-manager/releases/download/v1.10.1/cert-manager.crds.yaml
 
 # 安装 Cert-Manager
 # 为 cert-manager 创建命名空间
@@ -26,7 +26,7 @@ kubectl create namespace cert-manager
 # 创建 cert-manager CustomResourceDefinition (CRD)。
 kubectl apply -f cert-manager/cert-manager-crd.yaml
 # 安装 cert-manager。
-helm install cert-manager ./cert-manager-v1.7.1.tgz \
+helm install cert-manager ./cert-manager-v1.10.1.tgz \
     --namespace cert-manager \
     --set image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-controller \
     --set webhook.image.repository=<REGISTRY.YOURDOMAIN.COM:PORT>/quay.io/jetstack/cert-manager-webhook \
