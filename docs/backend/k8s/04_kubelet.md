@@ -31,7 +31,7 @@ Tips:
 - kubelet: 安装在集群节点上，用于启动 Pod
 - kubectl: 命令行工具
 
-### master 上初始化
+### master 配置初始化参数
 
 配置
 ```shell
@@ -58,51 +58,40 @@ kind: KubeletConfiguration
 cgroupDriver: systemd
 ```
 
-初始化
+### master 初始化k8s
 ```shell
 kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 ```
 
-> 报错了，没法往下跑
+Tips:
+1. 初始化报 containerd 运行时错，可以重启一下 containerd
+2. kubeadm config images pull，可以提前拉取镜像
+
+初始化成功，按照提示，执行
+```shell
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+初始化完成，得到提示
+```shell
+kubeadm join xxx.xxx.xxx.xxx:6443 --token abcdef.0123456789abcdef \
+--discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+可以在node上执行，将 node 加入集群了
 
 
 
-
-### 网段规划
-- node 网段：192.168.0.0/16
-- pod 网段：10.12.0.0/16
-
-
-
-
-### 安装初始化 k8s
+### 加速
+若 k8s 集群初始化时间太长，可先导入镜像
 ```shell
 # 导入镜像：
 ctr -n=k8s.io images import k8s_1.25.0.tar.gz
 # 查看镜像
 crictl images
-# 初始化集群【仅 master】
-kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 ```
 
+Tips: 镜像包的获取，后面有需求再补充
 
-### 加入集群
-```shell
-# master 上获取加入获取集群的命令
-kubeadm token create --print-join-command
-# node 加入集群
-kubeadm master_ip:master_port --token xx.xxx --discovery-token-ca-cert-hash sha256:xxxx
-# master 查看集群节点
-kubectl get nodes
-# 给节点打标签
-kubectl label nodes ecs1 node-role.kubernetes.io/work=work
-kubectl get nodes
-```
-
-### 安装k8s网络组件-Calico
-```shell
-ctr -n=k8s.io images import calico.tar.gz
-# master:
-kubectl apply -f calico.yaml
-kubectl get node
-```
