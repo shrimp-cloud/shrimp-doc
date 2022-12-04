@@ -1,56 +1,5 @@
 # Docker安装和使用
 
-## Docker 安装
-
-
-### 环境准备
-```shell
-- yum install -y vim yum-utils device-mapper-persistent-data lvm2
-- yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-- yum makecache fast
-```
-Tips: device-mapper-persistent-data lvm2: 存储驱动
-
-
-### 安装 Docker
-- yum -y install docker-ce
-- 若安装冲突，需要 yum remove 冲突的依赖包
-
-- 镜像加速：
-```bash
-mkdir -p /etc/docker
-tee /etc/docker/daemon.json <<-'EOF'
-{
-  "exec-opts": ["native.cgroupdriver=systemd"],
-  "registry-mirrors": ["https://xxxxxxxx.mirror.aliyuncs.com"]
-}
-EOF
-systemctl daemon-reload
-```
-registry-mirrors 地址为阿里云镜像服务申请的镜像加速地址，阿里提供了镜像服务：
-1. 镜像加速地址获取：https://cr.console.aliyun.com/cn-shenzhen/instances/mirrors
-2. 登录账号密码设置：https://cr.console.aliyun.com/cn-shenzhen/instance/credentials
-3. 创建仓库并推送镜像：https://cr.console.aliyun.com/cn-shenzhen/instance/repositories
-
-systemd:
-systemd是系统自带的cgroup管理器, 系统初始化就存在的, 和cgroups联系紧密,为每一个进程分配cgroups, 用它管理就行了. 如果设置成cgroupfs就存在2个cgroup控制管理器, 实验证明在资源有压力的情况下,会存在不稳定的情况. 
-确认 systemd 配置是否生效：
-```shell
-docker info | grep Cgroup
-```
-
-### 启动 Docker 后台服务
-```shell
-systemctl start docker
-systemctl enable docker
-```
-
-### 测试运行 hello-world
-> 由于本地没有hello-world这个镜像，所以会下载一个hello-world的镜像，并在容器内运行。
-```shell
-docker run hello-world
-```
-
 
 ### Dockerfile 打包[基础镜像]
 准备JDK

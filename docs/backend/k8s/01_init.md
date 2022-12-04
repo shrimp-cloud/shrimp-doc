@@ -59,7 +59,12 @@ systemctl disable firewalld
 ### 设置静态IP
 - 内容忽略，使用云服务器，默认静态 IP
 
-### 时钟同步
+
+
+### 基础依赖安装
+```shell
+yum install -y yum-utils epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make cmake curl curl-devel sudo ntp
+```
 
 ### 时间同步
 ```shell
@@ -77,9 +82,38 @@ systemctl restart crond
 ```
 
 
-### 基础依赖安装
+### 修改内核参数
+关键参数
 ```shell
-yum install -y yum-utils epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make
+# vim /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward=1
+net.bridge.bridge-nf-call-iptables=1
+net.bridge.bridge-nf-call-ip6tables=1
+# modprobe br_netfilter
+# sysctl -p /etc/sysctl.d/k8s.conf
+```
+
+所有可能需要修改的参数
+> 其他参数在特定的情况下才需要配置
+```shell
+# modprobe br_netfilter
+# vim /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward=1 # 其值为0,说明禁止进行IP转发；如果是1,则说明IP转发功能已经打开。
+net.bridge.bridge-nf-call-iptables=1 # 二层的网桥在转发包时也会被iptables的FORWARD规则所过滤，这样有时会出现L3层的iptables rules去过滤L2的帧的问题
+net.bridge.bridge-nf-call-ip6tables=1 # 是否在ip6tables链中过滤IPv6包
+vm.swappiness=0 # 禁止使用 swap 空间，只有当系统 OOM 时才允许使用它
+vm.overcommit_memory=1 # 不检查物理内存是否够用
+vm.panic_on_oom=0 # 开启 OOM
+fs.inotify.max_user_instances=8192 # 表示每一个real user ID可创建的inotify instatnces的数量上限，默认128.
+fs.inotify.max_user_watches=524288 # 同一用户同时可以添加的watch数目，默认8192。
+fs.file-max=52706963 # 文件描述符的最大值
+fs.nr_open=52706963 #设置最大进程号打开数
+net.ipv6.conf.all.disable_ipv6=1 #禁用IPv6，修为0为启用IPv6
+net.netfilter.nf_conntrack_max=2310720 #连接跟踪表的大小，建议根据内存计算该值CONNTRACK_MAX = RAMSIZE (in bytes) / 16384 / (x / 32)，并满足nf_conntrack_max=4*nf_conntrack_buckets，默认262144
+```
+```shell
+# sysctl -p  : (执行这个使其生效，不用重启)
+sysctl -p /etc/sysctl.d/k8s.conf
 ```
 
 
