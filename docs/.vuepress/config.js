@@ -58,7 +58,7 @@ module.exports = {
                     { text: 'Java', link: '/backend/java/' },
                     { text: 'Spring', link: '/backend/spring/' },
                     { text: '中间件安装与使用', link: '/backend/component/' },
-                    { text: 'Kubenetes', link: '/backend/k8s/' },
+                    { text: 'Kubernetes', link: '/backend/k8s/' },
                     { text: '架构设计', link: '/backend/framework/' },
                     { text: '模块设计', link: '/backend/modules/' },
                     { text: '逻辑设计', link: '/backend/design/' },
@@ -153,7 +153,7 @@ module.exports = {
             ],
             '/backend/k8s/': [
                 '',
-                '01.init',
+                '01_init',
 
                 'docker',
                 'kubenetes',
