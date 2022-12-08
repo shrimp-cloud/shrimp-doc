@@ -32,8 +32,9 @@ kubectl get nodes
 
 查看污点
 ```shell
-kubectl describe node [node_name] |grep Taints
+kubectl describe node [node_name] | grep Taints
 # Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+kubectl describe node | grep -E "Name:|Taints:"
 ```
 
 删除污点

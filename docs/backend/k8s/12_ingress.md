@@ -2,6 +2,33 @@
 
 > Ingress 相关知识点
 
+### 安装
+
+安装文档：https://kubernetes.github.io/ingress-nginx/deploy/
+
+
+
+```shell
+# 官方安装（网络不通）：
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
+
+# 下载 ymal
+wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
+# 查找镜像
+docker search controller:v1.5.1 --no-trunc
+# 更换镜像
+vim deploy.ymal
+# image: registry.k8s.io/ingress-nginx/controller:v1.5.1  修改为：docker.io/查询找的镜像，示例：image: docker.io/xxx/ingress-nginx-controller:v1.5.1
+
+# 安装
+kubectl apply -f deploy.yaml
+
+# 查看状态
+kubectl get pods --namespace=ingress-nginx
+```
+
+
+
 
 ### 跨域问题解决
 
