@@ -27,3 +27,33 @@ kubectl label nodes [name] node-role.kubernetes.io/work=work
 kubectl get nodes
 ```
 
+
+### 将 master 作为 node 使用
+
+查看污点
+```shell
+kubectl describe node [node_name] |grep Taints
+# Taints:             node-role.kubernetes.io/control-plane:NoSchedule
+```
+
+删除污点
+```shell
+kubectl taint nodes [node_name] node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/master-
+# 【污点叫 node-role.kubernetes.io/control-plane】
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+```
+
+标识为 node
+```shell
+kubectl label nodes [node_name] node-role.kubernetes.io/work=work
+```
+
+设置污点
+```shell
+# kubectl taint node [node_name] node-role.kubernetes.io/master=:PreferNoSchedule
+node/master01 tainted
+```
+- NoSchedule: 一定不能被调度
+- PreferNoSchedule: 尽量不要调度
+- NoExecute: 不仅不会调度, 还会驱逐Node上已有的Pod

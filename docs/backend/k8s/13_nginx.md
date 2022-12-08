@@ -18,5 +18,5 @@ kubectl get pods
 
 测试：
 ```shell
-curl http://master or node ip:30931
+curl http://master_or_node ip:30931
 ```

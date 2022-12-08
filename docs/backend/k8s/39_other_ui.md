@@ -1,9 +1,62 @@
-# Rancher
+# 其他 UI
 
+
+
+### Dashboard UI
+- [官方安装文档](https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/web-ui-dashboard/)
+```shell
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.6.1/aio/deploy/recommended.yaml
+```
+
+
+
+
+### kuboard
+> Kuboard, 快速在 Kubernetes 落地微服务,官网 https://kuboard.cn/
+
+#### 安装 kuboard
+```shell
+kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
+```
+
+#### 卸载 kuboard
+```shell
+kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
+```
+
+
+
+
+
+### rancher:docker
+
+#### 前提
+- 安装 iptables, 若在 docker 之后安装，要重启docker
+- [安装Docker](docs/backend/k8s/docker.mdend/k8s/docker.md)
+
+#### 安装
+
+```shell
+docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:stable
+
+# 找密码
+docker ps # 获取 container-id
+docker logs container-id 2>&1 | grep "Bootstrap Password:"
+
+# 新用户名 admin
+# 新密码 即时设置
+
+```
+
+
+
+
+
+
+### rancher: k8s
 
 > 官方文档： https://docs.ranchermanager.rancher.io/zh/
 
-### Kubernetes安装rancher
 1. 安装 Helm: https://helm.sh/zh/docs/intro/install/
 2. 安装 [Rancher](https://docs.ranchermanager.rancher.io/zh/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/install-rancher-ha)
 ```shell
@@ -44,7 +97,6 @@ cert-manager   cert-manager-startupapicheck-6c8bx         0/1     InvalidImageNa
 cert-manager   cert-manager-webhook-bfc8b9886-npt52       0/1     InvalidImageName   0          130m
 ```
 
-
 ```
 # 安装  Rancher
 kubectl create namespace cattle-system
@@ -57,24 +109,3 @@ helm install rancher ./rancher-<VERSION>.tgz \
     --set useBundledSystemChart=true # 使用打包的 Rancher System Chart
 ```
 
-
-
-### docker安装rancher
-
-#### 前提
-- 安装 iptables, 若在 docker 之后安装，要重启docker
-- [安装Docker](docs/backend/k8s/docker.mdend/k8s/docker.md)
-
-#### 安装
-
-```shell
-docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:stable
-
-# 找密码
-docker ps # 获取 container-id
-docker logs container-id 2>&1 | grep "Bootstrap Password:"
-
-# 新用户名 admin
-# 新密码 即时设置
-
-```

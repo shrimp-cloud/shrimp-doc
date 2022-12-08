@@ -163,8 +163,7 @@ module.exports = {
                 '12_ingress',
                 '13_nginx',
                 '21_docker_image',
-                '31_kuboard',
-                '32_rancher',
+                '31_other_ui',
                 '99_others',
             ],
             '/backend/framework/': [
