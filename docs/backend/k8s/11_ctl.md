@@ -38,6 +38,7 @@ kubectl delete pod --field-selector=status.phase==Succeeded
 | crictl ps -a                        | 打印容器清单      |
 | crictl ps                           | 打印正在运行的容器清单 |
 | crictl exec -i -t _containerd_id ls | 容器上执行命令     |
+| crictl exec -it _containerd_id bash | 进入容器        |
 | crictl logs _containerd_id          | 获取容器的所有日志   |
 | crictl logs --tail=2 _containerd_id | 获取最近的 N 行日志 |
 | crictl pull busybox                 | 拉取镜像        |

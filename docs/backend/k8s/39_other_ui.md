@@ -37,11 +37,12 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 #### 安装
 
 ```shell
+# 稳定版
 docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:stable
 
 # 找密码
 docker ps # 获取 container-id
-docker logs container-id 2>&1 | grep "Bootstrap Password:"
+docker logs [container-id] 2>&1 | grep "Bootstrap Password:"
 
 # 新用户名 admin
 # 新密码 即时设置

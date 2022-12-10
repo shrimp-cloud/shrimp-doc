@@ -61,6 +61,7 @@ cgroupDriver: systemd
 
 ### master 初始化k8s
 ```shell
+# systemctl enable kubelet --now # 待确认是否需要
 kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 ```
 
