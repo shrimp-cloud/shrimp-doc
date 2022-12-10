@@ -16,6 +16,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
 # 查找镜像
 docker search controller:v1.5.1 --no-trunc
+# 若没有可用镜像，可借助别人的镜像同步方案
 # 更换镜像
 vim deploy.ymal
 # image: registry.k8s.io/ingress-nginx/controller:v1.5.1  修改为：docker.io/查询找的镜像，示例：image: docker.io/xxx/ingress-nginx-controller:v1.5.1

@@ -47,3 +47,7 @@
 | ctr run -d pause-test pause    | docker run -d --name=pause pause-test | 运行容器           |
 | ctr image tag pause pause-test | docker tag pause pause-test           | tag应该pause镜像   |
 
+
+### 镜像同步方案
+热心网友的镜像同步方案：
+- https://github.com/anjia0532/gcr.io_mirror
