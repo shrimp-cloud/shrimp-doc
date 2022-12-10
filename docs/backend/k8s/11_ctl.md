@@ -1,4 +1,4 @@
-# k8s 命令
+# k8s 命令,状态
 
 > 常用命令
 
@@ -9,6 +9,12 @@
 | kubectl get pod -A               | 同上          | -   |
 | crictl images                    | 查看 现有镜像     | -   |
 
+```shell
+# 列举已完成的 pod
+kubectl get pod --field-selector=status.phase==Succeeded -A
+# 删除所有已完成的pod
+kubectl delete pod --field-selector=status.phase==Succeeded
+```
 
 
 ### ctr
@@ -48,6 +54,36 @@
 | ctr image tag pause pause-test | docker tag pause pause-test           | tag应该pause镜像   |
 
 
-### 镜像同步方案
-热心网友的镜像同步方案：
-- https://github.com/anjia0532/gcr.io_mirror
+
+### Pod 异常
+| 名称                                  | 含义                 |
+|-------------------------------------|--------------------|
+| CrashLoopBackOff                    | 容器退出，kubelet正在将它重启 |
+| InvalidImageName                    | 无法解析镜像名称           |
+| ImageInspectError                   | 无法校验镜像             |
+| ErrImageNeverPull                   | 策略禁止拉取镜像           |
+| ImagePullBackOff                    | 正在重试拉取             |
+| RegistryUnavailable                 | 连接不到镜像中心           |
+| ErrImagePull                        | 通用的拉取镜像出错          |
+| CreateContainerConfigError          | 不能创建kubelet使用的容器配置 |
+| CreateContainerError                | 创建容器失败             |
+| internalLifecycle.PreStartContainer | 执行hook报错           |
+| RunContainerError                   | 启动容器失败             |
+| PostStartHookError                  | 执行hook报错           |
+| ContainersNotInitialized            | 容器没有初始化完毕          |
+| ContainersNotReady                  | 容器没有准备完毕           |
+| ContainerCreating                   | 容器创建中              |
+| PodInitializing                     | pod 初始化中           |
+| DockerDaemonNotReady                | docker还没有完全启动      |
+| NetworkPluginNotReady               | 网络插件还没有完全启动        |
+
+
+### Pod uffy
+| 状态        | 含义   | 说明                                                                                |
+|-----------|------|-----------------------------------------------------------------------------------|
+| Pending   | 等待中  | Pod已经被创建，但还没有完成调度，或者说有一个或多个镜像正处于从远程仓库下载的过程。处在这个阶段的Pod可能正在写数据到etcd中、调度、pull镜像或启动容器 |
+| Running   | 运行中  | 该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态。                       |
+| Succeeded | 正常终止 | Pod中的所有的容器已经正常的执行后退出，并且不会自动重启，一般会是在部署job的时候会出现。                                   |
+| Failed    | 异常停止 | Pod 中的所有容器都已终止了，并且至少有一个容器是因为失败终止。也就是说，容器以非0状态退出或者被系统终止。                           |
+| Unkonwn   | 未知状态 | API Server无法正常获取到Pod对象的状态信息，通常是由于其无法与所在工作节点的kubelet通信所致。                          |
+

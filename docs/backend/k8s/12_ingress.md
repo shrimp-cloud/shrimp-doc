@@ -5,9 +5,7 @@
 ### 安装
 
 安装文档：https://kubernetes.github.io/ingress-nginx/deploy/
-
-
-
+安装过程镜像无法拉取，请看 [k8s 其他内容](99_others.md) 的 镜像同步方案
 ```shell
 # 官方安装（网络不通）：
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
@@ -16,18 +14,13 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
 # 查找镜像
 docker search controller:v1.5.1 --no-trunc
-# 若没有可用镜像，可借助别人的镜像同步方案
 # 更换镜像
-vim deploy.ymal
-# image: registry.k8s.io/ingress-nginx/controller:v1.5.1  修改为：docker.io/查询找的镜像，示例：image: docker.io/xxx/ingress-nginx-controller:v1.5.1
-
+vim deploy.ymal # controller, kube-webhook-certgen(两处) 需要替换镜像地址
 # 安装
 kubectl apply -f deploy.yaml
-
 # 查看状态
 kubectl get pods --namespace=ingress-nginx
 ```
-
 
 
 
