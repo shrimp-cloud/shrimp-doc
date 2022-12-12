@@ -1,8 +1,9 @@
-# 部署 Nginx
+# 应用
 
-> Nginx 用于部署测试
+## Nginx
 
-部署：
+### Nginx 部署
+
 ```shell
 # 部署 nginx
 kubectl create deployment nginx --image=nginx
@@ -16,7 +17,25 @@ kubectl scale deployment nginx --replicas=3
 kubectl get pods
 ```
 
-测试：
+### Nginx 测试
+
 ```shell
 curl http://master_or_node ip:30931
+```
+
+
+## Redis
+
+### 部署
+
+```shell
+# 部署
+kubectl create deployment redis --image=redis
+# 查看状态
+kubectl get pods
+# 查看进程
+crictl ps
+# 进入容器
+crictl exec -it [_containerd_id] bash
+
 ```

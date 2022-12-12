@@ -1,6 +1,7 @@
-# Ingress
+# 组件
 
-> Ingress 相关知识点
+
+## Ingress
 
 ### 安装
 
@@ -21,7 +22,6 @@ kubectl apply -f deploy.yaml
 # 查看状态
 kubectl get pods --namespace=ingress-nginx
 ```
-
 
 
 ### 跨域问题解决
