@@ -24,7 +24,6 @@ gpgcheck=0
 安装 kubelet kubeadm kubectl
 ```shell
 yum install -y kubelet kubeadm kubectl
-systemctl enable kubelet
 ```
 Tips:
 - Kubeadm: 初始化集群的工具包
@@ -42,11 +41,11 @@ kubeadm config print init-defaults > kubeadm.yaml
 ```
 
 修改 kubeadm.yaml 配置
-1. 修改控制节点的IP：advertiseAddress 为 master 地址
-2. 指定 containerd 容器运行时：criSocket: unix:///run/containerd/containerd.sock
-3. 修改 name: node 为自己的名字，示例 `k8s-master`
-3. 修改镜像仓库地址为阿里云：imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
-4. 指定Pod网段（在dnsDomain下方添加）：podSubnet: 10.12.0.0/16
+1. 修改控制节点的IP: advertiseAddress 为 master 地址
+2. 指定 containerd 容器运行时: criSocket: unix:///run/containerd/containerd.sock
+3. 修改 name: node 为自己的名字，示例: `k8s-master`
+3. 修改镜像仓库地址为阿里云：imageRepository:  registry.cn-hangzhou.aliyuncs.com/google_containers
+4. 指定Pod网段（在dnsDomain下方添加）: podSubnet: 10.12.0.0/16
 5. 配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
 ```shell
 ---
@@ -61,7 +60,8 @@ cgroupDriver: systemd
 
 ### master 初始化k8s
 ```shell
-# systemctl enable kubelet --now # 待确认是否需要
+systemctl enable kubelet --now
+systemctl restart containerd
 kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 ```
 
