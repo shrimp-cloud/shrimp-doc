@@ -1,4 +1,4 @@
-# node 加入集群
+# 集群 node
 
 > 在初始化 k8s 集群前的所有步骤，在node 上都在执行，仅在初始化 master 时，只在 master 执行。以下步骤为将 node 添加到 master 的步骤
 

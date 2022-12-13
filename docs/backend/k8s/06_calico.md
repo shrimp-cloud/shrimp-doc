@@ -1,4 +1,4 @@
-# 安装 Calico
+# 安装 calico
 
 > k8s 有多个网络组件可选择，这里使用 Calico
 

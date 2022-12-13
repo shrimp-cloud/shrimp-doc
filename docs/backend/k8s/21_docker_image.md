@@ -1,4 +1,4 @@
-# 打包 Image
+# 打包 image
 
 
 ### Dockerfile 打包[基础镜像]

@@ -1,4 +1,4 @@
-# 组件
+# 组件  plugins
 
 
 ## Ingress
