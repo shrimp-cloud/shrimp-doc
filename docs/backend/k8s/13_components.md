@@ -11,17 +11,22 @@
 # 官方安装（网络不通）：
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
 
-# 下载 ymal
+# 下载 yaml
 wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
 # 查找镜像
 docker search controller:v1.5.1 --no-trunc
 # 更换镜像
-vim deploy.ymal # controller, kube-webhook-certgen(两处) 需要替换镜像地址
+vim deploy.yaml # controller, kube-webhook-certgen(两处) 需要替换镜像地址
 # 安装
 kubectl apply -f deploy.yaml
 # 查看状态
 kubectl get pods --namespace=ingress-nginx
 ```
+
+Ingress 安装镜像替换：
+- controller: docker.io/anjia0532/google-containers.ingress-nginx.controller:v1.5.1
+- kube-webhook-certgen: docker.io/anjia0532/google-containers.ingress-nginx.kube-webhook-certgen:v20220916-gd32f8c343
+
 
 
 ### 跨域问题解决
