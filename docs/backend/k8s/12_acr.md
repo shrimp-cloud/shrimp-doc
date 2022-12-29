@@ -30,6 +30,6 @@ spec:
 
 ### 向k8s中推送更新
 1. 进入 https://flow.aliyun.com/ 的 k8s 集群管理，添加集群
-2. vim ~/.kube/cofig, 添加到 flow 中【不能修改服务器中的 config】
+2. `vim ~/.kube/config`, 添加到 flow 中【不能修改服务器中的 config】
 3. 在 server 同级位置添加配置： `insecure-skip-tls-verify: true`，并修改 server 地址为外部地址，开通服务器防火墙
 3. 在 flow 中向 k8s 发起更新, 跳过TLS 验证。部署时即可将应用部署到自定义的 k8s 集群中

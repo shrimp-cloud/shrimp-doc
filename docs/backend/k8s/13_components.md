@@ -24,8 +24,8 @@ kubectl get pods --namespace=ingress-nginx
 ```
 
 Ingress 安装镜像替换：
-- controller: docker.io/anjia0532/google-containers.ingress-nginx.controller:v1.5.1
-- kube-webhook-certgen: docker.io/anjia0532/google-containers.ingress-nginx.kube-webhook-certgen:v20220916-gd32f8c343
+- controller: registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.5.1
+- kube-webhook-certgen: registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.5.1
 
 
 
