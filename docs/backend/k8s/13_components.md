@@ -7,25 +7,25 @@
 
 安装文档：https://kubernetes.github.io/ingress-nginx/deploy/
 安装过程镜像无法拉取，请看 [k8s 其他内容](99_others.md) 的 镜像同步方案
-```shell
-# 官方安装（网络不通）：
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
 
-# 下载 yaml
+下载官方 yaml:
+```shell
 wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
-# 查找镜像
-docker search controller:v1.5.1 --no-trunc
-# 更换镜像
-vim deploy.yaml # controller, kube-webhook-certgen(两处) 需要替换镜像地址
+```
+
+修改内容
+1. 修改 nginx-ingress-controller 镜像地址为：registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.5.1
+2. 修改 kube-webhook-certgen (2处) 镜像地址为：registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.5.1
+3. 修改 nginx-ingress-controller 的网络模式为 hostNetwork
+  - 在 nginx-ingress-controller image 的containers层配置：`hostNetwork: true`
+  - 在 nginx-ingress-controller image 的containers层配置：`dnsPolicy: ClusterFirstWithHostNet`
+
+```shell
 # 安装
 kubectl apply -f deploy.yaml
 # 查看状态
 kubectl get pods --namespace=ingress-nginx
 ```
-
-Ingress 安装镜像替换：
-- controller: registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.5.1
-- kube-webhook-certgen: registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.5.1
 
 
 
