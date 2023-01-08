@@ -1,4 +1,4 @@
-# Ruoyi Bug修复记录
+# Bug修复记录
 
 > 此章节记录 ruoyi bug 的修复情况
 

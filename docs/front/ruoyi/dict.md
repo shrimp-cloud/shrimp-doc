@@ -12,8 +12,9 @@ export function restToDict(params) {
 ### 修正字段映射
 - 位置：src/utils/dict.js
 - elTagType: 将会作为 el-tag 的 type 使用
-- elTagClass: 将会作为 el-tag 的 class 使用
+- elTagClass: 将会作为 el-tag 的 class 使用【复杂，暂时不支持】
 - 具体 type 和 class 取值，请找 el 官方文档
+- 修正 value 匹配：value 可能为字符，或数字：`value: isNaN(p.dictValue) ? p.dictValue : Number(p.dictValue), // 若 value 为数字，需要转成数字`
 
 ### 页面引入
 ```javascript
@@ -46,7 +47,11 @@ const { DICT_TYPE1, DICT_TYPE2 } = proxy.useDict("DICT_TYPE1", "DICT_TYPE2");
 </el-radio-group>
 ```
 
-### 标签展示修理
+### 标签展示修复
 - 用途：在 table 内展示 `dict-tag` 时，数字枚举无法匹配
-- 位置：src/components/DictTag/index.vue
-- 修改：`String(props.value)` 移除 String 包装，直接使用 `props.value`
+- 字典值转换：
+  - 位置: src/utils/dict.js
+  - 修改: 若 value 为数字，需要转成数字： `value: isNaN(p.dictValue) ? p.dictValue : Number(p.dictValue)`
+- 字典展示：
+  - 位置：src/components/DictTag/index.vue
+  - 修改：`String(props.value)` 移除 String 包装，直接使用 `props.value`
