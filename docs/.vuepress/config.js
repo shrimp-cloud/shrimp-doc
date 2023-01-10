@@ -150,6 +150,7 @@ module.exports = {
                 'nginx',
                 'samba',
                 'squid',
+                'sftp',
             ],
             '/backend/k8s/': [
                 '',
