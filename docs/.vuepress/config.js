@@ -48,6 +48,7 @@ module.exports = {
                 items: [
                     { text: 'VUE', link: '/front/vue/' },
                     { text: 'ruoyi', link: '/front/ruoyi/' },
+                    { text: 'vant-wxapp', link: '/front/vant-wxapp/' },
                     { text: '客户端', link: '/front/client/' },
                 ]
             },
@@ -233,6 +234,10 @@ module.exports = {
                 'dict',
                 'monaco',
                 'bugs',
+            ],
+            '/front/vant-wxapp/': [
+                '',
+                'init',
             ],
             '/front/client/': [
                 '',
