@@ -1,6 +1,6 @@
 # SFTP
 
-> SMB协议的文件及打印机等资源共享服务
+> SFTP（SSH File Transfer Protocol，也称 Secret File Transfer Protocol），是一种安全的文件传输协议，一种通过网络传输文件的安全方法；它确保使用私有和安全的数据流来安全地传输数据。
 
 ## 配置
 
@@ -90,4 +90,7 @@ sftp sftpuser@sftp.example.com
 | explore      | 浏览您的本地目录，即打开本地目录                  |
 | get test.txt | 把sftp服务器上当前目录下test.txt文件下载到本地当前目录 |
 | put test.txt | 把本地文件当前目录下test.txt上传到ftp服务器当前目录   |
+| rm           | 删除文件                              |
+| rmdir        | 删除目录                              |
+
 
