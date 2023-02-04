@@ -238,6 +238,7 @@ module.exports = {
             '/front/vant-wxapp/': [
                 '',
                 'init',
+                'env',
                 'request',
             ],
             '/front/client/': [
