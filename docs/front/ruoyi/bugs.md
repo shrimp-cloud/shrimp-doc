@@ -14,3 +14,16 @@
   z-index: auto !important;
 }
 ```
+
+
+### 分页优化
+问题1： 分页组件上方空白区域太大
+位置：src/components/Pagination/index.vue
+修改：
+1. `class=pagination-container` 添加属性 `margin-top: 6px;`
+
+问题2：el-table 的高度不自动适配
+位置：任意页面
+修改：
+1. el-table 高度引用变量：` :height="tableHeight"`，
+2. 使用计算属性计算当下高度：`const tableHeight = computed(() => window.innerHeight - 216);`
