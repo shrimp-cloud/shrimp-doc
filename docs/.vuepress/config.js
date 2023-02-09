@@ -239,6 +239,7 @@ module.exports = {
                 '',
                 'init',
                 'request',
+                'shit',
             ],
             '/front/client/': [
                 '',
