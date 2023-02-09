@@ -44,6 +44,9 @@
           <el-input v-model="queryParams.domain" placeholder="访问地址" clearable style="width: 160px" @keyup.enter="handleQuery"/>
         </el-form-item>
         <el-form-item>
+          <el-date-picker v-model="dateRange" style='width: 380px' value-format="YYYY-MM-DD HH:mm:ss" type="datetimerange" range-separator="-" start-placeholder="开始时间" end-placeholder="结束时间"/>
+        </el-form-item>
+        <el-form-item>
           <el-button type="primary" icon="Search" @click="handleQuery" v-hasPermi="['page']">搜索</el-button>
           <el-button icon="Refresh" @click="resetQuery">重置</el-button>
         </el-form-item>
@@ -51,7 +54,7 @@
           <el-button type="primary" icon="Plus" @click="handleAdd" v-hasPermi="['create']">新增</el-button>
         </el-form-item>
       </el-form>
-      <el-table v-loading="loading" height="680" :data="dataList">
+      <el-table v-loading="loading" :height="tableHeight" :data="dataList">
         <el-table-column label="ID" align="center" prop="id" width="80"/>
         <el-table-column label="应用编码" align="left" prop="appCode" min-width="120" :show-overflow-tooltip="true" />
         <el-table-column label="应用名称" align="left" prop="appName" min-width="160" :show-overflow-tooltip="true" />
@@ -87,9 +90,11 @@
 
 <script setup name="AppPage">
 import {appPage, appRemove} from "@/api/ops";
-import Edit from "./components/edit"
+import Edit from "./components/edit";
+//import {parseTime} from "@/utils/ruoyi";
 
 const { proxy } = getCurrentInstance();
+const tableHeight = computed(() => window.innerHeight - 216);
 const dataList = ref([]);
 const loading = ref(true);
 const total = ref(0);
@@ -116,6 +121,7 @@ function init() {
 /** 查询参数列表 */
 function getList() {
   loading.value = true;
+  // proxy.addDateRange(queryParams.value, dateRange.value)
   appPage(queryParams.value).then(res => {
     const data = res.data;
     dataList.value = data.rows;

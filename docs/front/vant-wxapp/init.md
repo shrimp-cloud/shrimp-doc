@@ -52,3 +52,4 @@ yarn.lock
 
 ## 代码提交 git
 - 微信居然也搞了个 git...: https://git.weixin.qq.com/
+- 可是我还是用 github 了
