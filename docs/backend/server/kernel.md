@@ -46,7 +46,7 @@ yum install -y kernel-lt-5.4.189-1.el7.elrepo --enablerepo=elrepo-kernel
 # grub引导
 cat /boot/grub2/grub.cfg | grep menuentry
 # efi引导
-cat /etc/grub2-efi.cfg | grep ^menuentry
+cat /etc/grub2-efi.cfg | grep menuentry
 ```
 
 设置开机从新内核启动

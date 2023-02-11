@@ -74,7 +74,63 @@ vim /etc/sysconfig/kubelet
 KUBELET_EXTRA_ARGS="--fail-swap-on=false"
 ```
 
+## 网络
+位置：
+```shell
+cd /etc/sysconfig/network-scripts/
+```
 
+### DHCP
+```shell
+TYPE="Ethernet"
+PROXY_METHOD="none"
+BROWSER_ONLY="no"
+BOOTPROTO="dhcp"
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+# 名称可能不一样
+NAME="enp0s3"
+# UUID 在每台电脑都不一样
+UUID="5a84509d-72b5-464b-970a-70adf9d533e0"
+DEVICE="enp0s3"
+ONBOOT="yes"
+```
+
+### 固定 IP
+```shell
+TYPE="Ethernet"
+PROXY_METHOD="none"
+BROWSER_ONLY="no"
+BOOTPROTO="static"
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+# 名称可能不一样
+NAME="enp0s3"
+DEVICE="enp0s3"
+ONBOOT="yes"
+
+GATEWAY=172.12.12.1
+IPADDR=172.12.12.101
+NETMASK=172.12.12.0
+DNS1=172.12.12.1
+DNS2=114.114.115.115
+
+```
+
+### 生效
+```shell
+systemctl restart network
+```
 
 ## 生成公钥
 ```shell script
