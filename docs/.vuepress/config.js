@@ -161,6 +161,7 @@ module.exports = {
                 '04_kubelet',
                 '05_node',
                 '06_calico',
+                '07_ingress',
                 '10_yaml',
                 '11_ctl',
                 '12_acr',

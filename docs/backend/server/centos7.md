@@ -16,7 +16,9 @@ passwd apps
 # 更新：
 yum update -y
 # 修改主机名：
-hostnamectl set-hostname lzser
+hostnamectl set-hostname shrimp
+# 立即生效
+bash
 # 安装工具： 
 yum install -y epel-release yum-utils
 yum install -y vim net-tools numactl fontconfig lrzsz zip unzip wget htop git telnet
@@ -127,10 +129,20 @@ DNS2=114.114.115.115
 
 ```
 
+
 ### 生效
 ```shell
 systemctl restart network
 ```
+
+
+## 修改dns
+```shell
+# vim /etc/resolv.conf
+nameserver 172.12.12.1
+nameserver 114.114.114.114
+```
+
 
 ## 生成公钥
 ```shell script

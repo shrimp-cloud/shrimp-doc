@@ -6,7 +6,7 @@
 ### 安装k8s网络组件-Calico
 ```shell
 # master:
-wget https://docs.projectcalico.org/manifests/calico.yaml
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
 kubectl apply -f calico.yaml
 # 在等待片刻后，可查看 nodes 状态，STATUS 将由 NotReady 变更为 Ready
 kubectl get nodes
