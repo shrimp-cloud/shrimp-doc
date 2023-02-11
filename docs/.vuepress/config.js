@@ -240,6 +240,7 @@ module.exports = {
                 'init',
                 'env',
                 'request',
+                'shit',
             ],
             '/front/client/': [
                 '',
