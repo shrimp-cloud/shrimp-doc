@@ -32,7 +32,7 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 
 #### 前提
 - 安装 iptables, 若在 docker 之后安装，要重启docker
-- [安装Docker](docs/backend/k8s/docker.mdend/k8s/docker.md)
+- [安装Docker](docs/backend/k8s/docker.md)
 
 #### 安装
 

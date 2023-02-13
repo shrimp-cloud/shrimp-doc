@@ -40,6 +40,11 @@
         <el-form-item prop="appName">
           <el-input v-model="queryParams.appName" placeholder="应用名称" clearable style="width: 160px" @keyup.enter="handleQuery"/>
         </el-form-item>
+        <el-form-item prop="isDefault">
+          <el-select v-model="queryParams.isDefault" placeholder="默认" clearable style='width: 100px'>
+            <el-option v-for="dict in BOOLEAN" :key="dict.value" :label="dict.label" :value="dict.value"/>
+          </el-select>
+        </el-form-item>
         <el-form-item prop="domain">
           <el-input v-model="queryParams.domain" placeholder="访问地址" clearable style="width: 160px" @keyup.enter="handleQuery"/>
         </el-form-item>
@@ -59,6 +64,9 @@
         <el-table-column label="应用编码" align="left" prop="appCode" min-width="120" :show-overflow-tooltip="true" />
         <el-table-column label="应用名称" align="left" prop="appName" min-width="160" :show-overflow-tooltip="true" />
         <el-table-column label="访问地址" align="left" prop="domain" min-width="240" :show-overflow-tooltip="true"/>
+        <el-table-column label="默认" align="center" prop="isDefault" width="80">
+          <template #default="scope"><dict-tag :options="BOOLEAN" :value="scope.row.isDefault"/></template>
+        </el-table-column>
         <el-table-column label="排序" align="left" prop="sort" min-width="80" :show-overflow-tooltip="true"/>
         <el-table-column label="备注" align="left" prop="comments" min-width="200" :show-overflow-tooltip="true"/>
         <el-table-column label="修改人" align="left" prop="updateBy" width="100" :show-overflow-tooltip="true"/>
@@ -93,8 +101,9 @@ import {appPage, appRemove} from "@/api/ops";
 import Edit from "./components/edit";
 //import {parseTime} from "@/utils/ruoyi";
 
-const { proxy } = getCurrentInstance();
 const tableHeight = computed(() => window.innerHeight - 216);
+const { proxy } = getCurrentInstance();
+const { BOOLEAN } = proxy.useDict("BOOLEAN");
 const dataList = ref([]);
 const loading = ref(true);
 const total = ref(0);
@@ -184,6 +193,11 @@ getList();
       </el-form-item>
       <el-form-item label="访问地址" prop="domain">
         <el-input v-model="form.domain" placeholder="请输入访问地址" />
+      </el-form-item>
+      <el-form-item label="默认" prop="isDefault">
+        <el-radio-group v-model="form.isDefault">
+          <el-radio v-for="dict in BOOLEAN" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
+        </el-radio-group>
       </el-form-item>
       <el-form-item label="排序" prop="sort">
         <el-input v-model="form.sort" type="number" placeholder="请输入排序" />
