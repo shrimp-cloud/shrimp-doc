@@ -1,4 +1,4 @@
-# Bug修复记录
+# 优化，Bug修复记录
 
 > 此章节记录 ruoyi bug 的修复情况
 
@@ -27,3 +27,12 @@
 修改：
 1. el-table 高度引用变量：` :height="tableHeight"`，
 2. 使用计算属性计算当下高度：`const tableHeight = computed(() => window.innerHeight - 216);`
+
+### 时间范围查询
+问题：后端为自定义 时间范围字段，addDateRange 方法无法自适应
+位置：src/utils/ruoyi.js.addDateRange
+修改：【适应自己的后端框架】
+```
+search['timeFrom'] = dateRange[0];
+search['timeTo'] = dateRange[1];
+```
