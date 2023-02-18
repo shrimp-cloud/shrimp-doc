@@ -182,7 +182,6 @@ getList();
 - 应用新增, 编辑
 ```html
 <template>
-  <!-- 添加或修改参数配置对话框 -->
   <el-dialog :title="title" v-model="open" width="800px" append-to-body draggable :close-on-click-modal="false">
     <el-form ref="editRef" :model="form" :rules="rules" label-width="120px">
       <el-form-item label="应用编码" prop="appCode">

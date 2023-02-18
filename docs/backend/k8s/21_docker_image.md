@@ -1,7 +1,7 @@
 # 打包 image
 
 
-### Dockerfile 打包[基础镜像]
+### 打包[JDK基础镜像]
 准备JDK
 ```shell
 wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
@@ -30,7 +30,30 @@ ENV PATH=/apps/jdk17/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 ENV LANG=en_US.utf8
 EOF
 ```
-打包
+
+### 打包前端node 环境镜像
+> 用于前端编译
+
+准备 node16
+```dockerfile
+FROM centos:7
+MAINTAINER shrimp
+WORKDIR /apps
+
+ADD node16.15.1 node16.15.1
+
+RUN yum update -y && \
+  yum install -y gcc make automake libtool zlib git wget && \
+  wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz && tar -zxvf zlib-1.2.9.tar.gz && \
+  cd zlib-1.2.9 && ./configure && make && make install && ln -s -f /usr/local/lib/libz.so.1.2.9 /lib64/libz.so.1 && \
+  cd /apps/ && rm -rf zlib-1.2.9* && \
+  yum clean all
+
+ENV PATH=/apps/node16.15.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+```
+
+
+### 打包后端应用
 ```shell
 # 打包到指定版本
 docker build -t image.wkclz.com/lz-cloud/centos7:0.0.1 .
