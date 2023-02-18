@@ -198,6 +198,11 @@ getList();
           <el-radio v-for="dict in BOOLEAN" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="默认" prop="isDefault">
+        <el-select v-model="form.isDefault">
+          <el-option v-for="dict in BOOLEAN" :key="dict.value" :label="dict.label" :value="dict.value"/>
+        </el-select>
+      </el-form-item>
       <el-form-item label="排序" prop="sort">
         <el-input v-model="form.sort" type="number" placeholder="请输入排序" />
       </el-form-item>
