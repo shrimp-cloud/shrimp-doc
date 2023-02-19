@@ -27,7 +27,6 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 
 
 
-
 ### rancher:docker
 
 #### 前提
@@ -38,7 +37,10 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 
 ```shell
 # 稳定版
-docker run --privileged -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:stable
+docker run --privileged -d \
+  --restart=unless-stopped  \
+  -p 80:80 -p 443:443 \
+  rancher/rancher:stable
 
 # 找密码
 docker ps # 获取 container-id
@@ -46,10 +48,31 @@ docker logs [container-id] 2>&1 | grep "Bootstrap Password:"
 
 # 新用户名 admin
 # 新密码 即时设置
+```
 
+#### 更换自定义证书
+1. 操作前请备份数据，[查看官方文档](https://ranchermanager.docs.rancher.com/zh/v2.6/getting-started/installation-and-upgrade/other-installation-methods/rancher-on-a-single-node-with-docker/upgrade-docker-installed-rancher)
+2. 准备证书
+2. 修改启动命令 【rancher-data 是1中导出的数据】
+```shell
+docker run -d --volumes-from rancher-data \
+  --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /root/tls/cert.pem:/etc/rancher/ssl/cert.pem \
+  -v /root/tls/key.pem:/etc/rancher/ssl/key.pem \
+  --privileged \
+  rancher/rancher:stable \
+  --no-cacerts
 ```
 
 
+#### 导入集群
+- 集群管理，导入集群，导入已有集群
+- 到目标集群所在机器，下载 yaml: wget --no-check-certificate https://rancher.expmple.com/v3/import/xxxx.yaml
+- 【k8s 版本问题】修改 ymal: `beta.kubernetes.io/os` -> `kubernetes.io/os`
+- 导入：`kubectl apply -f xxxx.yaml`
+- 异常处理
+  - 查看 pod 日志：`kubectl logs -n cattle-system cattle-cluster-agent-xxxx-xx`
 
 
 
