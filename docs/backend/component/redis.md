@@ -68,3 +68,21 @@ docker exec -it redis bash
 # 或直接使用redis-cli访问容器内redis
 docker exec -it redis redis-cli [-a your_redis_password]
 ```
+
+
+### redis 使用
+
+redis-cli 连接
+```shell
+# 直接在连接时附加密码
+redis-cli -h 127.0.0.1 -p 6379 -a 12345
+# 连接后附加密码
+redis-cli -h 127.0.0.1 -p 6379
+auth 12345
+```
+
+telnet 连接
+```shell
+telnet 127.0.0.1 6379
+auth 12345
+```
