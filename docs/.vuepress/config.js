@@ -227,7 +227,6 @@ module.exports = {
                 'request',
                 'api',
                 'login',
-                'redirect_login',
                 'iframe_login',
                 'router',
                 'hasPermi',
@@ -235,6 +234,8 @@ module.exports = {
                 'dict',
                 'monaco',
                 'bugs',
+                'baseComponents',
+                'bizComponents',
             ],
             '/front/vant-wxapp/': [
                 '',
