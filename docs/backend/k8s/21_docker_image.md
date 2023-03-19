@@ -14,20 +14,23 @@ mv jdk-17* jdk17
 vim Dockerfile
 tee ./Dockerfile <<-'EOF'
 FROM centos:7
-MAINTAINER lz
+MAINTAINER shrimp
 WORKDIR /apps
 
 # JDK
 ADD jdk17 jdk17
 
-# 安装基本依赖
-RUN yum install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
-  yum clean all
-
 # 环境变量
+ENV TZ=Asia/Shanghai
 ENV JAVA_HOME=/apps/jdk17
 ENV PATH=/apps/jdk17/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV LANG=en_US.utf8
+
+# 安装基本依赖
+RUN yum install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
+  yum clean all && \
+  ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 EOF
 ```
 
@@ -59,6 +62,8 @@ ENV PATH=/apps/node16.15.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 docker build -t image.wkclz.com/lz-cloud/centos7:0.0.1 .
 # 打包到latest
 docker build -t image.wkclz.com/lz-cloud/centos7:latest .
+# 多打一个 tag
+docker tag [ImageId] image.wkclz.com/lz-cloud/centos7:latest
 # 运行并进入 img:
 docker run -it image.wkclz.com/lz-cloud/centos7:0.0.1 /bin/bash
 # 查看正在运行的容器
