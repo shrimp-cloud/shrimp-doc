@@ -58,7 +58,12 @@ nginx.ingress.kubernetes.io/ssl-redirect=false
 ```
 
 ## 自定义 location逻辑
-| 注解标签                                           | 注解值                                                            |
-|------------------------------------------------|----------------------------------------------------------------|
-| nginx.ingress.kubernetes.io/configuration-snippet        | if ($schema = http ) { return 301 https://$host/$request_uri;} |
+| 注解标签                                              | 注解值                |
+|---------------------------------------------------|--------------------|
+| nginx.ingress.kubernetes.io/server-snippet        | 用于插入 server 块代码段   |
+| nginx.ingress.kubernetes.io/configuration-snippet | 用于插入 location 块代码段 |
 
+示例：
+```
+nginx.ingress.kubernetes.io/configuration-snippet: if ($schema = http ) { return 301 https://$host/$request_uri;}
+```
