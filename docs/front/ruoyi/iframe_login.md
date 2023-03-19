@@ -52,10 +52,11 @@ if(token && !isSelf) {
 import { setToken } from '@/utils/auth'
 import { useRoute, useRouter } from 'vue-router';
 const CAS = import.meta.env.VITE_APP_CAS;
+const APP_CODE = import.meta.env.VITE_APP_APP_CODE;
 const { query } = useRoute();
 const router = useRouter();
 const fullPath = computed(() => {
-    return `${CAS}/#/login`
+    return `${CAS}/#/login?appCode=${APP_CODE}`
 });
 window.addEventListener('message', function(e){
     var token=e.data;
@@ -69,6 +70,7 @@ window.addEventListener('message', function(e){
 <style>
 .cas-login {
     height: 100%;
+    overflow-y: hidden;
 }
 .cas-login iframe {
     border: 0;

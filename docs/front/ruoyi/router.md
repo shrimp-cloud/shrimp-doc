@@ -26,7 +26,7 @@ const usePermissionStore = defineStore('permission', {
                     const data = res.data;
                     if (!data || data.length === 0) {
                         const msg = '您没有此系统的任何权限！';
-                        ElMessage({message: msg, type: 'error', duration: 5 * 1000})
+                        ElMessageBox.alert(msg, '无权限访问', {  confirmButtonText: '--> 去个人中心', callback: (action) => location.href = CAS})
                         reject(msg);
                         return;
                     }
