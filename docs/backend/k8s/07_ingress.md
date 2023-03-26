@@ -67,3 +67,26 @@ nginx.ingress.kubernetes.io/ssl-redirect=false
 ```
 nginx.ingress.kubernetes.io/configuration-snippet: if ($schema = http ) { return 301 https://$host/$request_uri;}
 ```
+
+## 开启 tcp/udp转发
+
+ingress-nginx-controller 配置
+```yaml
+spec:
+  containers:
+    - args:
+        - '--tcp-services-configmap=$(POD_NAMESPACE)/tcp-services'
+        - '--udp-services-configmap=$(POD_NAMESPACE)/udp-services'
+```
+
+ConfigMap 配置：
+```shell
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+data:
+  # 将 9000 映射至 default/example-go:8080
+  9000: "default/example-go:8080"
+```
