@@ -28,6 +28,47 @@ netstat -ntlp | grep emqx
 ### 认证
 - MySQL 认证：https://www.emqx.io/docs/zh/v4.4/advanced/auth-mysql.html#mysql-连接信息
 
+- Http 认证【新版本没成功】
+
+认证接口
+```java
+public class MqttLoginRest {
+    @PostMapping(Routes.MQTT_LOGIN)
+    public Map<String, Object> mqttLogin(@RequestBody LoginRequest loginRequest, HttpServerRequest request) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("result", "deny");
+        result.put("is_superuser", false);
+
+        String emqx = request.getHeader("X-Request-Source");
+        if (!"EMQX".equals(emqx)) {
+            log.warn("err header with mqtt login");
+            return result;
+        }
+
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
+        if (StringUtils.isBlank(username)) {
+            log.warn("no username with mqtt login");
+            return result;
+        }
+        if (StringUtils.isBlank(password)) {
+            log.warn("no password with mqtt login");
+            return result;
+        }
+
+        // TODO 用户名密码，有效性检测
+        boolean usernameAndPasswordIsRight = true;
+        if (!usernameAndPasswordIsRight) {
+            log.warn("err password with mqtt login");
+            return result;
+        }
+        
+        result.put("result", "allow");
+        return result;
+    }
+
+}
+```
 
 ## 使用
 
@@ -43,7 +84,7 @@ netstat -ntlp | grep emqx
 
 ### 添加配置
 ```yaml
-lz:
+shrimp:
   mqtt:
     client-id-prefix: server # 服务器作为 client接入的id前缀。后缀将是服务器IP
     end-point: tcp://mqtt.server.domain.or.ip:1883 # mqtt 服务器域名或IP
