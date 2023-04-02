@@ -77,20 +77,26 @@ public class MqttLoginRest {
 ```xml
 <dependency>
     <groupId>com.wkclz.mqtt</groupId>
-    <artifactId>lz-mqtt-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>shrimp-cloud-mqtt</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
 ### 添加配置
 ```yaml
 shrimp:
-  mqtt:
-    client-id-prefix: server # 服务器作为 client接入的id前缀。后缀将是服务器IP
-    end-point: tcp://mqtt.server.domain.or.ip:1883 # mqtt 服务器域名或IP
-    username: username # mqtt用户名
-    password: password # mqtt密码
+  cloud:
+    mqtt:
+      # 服务器作为 client接入的id前缀。后缀将是服务器IP
+      client-id-prefix: server
+      # mqtt 服务器域名或IP
+      end-point: tcp://mqtt.server.domain.or.ip:1883
+      # mqtt用户名
+      username: username
+      # mqtt密码
+      password: password
 ```
+Tops: 容器代理将会使用外部端口
 
 ### 监听主题消息
 ```java
@@ -138,25 +144,31 @@ public class MqttConsumerDemo {
 ```java
 package com.wkclz.your.pkg.mqtt;
 
-import com.wkclz.mqtt.bean.MqttHexMsg;
+import com.wkclz.common.entity.Result;
 import com.wkclz.mqtt.client.MqttProducer;
 import com.wkclz.mqtt.enums.Qos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController // 使用 rest 接口来写此 demo
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
 public class MqttProducerDemo {
 
     @Autowired
     private MqttProducer mqttProducer;
 
-    @GetMapping("/demo/mqtt/produce/test")
-    public void acceptSubTopic1(MqttHexMsg msg) {
-        // 相当简单，不过多解说了
-        mqttProducer.send("target/topic", Qos.QOS_1 , "your_message".getBytes());
+    @GetMapping("/public/mqtt/produce/test")
+    public Result mqttProduceTest() {
+        Map<String, String> map = new HashMap<>();
+        map.put("key1", "value1");
+        map.put("key2", "value2");
+        mqttProducer.send("client/${model}/${devoceNo}", map, Qos.QOS_1);
+        return Result.ok();
     }
-    
+
 }
 ```
 ### 监听系统事件
