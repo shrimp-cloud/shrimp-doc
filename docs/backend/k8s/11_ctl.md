@@ -42,6 +42,7 @@ kubectl delete pod --field-selector=status.phase==Succeeded
 | crictl logs _containerd_id          | 获取容器的所有日志   |
 | crictl logs --tail=2 _containerd_id | 获取最近的 N 行日志 |
 | crictl pull busybox                 | 拉取镜像        |
+| crictl rmi --prune                  | 清理未在使用的镜像   |
 
 ### 命令对比
 | Containerd命令                   | Docker命令                              | 描述             |
