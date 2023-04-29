@@ -135,6 +135,7 @@ module.exports = {
                 'BeanPostProcessor',
                 'IocBeanLifeCycle',
                 'ApplicationListener',
+                'path',
                 'LocalJar',
                 'NotOnlyJava',
                 'OverrideSpringBean',

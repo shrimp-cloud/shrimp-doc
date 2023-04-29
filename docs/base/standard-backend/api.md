@@ -26,8 +26,8 @@
 | 参数名称     | 参数含意            | 类型                    | 默认值     |
 |----------|-----------------|-----------------------|---------|
 | token    | [header]用户token | String                | NaN     |
-| pageNo   | 页码              | Integer               | 1       |
-| pageSize | 每页数             | Integer               | 10      |
+| current  | 页码              | Integer               | 1       |
+| size     | 每页数             | Integer               | 10      |
 | orderBy  | 排序字段            | String                | id desc |
 | timeFrom | 时间范围开始          | yyyy-MM-dd HH\:mm\:ss | NaN     |
 | timeTo   | 时间范围结束          | yyyy-MM-dd HH\:mm\:ss | NaN     |
@@ -45,11 +45,11 @@
 | costTime     | 时间消耗    | 在 Controller 内消耗的时间，单位为毫秒   |
 | data         | 详情      | 正常返回时为业务数据【无具体业务数据时返回 true】 |
 | ==分页==       | ==查询==  | ==有返回==                     |
-| pageNo       | Integer | 页码                          |
-| pageSize     | Integer | 每页数                         |
+| current      | Integer | 页码                          |
+| size         | Integer | 每页数                         |
+| page         | Integer | 总页码数                        |
+| total        | Integer | 叫数据条数                       |
 | offset       | Integer | 偏移量                         |
-| totalPage    | Integer | 总页码数                        |
-| totalCount   | Integer | 叫数据条数                       |
 | rows         | Array   | 具体的业务数据                     |
 
 # 返回特殊 code 代码对照表
