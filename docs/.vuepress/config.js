@@ -136,6 +136,7 @@ module.exports = {
                 'IocBeanLifeCycle',
                 'ApplicationListener',
                 'RoutingDataSource',
+                'path',
                 'LocalJar',
                 'NotOnlyJava',
                 'OverrideSpringBean',

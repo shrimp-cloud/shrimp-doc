@@ -2,7 +2,13 @@
 
 > 正向代理，指的是通过代理服务器访问目标地址
 
-## CentOS7会话级代理
+## 单次 curl 代码
+```shell
+curl -v --proxy ip:port http://www.baidu.com
+curl -v -x ip:port http://www.baidu.com
+```
+
+## CentOS7 会话级代理
 
 设置代理：
 ```shell
