@@ -40,6 +40,7 @@ public abstract class AbstractShrimpRoutingDataSource extends AbstractRoutingDat
 ```java
 package com.wkclz.mybatis.dynamicdb;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.wkclz.common.exception.BizException;
 import com.wkclz.mybatis.config.ShrimpMyBatisConfig;
 import com.wkclz.spring.config.SpringContextHolder;
@@ -49,6 +50,7 @@ import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * 重写 determineCurrentLookupKey() 方法来实现数据源切换功能
@@ -81,14 +83,25 @@ public class DynamicDataSource extends AbstractShrimpRoutingDataSource {
             if (latest != null) {
                 return key;
             }
-            // 若想用多数据源，必需注入此工厂
-            DynamicDataSourceFactory dynamicDataSourceFactory = SpringContextHolder.getBean(DynamicDataSourceFactory.class);
-            if (dynamicDataSourceFactory == null) {
-                throw BizException.error("please init dynamicDataSourceFactory before use dynamic dataSource");
+
+            // 使用异步线程。否则使用默认数据源管理三方数据的场景下，会进入死循环
+            CountDownLatch countDownLatch = ThreadUtil.newCountDownLatch(1);
+            ThreadUtil.newExecutor().execute(() -> {
+                // 若想用多数据源，必需注入此工厂
+                DynamicDataSourceFactory dynamicDataSourceFactory = SpringContextHolder.getBean(DynamicDataSourceFactory.class);
+                if (dynamicDataSourceFactory == null) {
+                    throw BizException.error("please init dynamicDataSourceFactory before use dynamic dataSource");
+                }
+                DataSource dataSource = dynamicDataSourceFactory.createDataSource(key);
+                addDataSource(key, dataSource);
+                hasCreateDataSource.put(key, now);
+                countDownLatch.countDown();
+            });
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-            DataSource dataSource = dynamicDataSourceFactory.createDataSource(key);
-            addDataSource(key, dataSource);
-            hasCreateDataSource.put(key, now);
             return key;
         }
     }
@@ -173,7 +186,7 @@ public class DynamicDataSourceAutoConfig {
     // 必需定义为 Primary， 以使得 com.alibaba.druid.spring.boot.autoconfigur.DruidDataSourceAutoConfigure.dataSource() 失效
     @Bean
     @Primary
-    public DynamicDataSource dynamicDataSource(DynamicDataSourceFactory dynamicDataSourceFactory) throws Exception {
+    public DynamicDataSource dynamicDataSource() throws Exception {
         logger.info("dynamicData Source, load default dataSource...");
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
 
@@ -294,7 +307,6 @@ public class DynamicDataSourceInit implements DynamicDataSourceFactory {
     @Override
     public DataSource createDataSource(String key) {
         // 请自行根据 key 获取数据源配置
-        // TODO 若再注入 bean 以获取连接信息，将会造成循环依赖风险。在已知无风险的情况下，需要避开循环依赖检查。可使用 SpringContextHolder
         Map map = new HashMap();
         return DruidDataSourceFactory.createDataSource(map);
     }
