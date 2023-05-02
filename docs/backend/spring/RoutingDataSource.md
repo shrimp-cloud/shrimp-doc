@@ -294,6 +294,7 @@ public class DynamicDataSourceInit implements DynamicDataSourceFactory {
     @Override
     public DataSource createDataSource(String key) {
         // 请自行根据 key 获取数据源配置
+        // TODO 若再注入 bean 以获取连接信息，将会造成循环依赖风险。在已知无风险的情况下，需要避开循环依赖检查。可使用 SpringContextHolder
         Map map = new HashMap();
         return DruidDataSourceFactory.createDataSource(map);
     }
@@ -319,7 +320,7 @@ import java.util.Map;
 public class TestRest {
 
     @GetMapping("/test/selectList")
-    public Result list2() {
+    public Result testSelectList() {
         // 若需要使用其他数据源，请使用 DynamicDataSourceHolder 给线程设置 对应的 key
         DynamicDataSourceHolder.set("key");
         List<Map> maps = MyBatisHelper.selectList("select * from xxxx", new HashMap());
