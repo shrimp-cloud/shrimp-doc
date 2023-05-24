@@ -37,6 +37,7 @@ module.exports = {
                 ariaLabel: '基础',
                 items: [
                     { text: '常用', link: '/base/common/' },
+                    { text: 'CentOS7', link: '/base/centos7/' },
                     { text: '基础规范', link: '/base/standard-base/' },
                     { text: '前端规范', link: '/base/standard-frontend/' },
                     { text: '后端规范', link: '/base/standard-backend/' },
@@ -105,6 +106,10 @@ module.exports = {
                 'regular',
                 'forwardProxy',
                 'centos7',
+            ],
+            '/base/centos7/': [
+                '',
+                'base',
             ],
             '/base/standard-base/': [
                 '',
