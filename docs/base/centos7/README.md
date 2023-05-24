@@ -1,4 +1,4 @@
-# CentOs 7
+# CentOS 7
 
 ## Unix 家族
 
@@ -8,6 +8,7 @@ Unix 家族：
 Linux 家族：
 [https://www.cnblogs.com/zandon/p/11923623.html](https://www.cnblogs.com/zandon/p/11923623.html)
 
+Linux 仅为 Unix 的一个小分支
 
 ## 重要分支及时间点
 - 1969 UNICS
@@ -21,14 +22,16 @@ Linux 家族：
       - 2007 iPhone OS (iOS)
     - 2007 Android
 
-## 服务器操作系统市场份额【前五】
+## 服务器系统市场份额
+【前五】
 - Linux - 33.6%
 - Windows Server - 29.9%
 - Unix (包括 macOS 和其他 Unix 系统) - 11.7%
 - IBM Z - 8.3%
 - VMware ESXi - 7.0%
 
-## 所有 Linux 系统的市场份额【前五】
+## Linux服务器市场份额
+【前五】
 - Ubuntu - 33%
 - CentOS - 26%
 - Debian - 20%

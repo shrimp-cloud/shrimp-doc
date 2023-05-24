@@ -23,14 +23,14 @@
 
 - 目录，文件操作
 
-| 命令      | 示例                   | 含义                                          |
-|---------|----------------------|---------------------------------------------|
-| `mkdir` | `mkdir abc`          | 创建名字为 abc 的目录                               |
-| `rm`    | `rm aaa.txt`         | 删除名称为 aaa.txt 的文件                           |
-| `rm`    | `rm -rf abc`         | -r 递归，-f 强制(不出现删除提示)，递归方式强制删除目录             |
-| `cp`    | `cp aaa.txt bbb.txt` | 复制，将 aaa.txt 复制为 bbb.txt, 复制时可加上路径，即复制到新的位置 |
-| `cp`    | `cp -r abc efg`      | 将 abc 目录，以递归方式复制为 efg                       |
-| `mv`    | `mv aaa.txt bbb.txt` | 修改名称，移动, 将 aaa.txt 重命名为 bbb.txt, 若位置不同，即为移动 |
+| 命令      | 示例                   | 含义                                                      |
+|---------|----------------------|---------------------------------------------------------|
+| `mkdir` | `mkdir abc`          | 创建名字为 abc 的目录                                           |
+| `rm`    | `rm aaa.txt`         | <span style="color: red">【删除需谨慎】</span>删除名称为 aaa.txt 的文件 |
+| `rm`    | `rm -rf abc`         | <span style="color: red">【删除需谨慎】</span>-r 递归，-f 强制(不出现删除提示)，递归方式强制删除目录                  |
+| `cp`    | `cp aaa.txt bbb.txt` | 复制，将 aaa.txt 复制为 bbb.txt, 复制时可加上路径，即复制到新的位置             |
+| `cp`    | `cp -r abc efg`      | 将 abc 目录，以递归方式复制为 efg                                   |
+| `mv`    | `mv aaa.txt bbb.txt` | 修改名称，移动, 将 aaa.txt 重命名为 bbb.txt, 若位置不同，即为移动             |
 
 - 纯文本文件操作【待完善】
 1. 新增
