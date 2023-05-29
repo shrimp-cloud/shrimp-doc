@@ -44,19 +44,20 @@
 
 > Linux 基本的文本操作
 
-| 命令   | 示例                                         | 含义                            |
-|------|--------------------------------------------|-------------------------------|
-| cat  | cat file                                   | concatenate, 获取文件内容。在文件很大时会刷屏 |
-| head | head filename                              | 显示文件的前10行 (默认前10行)            |
-| head | head -20 filename                          | 显示文件的前20行                     |
-| tail | tail filename                              | 显示文件的最后10行 (默认后10行)           |
-| tail | tail -20 filename                          | 显示文件的最后20行                    |
-| nl   | nl file                                    | 显示带有行号的文件                     |
-| grep | cat file &#124; grep keyword               | 过滤显示文件的内容                     |
-| sed  | sed s/mysql/MySQL/g filename               | 将文件中的mysql替换成MySQL            |
-| sed  | sed s/mysql/MySQL/g filename > newfilename | 将文件中的mysql替换成MySQL,并写到新文件     |
-| more | more file                                  | 每次显示文件的一页，并允许分页               |
-| less | less file                                  | 与more命令类似, 快捷键比 more 更实用      |
+| 命令   | 示例                                         | 含义                               |
+|------|--------------------------------------------|----------------------------------|
+| cat  | cat file                                   | concatenate, 获取文件内容。在文件很大时会刷屏    |
+| head | head filename                              | 显示文件的前10行 (默认前10行)               |
+| head | head -20 filename                          | 显示文件的前20行                        |
+| tail | tail filename                              | 显示文件的最后10行 (默认后10行)              |
+| tail | tail -20 filename                          | 显示文件的最后20行                       |
+| tail | tail -20f filename                         | 显示文件的最后20行,若文件有新内容，会一直更新，适合看动态日志 |
+| nl   | nl file                                    | 显示带有行号的文件                        |
+| grep | cat file &#124; grep keyword               | 过滤显示文件的内容                        |
+| sed  | sed s/mysql/MySQL/g filename               | 将文件中的mysql替换成MySQL               |
+| sed  | sed s/mysql/MySQL/g filename > newfilename | 将文件中的mysql替换成MySQL,并写到新文件        |
+| more | more file                                  | 每次显示文件的一页，并允许分页                  |
+| less | less file                                  | 与more命令类似, 快捷键比 more 更实用         |
 
 
 # vim 操作【待完善】
