@@ -69,10 +69,12 @@ module.exports = {
                 ]
             },
             {
-                text: 'GO',
-                ariaLabel: 'GO',
+                text: '其他',
+                ariaLabel: '其他',
                 items: [
-                    { text: 'GO基础', link: '/go/' },
+                    { text: 'GO基础', link: '/other/go/' },
+                    { text: 'Arduino', link: '/other/arduino/' },
+                    { text: 'Python', link: '/other/python/' },
                 ]
             },
         ],
@@ -101,6 +103,7 @@ module.exports = {
                 '',
                 'report',
             ],
+
             '/base/common/': [
                 '',
                 'regular',
@@ -127,6 +130,37 @@ module.exports = {
                 'framework',
             ],
 
+            '/front/vue/': [
+                '',
+                'node_base',
+                'base_image',
+                'node_update',
+                'components',
+            ],
+            '/front/ruoyi/': [
+                '',
+                'init',
+                'env',
+                'request',
+                'api',
+                'login',
+                'iframe_login',
+                'router',
+                'hasPermi',
+                'crud',
+                'dict',
+                'monaco',
+                'bugs',
+                'baseComponents',
+                'bizComponents',
+            ],
+            '/front/vant-wxapp/': [
+                '',
+                'init',
+                'env',
+                'request',
+                'shit',
+            ],
             '/backend/java/': [
                 '',
                 'cache',
@@ -220,45 +254,21 @@ module.exports = {
                 'wxpay',
             ],
 
-            '/front/vue/': [
-                '',
-                'node_base',
-                'base_image',
-                'node_update',
-                'components',
-            ],
-            '/front/ruoyi/': [
-                '',
-                'init',
-                'env',
-                'request',
-                'api',
-                'login',
-                'iframe_login',
-                'router',
-                'hasPermi',
-                'crud',
-                'dict',
-                'monaco',
-                'bugs',
-                'baseComponents',
-                'bizComponents',
-            ],
-            '/front/vant-wxapp/': [
-                '',
-                'init',
-                'env',
-                'request',
-                'shit',
-            ],
             '/front/client/': [
                 '',
                 'miniapp',
             ],
-            '/go/': [
+            '/other/go/': [
                 '',
                 'init',
                 'web',
+            ],
+            '/other/python/': [
+                '',
+            ],
+            '/other/arduino/': [
+                '',
+                'base',
             ],
         },
     },
