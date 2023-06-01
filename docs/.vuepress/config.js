@@ -252,6 +252,7 @@ module.exports = {
                 'sms',
                 'wechat',
                 'wxpay',
+                'mqtt',
             ],
 
             '/front/client/': [

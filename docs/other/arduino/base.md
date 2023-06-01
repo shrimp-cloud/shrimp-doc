@@ -198,6 +198,7 @@ void setup() {
 
   // mqtt
   espClient.setCACert(ca_cert);
+  client.setKeepAlive(60);
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
 }
@@ -221,7 +222,7 @@ void reconnect() {
         Serial.println("拒绝连接, 服务器不支持该客户端请求的 MQTT 协议");
       }
       if (state == 2) {
-        Serial.println("拒绝连接, 客户端 ID 是正确的 UTF-8 字符串，但是不被服务器允许");
+        Serial.println("拒绝连接, 客户端 ID 是正确的 UTF-8 字符串，但是不被服务器允许, 或者心跳时间间隔不满足平台要求");
       }
       if (state == 3) {
         Serial.println("拒绝连接, 网络连接已经建立，但是 MQTT 服务不可用");
