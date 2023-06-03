@@ -2,24 +2,18 @@
 
 ## 打印基本信息
 ```shell
-uint32_t chip_id = 0;
-void setup() {
-  // 设置串口
-  Serial.begin(115200);
-  while(!Serial){delay(100);}
- 
-  // 打印基础信息
-  printBaseInfo();
-}
+#include "Arduino.h"
+#include "config.h"
 
+uint32_t chipId = 0;
 void printBaseInfo() {
-  // base info
+
   for(int i=0; i<17; i=i+8) {
-    chip_id |= ((ESP.getEfuseMac() >> (40 - i)) & 0xff) << i;
+    chipId |= ((ESP.getEfuseMac() >> (40 - i)) & 0xff) << i;
   }
 
   Serial.println();
-  Serial.print("芯片ID: "); Serial.println(chip_id); // 15556044
+  Serial.print("芯片ID: "); Serial.println(chipId); // 15556044
   Serial.printf("Mac地址: %012X \n", ESP.getEfuseMac());
   Serial.printf("芯片型号: %s\n", ESP.getChipModel());
   Serial.printf("芯片版本号: %d\n", ESP.getChipRevision());
@@ -54,30 +48,19 @@ void printBaseInfo() {
   Serial.printf("固件区域剩余大小: %u Byte\n", ESP.getFreeSketchSpace());
   Serial.println();
 }
+
 ```
 
 
 ## WIFI 连接
 
 ```shell
+#include "Arduino.h"
 #include <WiFi.h>
 
-// wifi
 const char* ssid     = "my_ssid";
 const char* password = "my_password";
 
-void setup() {
-  // 设置串口
-  Serial.begin(115200);
-  while(!Serial){delay(100);}
- 
-  // 打印基础信息
-
-  // connect wifi
-  connectWifi();
-}
-
-// connect wofo
 void connectWifi() {
   // We start by connecting to a WiFi network
   Serial.println();
@@ -99,31 +82,17 @@ void connectWifi() {
 
 ## 时钟同步
 ```shell
+#include "Arduino.h"
 #include <time.h>
 #include <sntp.h>
 
-// time
 const char* ntpServer1 = "pool.ntp.org";
 const char* ntpServer2 = "time.nist.gov";
 const long  gmtOffset_sec = 8 * 60 * 60;
 const int   daylightOffset_sec = 0;
 const char* time_zone = "CET-1CEST,M3.5.0,M10.5.0/3";
 
-void setup() {
-  // 设置串口
-  Serial.begin(115200);
-  while(!Serial){delay(100);}
-
-  // 打印基础信息
-
-  // connect wifi
-
-  // time setting
-  sntp_set_time_sync_notification_cb(timeavailable);
-  sntp_servermode_dhcp(1);
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer1, ntpServer2);
-}
-// 时间打印
+// 打印时间
 void printLocalTime() {
   struct tm timeinfo;
   if(!getLocalTime(&timeinfo)) {
@@ -138,14 +107,21 @@ void timeavailable(struct timeval *t) {
   Serial.println("Got time adjustment from NTP!");
   printLocalTime();
 }
+
+void setTime() {
+  sntp_set_time_sync_notification_cb(timeavailable);
+  sntp_servermode_dhcp(1);
+  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer1, ntpServer2);
+}
 ```
 
 ## mqtt
 
 ```shell
+#include "Arduino.h"
+#include <WiFi.h>
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
-
 
 // mqtt
 const char* mqtt_server = "example.emqxsl.cn";
@@ -183,40 +159,39 @@ const char* ca_cert= \
 "-----END CERTIFICATE-----\n";
 // WiFiClient espClient;
 WiFiClientSecure espClient;
-PubSubClient client(espClient);
+PubSubClient mqttClient(espClient);
 
-void setup() {
-  // 设置串口
-  Serial.begin(115200);
-  while(!Serial){delay(100);}
-
-  // 打印基础信息
-
-  // connect wifi
-
-  // time setting
-
-  // mqtt
-  espClient.setCACert(ca_cert);
-  client.setKeepAlive(60);
-  client.setServer(mqtt_server, mqtt_port);
-  client.setCallback(callback);
+// mqtt 消息接收
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
 }
 
+void setMqtt() {
+  espClient.setCACert(ca_cert);
+  mqttClient.setKeepAlive(120);
+  mqttClient.setServer(mqtt_server, mqtt_port);
+  mqttClient.setCallback(callback);
+}
 
 // mqtt 连接/重连
-void reconnect() {
-  while (!client.connected()) {
+void reconnectMqtt() {
+  while (!mqttClient.connected()) {
     Serial.print("Attempting MQTT connection...");
-    if (client.connect(mqtt_client_id, mqtt_username, mqtt_password)) {
+    if (mqttClient.connect(mqtt_client_id, mqtt_username, mqtt_password)) {
       Serial.println("connected: 连接成功");
-      client.subscribe(mqtt_subscribe);
+      mqttClient.subscribe(mqtt_subscribe);
       // 连接成功，推送消息
-      client.publish(mqtt_push, "reconnected: mqtt connect success!");
+      mqttClient.publish(mqtt_push, "reconnected: mqtt connect success!");
     } else {
-      int state = client.state();
+      int state = mqttClient.state();
       Serial.print("failed, rc=");
-      Serial.print(client.state());
+      Serial.print(mqttClient.state());
       Serial.print(" try again in 5 seconds: ");
       if (state == 1) {
         Serial.println("拒绝连接, 服务器不支持该客户端请求的 MQTT 协议");
@@ -237,48 +212,63 @@ void reconnect() {
     }
   }
 }
-// mqtt 消息接收
-void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
+
+/* 在uno 中要 loop
+void loop() {
+  delay(1000);
+  if (!client.connected()) {
+    reconnect();
   }
-  Serial.println();
+  client.loop();
 }
+*/
 ```
 
-## setup&loop
+## config.h
+
 ```shell
+# include "Arduino.h"
+#include <PubSubClient.h>
+
+extern uint32_t chipId;
+extern PubSubClient mqttClient;
+
+void printBaseInfo();
+
+void connectWifi();
+
+void setTime();
+
+void printLocalTime();
+
+void setMqtt();
+
+void reconnectMqtt();
+```
+
+
+## setup&loop
+
+```shell
+#include <time.h>
+#include "config.h"
+
 void setup() {
   // 设置串口
   Serial.begin(115200);
   while(!Serial){delay(100);}
 
-  // 打印基础信息
-  printBaseInfo();
+  // printBaseInfo();
+  // connectWifi();
+  // setTime();
+  // setMqtt();
 
-  // connect wifi
-  connectWifi();
-
-  // time setting
-  sntp_set_time_sync_notification_cb( timeavailable );
-  sntp_servermode_dhcp(1);
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer1, ntpServer2);
-
-  // mqtt
-  espClient.setCACert(ca_cert);
-  client.setServer(mqtt_server, mqtt_port);
-  client.setCallback(callback);
+  pinMode(led1, OUTPUT);
+  digitalWrite(led1, HIGH);
 }
 
 void loop() {
+  printLocalTime();
   delay(1000);
-  // printLocalTime();
-  if (!client.connected()) {
-    reconnect();
-  }
-  client.loop();
 }
 ```
