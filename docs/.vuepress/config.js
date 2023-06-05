@@ -113,6 +113,7 @@ module.exports = {
             '/base/centos7/': [
                 '',
                 'base',
+                'systemd',
             ],
             '/base/standard-base/': [
                 '',
