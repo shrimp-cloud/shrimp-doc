@@ -156,9 +156,9 @@ make && make install
 mkdir /opt/nginx/cache # 这个傻x 居然不会自己创建 cache 目录
 
 # 权限
-chown -R apps:apps /otp/nginx/
-chown root:apps /otp/nginx/sbin/nginx
-chmod u+s /otp/nginx/sbin/nginx
+chown -R apps:apps /opt/nginx/
+chown root:apps /opt/nginx/sbin/nginx
+chmod u+s /opt/nginx/sbin/nginx
 
 ```
 
