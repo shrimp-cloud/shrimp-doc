@@ -45,3 +45,17 @@
 - 写代码，上载到开发板中，可从监视窗口看到串口日志
 
 
+
+## 编译，烧录
+- 编译: Sketch -> Export Compiled Binrary
+- 烧录工具下载: https://www.espressif.com.cn/zh-hans/support/download/other-tools
+- 打开烧录工具，dev 模式，依次选择
+  - bootloader.bin @ 0x1000
+  - partitions.bin @ 0x8000
+  - main.ino.bin @ 0x10000
+- 勾选 三个 bin, 选择 开发板 SPI 频率，模式，选择 COM 口，波特率，开始写入
+- 写入完成，断点重启，即可正常运行
+
+## 其他资料
+
+- SPI Mode: https://blog.csdn.net/zhou_2018/article/details/117769317
