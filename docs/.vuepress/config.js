@@ -26,6 +26,7 @@ module.exports = {
                 ariaLabel: '生态',
                 items: [
                     { text: '后端架构', link: '/ecology/cloud/' },
+                    { text: 'PAAS', link: '/ecology/paas/' },
                     { text: '代码生成', link: '/ecology/gen/' },
                     { text: '权限', link: '/ecology/cas/' },
                     { text: '报表', link: '/ecology/report/' },
@@ -84,6 +85,10 @@ module.exports = {
                 '',
                 'annotation',
                 'page',
+            ],
+            '/ecology/paas/': [
+                '',
+                'oss',
             ],
             '/ecology/demo/': [
                 '',
