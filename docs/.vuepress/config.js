@@ -113,6 +113,7 @@ module.exports = {
             ],
             '/backend/component/': [
                 '',
+                'mybatis',
                 'oss',
                 'mqtt',
             ],
@@ -120,16 +121,15 @@ module.exports = {
                 '',
                 'repo',
                 'parent',
-                'sdk',
                 'starter',
                 'cicd',
                 'trace',
                 'core',
-                'gray_release',
             ],
             '/backend/design/': [
                 '',
                 'andor',
+                'gray_release',
             ],
             '/backend/third/': [
                 '',
