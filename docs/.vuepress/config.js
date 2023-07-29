@@ -11,7 +11,7 @@ module.exports = {
     ],
     themeConfig: {
         logo: '/favicon.svg',
-        search: false,
+        search: true,
         lastUpdated: '上次更新', // string | boolean
         smoothScroll: true,
         repo: 'shrimp-cloud/shrimp-doc',
