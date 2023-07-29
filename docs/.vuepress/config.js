@@ -22,26 +22,16 @@ module.exports = {
         nav: [
             { text: 'Home', link: '/'},
             {
-                text: '生态',
-                ariaLabel: '生态',
+                text: '后端',
+                ariaLabel: '后端',
                 items: [
-                    { text: '后端架构', link: '/ecology/cloud/' },
-                    { text: '组件', link: '/ecology/component/' },
-                    { text: '代码生成', link: '/ecology/gen/' },
-                    { text: '权限', link: '/ecology/cas/' },
-                    { text: '报表', link: '/ecology/report/' },
-                    { text: 'DEMO', link: '/ecology/demo/' },
-                ]
-            },
-            {
-                text: '基础',
-                ariaLabel: '基础',
-                items: [
-                    { text: '常用', link: '/base/common/' },
-                    { text: 'CentOS7', link: '/base/centos7/' },
-                    { text: '基础规范', link: '/base/standard-base/' },
-                    { text: '前端规范', link: '/base/standard-frontend/' },
-                    { text: '后端规范', link: '/base/standard-backend/' },
+                    { text: 'Java', link: '/backend/java/' },
+                    { text: 'Spring', link: '/backend/spring/' },
+                    { text: '框架', link: '/backend/cloud/' },
+                    { text: '组件', link: '/backend/component/' },
+                    { text: '架构设计', link: '/backend/framework/' },
+                    { text: '逻辑设计', link: '/backend/design/' },
+                    { text: '三方服务集成', link: '/backend/third/' },
                 ]
             },
             {
@@ -55,18 +45,34 @@ module.exports = {
                 ]
             },
             {
-                text: '后端',
-                ariaLabel: '后端',
+                text: '生态',
+                ariaLabel: '生态',
                 items: [
-                    { text: 'Java', link: '/backend/java/' },
-                    { text: 'Spring', link: '/backend/spring/' },
-                    { text: '中间件', link: '/backend/component/' },
-                    { text: 'Kubernetes', link: '/backend/k8s/' },
-                    { text: '架构设计', link: '/backend/framework/' },
-                    { text: '模块设计', link: '/backend/modules/' },
-                    { text: '逻辑设计', link: '/backend/design/' },
-                    { text: '服务器运维', link: '/backend/server/' },
-                    { text: '三方服务集成', link: '/backend/third/' },
+                    { text: '模块设计', link: '/ecology/modules/' },
+                    { text: '代码生成', link: '/ecology/gen/' },
+                    { text: '权限', link: '/ecology/cas/' },
+                    { text: '报表', link: '/ecology/report/' },
+                    { text: 'DEMO', link: '/ecology/demo/' },
+                ]
+            },
+            {
+                text: '运维',
+                ariaLabel: '运维',
+                items: [
+                    { text: 'CentOS7', link: '/devops/centos7/' },
+                    { text: '中间件', link: '/devops/component/' },
+                    { text: 'Kubernetes', link: '/devops/k8s/' },
+                    { text: '服务器运维', link: '/devops/server/' },
+                ]
+            },
+            {
+                text: '基础',
+                ariaLabel: '基础',
+                items: [
+                    { text: '常用', link: '/base/common/' },
+                    { text: '基础规范', link: '/base/standard-base/' },
+                    { text: '前端规范', link: '/base/standard-frontend/' },
+                    { text: '后端规范', link: '/base/standard-backend/' },
                 ]
             },
             {
@@ -81,11 +87,6 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示3级
         sidebar: {
-            '/ecology/cloud/': [
-                '',
-                'annotation',
-                'page',
-            ],
             '/ecology/component/': [
                 '',
                 'oss',
@@ -187,6 +188,11 @@ module.exports = {
                 'NotOnlyJava',
                 'OverrideSpringBean',
             ],
+            '/backend/cloud/': [
+                '',
+                'annotation',
+                'page',
+            ],
             '/backend/component/': [
                 '',
                 'jdk',
@@ -229,7 +235,6 @@ module.exports = {
                 'cicd',
                 'trace',
                 'core',
-                'cache',
                 'gray_release',
             ],
             '/backend/modules/': [

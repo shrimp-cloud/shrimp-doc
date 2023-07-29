@@ -5,7 +5,7 @@
 ## 安装
 
 安装文档：https://kubernetes.github.io/ingress-nginx/deploy/
-安装过程镜像无法拉取，请看 [k8s 其他内容](99_others.md) 的 镜像同步方案
+安装过程镜像无法拉取，请看 [k8s 其他内容](docs/devops/k8s/99_others.md) 的 镜像同步方案
 
 下载官方 yaml:
 ```shell
