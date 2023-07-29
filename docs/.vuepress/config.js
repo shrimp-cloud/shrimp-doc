@@ -47,11 +47,13 @@ module.exports = {
                 text: '生态',
                 ariaLabel: '生态',
                 items: [
-                    { text: '模块设计', link: '/ecology/modules/' },
-                    { text: '代码生成', link: '/ecology/gen/' },
-                    { text: '权限', link: '/ecology/cas/' },
-                    { text: '报表', link: '/ecology/report/' },
                     { text: 'DEMO', link: '/ecology/demo/' },
+                    { text: '系统管理', link: '/ecology/sys/' },
+                    { text: '代码生成', link: '/ecology/gen/' },
+                    { text: '权限管理', link: '/ecology/cas/' },
+                    { text: '内容管理', link: '/ecology/cms/' },
+                    { text: '商城管理', link: '/ecology/pms/' },
+                    { text: '报表管理', link: '/ecology/report/' },
                 ]
             },
             {
@@ -111,8 +113,6 @@ module.exports = {
                 'parent',
                 'repo',
                 'starter',
-                'cicd',
-                'trace',
                 'core',
                 'annotation',
                 'page',
@@ -126,6 +126,7 @@ module.exports = {
             '/backend/design/': [
                 '',
                 'andor',
+                'trace',
                 'gray_release',
             ],
             '/backend/third/': [
@@ -180,12 +181,14 @@ module.exports = {
                 'miniapp',
             ],
 
-
-            '/ecology/modules/': [
+            '/ecology/demo/': [
+                '',
+                'lectotype',
+                'demo',
+            ],
+            '/ecology/sys/': [
                 '',
                 'sys',
-                'cms',
-                'pms',
             ],
             '/ecology/gen/': [
                 '',
@@ -196,14 +199,17 @@ module.exports = {
                 '',
                 'cas',
             ],
+            '/ecology/cms/': [
+                '',
+                'cms',
+            ],
+            '/ecology/pms/': [
+                '',
+                'pms',
+            ],
             '/ecology/report/': [
                 '',
                 'report',
-            ],
-            '/ecology/demo/': [
-                '',
-                'lectotype',
-                'demo',
             ],
 
             '/devops/centos7/': [
@@ -225,6 +231,7 @@ module.exports = {
                 'squid',
                 'sftp',
                 'php',
+                'cicd',
             ],
             '/devops/k8s/': [
                 '',
@@ -244,7 +251,7 @@ module.exports = {
                 '39_other_ui',
                 '99_others',
             ],
-            '/backend/server/': [
+            '/devops/server/': [
                 '',
                 'centos7',
                 'kernel',

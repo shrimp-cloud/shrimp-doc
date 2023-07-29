@@ -3,16 +3,17 @@
 > 请在左侧选择相关菜单
 
 
-## 仓库
-- shrimp-doc (当前文档)
-- shrimp-parent 父工程
-- shrimp-core 核心工程
-- shrimp-spring-boot-starter 启动器
-- shrimp-soa 服务治理
-    - nacos 注册中心
-    - shrimp-admin 监控
-    - shrimp-gateway 网关
 
+## 前端模块
+
+> 前端模块主要完成具体的业务功能，分为以下几个端：
+- console 总控制台，面向于开发/运维人员
+- manager 总管理后台，面向于平台管理人员
+- admin 租户/模块管理后台，面向于使用系统客户，租户
+- customoer 用户终端，面向于终端用户
+- miniapp 小程序终端，面向终端用户
+
+## 后端模块
 
 | 模块   | 含意       | 地址                               |
 |------|----------|----------------------------------|
@@ -25,3 +26,15 @@
 | cms  | 内容       | [文档](http://doc.wkclz.com/cms/)  |
 | oms  | 订单       | [文档](http://doc.wkclz.com/oms/)  |
 | pay  | 支付       | [文档](http://doc.wkclz.com/pay/)  |
+
+
+- [系统管理](docs/ecology/sys/sys.md)
+- [内容管理](docs/ecology/cms/cms.md)
+- [商品管理](docs/ecology/pms/pms.md)
+- [支付管理](docs/ecology/modules/pay.md)
+- [订单管理](docs/ecology/modules/oms.md)
+- [服务管理](docs/ecology/modules/gov.md)
+
+
+### 架构
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:900px; height:1200px;" src="https://www.processon.com/embed/5cc3b626e4b09a3e45ad9f14"></iframe>
