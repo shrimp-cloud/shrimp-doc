@@ -87,56 +87,65 @@ module.exports = {
         ],
         sidebarDepth: 3, // 侧边栏显示3级
         sidebar: {
-            '/ecology/component/': [
+            '/backend/java/': [
+                '',
+                'cache',
+                'jvm',
+                'dubbo',
+            ],
+            '/backend/spring/': [
+                '',
+                'reflect',
+                'PostConstruct',
+                'BeanPostProcessor',
+                'IocBeanLifeCycle',
+                'ApplicationListener',
+                'RoutingDataSource',
+                'path',
+                'LocalJar',
+                'NotOnlyJava',
+                'OverrideSpringBean',
+            ],
+            '/backend/cloud/': [
+                '',
+                'annotation',
+                'page',
+            ],
+            '/backend/component/': [
                 '',
                 'oss',
                 'mqtt',
             ],
-            '/ecology/demo/': [
+            '/backend/framework/': [
                 '',
-                'lectotype',
-                'demo',
+                'repo',
+                'parent',
+                'sdk',
+                'starter',
+                'cicd',
+                'trace',
+                'core',
+                'gray_release',
             ],
-            '/ecology/gen/': [
+            '/backend/design/': [
                 '',
-                'sql2code',
-                'gen',
+                'andor',
             ],
-            '/ecology/cas/': [
+            '/backend/third/': [
                 '',
-                'cas',
-            ],
-            '/ecology/report/': [
-                '',
-                'report',
+                'alipay',
+                'database',
+                'domain',
+                'email',
+                'miniapp',
+                'oss',
+                'server',
+                'sms',
+                'wechat',
+                'wxpay',
+                'mqtt',
             ],
 
-            '/base/common/': [
-                '',
-                'regular',
-                'forwardProxy',
-                'centos7',
-            ],
-            '/base/centos7/': [
-                '',
-                'base',
-                'systemd',
-            ],
-            '/base/standard-base/': [
-                '',
-                'git',
-                'principle',
-            ],
-            '/base/standard-backend/': [
-                '',
-                'api',
-                'database',
-                'named',
-            ],
-            '/base/standard-frontend/': [
-                '',
-                'framework',
-            ],
 
             '/front/vue/': [
                 '',
@@ -169,31 +178,43 @@ module.exports = {
                 'request',
                 'shit',
             ],
-            '/backend/java/': [
+            '/front/client/': [
                 '',
-                'cache',
-                'jvm',
-                'dubbo',
+                'miniapp',
             ],
-            '/backend/spring/': [
+
+
+            '/ecology/modules/': [
                 '',
-                'reflect',
-                'PostConstruct',
-                'BeanPostProcessor',
-                'IocBeanLifeCycle',
-                'ApplicationListener',
-                'RoutingDataSource',
-                'path',
-                'LocalJar',
-                'NotOnlyJava',
-                'OverrideSpringBean',
+                'sys',
+                'cms',
+                'pms',
             ],
-            '/backend/cloud/': [
+            '/ecology/gen/': [
                 '',
-                'annotation',
-                'page',
+                'sql2code',
+                'gen',
             ],
-            '/backend/component/': [
+            '/ecology/cas/': [
+                '',
+                'cas',
+            ],
+            '/ecology/report/': [
+                '',
+                'report',
+            ],
+            '/ecology/demo/': [
+                '',
+                'lectotype',
+                'demo',
+            ],
+
+            '/devops/centos7/': [
+                '',
+                'base',
+                'systemd',
+            ],
+            '/devops/component/': [
                 '',
                 'jdk',
                 'redis',
@@ -208,7 +229,7 @@ module.exports = {
                 'sftp',
                 'php',
             ],
-            '/backend/k8s/': [
+            '/devops/k8s/': [
                 '',
                 '01_init',
                 '02_docker',
@@ -226,52 +247,37 @@ module.exports = {
                 '39_other_ui',
                 '99_others',
             ],
-            '/backend/framework/': [
-                '',
-                'repo',
-                'parent',
-                'sdk',
-                'starter',
-                'cicd',
-                'trace',
-                'core',
-                'gray_release',
-            ],
-            '/backend/modules/': [
-                '',
-                'sys',
-                'cms',
-                'pms',
-            ],
-            '/backend/design/': [
-                '',
-                'andor',
-            ],
             '/backend/server/': [
                 '',
                 'centos7',
                 'kernel',
                 'vuepress',
             ],
-            '/backend/third/': [
+
+
+            '/base/common/': [
                 '',
-                'alipay',
+                'regular',
+                'forwardProxy',
+                'centos7',
+            ],
+            '/base/standard-base/': [
+                '',
+                'git',
+                'principle',
+            ],
+            '/base/standard-backend/': [
+                '',
+                'api',
                 'database',
-                'domain',
-                'email',
-                'miniapp',
-                'oss',
-                'server',
-                'sms',
-                'wechat',
-                'wxpay',
-                'mqtt',
+                'named',
+            ],
+            '/base/standard-frontend/': [
+                '',
+                'framework',
             ],
 
-            '/front/client/': [
-                '',
-                'miniapp',
-            ],
+
             '/other/go/': [
                 '',
                 'init',
