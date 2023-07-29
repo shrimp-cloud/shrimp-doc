@@ -10,8 +10,5 @@
 # 使用
 1. 使用阿里云 mvn 仓库：
 - https://packages.aliyun.com/maven
+- 完全参照 阿里云 maven 仓库使用文档即可
 
-# 上传组件
-- parent
-- core
-- gen-plugin

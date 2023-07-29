@@ -58,11 +58,6 @@
 
 > shrimp 虾米，自个的网名，现在用于项目名
 
-## 后端公共静态
-- shrimp-cloud-common: 静态工具与方法
-- shrimp-cloud-redis: Redis 封装
-- shrimp-cloud-spring: 最接近业务的 spring 封装
-- shrimp-cloud-mybatis: MyBatis 的统一封装
 
 ### properties
 - 版本号：框架级别的依赖，必需在 bom 中的 properties 定义

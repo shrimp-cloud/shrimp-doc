@@ -112,6 +112,7 @@ module.exports = {
                 'bom',
                 'parent',
                 'repo',
+                'common',
                 'starter',
                 'core',
                 'annotation',
@@ -119,6 +120,8 @@ module.exports = {
             ],
             '/backend/component/': [
                 '',
+                'spring',
+                'redis',
                 'mybatis',
                 'oss',
                 'mqtt',
