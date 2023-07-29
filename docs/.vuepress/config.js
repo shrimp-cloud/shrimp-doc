@@ -120,8 +120,9 @@ module.exports = {
             ],
             '/backend/component/': [
                 '',
-                'spring',
                 'redis',
+                'spring',
+                'casStarter',
                 'mybatis',
                 'oss',
                 'mqtt',
