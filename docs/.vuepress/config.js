@@ -27,9 +27,8 @@ module.exports = {
                 items: [
                     { text: 'Java', link: '/backend/java/' },
                     { text: 'Spring', link: '/backend/spring/' },
-                    { text: '框架', link: '/backend/cloud/' },
+                    { text: '框架', link: '/backend/framework/' },
                     { text: '组件', link: '/backend/component/' },
-                    { text: '架构设计', link: '/backend/framework/' },
                     { text: '逻辑设计', link: '/backend/design/' },
                     { text: '三方服务集成', link: '/backend/third/' },
                 ]
@@ -106,8 +105,15 @@ module.exports = {
                 'NotOnlyJava',
                 'OverrideSpringBean',
             ],
-            '/backend/cloud/': [
+            '/backend/framework/': [
                 '',
+                'bom',
+                'parent',
+                'repo',
+                'starter',
+                'cicd',
+                'trace',
+                'core',
                 'annotation',
                 'page',
             ],
@@ -116,15 +122,6 @@ module.exports = {
                 'mybatis',
                 'oss',
                 'mqtt',
-            ],
-            '/backend/framework/': [
-                '',
-                'repo',
-                'parent',
-                'starter',
-                'cicd',
-                'trace',
-                'core',
             ],
             '/backend/design/': [
                 '',

@@ -64,40 +64,33 @@
   - RocketMQ
   - ...
 
-## 仓库
-- shrimp-doc (当前文档)
-- lz-parent 父工程
-- lz-core 核心工程
-- lz-sdk SDK【弃用】
-- lz-spring-boot-starter 启动器
-- config-repo 配置仓库
-- lz-soa 服务治理
-  - nacos 注册中心
-  - lz-admin 监控
-  - lz-gateway 网关
-- lz-demo 示例项目
-- lz-gen 代码生成
-- lz-gov 服务管理
-- lz-sys 系统服务
-- lz-cas 用户及权限服务
-- lz-pay 支付
-- lz-pms 商品管理
-- lz-cms 内容管理
 
-## 接口文档
+> shrimp 虾米，自个的网名，现在用于项目名
 
-模块 | 含意 | 地址
----|---|---
-demo | 示例项目 | [文档](http://doc.wkclz.com/demo/)
-gen | 代码生成 | [文档](http://doc.wkclz.com/gen/)
-gov | 服务管理 | [文档](http://doc.wkclz.com/gov/)
-sys | 系统管理 | [文档](http://doc.wkclz.com/sys/)
-cas | 用户/权限/资源 | [文档](http://doc.wkclz.com/cas/)
-pms | 产品 | [文档](http://doc.wkclz.com/pms/)
-cms | 内容 | [文档](http://doc.wkclz.com/cms/)
-oms | 订单 | [文档](http://doc.wkclz.com/oms/)
-pay | 支付 | [文档](http://doc.wkclz.com/pay/)
+## 后端公共静态
+- shrimp-cloud-common: 静态工具与方法
+- shrimp-cloud-redis: Redis 封装
+- shrimp-cloud-spring: 最接近业务的 spring 封装
+- shrimp-cloud-mybatis: MyBatis 的统一封装
 
+### properties
+- 版本号：框架级别的依赖，必需在 bom 中的 properties 定义
+- 命名规范：<artifactId.version>版本号</artifactId.version>
+- 排序：Spring 相关依赖；Shrimp 模块相关依赖; 三方静态工具依赖
 
-## 起步
-- 请转向 [脚手架](/modules/demo.md "脚手架")
+## shrimp-cloud-common
+> 静态资源：
+1. 注解
+2. 枚举
+3. 实体
+4. 异常
+5. 工具
+
+## shrimp-cloud-redis
+> redis 的封装
+1. 序列化方法纠正
+2. ID生成器
+3. 分布式锁
+
+## shrimp-cloud-spring
+> 提供spring 耦合，大量与 Spring 相关的工具类，方法
