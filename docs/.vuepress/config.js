@@ -202,6 +202,8 @@ module.exports = {
             '/ecology/cas/': [
                 '',
                 'cas',
+                'rbac',
+                'access_token',
             ],
             '/ecology/cms/': [
                 '',
