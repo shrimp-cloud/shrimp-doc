@@ -33,8 +33,25 @@
 - app_id, app_secret 信息缓存至 app 中，在 GW, 或 Interceptor 中, 客户端请求过来，提取 access_token, 完成各种校验，最后放行
 - 客户端，在请求服务端时，计算，并附加 access_token 信息
 
+### access token 管理
+
+- 生成 access token
+- 分发 access token 到可能作为服务端的应用中，以便在拦截器中获取 token 信息
+- 缓存机制：另新文章介绍
+
 
 ### 加密演示
+
+
+#### 客户端配置
+- 配置信息从服务提供方获取
+
+```yaml
+cas:
+  sdk:
+      app-id: appId
+      app-secret: appSecret
+```
 
 
 #### 加密解密
@@ -42,30 +59,20 @@
 ```java
 
 public class SignDemo {
-    public static void main(String[] args) {
 
-        String appId = "token_abcdefgh";
-        String appSecret = "qwertyuiopasdfghjklzxcvbnm";
+    /**
+     * 获取签名
+     */
+    public String getSign() {
+        String appId = casSdkConfig.getAppId();
+        String appSecret = casSdkConfig.getAppSecret();
         long timestamp = System.currentTimeMillis();
-        // 可自由任意拼接 noce, 尽可能保证每次请求都不一样
-        String nonce = SecretUtil.md5("xxxx" + timestamp);
-
-        // 业务数据
-        App app = new App();
-        app.setAppCode("appCode");
-        app.setAppName("appName");
-        String bizData = JSONObject.toJSONString(app);
-
-        System.out.println("bizData: " + bizData);
-        // 业务数据签名
-        String sign = getSHA256Str(bizData);
-        System.out.println("sign: " + sign);
+        String nonce = SecretUtil.md5(UUID.randomUUID().toString() + timestamp);
 
         // 生成签名
         Map<String, String> data = new HashMap<>();
         data.put("appId", appId);
         data.put("nonce", nonce);
-        data.put("sign", sign);
         data.put("timestamp", timestamp + "");
         Set<String> keySet = data.keySet();
         String[] keyArray = keySet.toArray(new String[keySet.size()]);
@@ -78,107 +85,161 @@ public class SignDemo {
                 sb.append(k).append("=").append(data.get(k).trim()).append("&");
             }
         }
-        sb.append("appSecret=").append(appSecret);
-        System.out.println("拼接后的参数：" + sb);
-
-        // 使用 MD5 简单签名
-        String appSign = SecretUtil.md5(sb.toString());
-        /* 更安全的，使用sha256withRSA的方式对header中的内容加签
-        String privateKey = appKeyPair.get(appId).get("privateKey");
-        String appSign = sha256withRSASignature(privateKey, sb.toString());
-        System.out.println("appSign：" + appSign);
-        */
-
-        // 请求接口时，需要将以下信息放到请求头
-        /**
-         * appId
-         * nonce
-         * sign
-         * timestamp
-         * appSign
-         */
-
-        // 验证 timestamp 是否已经超过5分钟，已经超过的，直接拒绝
-        // 验证 nonce 是否已经接收过 【接收过， redis 记录 5 分钟】，若接收过，拒绝请求
-
-        // 使用 MD5 验证 【省略】
-        boolean verifyed = true;
-        
-        /* 按照同样的方式生成 appSign，然后使用公钥进行验签
-        String publicKey = appKeyPair.get(appId).get("publicKey");
-        verifyed = rsaVerifySignature(sb.toString(), publicKey, appSign);
-        */
-        System.out.println(verifyed ? "验证通过": "验证失败");
-
+        return encrypt(appSecret, sb.substring(0, sb.length() - 1));
     }
+
+
+    /**
+     * 解析并校验签名
+     */
+    public boolean deSign(String appId, String sign) {
+        if (StringUtils.isBlank(appId) || StringUtils.isBlank(sign)) {
+            return false;
+        }
+
+        AppInfo appInfo = appInfoCache.get(casSdkConfig.getAppCode());
+        Map<String, AccessToken> accessTokens = appInfo.getAccessTokens();
+        AccessToken accessToken = accessTokens.get(appId);
+        if (accessToken == null) {
+            logger.error("appId: {} 不存在, 无法解密", appId);
+            return false;
+        }
+
+        // 签名验证
+        String decrypt;
+        try {
+            decrypt = decrypt(accessToken.getAppPublicKey(), sign);
+        } catch (Exception e) {
+            logger.error("appId: {} 解密失败", appId);
+            return false;
+        }
+
+        // 获取信息进行详情验证
+        String[] split = decrypt.split("&");
+        Map<String, String> data = new HashMap<>();
+        for (String s : split) {
+            String[] t = s.split("=");
+            if (t.length == 2) {
+                data.put(t[0], t[1]);
+            }
+        }
+
+        String appId2 = data.get("appId");
+        String timestamp = data.get("timestamp");
+        String nonce = data.get("nonce");
+
+        // 验证 appId1 是否被偷换
+        if (appId2 == null) {
+            logger.error("签名中缺少 appId: {}! ", appId);
+            return false;
+        }
+        if (!appId2.equals(appId)) {
+            logger.error("请求appId: {}, 验证appId: {} 不匹配，验证失败! ", appId, appId2);
+            return false;
+        }
+
+        // 验证 timestamp 是否已过期
+        if (timestamp == null) {
+            logger.error("签名中缺少 timestamp: {}! ", appId);
+            return false;
+        }
+        long l = Long.parseLong(timestamp);
+        if (System.currentTimeMillis() - l > 5 * 60 * 1000) {
+            logger.error("请求已过期，appId: {}, : timestamp: {}! ", appId, timestamp);
+            return false;
+        }
+
+        // 验证 nonce 是否重复请求
+        if (nonce == null) {
+            logger.error("签名中缺少 nonce: {}! ", appId);
+            return false;
+        }
+        String key = "cas:access:" + nonce;
+        boolean lock = redisLockHelper.lock(key, 5 * 60);
+        if (!lock) {
+            logger.error("重复的请求 appId: {}, nonce: {} ", appId, nonce);
+            return false;
+        }
+
+        return true;
+    }
+
 }
 
 ```
 
 
 #### 最后放几个使用到的函数
+
 ```java
 
 public class SignDemo {
-    // 给数据签名
-    public static String getSHA256Str(String str) {
-        MessageDigest messageDigest;
-        try {
-            messageDigest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-        byte[] hash = messageDigest.digest(str.getBytes(StandardCharsets.UTF_8));
-        return Hex.encodeHexString(hash);
-    }
 
-    // 私钥签名
-    public static String sha256withRSASignature(String privateKeyStr, String dataStr) {
+    private static String encrypt(String privateKeyStr, String plainText) {
         try {
-            byte[] key = Base64.getDecoder().decode(privateKeyStr);
-            byte[] data = dataStr.getBytes();
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(key);
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
-            Signature signature = Signature.getInstance("SHA256withRSA");
-            signature.initSign(privateKey);
-            signature.update(data);
-            return new String(Base64.getEncoder().encode(signature.sign()));
+            byte[] keyBytes = SecretUtil.base64Decode(privateKeyStr);
+            PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+            KeyFactory factory = KeyFactory.getInstance("RSA", "SunRsaSign");
+            PrivateKey privateKey = factory.generatePrivate(spec);
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            try {
+                cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+            } catch (InvalidKeyException e) {
+                //For IBM JDK, 原因请看解密方法中的说明
+                RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) privateKey;
+                RSAPublicKeySpec publicKeySpec = new RSAPublicKeySpec(rsaPrivateKey.getModulus(), rsaPrivateKey.getPrivateExponent());
+                Key fakePublicKey = KeyFactory.getInstance("RSA").generatePublic(publicKeySpec);
+                cipher = Cipher.getInstance("RSA");
+                cipher.init(Cipher.ENCRYPT_MODE, fakePublicKey);
+            }
+
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+            String encryptedString = SecretUtil.base64Encode(encryptedBytes);
+            return encryptedString;
         } catch (Exception e) {
-            throw new RuntimeException("签名计算出现异常", e);
+            throw new RuntimeException("加密计算出现异常", e);
         }
     }
 
-    // 公钥验签
-    public static boolean rsaVerifySignature(String dataStr, String publicKeyStr, String signStr) {
+    private static String decrypt(String publicKeyStr, String cipherText) {
         try {
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(Base64.getDecoder().decode(publicKeyStr));
-            PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
-            Signature signature = Signature.getInstance("SHA256withRSA");
-            signature.initVerify(publicKey);
-            signature.update(dataStr.getBytes());
-            return signature.verify(Base64.getDecoder().decode(signStr));
+            PublicKey publicKey = getPublicKey(publicKeyStr);
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            try {
+                cipher.init(Cipher.DECRYPT_MODE, publicKey);
+            } catch (InvalidKeyException e) {
+                // 因为 IBM JDK 不支持私钥加密, 公钥解密, 所以要反转公私钥
+                // 也就是说对于解密, 可以通过公钥的参数伪造一个私钥对象欺骗 IBM JDK
+                RSAPublicKey rsaPublicKey = (RSAPublicKey) publicKey;
+                RSAPrivateKeySpec spec = new RSAPrivateKeySpec(rsaPublicKey.getModulus(), rsaPublicKey.getPublicExponent());
+                Key fakePrivateKey = KeyFactory.getInstance("RSA").generatePrivate(spec);
+                cipher = Cipher.getInstance("RSA");
+                cipher.init(Cipher.DECRYPT_MODE, fakePrivateKey);
+            }
+
+            if (cipherText == null || cipherText.length() == 0) {
+                return cipherText;
+            }
+
+            byte[] cipherBytes = SecretUtil.base64Decode(cipherText);
+            byte[] plainBytes = cipher.doFinal(cipherBytes);
+
+            return new String(plainBytes);
         } catch (Exception e) {
-            throw new RuntimeException("验签计算出现异常", e);
+            throw new RuntimeException("解密计算出现异常", e);
         }
     }
 
-    // 生成 RSA 密钥对
-    public static void initKeyPair(String appId) {
+    private static PublicKey getPublicKey(String publicKeyStr) {
         try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            KeyPair keyPair = keyPairGenerator.generateKeyPair();
-            RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-            RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-            Map<String, String> keyMap = new HashMap<>();
-            keyMap.put("publicKey", new String(Base64.getEncoder().encode(publicKey.getEncoded())));
-            keyMap.put("privateKey", new String(Base64.getEncoder().encode(privateKey.getEncoded())));
-            appKeyPair.put(appId, keyMap);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            byte[] publicKeyBytes = SecretUtil.base64Decode(publicKeyStr);
+            X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(publicKeyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA", "SunRsaSign");
+            return keyFactory.generatePublic(x509KeySpec);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to get public key", e);
         }
     }
+
 }
 ```
