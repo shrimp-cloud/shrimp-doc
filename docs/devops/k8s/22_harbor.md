@@ -20,6 +20,10 @@ vim harbor.yml
 
 ## 启停
 ```shell
+# 若命令不存在
+yum install docker-compose -y
+
 docker-compose stop
+docker-compose start
 docker-compose up -d
 ```
