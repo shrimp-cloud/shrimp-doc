@@ -69,16 +69,7 @@ kind: Ingress
 metadata:
   name: xxl-job-ingress
   annotations:
-    # 重写路径，取正则表达式的第二个变量
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-    # 支持跨域
-    nginx.ingress.kubernetes.io/enable-cors: 'true'
-    # 响应所有origin
-    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
-    # 响应所有请求方法
-    nginx.ingress.kubernetes.io/cors-allow-methods: GET, POST, PUT, DELETE, OPTIONS
-    # 可跨域的请求头
-    nginx.ingress.kubernetes.io/cors-allow-headers: Content-Type
+    nginx.ingress.kubernetes.io/configuration-snippet: if ($request_uri = / ) { return 301 https://$host/xxl-job-admin;}
 spec:
   ingressClassName: nginx
   rules:
