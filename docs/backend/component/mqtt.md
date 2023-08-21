@@ -27,6 +27,8 @@ shrimp:
       username: username
       # mqtt密码
       password: password
+        # 的我哥他 ssl 时，需要给定 ca 证书位置
+      ca-path: /config/mqtt-server-ca.crt
 ```
 Tops: 容器代理将会使用外部端口
 
