@@ -295,6 +295,8 @@ module.exports = {
             ],
             '/other/python/': [
                 '',
+                'python',
+                'micropython',
             ],
             '/other/arduino/': [
                 '',
