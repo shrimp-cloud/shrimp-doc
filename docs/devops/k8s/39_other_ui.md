@@ -34,15 +34,26 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 - [安装Docker](docs/devops/k8s/docker.md)
 - 版本选择：Rancher v2.7.1 才支持 k8s 1.26, 若使用新版本k8s, 请使用新版本 rancher!
 - 版本问题：版本匹配非常混乱，也没找到官方宣称的支持清单。
+- rancher 版本: https://ranchermanager.docs.rancher.com/zh/versions
 
 #### 安装
 
 ```shell
-# v2.7.1
+# v2.7.8
 docker run --privileged -d \
   --restart=unless-stopped  \
-  -p 80:80 -p 443:443 \
-  rancher/rancher:v2.7.1
+  -p 7080:80 -p 7443:443 \
+  rancher/rancher:v2.7.8
+
+# with ssl
+docker run -d \
+  --restart=unless-stopped \
+  -p 7080:80 -p 7443:443 \
+  -v /opt/rancher/tls/cert.pem:/etc/rancher/ssl/cert.pem \
+  -v /opt/rancher/tls/key.pem:/etc/rancher/ssl/key.pem \
+  --privileged \
+  rancher/rancher:v2.7.8 \
+  --no-cacerts
 
 # 找密码
 docker ps # 获取 container-id
@@ -59,11 +70,11 @@ docker logs [container-id] 2>&1 | grep "Bootstrap Password:"
 ```shell
 docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
-  -p 80:80 -p 443:443 \
-  -v /root/tls/cert.pem:/etc/rancher/ssl/cert.pem \
-  -v /root/tls/key.pem:/etc/rancher/ssl/key.pem \
+  -p 7080:80 -p 7443:443 \
+  -v /opt/rancher/tls/cert.pem:/etc/rancher/ssl/cert.pem \
+  -v /opt/rancher/tls/key.pem:/etc/rancher/ssl/key.pem \
   --privileged \
-  rancher/rancher:v2.7.1 \
+  rancher/rancher:v2.7.8 \
   --no-cacerts
 ```
 
@@ -77,7 +88,6 @@ docker run -d --volumes-from rancher-data \
   - 查看 pod 日志：`kubectl logs -n cattle-system cattle-cluster-agent-xxxx-xx`
   - 异常：looking up cattle-system/cattle ca/token: no secret exists for service account cattle-system/cattle
     - Rancher2.6.x 不支持 k8s 1.26, 升级到 rancher 2.7.1 解决
-
 
 
 
