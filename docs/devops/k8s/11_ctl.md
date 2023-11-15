@@ -25,7 +25,7 @@ kubectl delete pod --field-selector=status.phase==Succeeded
 | ctr -n k8s.io i rm k8s.gcr.io/pause:3.2                 | 删除镜像        |
 | ctr -n k8s.io i pull -k k8s.gcr.io/pause:3.2            | 拉取镜像        |
 | ctr -n k8s.io i push -k k8s.gcr.io/pause:3.2            | 推送镜像        |
-| tr -n k8s.io i export pause.tar k8s.gcr.io/pause:3.2    | 导出镜像        |
+| ctr -n k8s.io i export pause.tar k8s.gcr.io/pause:3.2   | 导出镜像        |
 | ctr -n k8s.io i import pause.tar                        | 导入镜像        |
 
 ### crictl

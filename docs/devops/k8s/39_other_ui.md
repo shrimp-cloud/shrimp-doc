@@ -49,8 +49,8 @@ docker run --privileged -d \
 docker run -d \
   --restart=unless-stopped \
   -p 7080:80 -p 7443:443 \
-  -v /opt/rancher/tls/cert.pem:/etc/rancher/ssl/cert.pem \
-  -v /opt/rancher/tls/key.pem:/etc/rancher/ssl/key.pem \
+  -v /opt/rancher/ssl/cert.pem:/etc/rancher/ssl/cert.pem \
+  -v /opt/rancher/ssl/key.pem:/etc/rancher/ssl/key.pem \
   --privileged \
   rancher/rancher:v2.7.8 \
   --no-cacerts
@@ -71,8 +71,8 @@ docker logs [container-id] 2>&1 | grep "Bootstrap Password:"
 docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
   -p 7080:80 -p 7443:443 \
-  -v /opt/rancher/tls/cert.pem:/etc/rancher/ssl/cert.pem \
-  -v /opt/rancher/tls/key.pem:/etc/rancher/ssl/key.pem \
+  -v /opt/rancher/ssl/cert.pem:/etc/rancher/ssl/cert.pem \
+  -v /opt/rancher/ssl/key.pem:/etc/rancher/ssl/key.pem \
   --privileged \
   rancher/rancher:v2.7.8 \
   --no-cacerts
