@@ -13,7 +13,7 @@
 # 列举已完成的 pod
 kubectl get pod --field-selector=status.phase==Succeeded -A
 # 删除所有已完成的pod
-kubectl delete pod --field-selector=status.phase==Succeeded
+kubectl delete pod --field-selector=status.phase==Succeeded -A
 ```
 
 
