@@ -65,7 +65,7 @@ nginx.ingress.kubernetes.io/ssl-redirect=false
 
 示例：
 ```
-nginx.ingress.kubernetes.io/configuration-snippet: if ($schema = http ) { return 301 https://$host/$request_uri;}
+nginx.ingress.kubernetes.io/configuration-snippet: if ($scheme = http ) { return 301 https://$host/$request_uri;}
 ```
 
 ## 开启 tcp/udp转发
