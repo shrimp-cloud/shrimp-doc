@@ -20,7 +20,18 @@ Tips: device-mapper-persistent-data lvm2: 存储驱动
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
   "registry-mirrors": ["https://xxxx.mirror.aliyuncs.com"]
+},
+# 腾讯云
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "registry-mirrors": ["https://mirror.ccs.tencentyun.com"]
 }
+
+# 生效
+systemctl daemon-reload
+systemctl restart docker
+# 查看
+docker info
 ```
 
 Tips
@@ -28,6 +39,8 @@ Tips
 1. 镜像加速地址获取：https://cr.console.aliyun.com/cn-shenzhen/instances/mirrors
 2. 登录账号密码设置：https://cr.console.aliyun.com/cn-shenzhen/instance/credentials
 3. 创建仓库并推送镜像：https://cr.console.aliyun.com/cn-shenzhen/instance/repositories
+4. 生效: ``, 
+
 
 systemd
 > systemd是系统自带的cgroup管理器, 系统初始化就存在的, 和cgroups联系紧密,为每一个进程分配cgroups, 用它管理就行了. 如果设置成cgroupfs就存在2个cgroup控制管理器, 实验证明在资源有压力的情况下,会存在不稳定的情况.

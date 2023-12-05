@@ -5,6 +5,9 @@
 ## 环境搭建
 
 - 安装 python: https://www.python.org/
+- 安装 pip
+  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  - python3 get-pip.py
 
 ### 准备
 - IDE: https://www.jetbrains.com/pycharm/
