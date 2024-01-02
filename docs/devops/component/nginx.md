@@ -661,6 +661,7 @@ stream {
 upstream proxy_2_8809 {
     server 127.0.0.1:8811;
     server 127.0.0.1:8812;
+}
 
 ```
 
@@ -710,6 +711,50 @@ add_header Content-Security-Policy "default-src 'self'" always;
 1. 在 vue 或 react 内，若 router 使用了 hash 模式，最好配置 try_files 来确保请求能找到处理文件。同时内部要自行解决路由匹配的404问题
 2. 若服务没法使用 try_files, 则必需配置默认页面，并且需要引导用户，不能访问到其他 uri
 
+
+### location
+
+| 匹配符 | 含义                   | 配置示例              | 匹配示例                   |
+|-----|----------------------|-------------------|------------------------|
+|     | 不加任何规则，默认是大小写敏感，前缀匹配 | location /abc/    | http://abc.com/abc/    |
+| =   | 精确匹配                 | location = /abc/  | http://abc.com/abc/    |
+| ~   | 执行正则匹配，区分大小写         | location ~ /Abc/  | http://abc.com/Abc/xxx |
+| ~*  | 执行正则匹配，忽略大小写         | location ~ /Abc/  | http://abc.com/abc/xxx |
+| ^~  | 普通字符串匹配上以后不再进行正则匹配   | location ^~ /abc/ | http://abc.com/abc/xxx |
+
+匹配顺序：
+- `=` > `^~` > `~ | ~*` > `最长前缀匹配` > `/`
+
+> location指令的处理流程，总体上分类三个阶段，分别是：uri规范化处理、uri匹配、后置处理
+
+- uri规范化处理
+  - 解码 &xx 这样的url编码字符
+  - 解析 `./` 或 `../` 路径，变成标准路径
+  - 多个 `/` 压缩成一个 `/`
+- uri匹配
+  - 精确匹配
+  - 缀匹配,若命中多个，匹配最长的一个
+  - 正则匹配（匹配成功即停止匹配）
+- 后置处理
+  - 处理 {} 内的内容
+
+![Nginx匹配](../../img/nginx_mapping.png)
+
+### proxy_pass
+
+> proxy_pass命令会将请求代理到一个新的uri地址，这个新的代理地址，与proxy_passs配置的最后一个字符是否为斜杠 / 没有关系，只与proxy_pass的配置是否带有uri（这里的uri是指url中，端口之后与问号之前的部分）相关，具体如下：
+
+- 不带uri时（如http://localhost:8379）
+  - 新的地址构成为：proxy_pass的配置内容 + 原始请求URI中去除掉协议、主机和端口后的剩余内容
+
+- 配置了uri时（如：http://localhost:8379/ 或 http://localhost:8379/foo ）
+  - 新的地址构成为：proxy_pass的配置内容 + 原始请求uri中去除掉协议、主机、端口和location配置内容后的剩余部分
+
+从上面可以看出，proxy_pass在创建新的转发地址时，总是会剔除掉原始uri中的协议、主机、端口。核心差异在于是否要去除掉location指令的配置内容。如果proxy_pass配置带有uri就去除，反之则不去除。
+
+另外，像http://localhost:8379/这个地址很特别，因为去除掉协议、主机、端口后，就只剩下 / 了，这大概就是，以斜杠结尾的配置会去除location配置内容这个错误说法的源头了。事实上，像http://localhost:8379/foo这个地址，uri为/foo，它并没有以 / 结尾，但在生成新的转发uri时，同样会去除掉location的配置内容。
+
+
 ### root&alias
 
 - [root]
@@ -728,4 +773,5 @@ add_header Content-Security-Policy "default-src 'self'" always;
 2. alias可以指定任何名称。
 3. alias在使用正则匹配时，必须捕捉要匹配的内容并在指定的内容处使用。
 4. alias只能位于location块中。
+
 
