@@ -298,7 +298,7 @@ module.exports = {
                 '',
                 'env',
                 'pycharm',
-                'Django',
+                'django',
                 'micropython',
             ],
             '/other/arduino/': [
