@@ -85,7 +85,6 @@ kubeadm join xxx.xxx.xxx.xxx:6443 --token abcdef.0123456789abcdef \
 可以在node上执行，将 node 加入集群了
 
 
-
 ### 加速
 若 k8s 集群初始化时间太长，可先导入镜像
 ```shell
@@ -94,6 +93,23 @@ ctr -n=k8s.io images import k8s_1.25.0.tar.gz
 # 查看镜像
 crictl images
 ```
+
+
+### 证书更新
+SSL 证书有效期一年，若 apiserver 无法通信，需要更新证书
+```shell
+# 查询证书过期时间：
+kubeadm certs check-expiration
+
+# 更新证书：
+kubeadm certs renew all
+
+# 使用新读书：
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+# 证书还可能用在 cd 流水线，或服务治理平台中，需要同步更新
+```
+
 
 Tips: 镜像包的获取，后面有需求再补充
 
