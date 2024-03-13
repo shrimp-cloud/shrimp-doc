@@ -16,8 +16,8 @@
 
 | 命令                             | 用途               | 示例                                                                                        |
 |--------------------------------|------------------|-------------------------------------------------------------------------------------------|
-| info pid                       | 查看jvm系统详细参数及环境变量 | info 1                                                                                    |
-| info -flags pid                | 查看jvm非默认值参数      | info -flags 1                                                                             |
+| jinfo pid                      | 查看jvm系统详细参数及环境变量 | jinfo 1                                                                                   |
+| jinfo -flags pid               | 查看jvm非默认值参数      | jinfo -flags 1                                                                            |
 | jinfo -flag \<option\> pid     | 每个参数独立查看         | jinfo -flag MetaspaceSize 1                                                               |
 | jinfo -flag \<name\>=\<value\> | 动态修改jvm参数        | `jinfo -flag +HeapDumpOnOutOfMemoryError 1` <br/> `jinfo -flag HeapDumpPath=/opt/dump/ 1` |
 
