@@ -59,38 +59,32 @@
           <el-button type="primary" icon="Plus" @click="handleAdd" v-hasPermi="['create']">新增</el-button>
         </el-form-item>
       </el-form>
-      <el-table v-loading="loading" :height="tableHeight" :data="dataList">
-        <el-table-column label="ID" align="center" prop="id" width="80"/>
-        <el-table-column label="应用编码" align="left" prop="appCode" min-width="120" :show-overflow-tooltip="true" />
-        <el-table-column label="应用名称" align="left" prop="appName" min-width="160" :show-overflow-tooltip="true" />
-        <el-table-column label="访问地址" align="left" prop="domain" min-width="240" :show-overflow-tooltip="true"/>
-        <el-table-column label="默认" align="center" prop="isDefault" width="80">
+      <el-table v-loading="loading" :data="dataList">
+        <el-table-column label="ID" prop="id" width="80"/>
+        <el-table-column label="应用编码" prop="appCode" min-width="120"/>
+        <el-table-column label="应用名称" prop="appName" min-width="160"/>
+        <el-table-column label="访问地址" prop="domain" min-width="240"/>
+        <el-table-column label="默认" prop="isDefault" width="80">
           <template #default="scope"><dict-tag :options="BOOLEAN" :value="scope.row.isDefault"/></template>
         </el-table-column>
-        <el-table-column label="排序" align="left" prop="sort" min-width="80" :show-overflow-tooltip="true"/>
-        <el-table-column label="备注" align="left" prop="comments" min-width="200" :show-overflow-tooltip="true"/>
-        <el-table-column label="修改人" align="left" prop="updateBy" width="100" :show-overflow-tooltip="true"/>
-        <el-table-column label="修改时间" align="center" prop="updateTime" width="160">
+        <el-table-column label="排序" prop="sort" min-width="80"/>
+        <el-table-column label="备注" prop="comments" min-width="200"/>
+        <el-table-column label="修改人" prop="updateBy" width="100"/>
+        <el-table-column label="修改时间" prop="updateTime" width="160">
           <template #default="scope"><span>{{ parseTime(scope.row.updateTime) }}</span></template>
         </el-table-column>
-        <el-table-column label="创建人" align="left" prop="createBy" width="100" :show-overflow-tooltip="true"/>
-        <el-table-column label="创建时间" align="center" prop="createTime" width="160">
+        <el-table-column label="创建人" prop="createBy" width="100"/>
+        <el-table-column label="创建时间" prop="createTime" width="160">
           <template #default="scope"><span>{{ parseTime(scope.row.createTime) }}</span></template>
         </el-table-column>
-        <el-table-column label="操作" align="center" fixed='right' width="160" class-name="small-padding fixed-width">
+        <el-table-column label="操作" fixed='right' width="80">
           <template #default="scope">
-            <el-button type="text" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['update']">修改</el-button>
-            <el-button type="text" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['remove']">删除</el-button>
+            <el-button type="text" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['update']"/>
+            <el-button type="text" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['remove']"/>
           </template>
         </el-table-column>
       </el-table>
-      <pagination 
-          v-show="total > 0" 
-          :total="total" 
-          v-model:page="queryParams.current" 
-          v-model:limit="queryParams.size" 
-          @pagination="getList"
-      />
+      <pagination v-show="total > 0" :total="total" v-model:page="queryParams.current" v-model:limit="queryParams.size" @pagination="getList"/>
 
      <edit ref="editRef" @change="getList"/>
    </div>
@@ -99,9 +93,7 @@
 <script setup name="AppPage">
 import {appPage, appRemove} from "@/api/ops";
 import Edit from "./components/edit";
-//import {parseTime} from "@/utils/ruoyi";
 
-const tableHeight = computed(() => window.innerHeight - 216);
 const { proxy } = getCurrentInstance();
 const { BOOLEAN } = proxy.useDict("BOOLEAN");
 const dataList = ref([]);
@@ -120,11 +112,12 @@ function init() {
   /* 若存在时间范围
   const now = new Date();
   dateRange.value = [
-    parseTime(now.setDate(now.getDate()-7), '{y}-{m}-{d}') + ' 00:00:00',
-    parseTime(new Date(), '{y}-{m}-{d}') + ' 23:59:59'
+    proxy.parseTime(now.setDate(now.getDate()-7), '{y}-{m}-{d}') + ' 00:00:00',
+    proxy.parseTime(new Date(), '{y}-{m}-{d}') + ' 23:59:59'
   ];
   */
   queryParams.value.current = 1;
+    getList();
 }
 
 /** 查询参数列表 */
@@ -154,35 +147,30 @@ function resetQuery() {
 }
 
 function handleAdd() {
-  proxy.$refs["editRef"].handleEdit();
+  proxy.$refs["editRef"].init();
 }
 function handleUpdate(row) {
-  proxy.$refs["editRef"].handleEdit(row);
+  proxy.$refs["editRef"].init(row);
 }
 
 /** 删除按钮操作 */
 function handleDelete(row) {
   proxy.$modal.confirm('是否确认删除应用: "' + row.appCode + '"？').then(() => {
     appRemove({id: row.id}).then(res => {
-      if (res.code === 1) {
-        getList();
-        proxy.$modal.msgSuccess("删除成功");
-      } else {
-        proxy.$modal.msgError('删除失败: ' + res.msg);
-      }
+    proxy.$modal.msgSuccess("删除成功");
+    getList();
     })
   }).catch(() => {});
 }
 
 init();
-getList();
 </script>
 ```
 
 - 应用新增, 编辑
 ```html
 <template>
-  <el-dialog :title="title" v-model="open" width="800px" append-to-body draggable :close-on-click-modal="false">
+  <el-dialog :title="title" v-model="open" width="800px">
     <el-form ref="editRef" :model="form" :rules="rules" label-width="120px">
       <el-form-item label="应用编码" prop="appCode">
         <el-input v-model="form.appCode" :disabled="!!form.id" placeholder="请输入应用编码" />
@@ -222,7 +210,7 @@ getList();
 <script setup name="AppEdit">
 import { appInfo, appUpdate, appCreate } from "@/api/ops";
 
-defineExpose({handleEdit})
+defineExpose({init})
 const emit = defineEmits(['change']);
 const { proxy } = getCurrentInstance();
 const open = ref(false);
@@ -247,7 +235,7 @@ function cancel() {
 }
 
 // 新增/修改按钮操作
-function handleEdit(row) {
+function init(row) {
   reset();
   if (!row || !row.id) {
     open.value = true;
