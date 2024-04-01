@@ -179,6 +179,7 @@ module.exports = {
                 'init',
                 'env',
                 'request',
+                'components',
                 'shit',
             ],
             '/front/client/': [

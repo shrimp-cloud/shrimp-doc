@@ -14,8 +14,8 @@ utils/request.js
 import { guid, tansParams } from './tools'
 const app = getApp();
 
-// 记录登录时间，防止登录时旧 token 的影响，以及新 token 被清理
-let loginTime = undefined;
+// 重复的登录请求，需要被拦截并等待
+let loginLock = undefined;
 
 const request = (options) => {
     return new Promise((resolve, reject) => {
@@ -40,24 +40,27 @@ const request = (options) => {
             success: async (res) => {
                 // http 异常
                 const httpCode = res.statusCode;
+
+                if (httpCode === 401 || httpCode === 403) {
+                    console.error('request notlogin');
+                    await login();
+                    // 登录后需要二次请求，并 resolve
+                    const data = request(options);
+                    return resolve(data);
+                }
+                const data = res.data;
+                const msg = data.msg;
+                const code = data.code;
+
                 if (httpCode !== 200) {
-                    wx.showToast({icon: 'error', title: httpCode + ':' + res.data.error})
-                    reject(httpCode + ':' + res.data.error)
+                    wx.showToast({icon: 'error', title: msg})
+                    reject(httpCode + ':' + msg)
                     return;
                 }
 
                 // 请求正常
-                const data = res.data;
-                const code = data.code;
-                const msg = data.msg;
-
-                if (code === 10001 || code === 10002 || code === 10005 || code === 10006 || code === 10007) {
-                    console.error('request.notlogin', code, msg);
-                    await login(); // 登录时需要阻塞。防止登录请求重复执行。
-                    const data = request(options); // 若当前请求需要登录，登录后需要重新执行此请求
-                    return resolve(data);
-                } else if (code === -1 || code === 0) {
-                    wx.showToast({icon: 'error', title: code + ':' + msg})
+                if (code === -1 || code === 0) {
+                    wx.showToast({icon: 'error', title: msg})
                     return reject(msg);
                 } else {
                     return resolve(data);
@@ -74,30 +77,37 @@ const request = (options) => {
 
 function login() {
     return new Promise((resolve, reject) => {
-        let token = wx.getStorageSync('token');
         const now = Date.now();
 
-        // 保证 60 秒内不重新清理 token
-        if ((loginTime === undefined || ((now - loginTime) > 60 * 1000) ) && token) {
-            console.log('request.notlogin.clear.token');
-            wx.removeStorageSync('token');
-            token = undefined;
+        // 锁，登录不能被重复执行
+        if (loginLock && ((now - loginLock) < 12 * 1000)) {
+            // 已经在执行登录了，第二次登录请求需要锁
+            const waitLogin = setInterval(function() {
+                if (!loginLock || ((Date.now() - loginLock) > 12 * 1000)) {
+                    clearInterval(waitLogin);
+                    return resolve();
+                }
+            }, 10);
+            // 不往下执行，但也不 resolve， 只等 interval 内的 resolve，
+            return;
         }
-        if (token) {
-            console.log('online now');
-            return resolve();
-        }
+        // 标识有一个登录正在执行了，在执行完登录之后，再变成  false
+        loginLock = now;
+
+        wx.removeStorageSync('token');
+
         wx.login({
             success (res) {
                 const code = res.code;
                 if (!code) {
                     console.error('登录失败！' + res.errMsg)
+                    loginLock = undefined;
                     return reject();
                 }
 
                 // 不使用封装，只使用 wx.request
                 wx.request({
-                    url: app.config.apiBase + '/cas/public/miniapp/login',
+                    url: app.config.apiBase + MINIAPP_LOGIN,
                     method: 'post',
                     data: {appId: app.config.appId, code},
                     header: getHeaders(),
@@ -105,14 +115,16 @@ function login() {
                         // http 异常
                         const httpCode = res.statusCode;
                         if (httpCode !== 200) {
-                            wx.showToast({icon: 'error', title: httpCode + ':' + res.data.error})
+                            wx.showToast({icon: 'error', title: res.data.error})
+                            loginLock = undefined;
                             return reject();
                         }
                         const data = res.data;
 
                         // 服务端处理异常
                         if (data.code !== 1) {
-                            wx.showToast({icon: 'error', title: code + ':' + data.msg})
+                            wx.showToast({icon: 'error', title: data.msg})
+                            loginLock = undefined;
                             return reject();
                         }
 
@@ -120,17 +132,20 @@ function login() {
                         const loginData = data.data;
                         if (loginData.status !== 0) {
                             console.error('登录失败：' + loginData.msg);
+                            loginLock = undefined;
                             return reject();
                         }
 
                         // 登录成功
-                        loginTime = now;
                         wx.setStorageSync('token', loginData.token);
-                        console.log('login.new.reload');
+                        console.log('login success');
+                        loginLock = undefined;
                         return resolve();
                     },
                     fail: (err) => {
                         console.error('err', err);
+                        loginLock = undefined;
+                        return reject();
                     },
                 })
             }
