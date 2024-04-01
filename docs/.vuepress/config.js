@@ -39,7 +39,7 @@ module.exports = {
                 items: [
                     { text: 'VUE', link: '/front/vue/' },
                     { text: 'ruoyi', link: '/front/ruoyi/' },
-                    { text: 'vant-wxapp', link: '/front/vant-wxapp/' },
+                    { text: 'vant-weapp', link: '/front/vant-weapp/' },
                     { text: '客户端', link: '/front/client/' },
                 ]
             },
@@ -174,7 +174,7 @@ module.exports = {
                 'baseComponents',
                 'bizComponents',
             ],
-            '/front/vant-wxapp/': [
+            '/front/vant-weapp/': [
                 '',
                 'init',
                 'env',
