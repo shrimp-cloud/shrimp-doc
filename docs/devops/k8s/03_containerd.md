@@ -19,7 +19,7 @@ containerd config default > /etc/containerd/config.toml
 ```shell
 # vim /etc/containerd/config.toml
 SystemdCgroup = true
-sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.7"
+sandbox_image = "registry.aliyuncs.com/google_containers/pause:latest"
 ```
 
 修改配置

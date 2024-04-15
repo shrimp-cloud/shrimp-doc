@@ -18,7 +18,7 @@ wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.
 3. 修改 nginx-ingress-controller 的网络模式为 hostNetwork
   - 在 nginx-ingress-controller image 的containers上方配置：`hostNetwork: true`
   - 在 nginx-ingress-controller image 的containers上方配置：`dnsPolicy: ClusterFirstWithHostNet`
-4. 设置默认IngressClass： 在 `kind: IngressClass` 添加：`metadata.annotations.ingressclass.kubernetes.io/is-default-class: 'true'`
+4. 设置默认IngressClass： 在 `kind: IngressClass` 添加：`metadata:annotations:ingressclass.kubernetes.io/is-default-class: 'true'`
 5. 异常：`Error: Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": Post https://ingress-nginx-controller-admission.kube-system.svc:443/networking/v1beta1/ingresses?timeout=10s: context deadline exceeded`
   - 解决方法：删除 `validatingwebhookconfigurations`【可在 yaml 中删除后再 apply，也可以在 apply 后使用命令删除】
 ```shell
