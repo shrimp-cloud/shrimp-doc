@@ -47,6 +47,15 @@ GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%' IDENTIFIED BY 'user_p
 FLUSH PRIVILEGES;
 ```
 
+
+### 自定义端口
+```shell
+# vim /etc/my.cnf
+[mysqld]
+port = 13307
+```
+
+
 ### 防火墙
 
 ```shell script
