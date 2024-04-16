@@ -154,6 +154,22 @@ mysql_secure_installation # 初始化
 lower_case_table_names=1 # 【1不敏感，0敏感】
 ```
 
+### 导入导出
+
+####  导出
+```shell
+# 按 schema 维度导出
+mysqldump -P 3306 -uroot -p [schema_name] > /path/to/backup_date.sql
+zip -r /path/to/backup_date.zip /path/to/backup_date.sql
+
+# 导入
+mysql -P 3306 -uroot -p [schema_name] < /path/to/backup_date.sql
+```
+
+#### 导入
+
+
+
 ## 使用
 
 ### 产生随机数
