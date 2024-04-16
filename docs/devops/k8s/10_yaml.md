@@ -1,5 +1,11 @@
 # 模板 yaml
 
+## namespace
+
+```shell
+kubectl create namespace <namespace-name>
+```
+
 ## Deployment
 ```yaml
 apiVersion: apps/v1		# 指定api版本，此值必须在kubectl api-versions中。业务场景一般首选”apps/v1“
