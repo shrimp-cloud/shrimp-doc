@@ -310,6 +310,8 @@ module.exports = {
             '/other/opencv/': [
                 '',
                 'install',
+                'base',
+                'apis',
             ],
         },
     },

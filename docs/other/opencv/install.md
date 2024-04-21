@@ -2,6 +2,19 @@
 
 > 以下针对 java 语言
 
+## 使用
+
+```java
+public class OpenCvTest {
+    static {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
+}
+```
+
+- 在使用之前，您还需要安装OpenCV的动态连接库。以下是不同的操作系统的安装方式
+
+
 ## Windows
 
 - 访问 https://opencv.org/releases/
