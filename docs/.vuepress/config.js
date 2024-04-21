@@ -83,6 +83,7 @@ module.exports = {
                     { text: 'GO基础', link: '/other/go/' },
                     { text: 'Arduino', link: '/other/arduino/' },
                     { text: 'Python', link: '/other/python/' },
+                    { text: 'OpenCV', link: '/other/opencv/' },
                 ]
             },
         ],
@@ -305,6 +306,10 @@ module.exports = {
             '/other/arduino/': [
                 '',
                 'base',
+            ],
+            '/other/opencv/': [
+                '',
+                'install',
             ],
         },
     },
