@@ -7,6 +7,9 @@
 wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
 tar -zxvf jdk-17_linux-x64_bin.tar.gz
 mv jdk-17* jdk17
+wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.7.2/arthas-bin.zip
+unzip arthas-bin.zip -d arthas
+
 ```
 
 打包镜像
@@ -17,8 +20,9 @@ FROM centos:7
 MAINTAINER shrimp
 WORKDIR /apps
 
-# JDK
+# JDK & arthas
 ADD jdk17 jdk17
+ADD arthas arthas
 
 # 环境变量
 ENV TZ=Asia/Shanghai
@@ -59,13 +63,13 @@ ENV PATH=/apps/node16.15.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 ### 打包后端应用
 ```shell
 # 打包到指定版本
-docker build -t image.wkclz.com/lz-cloud/centos7:0.0.1 .
+docker build -t image.wkclz.com/shrimp-cloud/centos7:0.0.1 .
 # 打包到latest
-docker build -t image.wkclz.com/lz-cloud/centos7:latest .
+docker build -t image.wkclz.com/shrimp-cloud/centos7:latest .
 # 多打一个 tag
-docker tag [ImageId] image.wkclz.com/lz-cloud/centos7:latest
+docker tag [ImageId] image.wkclz.com/shrimp-cloud/centos7:latest
 # 运行并进入 img:
-docker run -it image.wkclz.com/lz-cloud/centos7:0.0.1 /bin/bash
+docker run -it image.wkclz.com/shrimp-cloud/centos7:0.0.1 /bin/bash
 # 查看正在运行的容器
 docker ps
 # 进入正在运行的容器
@@ -84,14 +88,14 @@ docker login image.wkclz.com
 # 带密码登录
 cat /xx/xx/docker.pwd | docker login --username=${username} --password-stdin image.wkclz.com
 # 推送
-docker push image.wkclz.com/lz-cloud/centos7:0.0.1
+docker push image.wkclz.com/shrimp-cloud/centos7:0.0.1
 ```
 
 
 ### 镜像使用
 > 需要配置镜像源
 ```shell
-FROM image.wkclz.com/lz-cloud/centos7:latest
+FROM image.wkclz.com/shrimp-cloud/centos7:latest
 MAINTAINER wkclz
  
 WORKDIR /apps

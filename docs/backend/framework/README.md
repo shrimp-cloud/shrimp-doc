@@ -4,13 +4,13 @@
 
 后端架构包含后端服务的所有内容（不包含业务功能模块）。阅读完后端架构相关文档，您需要能够完成本地环境搭建，运行并熟悉demo项目，可以将项目里面的使用方式㻒到具体的业务开发中。同时还需要完成服务器部署等整套 CI/CD 过程。
 
-# LZ-cloud SpringCloud 微服务开发框架
+# shrimp-cloud SpringCloud 微服务开发框架
 
 > 一套[完整]的SpringCloud微服务框架. 文档完成进度：基本完成《基础》部分
 
 ## 地址
-* [GitHub: https://github.com/lz-cloud/](https://github.com/lz-cloud/)
-* [Gitee: http://gitee.com/lz-cloud/](http://gitee.com/lz-cloud/)
+* [GitHub: https://github.com/shrimp-cloud/](https://github.com/shrimp-cloud/)
+* [Gitee: http://gitee.com/shrimp-cloud/](http://gitee.com/shrimp-cloud/)
 * [文档: http://doc.wkclz.com/](http://doc.wkclz.com/)
 * github 为主要仓库，再同步到 gitee 做国内的访问加速
 

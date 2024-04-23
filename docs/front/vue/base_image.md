@@ -32,10 +32,10 @@ EOF
 打包
 ```shell
 # 打包到指定版本
-docker build -t registry-vpc.cn-shenzhen.aliyuncs.com/lz-cloud/centos7-nodejs:16.15.1 .
+docker build -t registry-vpc.cn-shenzhen.aliyuncs.com/shrimp-cloud/centos7-nodejs:16.15.1 .
 # 运行并进入 img:
-docker run -it registry-vpc.cn-shenzhen.aliyuncs.com/lz-cloud/centos7-nodejs:16.15.1 /bin/bash
-docker run -w /root/workspace --entrypoint=/bin/bash -it registry-vpc.cn-shenzhen.aliyuncs.com/lz-cloud/centos7-nodejs:16.15.1
+docker run -it registry-vpc.cn-shenzhen.aliyuncs.com/shrimp-cloud/centos7-nodejs:16.15.1 /bin/bash
+docker run -w /root/workspace --entrypoint=/bin/bash -it registry-vpc.cn-shenzhen.aliyuncs.com/shrimp-cloud/centos7-nodejs:16.15.1
 # 查看正在运行的容器
 docker ps
 # 进入正在运行的容器
@@ -49,7 +49,7 @@ docker exec -it 容器id /bin/bash
 # 登录，根据提示完成登录
 docker login registry-vpc.cn-shenzhen.aliyuncs.com
 # 推送
-docker push registry-vpc.cn-shenzhen.aliyuncs.com/lz-cloud/centos7-nodejs:16.15.1
+docker push registry-vpc.cn-shenzhen.aliyuncs.com/shrimp-cloud/centos7-nodejs:16.15.1
 ```
 
 ### 可能的后缀步骤
