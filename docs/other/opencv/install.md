@@ -28,6 +28,19 @@ public class OpenCvTest {
 
 - https://blog.csdn.net/Mattscl/article/details/134259677
 
+
+
+```shell
+# 安装
+brew install opencv
+# brew edit opencv
+-DBUILD_opencv_java=ON
+# 卸载
+brew uninstall opencv
+```
+
+
+
 ## x86 Linux 【待实践】
 
 ## Arm Linux 【待实践】
