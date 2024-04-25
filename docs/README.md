@@ -12,5 +12,5 @@ features:
   details: 包含控制台，大后台，管理后台及小前台的前端平台。
 - title: 自动化，智能
   details: 自动化开发与部署，以SAAS平台的呈现方式，让开发与使用带来无限顺滑感
-footer: MIT Licensed | Copyright © 2016-2023 Shrimp Workstudio
+footer: MIT Licensed | Copyright © 2016-2024 Shrimp Workstudio
 ---

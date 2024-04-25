@@ -26,12 +26,23 @@ public class OpenCvTest {
 
 ## Mac 【待实践】
 
+### 安装 Homebrew
+
+- 官网：https://brew.sh/
+- 使用命令安装：`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+- 离线安装：https://github.com/Homebrew/brew/releases/latest
+
+
+
+
 - https://blog.csdn.net/Mattscl/article/details/134259677
 
 
 
 ```shell
-# 安装
+# 安装 ant
+brew install ant
+# 安装 opencv
 brew install opencv
 # brew edit opencv
 -DBUILD_opencv_java=ON
