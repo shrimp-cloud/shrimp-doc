@@ -1,5 +1,7 @@
 # JVM
 
+> JVM 指令常用于获取JVM运行时的性能和状态信息, 包括内存、线程、类、垃圾回收等。6个常用的JVM命令:jps、jstat、jmap、jhat、jstack和jinfo
+
 ## jps
 
 > jdk提供的一个查看当前java进程的小工具
