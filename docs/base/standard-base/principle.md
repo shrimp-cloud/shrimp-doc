@@ -3,9 +3,8 @@
 > 制定完善和遵守开发过程的基本原则，可以减少软件的安全风险，提高代码可读性，可维护性，可扩展性，可复用性，可测试性等。可以帮助开发人员提高开发效率，降低开发成本。以下为个人开发过程总结的一些原则。
 
 
-```
-最小化原则
-```
+## 最小化原则
+
 - <span style="color:red">原则：最小化原则</span><span style="color:orange">-强烈推荐</span>
 - 说明：为系统系统的参数更简洁，更方便维护，制定以下推荐条例：
     1. 接口定义，参数需要尽可能的简洁。所有的参数都是必需参数。能后端获取的参数，不要让前端传。
@@ -13,9 +12,8 @@
     3. 自定义 sql 查询，结果集将只包含必要的数据。
     4. 接口参数返回，所有参数都需要是必要且不多余的。
 
-```
-最快收敛原则
-```
+## 最快收敛原则
+
 - <span style="color:red">原则：最快收敛原则</span><span style="color:orange">-强烈推荐</span>
 - 说明：为提高系统的性能，偷换数学的概念，结合编码学，创建了最快收敛原因：
     1. 前端（接口定义）聚合数据进行传输。如，批量删除，只应传一组id，调一次接口
@@ -25,9 +23,8 @@
     5. 数据返回时，尽可能聚合参数，尽可能减少数据的传输次数
     6. 如果可以做到以上的快速收敛，可以不考虑 java 代码对数据的处理量。原因是：以上的调用过程都要经过 http 请求，或者磁盘的读写。而 java 的运行，会全部在内存中运行。效率不是同一个数量级
 
-```
-互不信任原则
-```
+## 互不信任原则
+
 - <span style="color:red">原则：互不信任原则</span><span style="color:orange">-强烈推荐</span>
 - 说明：在程序运行上下游的整个链路中，每个点都是不能保证绝对可靠的，任何一个点都可能随时发生故障或者不可预知的行为，包括机器网络、服务本身、依赖环境、输入和请求等，因此要处处设防。
     1. 参数严格校验
@@ -38,14 +35,13 @@
     6. 健全的敏感操作日志体系
     7. 其他任何可能的倏忽，都提前防备
 
-```
-金钱的计算原则
-```
-- <span style="color:red"> 原则：单位精确到分。BigDecimal.ROUND_HALF_UP 原则</span><span style="color:orange">-强制执行</span>
+## 金钱的计算原则
+
+- <span style="color:red"> 原则：单位精确到分。`BigDecimal.ROUND_HALF_UP` 原则</span><span style="color:orange">-强制执行</span>
 
 > 前端：
-- 计算后的值，必需使用 toFixed(n)  函数进行处理。
-- 也可以使用：Math.round(parseFloat(price*100 * quantity))/100
+- 计算后的值，必需使用 `toFixed(n)`  函数进行处理。
+- 也可以使用：`Math.round(parseFloat(price*100 * quantity))/100`
 
 > 后端：
-- 强制使用 BigDecimal，后端：bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP)
+- 强制使用 BigDecimal，后端：`bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP)`
