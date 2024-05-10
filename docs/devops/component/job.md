@@ -34,11 +34,11 @@ spec:
         # 挂载本地磁盘写日志
         - name: xxl-job-logs
           hostPath:
-            path: /opt/xxl-job/logs
+            path: /data/log/xxl-job-admin-uat/logs
             type: DirectoryOrCreate
       containers:
         - name: xxl-job
-          image: xuxueli/xxl-job-admin:2.4.0
+          image: xuxueli/xxl-job-admin:2.4.1
           env:
             - name: JAVA_OPTS
               value: '-server -Xms512m -Xmx512m'
@@ -73,7 +73,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: xxl-job.example.com
+    - host: xxl-job.kk.wkclz.com
       http:
         paths:
           - path: /
