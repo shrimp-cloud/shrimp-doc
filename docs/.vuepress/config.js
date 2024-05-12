@@ -235,6 +235,7 @@ module.exports = {
                 'mybatis',
                 'mqtt',
                 'rocketmq',
+                'job',
                 'nginx',
                 'samba',
                 'squid',
