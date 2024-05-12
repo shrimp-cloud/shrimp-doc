@@ -51,3 +51,11 @@ $ ./get_helm.sh
 - 异常: `Error from server (InternalError): error when creating "auth.yaml": Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": failed to call webhook: Post "https://ingress-nginx-controller-admission.ingress-nginx.svc:443/networking/v1/ingresses?timeout=10s": tls: failed to verify certificate: x509: certificate signed by unknown authority`
   - 原因: ValidatingWebhookConfiguration 里面有一个针对证书的验证器，删除就好
   - 查看： `kubectl get ValidatingWebhookConfiguration` 删除: `kubectl delete ValidatingWebhookConfiguration ingress-nginx-admission`
+
+### Ipvsadm
+
+> NodePort 模式开放的端口，可以通过 ipvsadm 查看
+
+```shell
+ipvsadm -Ln
+```

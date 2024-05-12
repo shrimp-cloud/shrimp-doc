@@ -57,12 +57,12 @@ metadata:
   name: xxl-job-svc
 spec:
   type: ClusterIP
+  selector:
+      app: xxl-job
   ports:
     - port: 8080
       targetPort: 8080
       name: http-8080
-  selector:
-    app: xxl-job
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -83,7 +83,22 @@ spec:
                 name: xxl-job-svc
                 port:
                   number: 8080
-
+---
+# 通过 nodeport 开放到外网
+apiVersion: v1
+kind: Service
+metadata:
+ name: xxl-job-node-port-svc
+ namespace: uat
+spec:
+ type: NodePort
+ selector:
+  app: xxl-job
+ ports:
+  - nodePort: 38080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
 
 ```
 
