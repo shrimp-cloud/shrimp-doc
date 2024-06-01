@@ -221,6 +221,11 @@ module.exports = {
                 '',
                 'report',
             ],
+            '/ecology/blog/': [
+                '',
+                'mgr',
+                'blog',
+            ],
 
             '/devops/centos7/': [
                 '',
