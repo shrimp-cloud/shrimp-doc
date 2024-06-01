@@ -84,6 +84,7 @@ module.exports = {
                     { text: 'Arduino', link: '/other/arduino/' },
                     { text: 'Python', link: '/other/python/' },
                     { text: 'OpenCV', link: '/other/opencv/' },
+                    { text: 'LM 大模型', link: '/other/lm/' },
                 ]
             },
         ],
@@ -313,6 +314,11 @@ module.exports = {
                 'install',
                 'base',
                 'apis',
+            ],
+            '/other/lm/': [
+                '',
+                'equipment',
+                'install',
             ],
         },
     },
