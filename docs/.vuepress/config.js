@@ -224,7 +224,7 @@ module.exports = {
             ],
             '/ecology/blog/': [
                 '',
-                'mgr',
+                'server',
                 'blog',
             ],
 
