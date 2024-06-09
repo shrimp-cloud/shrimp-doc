@@ -6,7 +6,7 @@ export default defineConfig({
   description: 'Shrimp Workstudio',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/.vitepress/public/favicon.svg',
+    logo: '/favicon.svg',
     search: {
       provider: 'local'
     },

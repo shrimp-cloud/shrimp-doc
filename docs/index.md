@@ -5,7 +5,7 @@ hero:
   name: Shrimp Cloud
   tagline: 模块化，自动化，一体化的解决方案。
   image:
-    src: .vitepress/public/favicon.svg
+    src: /favicon.svg
     alt: Shrimp-Cloud
   actions:
     - theme: brand
