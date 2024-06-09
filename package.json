@@ -11,6 +11,8 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "vitepress": "^1.2.3"
+    "vitepress": "latest",
+    "mermaid": "latest",
+    "vitepress-plugin-mermaid": "latest"
   }
 }
