@@ -77,7 +77,7 @@ source /etc/profile
 ###  ngx_devel_kit 和 lua-nginx-module
 
 > 若不需要 lua 支持，可忽略此过程
-> 
+>
 ```shell script
 cd /opt/download
 
@@ -102,7 +102,7 @@ tar -zxvf lua-nginx-module-0.10.9rc7.tar.gz
 mkdir /opt/download
 cd /opt/download
 wget http://nginx.org/download/nginx-1.18.0.tar.gz
-tar -zxvf nginx-1.18.0.tar.gz 
+tar -zxvf nginx-1.18.0.tar.gz
 cd /opt/download/nginx-1.18.0
 
 ./configure --prefix=/opt/nginx \
@@ -335,7 +335,7 @@ events {
 http {
     include         mime.types;
     charset         UTF-8;
-     
+
     log_format main '{"@timestamp":"$time_iso8601",'
                     '"http_trace_id":"$http_trace_id",' # 需要结合前端的 trace-id 使用
                     '"http_x_forwarded_for":"$http_x_forwarded_for",'
@@ -356,59 +356,59 @@ http {
                     '"http_referer":"$http_referer",'
                     '"http_user_agent":"$http_user_agent"'
                     '}';
- 
+
     access_log logs/access.log main;
- 
+
     default_type    application/octet-stream;
- 
+
     client_body_buffer_size     1024m; # 读取客户端请求体时的缓冲区
     client_max_body_size        0;  # 允许的客户端最大请求体大小, 0为不限制。Content-Length 超过此值将收到 413
- 
+
     keepalive_disable           none; # 对某些浏览器不再使用keepalive，默认 msie6
     keepalive_requests          10000; # 一个TCP连接上最多执行多少个HTTP请求
     keepalive_timeout           65; # HTTP请求连接完成以后，最多经过timeout时间，如果还是没有新的请求，就会关闭连接，默认 75秒
     server_tokens               off; # 隐藏 nginx 版本号
     underscores_in_headers      on; # off 表示当客户端请求头中带有下划线的字段默认将会被标识为无效字段。
- 
+
     sendfile                    on; # sendfile是 Linux2.0+以后的推出的一个系统调用,不但能减少切换次数而且还能减少拷贝次数。
     tcp_nodelay                 on; # 关闭Nagle算法（启用不延时）
     tcp_nopush                  on; # 与 tcp_nodelay 互斥。Nagle 需要等待0.2s, 此处只需要等待数据包大小到达一定值即可推送。依赖 sendfile
- 
+
     server {
         server_name localhost;
         # 使用了 reuse_port 特性以后，多个 worker 进程可以分别用自己不同的 socket 去监听，避免对同一个 socket 进行 accept 时的锁的开销
         # 参数backlog 限制了用于存放处于挂起状态连接的队列最大长度. 默认-1。太大会导致"Broken pipe"，太小会导致"502 Bad Gateway"，建议值：backlog=QPS
         listen 80 reuseport backlog=10240;
- 
+
         access_log logs/localhost.access.log  main; # 按 server 配置日志
- 
+
         # 这个时间不够，代码写得太烂了。。
         proxy_connect_timeout       60s;
         proxy_read_timeout          60s;
         proxy_send_timeout          60s;
- 
+
         location / {
             # 默认1.0, 不支持文件分块传递。1.1 之后才支持keepalive
             proxy_http_version      1.1;
             proxy_buffering          on;
             proxy_request_buffering  on;
- 
+
             # 常用 http 头
             proxy_set_header        Host               $host;
             proxy_set_header        X-Real-IP          $remote_addr;
             proxy_set_header        X-Forwarded-For    $http_x_forwarded_for;
-            
+
             # websocket 支持必需
             proxy_set_header        Upgrade            $http_upgrade;
             proxy_set_header        Connection         "upgrade";
- 
+
             # 当传输大文件时，建议优化此参数
             proxy_buffering             on;
             proxy_buffer_size           64k;
             proxy_buffers               4 128k;
             proxy_busy_buffers_size     256k;
             proxy_max_temp_file_size    0;
- 
+
             # localhost表示本机的名字，127.0.0.1是经过系统的映射的本机IP。所以实际来说大部分情况建议直接使用localhost
             proxy_pass              http://localhost:8088;
         }
@@ -680,7 +680,7 @@ stream {
 ### 安全配置
 | 注解标签                    | 注解值                | 可选值                            | 说明                                                            |
 |-------------------------|--------------------|--------------------------------|---------------------------------------------------------------|
-| X-Frame-Options         | SAMEORIGIN         | DENY/SAMEORIGIN/ALLOW-FROM uri | 浏览器指示允许一个页面可否在 <frame>, </iframe> 或者 <object> 中展现的标记          |
+| X-Frame-Options         | SAMEORIGIN         | DENY/SAMEORIGIN/ALLOW-FROM uri | 浏览器指示允许一个页面可否在 \<frame\>, \</iframe\> 或者 \<object\> 中展现的标记    |
 | X-XSS-Protection        | 1; mode=block      | 0/1/1; mode=block              | 检测到跨站脚本攻击 (XSS)时，浏览器将停止加载页面                                   |
 | X-Content-Type-Options  | nosniff            | nosniff                        | Content-Type是错的或者未定义时，可以禁用浏览器的类型猜测                            |
 | Content-Security-Policy | default-src 'self' | 可选值有点多，需要再查询                   | 定义一套页面资源加载白名单规则，浏览器使用csp规则去匹配所有资源，禁止加载不符合规则的资源，同时将非法资源请求进行上报。 |
@@ -744,15 +744,15 @@ add_header Content-Security-Policy "default-src 'self'" always;
 
 > proxy_pass命令会将请求代理到一个新的uri地址，这个新的代理地址，与proxy_passs配置的最后一个字符是否为斜杠 / 没有关系，只与proxy_pass的配置是否带有uri（这里的uri是指url中，端口之后与问号之前的部分）相关，具体如下：
 
-- 不带uri时（如http://localhost:8379）
+- 不带uri时（如`http://localhost:8379`）
   - 新的地址构成为：proxy_pass的配置内容 + 原始请求URI中去除掉协议、主机和端口后的剩余内容
 
-- 配置了uri时（如：http://localhost:8379/ 或 http://localhost:8379/foo ）
+- 配置了uri时（如：`http://localhost:8379/` 或 `http://localhost:8379/foo` ）
   - 新的地址构成为：proxy_pass的配置内容 + 原始请求uri中去除掉协议、主机、端口和location配置内容后的剩余部分
 
 从上面可以看出，proxy_pass在创建新的转发地址时，总是会剔除掉原始uri中的协议、主机、端口。核心差异在于是否要去除掉location指令的配置内容。如果proxy_pass配置带有uri就去除，反之则不去除。
 
-另外，像http://localhost:8379/这个地址很特别，因为去除掉协议、主机、端口后，就只剩下 / 了，这大概就是，以斜杠结尾的配置会去除location配置内容这个错误说法的源头了。事实上，像http://localhost:8379/foo这个地址，uri为/foo，它并没有以 / 结尾，但在生成新的转发uri时，同样会去除掉location的配置内容。
+另外，像`http://localhost:8379/` 这个地址很特别，因为去除掉协议、主机、端口后，就只剩下 / 了，这大概就是，以斜杠结尾的配置会去除location配置内容这个错误说法的源头了。事实上，像`http://localhost:8379/foo`这个地址，uri为/foo，它并没有以 / 结尾，但在生成新的转发uri时，同样会去除掉location的配置内容。
 
 
 ### root&alias

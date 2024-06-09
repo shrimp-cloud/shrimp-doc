@@ -3,8 +3,8 @@
 > LNMP 安装，只讲述 Nginx 配置， php 安装，及 Wordpress 安装
 
 - 说明: 本文指在安装 php, 和 wordpress, 没提及 nginx, mysql 的安装
-  - nginx: [点我](docs/devops/component/nginx.md)
-  - mysql: [点我](docs/devops/component/mysql.md)
+  - nginx: [点我](./nginx.md)
+  - mysql: [点我](./mysql.md)
 
 
 ## php 安装

@@ -3,4 +3,4 @@
 
 本栏的主要内容如下：
 
-- [小程序](docs/front/client/miniapp.mdlient/miniapp.md)
+- [小程序](./miniapp.md)

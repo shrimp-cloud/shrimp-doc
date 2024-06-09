@@ -8,8 +8,8 @@
 - 也可以下载源码自行编译
 
 ### 准备
-- JDK安装，见JDK章节：[JDK](docs/devops/componentjdk.md)
-- MySQL安装，见MySQL章节：[MySQL](docs/devops/componentmysql.md)
+- JDK安装，见JDK章节：[JDK](./jdk.md)
+- MySQL安装，见MySQL章节：[MySQL](./mysql.md)
 
 ### 安装
 1. 导入数据库： nacos/conf/nacos-mysql.sql

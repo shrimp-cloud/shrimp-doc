@@ -21,19 +21,16 @@
 | gen  | 代码生成     | [文档](http://doc.wkclz.com/gen/)  |
 | gov  | 服务管理     | [文档](http://doc.wkclz.com/gov/)  |
 | sys  | 系统管理     | [文档](http://doc.wkclz.com/sys/)  |
-| cas  | 用户/权限/资源 | [文档](http://doc.wkclz.com/cas/)  |  
+| cas  | 用户/权限/资源 | [文档](http://doc.wkclz.com/cas/)  |
 | pms  | 产品       | [文档](http://doc.wkclz.com/pms/)  |
 | cms  | 内容       | [文档](http://doc.wkclz.com/cms/)  |
 | oms  | 订单       | [文档](http://doc.wkclz.com/oms/)  |
 | pay  | 支付       | [文档](http://doc.wkclz.com/pay/)  |
 
 
-- [系统管理](docs/ecology/sys/sys.md)
-- [内容管理](docs/ecology/cms/cms.md)
-- [商品管理](docs/ecology/pms/pms.md)
-- [支付管理](docs/ecology/modules/pay.md)
-- [订单管理](docs/ecology/modules/oms.md)
-- [服务管理](docs/ecology/modules/gov.md)
+- [系统管理](./sys/sys.md)
+- [内容管理](./cms/cms.md)
+- [商品管理](./pms/pms.md)
 
 
 ### 架构

@@ -45,9 +45,9 @@
 1. 按照 https://www.vuepress.cn/ 上的教程，创建本地项目【过程会有点多，有一定经验的建议自行搭建，无经验的建议直接使用本项目来改】
 2. 本项目的 README.md 内有改动细节
 2. 假设已经完成了项目的创建【使用本项目复制也算】，进行下一步：本地启动调试
-3. 安装依赖：`yarn install`，本地启动: `yarn docs:dev`, 启动成功后可预览：http://localhost:8080/
+3. 安装依赖：`yarn install`，本地启动: `yarn docs:dev`, 启动成功后可预览：`http://localhost:8080/`
 4. 坑：不支持 node 18!
-5. 提交代码： 
+5. 提交代码：
    - `git add .`
    - `git commit -m '你做了什么，要写清楚'
    - `git push`
