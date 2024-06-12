@@ -78,9 +78,12 @@ export default withMermaid({
           { text: 'Python', link: '/other/python/' },
           { text: 'OpenCV', link: '/other/opencv/' },
           { text: 'LM 大模型', link: '/other/lm/' },
+          { text: 'WordPress', link: '/other/wordpress/' },
         ]
       },
     ],
+
+
     sidebar: {
       '/backend/java/': [
         {
@@ -462,14 +465,23 @@ export default withMermaid({
       ],
       '/other/lm/': [
         {
-          text: '其他',
+          text: '大模型',
           items: [
-            {text: '其他', link: '/other/lm/'},
+            {text: '大模型', link: '/other/lm/'},
             {text: '设备', link: '/other/lm/equipment'},
             {text: '安装', link: '/other/lm/install'},
           ]
         }
       ],
+      '/other/wordpress/': [
+        {
+          text: 'WordPress',
+          items: [
+            {text: 'WordPress', link: '/other/wordpress/'},
+          ]
+        }
+      ],
+
     },
     editLink: {
       text: '编辑此页面',
