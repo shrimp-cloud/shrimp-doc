@@ -4,6 +4,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid';
 export default withMermaid({
   title: 'Shrimp Workstudio',
   description: 'Shrimp Workstudio',
+  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/favicon.svg',
