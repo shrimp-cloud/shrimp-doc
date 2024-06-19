@@ -94,6 +94,6 @@ kubectl delete pod --field-selector=status.phase==Succeeded -A
 
 #### 镜像从 docker 导入到 containerd
 
-docker save my-image:tag > my-image-tag.tar
-ctr -n=k8s.io images import my-image-tag.tar
-crictl images
+- `docker save my-image:tag > my-image-tag.tar`
+- `ctr -n=k8s.io images import my-image-tag.tar`
+- `crictl images`
