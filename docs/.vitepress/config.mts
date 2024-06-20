@@ -201,7 +201,7 @@ export default withMermaid({
             {text: '接口', link: '/front/ruoyi/api'},
             {text: '登录', link: '/front/ruoyi/login'},
             {text: '登录嵌入', link: '/front/ruoyi/iframe_login'},
-            {text: '跌幅', link: '/front/ruoyi/router'},
+            {text: '路由', link: '/front/ruoyi/router'},
             {text: '权限', link: '/front/ruoyi/hasPermi'},
             {text: 'CRUD', link: '/front/ruoyi/crud'},
             {text: '字典', link: '/front/ruoyi/dict'},
