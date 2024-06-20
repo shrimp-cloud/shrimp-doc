@@ -19,12 +19,16 @@ Tips: device-mapper-persistent-data lvm2: 存储驱动
 # vim /etc/docker/daemon.json
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
-  "registry-mirrors": ["https://xxxx.mirror.aliyuncs.com"]
+  "registry-mirrors": [
+    "https://xxxx.mirror.aliyuncs.com"
+  ]
 },
 # 腾讯云
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
-  "registry-mirrors": ["https://mirror.ccs.tencentyun.com"]
+  "registry-mirrors": [
+    "https://mirror.ccs.tencentyun.com"
+  ]
 }
 
 # 生效
@@ -39,7 +43,7 @@ Tips
 1. 镜像加速地址获取：https://cr.console.aliyun.com/cn-shenzhen/instances/mirrors
 2. 登录账号密码设置：https://cr.console.aliyun.com/cn-shenzhen/instance/credentials
 3. 创建仓库并推送镜像：https://cr.console.aliyun.com/cn-shenzhen/instance/repositories
-4. 生效: ``, 
+4. 生效: ``,
 
 
 systemd

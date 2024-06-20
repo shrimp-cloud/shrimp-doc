@@ -38,11 +38,13 @@ debug: false
 config_path = "/etc/containerd/certs.d"
 # mkdir -p /etc/containerd/certs.d/docker.io/
 # vim /etc/containerd/certs.d/docker.io/hosts.toml
-[host."https://xxxx.mirror.aliyuncs.com",host."https://registry.docker-cn.com"]
- capabilities = ["pull"]
+[host."https://xxxx.mirror.aliyuncs.com"]
+  capabilities = ["pull"]
+[host."https://registry.docker-cn.com"]
+  capabilities = ["pull"]
 ```
 
-### 启动 
+### 启动
 ```shell
 systemctl enable containerd --now
 ```
