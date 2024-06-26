@@ -522,10 +522,9 @@ server {
 ### SSL 配置
 ```
 server {
-    listen       443;
+    listen       443 ssl;
     server_name  api.wkclz.com;
 
-    ssl on;
     underscores_in_headers on;
 
     ssl_certificate      conf.d/ssl/api.wkclz.com.pem;
@@ -533,7 +532,7 @@ server {
 
     ssl_session_timeout 5m;
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
-    ssl_protocols TLSv1.1 TLSv1.2;
+    ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
 
     location / {
