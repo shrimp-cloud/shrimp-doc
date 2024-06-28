@@ -24,13 +24,13 @@ spec:
     metadata:
       labels:
         app: wordpress
-    volumes:
-      - name: wp-uploads
-        hostPath:
-          # 需要将已有的附件上传到到这里
-          path: /data/wp/uploads
-          type: DirectoryOrCreate
     spec:
+      volumes:
+        - name: wp-uploads
+          hostPath:
+            # 需要将已有的附件上传到到这里
+            path: /data/wp/uploads
+            type: DirectoryOrCreate
       containers:
         - name: wordpress
           image: docker.io/library/wordpress:latest
@@ -71,6 +71,7 @@ metadata:
   name: wordpress-svc-nodeport
   namespace: prod
 spec:
+  type: NodePort
   ports:
     - name: http-80
       nodePort: 30081
