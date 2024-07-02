@@ -357,6 +357,7 @@ export default withMermaid({
             {text: 'Node', link: '/devops/k8s/05_node'},
             {text: 'Calico', link: '/devops/k8s/06_calico'},
             {text: 'Ingress', link: '/devops/k8s/07_ingress'},
+            {text: 'Cert', link: '/devops/k8s/08_cert'},
             {text: 'Yaml', link: '/devops/k8s/10_yaml'},
             {text: '命令', link: '/devops/k8s/11_ctl'},
             {text: '镜像服务', link: '/devops/k8s/12_acr'},
