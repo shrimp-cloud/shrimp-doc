@@ -42,17 +42,19 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 # v2.7.8
 docker run --privileged -d \
   --restart=unless-stopped  \
+  -v /data/rancher:/var/lib/rancher \
   -p 7080:80 -p 7443:443 \
-  rancher/rancher:v2.7.8
+  rancher/rancher:v2.8-head
 
 # with ssl
 docker run -d \
   --restart=unless-stopped \
   -p 7080:80 -p 7443:443 \
+  -v /data/rancher:/var/lib/rancher \
   -v /opt/rancher/ssl/cert.pem:/etc/rancher/ssl/cert.pem \
   -v /opt/rancher/ssl/key.pem:/etc/rancher/ssl/key.pem \
   --privileged \
-  rancher/rancher:v2.7.8 \
+  rancher/rancher:v2.8-head \
   --no-cacerts
 
 # 找密码
@@ -146,4 +148,26 @@ helm install rancher ./rancher-<VERSION>.tgz \
     --set systemDefaultRegistry=<REGISTRY.YOURDOMAIN.COM:PORT> \ # 设置在 Rancher 中使用的默认私有镜像仓库
     --set useBundledSystemChart=true # 使用打包的 Rancher System Chart
 ```
+
+
+# 卸载 Rancher
+
+- MutatingWebhookConfiguration
+
+> 在 Kubernetes 中，MutatingWebhookConfiguration 是一种资源，用于配置 Mutating Admission Webhook。Mutating Admission Webhook 是一种 Kubernetes 功能，它允许您定义自定义逻辑以修改正在创建或更新的对象，例如 Pod、Deployment 等。这种修改可以是自动化的，例如为容器注入 sidecar 容器、设置标签或注解等。
+> MutatingWebhookConfiguration 允许您配置 Webhook 服务的端点以及何时触发 Webhook 的条件。例如，您可以配置 MutatingWebhookConfiguration，在每次创建新的 Pod 时触发一个 Webhook，该 Webhook 会在 Pod 中注入一些容器或者修改 Pod 的标签或注解。
+> 总的来说，MutatingWebhookConfiguration 提供了一种强大的机制，可以在 Kubernetes 中实现自定义的对象修改逻辑，从而实现更灵活和智能的资源管理。
+
+- ValidatingWebhookConfiguration
+
+> 在 Kubernetes 中，ValidatingWebhookConfiguration 是一种资源，用于配置 Validating Admission Webhook。Validating Admission Webhook 是 Kubernetes 的一种功能，它允许您定义自定义逻辑来验证正在创建或更新的对象，例如 Pod、Deployment 等。这种验证逻辑可以用于强制执行一些策略或规则，以确保对象的创建或更新满足特定的要求。
+> ValidatingWebhookConfiguration 允许您配置 Webhook 服务的端点以及何时触发 Webhook 的条件。例如，您可以配置 ValidatingWebhookConfiguration，在每次创建新的 Pod 时触发一个 Webhook，该 Webhook 会验证 Pod 是否符合特定的策略，例如检查容器的资源请求、标签或注解等。
+> 总的来说，ValidatingWebhookConfiguration 提供了一种强大的机制，可以在 Kubernetes 中实现自定义的对象验证逻辑，从而确保对象的创建或更新符合特定的规范或策略。
+
+
+- 直接删除 namespace:
+  - 居然删除不了。。一直停留在 Terminating 状态
+- 删除相关资源
+  - 删除相关资源: `kubectl get MutatingWebhookConfiguration`
+  - 删除相关资源: `kubectl get ValidatingWebhookConfiguration`
 
