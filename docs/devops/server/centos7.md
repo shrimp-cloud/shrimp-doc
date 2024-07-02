@@ -3,6 +3,28 @@
 ## 系统安装
 - CentOS 7.x
 
+
+## 修改登录端口
+
+```shell
+# 提前开放防火墙
+firewall-cmd --permanent --zone=public --add-port=22222/tcp
+firewall-cmd --reload
+
+# 修改端口
+vim /etc/ssh/sshd_config
+# 将 Port 22 修改为 Port 22222
+
+# 重启 sshd 让新端口生效
+systemctl restart sshd
+
+# 请到云服务端开放 22222 端口
+
+# 使用新端口登录
+ssh -p 22222 root@example.com
+```
+
+
 ## 添加用户/组
 ```shell scrip
 groupadd apps
@@ -19,7 +41,7 @@ yum update -y
 hostnamectl set-hostname shrimp
 # 立即生效
 bash
-# 安装工具： 
+# 安装工具：
 yum install -y epel-release yum-utils
 yum install -y vim net-tools numactl fontconfig lrzsz zip unzip wget htop git telnet
 yum install -y gcc automake autoconf libtool make
@@ -193,7 +215,7 @@ maven 自行下载
 
 ## 开机执行指定脚本
 ```shell script
-# vim   /etc/rc.d/rc.local 
+# vim   /etc/rc.d/rc.local
 # 以 apps 执行 /opt/tomcat-jenkins-9012/bin/startup.sh
 
 su - apps -c '/bin/sh /opt/tomcat-jenkins-9012/bin/startup.sh'
@@ -249,8 +271,8 @@ VBoxManage.exe modifyhd "/path/to/vdi" --resize 40960
 # vim ~/.bash_profile
 ```shell
 alias ll='ls -alF'
-alias la='ls -A' 
-alias l='ls -CF' 
+alias la='ls -A'
+alias l='ls -CF'
 ```
 ```shell
 source .bash_profile
