@@ -6,16 +6,16 @@
 ## IDE下载/安装/配置
 - 下载地址: https://www.arduino.cc/en/software
 - 安装
-- File -> Preferences 配置 Addittional boards manager URLs: 
+- File -> Preferences 配置 Addittional boards manager URLs:
   - https://espressif.github.io/arduino-esp32/package_esp32_index.json
-- Tools -> Board -> Boards Manager: 搜索 ESP32, 并下载 【下载会报错，需反复重试直到下载完成】
+- Tools -> Board -> Boards Manager: 搜索 ESP32, 并下载【ESP32 by Espressif】  【下载会报错，需反复重试直到下载完成】
 
 ## 离线安装esp32依赖库
 
 > 在线下载相关依赖库基本不成功，此处记录离线下载方式
 
 - 依赖库: https://github.com/espressif/arduino-esp32/releases
-- 下载: esp32-2.0.9.zip 【自行确认最新版本的依赖名】【不区分操作系统，多个系统开发可跨系统复制】
+- 下载: esp32-3.0.2.zip 【自行确认最新版本的依赖名】【不区分操作系统，多个系统开发可跨系统复制】
 - 手动下载的依赖放入到指定目录后，再在界面上点击安装，会安装其他内容
 - 若安装过程无法下载，会提示下载地址，转移到迅雷下载，完成之后再放到指定目录
 - 下载中的依赖，也可以从 index.json 中找到源地址，再手动下载
