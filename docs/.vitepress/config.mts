@@ -185,6 +185,7 @@ export default withMermaid({
             {text: 'Node基础', link: '/front/vue/node_base'},
             {text: 'Node升级', link: '/front/vue/node_update'},
             {text: 'NPM升级', link: '/front/vue/npm_update'},
+            {text: 'yarn 使用', link: '/front/vue/yarn'},
             {text: '组件', link: '/front/vue/components'},
             {text: '基础镜像', link: '/front/vue/base_image'},
           ]
