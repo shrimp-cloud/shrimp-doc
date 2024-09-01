@@ -55,7 +55,7 @@
 ## 后端项目配置
 > 新建项目和复制项目类似，如果是新建，则选择 《构建一个自由风格的软件项目》
 
-- 项目名称:prod-lz-sys【自定义即可】
+- 项目名称:prod-shrimp-demo【自定义即可】
 - 丢弃旧的构建-保持构建的最大个数：8
 - 参数化构建过程
   - Name：select
@@ -73,15 +73,15 @@
       - SSH Server
         - Name:自己的服务器
         - Transfers->Transfer Set：【代码传送】
-          - Source files：target/lz-sys-0.0.1.jar
+          - Source files：target/shrimp-demo-0.0.1.jar
           - Remove prefix：target/
-          - Remote directory：lz-sys
+          - Remote directory：shrimp-demo
         - Transfers->Transfer Set：【代码传送自行按环境处理】
           - Source files：target/classes/bin/service.sh
           - Remove prefix：target/classes/bin/
-          - Remote directory：lz-sys
-          - Exec command： sh /otp/dist/lz-sys/service.sh restart
-  
+          - Remote directory：shrimp-demo
+          - Exec command： sh /otp/dist/shrimp-demo/service.sh restart
+
 - 以上以包含主要配置，更详细的配置请自己动手，遇到问题可交流。
 
 ## 项目脚本
@@ -203,4 +203,51 @@ case "$1" in
      exit 1
 esac
 exit 0
+```
+
+## 编译脚本
+
+```shell
+#!/bin/sh
+
+# 参数
+DIST_PATH=/opt/dist
+APP=shrimp-app
+
+echo "开始..."
+
+# 临时目录
+TEMP_PATH=/data/deploy_temp
+mkdir -p $TEMP_PATH
+cd $TEMP_PATH
+echo "已创建临时目录$TEMP_PATH"
+
+# 环境(需提前自行准备)
+export JAVA_HOME=/opt/jdk21
+export PATH=$JAVA_HOME/bin:$PATH
+
+# 代码
+echo "准备拉取代码，可能需要验证信息..."
+git clone https://github.com/shrimp-cloud/$APP.git
+
+# 编译
+echo "准备编译..."
+cd $TEMP_PATH/$APP/
+/opt/maven3.6/bin/mvn -U clean -Dmaven.test.skip=true -am package
+
+# 部署
+echo "准备发布..."
+cp $TEMP_PATH/$APP/target/*.jar $DIST_PATH/$APP/
+
+# 启动
+echo "重启应用..."
+sh $DIST_PATH/$APP/service.sh restart
+
+# 清理遗留
+rm -rf $TEMP_PATH
+
+echo "=====================> 完成!"
+
+cd ~
+
 ```
