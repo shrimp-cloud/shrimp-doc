@@ -16,7 +16,7 @@ unzip arthas-bin.zip -d arthas
 ```shell
 vim Dockerfile
 tee ./Dockerfile <<-'EOF'
-FROM centos:7
+FROM centos:latest
 MAINTAINER shrimp
 WORKDIR /apps
 
@@ -32,10 +32,14 @@ ENV PATH=/apps/jdk21/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 ENV LANG=en_US.utf8
 
 # 安装基本依赖
-RUN yum install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
-  yum clean all && \
-  ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
-  fc-cache -fv
+RUN sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/*.repo && \
+    sed -i s/^#.*baseurl=http/baseurl=https/g /etc/yum.repos.d/*.repo && \
+    sed -i s/^mirrorlist=http/#mirrorlist=https/g /etc/yum.repos.d/*.repo && \
+    yum makecache && \
+    yum update -y && yum install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
+    yum clean all && \
+    ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    fc-cache -fv
 
 EOF
 ```
