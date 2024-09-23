@@ -4,9 +4,9 @@
 ### 打包[JDK基础镜像]
 准备JDK
 ```shell
-wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-tar -zxvf jdk-17_linux-x64_bin.tar.gz
-mv jdk-17* jdk17
+wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
+tar -zxvf jdk-21_linux-x64_bin.tar.gz
+mv jdk-21* jdk21
 wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.7.2/arthas-bin.zip
 unzip arthas-bin.zip -d arthas
 
@@ -21,19 +21,21 @@ MAINTAINER shrimp
 WORKDIR /apps
 
 # JDK & arthas
-ADD jdk17 jdk17
+ADD jdk21 jdk21
 ADD arthas arthas
+ADD simsun.ttf /usr/share/fonts/zh/simsun.ttf
 
 # 环境变量
 ENV TZ=Asia/Shanghai
-ENV JAVA_HOME=/apps/jdk17
-ENV PATH=/apps/jdk17/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV JAVA_HOME=/apps/jdk21
+ENV PATH=/apps/jdk21/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV LANG=en_US.utf8
 
 # 安装基本依赖
 RUN yum install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
   yum clean all && \
-  ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+  ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+  fc-cache -fv
 
 EOF
 ```
@@ -77,7 +79,7 @@ docker attach 容器id #Ctrl + P + Q 退出
 # 进入正在运行的容器
 docker exec -it 容器id /bin/bash
 ```
-Tips: 
+Tips:
 1. 同一个Dockerfile 使用不同的 tag 标签进行打包，不会重新打包，只会新增标签。推送也将是一样的效果。故可用此方式打出多个标签，方便通过 vpc 网络推送镜像
 2. 可以通过命令快速将已有的镜像打上新标签：docker tag [ImageId] [new tag]
 
@@ -97,7 +99,7 @@ docker push image.wkclz.com/shrimp-cloud/centos7:0.0.1
 ```shell
 FROM image.wkclz.com/shrimp-cloud/centos7:latest
 MAINTAINER wkclz
- 
+
 WORKDIR /apps
 ADD ./target/*.jar app.jar
 ```
