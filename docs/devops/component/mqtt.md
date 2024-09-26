@@ -12,6 +12,9 @@
 wget https://www.emqx.com/zh/downloads/broker/4.4.1/emqx-4.4.1-otp24.1.5-3-el7-amd64.zip
 unzip emqx-4.4.1-otp24.1.5-3-el7-amd64.zip
 cd emqx
+# 开启指定网段监听 $SYS 的topic: 注意，ip 地址使用 CIDR 地址格式方式，全匹配 k8s 的网段
+vim etc/acl.conf
+# {allow, {ipaddr, "10.12.0.0/16"}, subscribe, ["$SYS/#"]}.
 ./bin/emqx start/stop/restart
 # 修改控制台密码
 ./bin/emqx_ctl admins passwd admin adminPassword #(自行修改密码，重要！)
@@ -22,7 +25,7 @@ netstat -ntlp | grep emqx
 - 非本地连接使用 1883
 
 ### 控制台
-> http://127.0.0.1:18083 (用户名密码在安装之后使用 emqx_ctl设定) 
+> http://127.0.0.1:18083 (用户名密码在安装之后使用 emqx_ctl设定)
 > 配置 nginx(ingress) 转发以开放控制台
 
 ### 认证
@@ -62,7 +65,7 @@ public class MqttLoginRest {
             log.warn("err password with mqtt login");
             return result;
         }
-        
+
         result.put("result", "allow");
         return result;
     }
