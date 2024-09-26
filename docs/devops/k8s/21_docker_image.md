@@ -69,13 +69,13 @@ ENV PATH=/apps/node16.15.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 ### 打包后端应用
 ```shell
 # 打包到指定版本
-docker build -t image.wkclz.com/shrimp-cloud/centos7:0.0.1 .
+docker build -t image.wkclz.com/shrimp-cloud/centos8:0.0.1 .
 # 打包到latest
-docker build -t image.wkclz.com/shrimp-cloud/centos7:latest .
+docker build -t image.wkclz.com/shrimp-cloud/centos8:latest .
 # 多打一个 tag
-docker tag [ImageId] image.wkclz.com/shrimp-cloud/centos7:latest
+docker tag [ImageId] image.wkclz.com/shrimp-cloud/centos8:latest
 # 运行并进入 img:
-docker run -it image.wkclz.com/shrimp-cloud/centos7:0.0.1 /bin/bash
+docker run -it image.wkclz.com/shrimp-cloud/centos8:0.0.1 /bin/bash
 # 查看正在运行的容器
 docker ps
 # 进入正在运行的容器
