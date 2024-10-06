@@ -341,6 +341,7 @@ export default withMermaid({
             {text: 'Samba', link: '/devops/component/samba'},
             {text: 'Squid', link: '/devops/component/squid'},
             {text: 'SFTP', link: '/devops/component/sftp'},
+            {text: 'MinIO', link: '/devops/component/minio'},
             {text: 'PHP', link: '/devops/component/php'},
             {text: 'CI/CD', link: '/devops/component/cicd'},
           ]
