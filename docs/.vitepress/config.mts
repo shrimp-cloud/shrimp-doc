@@ -246,6 +246,17 @@ export default withMermaid({
           ]
         }
       ],
+      '/ecology/micro/': [
+        {
+          text: '微模块',
+          items: [
+            {text: '微模块', link: '/ecology/micro/'},
+            {text: '字典模块', link: '/ecology/micro/dict'},
+            {text: '报表模块', link: '/ecology/micro/report'},
+            {text: '文件模块', link: '/ecology/micro/file'},
+          ]
+        }
+      ],
       '/ecology/sys/': [
         {
           text: '系统管理模块',
