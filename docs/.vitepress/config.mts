@@ -44,6 +44,7 @@ export default withMermaid({
         text: '生态',
         items: [
           { text: 'DEMO', link: '/ecology/demo/' },
+          { text: '微模块', link: '/ecology/micro/' },
           { text: '系统管理', link: '/ecology/sys/' },
           { text: '代码生成', link: '/ecology/gen/' },
           { text: '权限管理', link: '/ecology/cas/' },
