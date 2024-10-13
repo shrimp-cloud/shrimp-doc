@@ -39,6 +39,8 @@ CREATE TABLE `mdm_report_param` (
   `field_type` varchar(31) DEFAULT NULL COMMENT '参数类型',
   `field_code` varchar(31) DEFAULT NULL COMMENT '字段编码',
   `field_name` varchar(31) DEFAULT NULL COMMENT '字段名称',
+  `placeholder` varchar(255) DEFAULT NULL COMMENT '输入提示',
+  `width` int DEFAULT NULL COMMENT '宽度',
   `sort` int NOT NULL DEFAULT '0' COMMENT '排序',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `create_by` varchar(31) DEFAULT NULL COMMENT '创建人',
