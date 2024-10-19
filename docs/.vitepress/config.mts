@@ -332,6 +332,7 @@ export default withMermaid({
           items: [
             {text: 'Centos7', link: '/devops/centos7/'},
             {text: '基础', link: '/devops/centos7/base'},
+            {text: 'Yum', link: '/devops/centos7/yum'},
             {text: 'Systemd', link: '/devops/centos7/systemd'},
           ]
         }
@@ -356,6 +357,7 @@ export default withMermaid({
             {text: 'MinIO', link: '/devops/component/minio'},
             {text: 'PHP', link: '/devops/component/php'},
             {text: 'CI/CD', link: '/devops/component/cicd'},
+            {text: 'Git', link: '/devops/component/git'},
           ]
         }
       ],
