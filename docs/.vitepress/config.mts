@@ -343,6 +343,7 @@ export default withMermaid({
           items: [
             {text: '组件', link: '/devops/component/'},
             {text: 'JDK', link: '/devops/component/jdk'},
+            {text: 'Maven', link: '/devops/component/maven'},
             {text: 'Redis', link: '/devops/component/redis'},
             {text: 'Mysql', link: '/devops/component/mysql'},
             {text: 'Nacos', link: '/devops/component/nacos'},
