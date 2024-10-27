@@ -94,7 +94,8 @@ export default withMermaid({
             { text: 'Java', link: '/backend/java' },
             { text: '缓存', link: '/backend/java/cache' },
             { text: 'JVM', link: '/backend/java/jvm' },
-            { text: 'Dubbo', link: '/backend/java/dubbo' }
+            { text: 'Dubbo', link: '/backend/java/dubbo' },
+            { text: 'Camunda', link: '/backend/java/camunda' }
           ]
         }
       ],
