@@ -490,6 +490,7 @@ export default withMermaid({
             {text: '大模型', link: '/other/lm/'},
             {text: '设备', link: '/other/lm/equipment'},
             {text: '安装', link: '/other/lm/install'},
+            {text: 'Ollama', link: '/other/lm/ollama'},
           ]
         }
       ],
