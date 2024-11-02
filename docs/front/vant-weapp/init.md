@@ -38,8 +38,8 @@
 ## 修改项目
 1. 升级基础库版本：project.config.json 中的 libVersion 修改为最新的稳定版本【可在开发工具 本地设置 中找到】
 2. 升级后报错：`routeDone with a webviewId 13 that is not the current page`：为开发工具的 bug, 等待修复
-3. 添加 .gitignore
-```gitignore
+3. 添加 `.gitignore`
+```
 # wxapp
 miniprogram_npm
 node_modules
