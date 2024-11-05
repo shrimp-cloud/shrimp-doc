@@ -37,6 +37,7 @@ CREATE TABLE `mdm_dict_item` (
   `dict_label` varchar(127) DEFAULT '' COMMENT '字典标签',
   `el_type` varchar(31) DEFAULT NULL COMMENT 'el类型',
   `description` varchar(255) DEFAULT NULL COMMENT '描述',
+  `enable_flag` int NOT NULL DEFAULT '1' COMMENT '生效状态',
   `sort` int NOT NULL DEFAULT '0' COMMENT '排序',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `create_by` varchar(31) DEFAULT NULL COMMENT '创建人',
