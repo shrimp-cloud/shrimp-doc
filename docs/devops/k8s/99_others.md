@@ -39,12 +39,12 @@ $ ./get_helm.sh
   - 查看： `kubectl get MutatingWebhookConfiguration` 删除: `kubectl delete MutatingWebhookConfiguration rancher.cattle.io`
   - 查看： `kubectl get ValidatingWebhookConfiguration` 删除: `kubectl delete ValidatingWebhookConfiguration rancher.cattle.io`
 
-### 导入证书
-
+### 更换证书
+- kubectl delete secrets my-secret -n xxx
 - kubectl create secret tls my-secret --cert=ca.pem --key=ca.key --namespace=xxx
 
 
-### 创建Ingress 可能的异常及处理  
+### 创建Ingress 可能的异常及处理
 
 - 导入  Ingress
   - `kubectl apply -f xxx-ingress.yaml`
