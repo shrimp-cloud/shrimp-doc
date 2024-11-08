@@ -120,13 +120,13 @@ FLUSH PRIVILEGES;
 
 ### 强制修改密码
 ```shell
-# vim /etc/my.cnf 
+# vim /etc/my.cnf
 [mysqld]
 skip-grant-tables
 
 # 登录并修改密码
 # MySQL 5.6 及以下
-UPDATE user SET Password = password ( ‘new-password’ ) WHERE User = ‘root’ ; 
+UPDATE user SET Password = password ( ‘new-password’ ) WHERE User = ‘root’ ;
 
 # MySQL:5.7
 UPDATE mysql.user set authentication_string=password('123qwe') where user='root' and Host = 'localhost';
@@ -172,9 +172,9 @@ mysql -P 3306 -uroot -p [schema_name] < /path/to/backup_date.sql
 
 ## 使用
 
-### 产生随机数
+### 生成随机数
 
-sql 产生
+sql 生成
 ```sql
 SELECT
 	(@i :=@i + 1) i,
@@ -184,12 +184,12 @@ FROM
 	(SELECT @i := 0) AS it
 ```
 
-存储过程产生
+存储过程生成
 ```sql
 CREATE DEFINER= CURRENT_USER FUNCTION `rand_string`(n INT) RETURNS varchar(255) CHARSET utf8
     COMMENT '获取随机数'
 BEGIN
-	
+
     DECLARE chars_str varchar(100) DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     DECLARE return_str varchar(255) DEFAULT '';
     DECLARE i INT DEFAULT 0;
@@ -199,4 +199,14 @@ BEGIN
     END WHILE;
     RETURN return_str;
 END
+```
+
+### 生成时间 序列
+```sql
+WITH recursive time_sequence(year_time) AS (
+    SELECT CAST('2020-01-01 00:00:00' as datetime)
+    UNION ALL
+    SELECT year_time + INTERVAL 1 YEAR FROM time_sequence WHERE year_time < NOW()
+)
+SELECT * FROM sequence;
 ```
