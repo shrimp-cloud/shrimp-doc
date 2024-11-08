@@ -361,6 +361,7 @@ export default withMermaid({
             {text: 'PHP', link: '/devops/component/php'},
             {text: 'CI/CD', link: '/devops/component/cicd'},
             {text: 'Git', link: '/devops/component/git'},
+            {text: 'Cloudreve', link: '/devops/component/cloudreve'},
           ]
         }
       ],
