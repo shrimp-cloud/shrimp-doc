@@ -362,6 +362,7 @@ export default withMermaid({
             {text: 'CI/CD', link: '/devops/component/cicd'},
             {text: 'Git', link: '/devops/component/git'},
             {text: 'Cloudreve', link: '/devops/component/cloudreve'},
+            {text: 'Wiki.js', link: '/devops/component/wikijs'},
           ]
         }
       ],
