@@ -5,6 +5,7 @@
 
 ## 安装
 
+- 官网：https://js.wiki/
 - mkdir wiki && cd wiki
 - 下载：wget https://github.com/Requarks/wiki/releases/latest/download/wiki-js.tar.gz
 - tar xzf wiki-js.tar.gz
