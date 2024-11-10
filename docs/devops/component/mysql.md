@@ -48,11 +48,20 @@ FLUSH PRIVILEGES;
 ```
 
 
-### 自定义端口
+### 自定义配置
 ```shell
 # vim /etc/my.cnf
 [mysqld]
-port = 13307
+port = 13307 # 自定义端口
+character-set-server = utf8mb4 # 设置 MySQL 服务器的默认字符集
+collation-server = utf8mb4_unicode_ci # 设置 MySQL 服务器的默认排序规则
+
+[client]
+default-character-set=utf8mb4 # 设置 MySQL 客户端的默认字符集
+
+[mysql]
+default-character-set=utf8mb4 # 设置 mysql 命令行客户端的默认字符集
+
 ```
 
 
@@ -104,7 +113,7 @@ tmp目录:$lvm分区/$项目名称/tmp
 ```shell
 [mysqld]
 slow_query_log = ON
-slow_query_log_file = /var/lib/mysql/lztest-slow.log
+slow_query_log_file = /var/lib/mysql/test-slow.log
 long_query_time = 1
 # 测试
 select sleep(2);
