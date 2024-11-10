@@ -14,8 +14,9 @@
 
 | 组件名称                                  | 组件用途 |
 |---------------------------------------|------|
+| [shrimp-micro-audit](./audit.md)      | 字典   |
 | [shrimp-micro-dict](./dict.md)        | 字典   |
-| [shrimp-micro-report](./report.md)    | 报表   |
 | [shrimp-micro-file-system](./file.md) | 文件系统 |
 | [shrimp-micro-mask](./mask.md)        | 脱敏   |
+| [shrimp-micro-report](./report.md)    | 报表   |
 
