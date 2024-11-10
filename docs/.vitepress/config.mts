@@ -257,6 +257,7 @@ export default withMermaid({
             {text: '报表模块', link: '/ecology/micro/report'},
             {text: '文件模块', link: '/ecology/micro/file'},
             {text: '数据脱敏', link: '/ecology/micro/mask'},
+            {text: '审计日志', link: '/ecology/micro/audit'},
           ]
         }
       ],
