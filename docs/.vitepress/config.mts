@@ -329,14 +329,15 @@ export default withMermaid({
         }
       ],
 
-      '/devops/centos7/': [
+      '/devops/centos/': [
         {
-          text: 'Centos7',
+          text: 'Centos',
           items: [
-            {text: 'Centos7', link: '/devops/centos7/'},
-            {text: '基础', link: '/devops/centos7/base'},
-            {text: 'Yum', link: '/devops/centos7/yum'},
-            {text: 'Systemd', link: '/devops/centos7/systemd'},
+            {text: 'Centos', link: '/devops/centos/'},
+            {text: '安装', link: '/devops/centos/install'},
+            {text: '基础', link: '/devops/centos/base'},
+            {text: 'Yum', link: '/devops/centos/yum'},
+            {text: 'Systemd', link: '/devops/centos/systemd'},
           ]
         }
       ],
