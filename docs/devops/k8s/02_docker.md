@@ -64,3 +64,14 @@ systemctl enable docker --now
 docker run hello-world
 ```
 
+### 其他
+
+```shell
+# 清理悬空的挂载卷
+docker volume prune
+# 清理悬空的镜像
+docker image prune -af
+# 清理悬空的资源(容器/镜像/网络/缓存)
+docker system prune -f
+```
+
