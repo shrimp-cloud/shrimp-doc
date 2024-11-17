@@ -18,5 +18,6 @@
 | [shrimp-micro-dict](./dict.md)        | 字典   |
 | [shrimp-micro-file-system](./file.md) | 文件系统 |
 | [shrimp-micro-mask](./mask.md)        | 脱敏   |
+| [shrimp-micro-msg](./msg.md)          | 站内消息 |
 | [shrimp-micro-report](./report.md)    | 报表   |
 
