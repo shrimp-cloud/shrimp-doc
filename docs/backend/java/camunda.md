@@ -107,7 +107,18 @@ camunda:
       create: All tasks
 ```
 
-- 再加个个 main 函数，启动即可
+- 再加个 main 函数，启动即可
+
+## 管理面板
+- 登录地址：http://localhost:8080 (部署在服务器上请自行转换)
+- 功能：
+  - Admin: 用户，组，租户，授权，系统配置
+  - Cockpit: 驾驶舱：流程实例，事件，任务
+  - Tasklist: 任务列表，正在运行的任务
+- 流程示例
+  - 部署流程：UI 居然没有部署流程的地方。。需要使用项目，或接口来部署 【可以使用设计器来部署流程】
+  - 启动流程：Tasklist -> Start Process -> 选择流程，填写变量，启动 -> 流程审批 -> 结束
+
 
 ## 设计器
 
@@ -138,5 +149,6 @@ feign:
   - org/camunda/community/rest/client/FeignClientConfiguration.java 内有 jackson 序列化相关bean 注册，覆盖了自定义的逻辑。可使用覆盖类的方式移除
   - rest 客户端一些高级操作，都被标注为 `TODO("not implemented")`, 需要自行使用 http client 工具实现
   - 无法获取流程图
+
 
 

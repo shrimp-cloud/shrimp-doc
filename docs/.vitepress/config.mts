@@ -57,7 +57,7 @@ export default withMermaid({
       {
         text: '运维',
         items: [
-          { text: 'CentOS7', link: '/devops/centos7/' },
+          { text: 'CentOS7', link: '/devops/centos/' },
           { text: '中间件', link: '/devops/component/' },
           { text: 'Kubernetes', link: '/devops/k8s/' },
           { text: '服务器运维', link: '/devops/server/' },
@@ -336,6 +336,7 @@ export default withMermaid({
           items: [
             {text: 'Centos', link: '/devops/centos/'},
             {text: '安装', link: '/devops/centos/install'},
+            {text: 'CentOS Stream9', link: '/devops/centos/centos9'},
             {text: '基础', link: '/devops/centos/base'},
             {text: 'Yum', link: '/devops/centos/yum'},
             {text: 'Systemd', link: '/devops/centos/systemd'},
