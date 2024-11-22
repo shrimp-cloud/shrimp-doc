@@ -399,8 +399,9 @@ export default withMermaid({
           text: '服务器',
           items: [
             {text: '服务器', link: '/devops/server/'},
-            {text: 'Centos7', link: '/devops/server/centos7'},
             {text: '常用命令', link: '/devops/server/command'},
+            {text: 'Centos7', link: '/devops/server/centos7'},
+            {text: 'Centos9', link: '/devops/server/centos9'},
             {text: '内核', link: '/devops/server/kernel'},
             {text: 'VuePress', link: '/devops/server/vuepress'},
           ]
