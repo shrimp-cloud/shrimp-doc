@@ -400,6 +400,7 @@ export default withMermaid({
           items: [
             {text: '服务器', link: '/devops/server/'},
             {text: 'Centos7', link: '/devops/server/centos7'},
+            {text: '常用命令', link: '/devops/server/command'},
             {text: '内核', link: '/devops/server/kernel'},
             {text: 'VuePress', link: '/devops/server/vuepress'},
           ]
@@ -413,7 +414,6 @@ export default withMermaid({
             {text: '常用', link: '/base/common/'},
             {text: '正则', link: '/base/common/regular'},
             {text: '代理', link: '/base/common/forwardProxy'},
-            {text: 'Centos7', link: '/base/common/centos7'},
           ]
         }
       ],

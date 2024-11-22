@@ -10,6 +10,8 @@
 
 ## 网络配置
 
+- 有线网络
+
 ```shell
 # 查看网络接口
 nmcli device
@@ -30,3 +32,20 @@ nmcli connection up eth0
 nmcli connection show
 ```
 
+- 无线网络
+
+```shell
+# 查看可用的 Wi-Fi 网络
+nmcli dev wifi list
+
+# 连接到 Wi-Fi 网络
+nmcli dev wifi connect "MyWiFi" password "MyPassword"
+
+# 检查连接状态
+nmcli connection show
+```
+
+
+## 使用
+
+- 包管理工具： dnf 替代 yum
