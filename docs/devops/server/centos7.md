@@ -206,6 +206,14 @@ systemctl enable iptables
 ```
 
 
+## 开机启动
+```shell
+# vim /etc/rc.d/rc.local
+# 添加需要开机运行的脚本
+# 再给 rc.local +x
+```
+
+
 
 ## 其他工具
 ```shell script
