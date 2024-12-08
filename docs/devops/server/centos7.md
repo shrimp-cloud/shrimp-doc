@@ -35,6 +35,12 @@ passwd apps
 
 ## 系统升级，依赖安装
 ```shell scrip
+# 更换 yum 源 (官方已经停止维护了)
+sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/*.repo && \
+    sed -i s/^#.*baseurl=http/baseurl=https/g /etc/yum.repos.d/*.repo && \
+    sed -i s/^mirrorlist=http/#mirrorlist=https/g /etc/yum.repos.d/*.repo && \
+    yum makecache
+
 # 更新：
 yum update -y
 # 修改主机名：
