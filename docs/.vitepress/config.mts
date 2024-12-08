@@ -341,6 +341,7 @@ export default withMermaid({
             {text: '基础', link: '/devops/centos/base'},
             {text: 'Yum', link: '/devops/centos/yum'},
             {text: 'Systemd', link: '/devops/centos/systemd'},
+            {text: 'iptables', link: '/devops/centos/iptables'},
           ]
         }
       ],
