@@ -61,7 +61,7 @@ export default withMermaid({
           { text: '服务器组件', link: '/devops/comp_ser/' },
           { text: '应用组件', link: '/devops/comp_app/' },
           { text: 'k8s集群安装', link: '/devops/k8s_install/' },
-          { text: 'k8s相关使用', link: '/devops/k8s_guide/' },
+          { text: 'k8s相关使用', link: '/devops/k8s_userguide/' },
         ]
       },
       {
@@ -410,17 +410,17 @@ export default withMermaid({
         }
       ],
 
-      '/devops/k8s_guide/': [
+      '/devops/k8s_userguide/': [
         {
           text: 'Kubernetes 使用',
           items: [
-            {text: 'K8s使用', link: '/devops/k8s_guide/'},
-            {text: '基础命令', link: '/devops/k8s_guide/01_ctl'},
-            {text: '基础镜像', link: '/devops/k8s_guide/02_docker_image'},
-            {text: 'Yaml语法', link: '/devops/k8s_guide/03_yaml'},
-            {text: '应用打包', link: '/devops/k8s_guide/04_apps'},
-            {text: 'Ingress使用', link: '/devops/k8s_guide/05_ingress'},
-            {text: '组件', link: '/devops/k8s_guide/99_components'},
+            {text: 'K8s使用', link: '/devops/k8s_userguide/'},
+            {text: '基础命令', link: '/devops/k8s_userguide/01_ctl'},
+            {text: '基础镜像', link: '/devops/k8s_userguide/02_docker_image'},
+            {text: 'Yaml语法', link: '/devops/k8s_userguide/03_yaml'},
+            {text: '应用打包', link: '/devops/k8s_userguide/04_apps'},
+            {text: 'Ingress使用', link: '/devops/k8s_userguide/05_ingress'},
+            {text: '组件', link: '/devops/k8s_userguide/99_components'},
           ]
         }
       ],

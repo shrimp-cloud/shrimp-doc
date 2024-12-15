@@ -38,4 +38,4 @@ kubectl get pods --namespace=ingress-nginx
 
 ## 使用
 
-- 见 [使用文档](../k8s_guide/05_ingress)
+- 见 [使用文档](../k8s_userguide/05_ingress)
