@@ -81,7 +81,6 @@ export default withMermaid({
           { text: 'Python', link: '/other/python/' },
           { text: 'OpenCV', link: '/other/opencv/' },
           { text: 'LM 大模型', link: '/other/lm/' },
-          { text: 'WordPress', link: '/other/wordpress/' },
         ]
       },
     ],
@@ -384,6 +383,7 @@ export default withMermaid({
             {text: 'Cloudreve', link: '/devops/comp_app/cloudreve'},
             {text: 'Wiki.js', link: '/devops/comp_app/wikijs'},
             {text: 'VuePress', link: '/devops/comp_app/vuepress'},
+            {text: 'WordPress', link: '/devops/comp_app/wordpress'},
           ]
         }
       ],
@@ -520,15 +520,6 @@ export default withMermaid({
           ]
         }
       ],
-      '/other/wordpress/': [
-        {
-          text: 'WordPress',
-          items: [
-            {text: 'WordPress', link: '/other/wordpress/'},
-          ]
-        }
-      ],
-
     },
     editLink: {
       text: '编辑此页面',
