@@ -352,7 +352,7 @@ export default withMermaid({
           text: '服务器组件',
           items: [
             {text: '基础命令', link: '/devops/comp_ser/'},
-            {text: 'iptable', link: '/devops/comp_ser/iptales'},
+            {text: 'iptables', link: '/devops/comp_ser/iptales'},
             {text: 'KVM', link: '/devops/comp_ser/kvm'},
             {text: 'systemd', link: '/devops/comp_ser/systemd'},
             {text: 'yum', link: '/devops/comp_ser/yum'},
@@ -370,7 +370,6 @@ export default withMermaid({
             {text: 'Redis', link: '/devops/comp_app/redis'},
             {text: 'Mysql', link: '/devops/comp_app/mysql'},
             {text: 'Nacos', link: '/devops/comp_app/nacos'},
-            {text: 'MyBatis', link: '/devops/comp_app/mybatis'},
             {text: 'MQTT', link: '/devops/comp_app/mqtt'},
             {text: 'Rocketmq', link: '/devops/comp_app/rocketmq'},
             {text: 'Job', link: '/devops/comp_app/job'},
@@ -425,7 +424,6 @@ export default withMermaid({
           ]
         }
       ],
-
 
 
       '/base/common/': [
