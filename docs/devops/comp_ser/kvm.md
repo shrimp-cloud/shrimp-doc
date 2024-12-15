@@ -80,6 +80,6 @@ systemctl enable cockpit
 - qcow2: QEMU/KVM支持的一种磁盘镜像格式，它代表 "QEMU Copy On Write version 2"
 - 问题：为什么不可以指定创建的存储位置？
   - 虚拟机使用的任何主机资源，都依赖于 【存储池】
-  - 若存储池不存在，则会自动创建。在创建虚拟机时，会创建默认存储池 【default】目标路径为：/var/lib/libvirt/images
+  - 若存储池不存在，则会自动创建。在创建虚拟机时，若不选择存储池，会创建默认存储池 【default】目标路径为：/var/lib/libvirt/images
   - 若要自定义系统安装的存储池，需要在创建虚拟机时，先不启动，添加自己【磁盘】，再移除默认关联的磁盘，此时，就可自定义存储位置了
 

@@ -31,7 +31,7 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 
 #### 前提
 - 安装 iptables, 若在 docker 之后安装，要重启docker
-- [安装Docker](./02_docker.md)
+- [安装Docker](02_docker.md)
 - 版本选择：Rancher v2.7.1 才支持 k8s 1.26, 若使用新版本k8s, 请使用新版本 rancher!
 - 版本问题：版本匹配非常混乱，也没找到官方宣称的支持清单。
 - rancher 版本: https://ranchermanager.docs.rancher.com/zh/versions

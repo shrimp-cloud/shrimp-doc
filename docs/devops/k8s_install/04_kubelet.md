@@ -76,7 +76,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-初始化完成，得到提示
+初始化完成，得到提示，之后可使用此命令将其他 k8s 加入到此集群中
 ```shell
 kubeadm join xxx.xxx.xxx.xxx:6443 --token abcdef.0123456789abcdef \
 --discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

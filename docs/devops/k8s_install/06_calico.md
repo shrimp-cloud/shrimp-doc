@@ -13,7 +13,6 @@ kubectl get nodes
 ```
 
 
-
 ### 加速
 若 Calico 初始化时间太长，可先导入镜像
 ```shell

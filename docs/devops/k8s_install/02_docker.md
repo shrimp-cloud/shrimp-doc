@@ -17,6 +17,7 @@ Tips: device-mapper-persistent-data lvm2: 存储驱动
 
 ```shell
 # vim /etc/docker/daemon.json
+# 阿里云 (现已不再提供给云服务之外的应用使用)
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
   "registry-mirrors": [
@@ -38,7 +39,7 @@ systemctl restart docker
 docker info
 ```
 
-Tips
+Tips(现已不再提供给云服务之外的应用使用)
 > registry-mirrors 地址为阿里云镜像服务申请的镜像加速地址，阿里提供了镜像服务：
 1. 镜像加速地址获取：https://cr.console.aliyun.com/cn-shenzhen/instances/mirrors
 2. 登录账号密码设置：https://cr.console.aliyun.com/cn-shenzhen/instance/credentials
@@ -63,6 +64,7 @@ systemctl enable docker --now
 ```shell
 docker run hello-world
 ```
+
 
 ### 其他
 

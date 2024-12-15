@@ -1,4 +1,12 @@
-# CentOS Stream 9
+# CentOS Stream 9 安装
+
+## 下载
+- 下载地址：
+  - 官网：https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/iso/
+  - 清华：https://mirrors.tuna.tsinghua.edu.cn/centos-stream/9-stream/BaseOS/x86_64/iso/
+  - 阿里云：https://mirrors.aliyun.com/centos-stream/9-stream/BaseOS/x86_64/iso/
+  - 阿里云镜像站，有丰富的镜像：https://mirrors.aliyun.com/
+- 若需要其他版本，请切换目录
 
 ## 安装
 
@@ -15,19 +23,14 @@
 ```shell
 # 查看网络接口
 nmcli device
-
 # 创建有线连接
 nmcli connection add type ethernet ifname enp0s3 con-name eth0
-
 # 配置 DHCP
 nmcli connection modify eth0 ipv4.method auto
-
 # 配置静态 IP
 nmcli connection modify eth0 ipv4.addresses 192.168.1.10/24 ipv4.gateway 192.168.1.1 ipv4.dns 8.8.8.8 ipv4.method manual
-
 # 启用连接
 nmcli connection up eth0
-
 # 检查连接状态
 nmcli connection show
 ```
@@ -37,14 +40,11 @@ nmcli connection show
 ```shell
 # 查看可用的 Wi-Fi 网络
 nmcli dev wifi list
-
 # 连接到 Wi-Fi 网络
 nmcli dev wifi connect "MyWiFi" password "MyPassword"
-
 # 检查连接状态
 nmcli connection show
 ```
-
 
 ## 使用
 

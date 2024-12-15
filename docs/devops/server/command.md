@@ -1,6 +1,6 @@
-# Centos7常用命令
+# Centos 常用命令
 
-> 个人服务器基本使用 CentOS7, 故以下命令实践均在 CentOS7 ，不代表只能适用于 CentOS7
+> 个人服务器基本使用 CentOS 7, 故以下命令实践均在 CentOS7 ，不代表只能适用于 CentOS7
 
 
 ## 压缩解压

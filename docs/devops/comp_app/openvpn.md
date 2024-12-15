@@ -145,10 +145,20 @@ ss -tunlp | grep openvpn
 # 添加地址转发
 echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf && sysctl -p
 # 添加iptable的nat
-iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j MASQUERADE
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+iptables -t nat -D POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j MASQUERADE
+iptables -t nat -D POSTROUTING -s 10.8.0.0/24 -j MASQUERADE
+
 iptables -A INPUT -p udp --dport 11195 -j ACCEPT
 iptables -A INPUT -p tcp --dport 11195 -j ACCEPT
+
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+
+
 ```
 
 

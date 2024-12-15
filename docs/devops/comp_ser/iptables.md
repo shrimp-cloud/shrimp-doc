@@ -115,3 +115,14 @@ POSTROUTING #  处理出站的路由规则
 -v  #  详细输出
 -F  #  清空规则链
 ```
+
+- 使用实例
+
+```shell
+iptables -L             #  列出所有规则
+iptables -L -nv         #  查看详细信息（IP 跟 端口会以数字形式显示）
+iptables -t nat -L      #  列出 nat 表中的所有规则
+iptables -t nat -L -nv  #  查看详细信息（IP 跟 端口会以数字形式显示）
+iptables -F             #  清除所有规则（如不指定表，则默认表为 filter）
+iptables -t nat -D INPUT 1  #  删除 nat 表 INPUT 链下的第一条规则
+```

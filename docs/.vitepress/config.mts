@@ -26,7 +26,7 @@ export default withMermaid({
           { text: 'Java', link: '/backend/java/' },
           { text: 'Spring', link: '/backend/spring/' },
           { text: '框架', link: '/backend/framework/' },
-          { text: '组件', link: '/backend/component/' },
+          { text: '组件', link: '/backend/comp_app/' },
           { text: '逻辑设计', link: '/backend/design/' },
           { text: '三方服务集成', link: '/backend/third/' },
         ]
@@ -57,10 +57,11 @@ export default withMermaid({
       {
         text: '运维',
         items: [
-          { text: 'CentOS7', link: '/devops/centos/' },
-          { text: '中间件', link: '/devops/component/' },
-          { text: 'Kubernetes', link: '/devops/k8s/' },
-          { text: '服务器运维', link: '/devops/server/' },
+          { text: '操作系统', link: '/devops/server/' },
+          { text: '服务器组件', link: '/devops/comp_ser/' },
+          { text: '应用组件', link: '/devops/comp_app/' },
+          { text: 'k8s集群安装', link: '/devops/k8s_install/' },
+          { text: 'k8s相关使用', link: '/devops/k8s_guide/' },
         ]
       },
       {
@@ -134,17 +135,17 @@ export default withMermaid({
           ]
         }
       ],
-      '/backend/component/': [
+      '/backend/comp_app/': [
         {
           text: '组件',
           items: [
-            {text: '组件', link: '/backend/component/'},
-            {text: 'Redis', link: '/backend/component/redis'},
-            {text: 'Spring', link: '/backend/component/spring'},
-            {text: 'Cas', link: '/backend/component/casStarter'},
-            {text: 'Mybatis', link: '/backend/component/mybatis'},
-            {text: 'oss', link: '/backend/component/oss'},
-            {text: 'mqtt', link: '/backend/component/mqtt'},
+            {text: '组件', link: '/backend/comp_app/'},
+            {text: 'Redis', link: '/backend/comp_app/redis'},
+            {text: 'Spring', link: '/backend/comp_app/spring'},
+            {text: 'Cas', link: '/backend/comp_app/casStarter'},
+            {text: 'Mybatis', link: '/backend/comp_app/mybatis'},
+            {text: 'oss', link: '/backend/comp_app/oss'},
+            {text: 'mqtt', link: '/backend/comp_app/mqtt'},
           ]
         }
       ],
@@ -331,84 +332,101 @@ export default withMermaid({
         }
       ],
 
-      '/devops/centos/': [
-        {
-          text: 'Centos',
-          items: [
-            {text: 'Centos', link: '/devops/centos/'},
-            {text: '安装', link: '/devops/centos/install'},
-            {text: 'CentOS Stream9', link: '/devops/centos/centos9'},
-            {text: '基础', link: '/devops/centos/base'},
-            {text: 'Yum', link: '/devops/centos/yum'},
-            {text: 'Systemd', link: '/devops/centos/systemd'},
-            {text: 'iptables', link: '/devops/centos/iptables'},
-          ]
-        }
-      ],
-      '/devops/component/': [
-        {
-          text: '组件',
-          items: [
-            {text: '组件', link: '/devops/component/'},
-            {text: 'JDK', link: '/devops/component/jdk'},
-            {text: 'Maven', link: '/devops/component/maven'},
-            {text: 'Redis', link: '/devops/component/redis'},
-            {text: 'Mysql', link: '/devops/component/mysql'},
-            {text: 'Nacos', link: '/devops/component/nacos'},
-            {text: 'MyBatis', link: '/devops/component/mybatis'},
-            {text: 'MQTT', link: '/devops/component/mqtt'},
-            {text: 'Rocketmq', link: '/devops/component/rocketmq'},
-            {text: 'Job', link: '/devops/component/job'},
-            {text: 'nginx', link: '/devops/component/nginx'},
-            {text: 'Samba', link: '/devops/component/samba'},
-            {text: 'Squid', link: '/devops/component/squid'},
-            {text: 'SFTP', link: '/devops/component/sftp'},
-            {text: 'MinIO', link: '/devops/component/minio'},
-            {text: 'PHP', link: '/devops/component/php'},
-            {text: 'CI/CD', link: '/devops/component/cicd'},
-            {text: 'Git', link: '/devops/component/git'},
-            {text: 'Cloudreve', link: '/devops/component/cloudreve'},
-            {text: 'Wiki.js', link: '/devops/component/wikijs'},
-          ]
-        }
-      ],
-      '/devops/k8s/': [
-        {
-          text: 'K8s',
-          items: [
-            {text: 'K8s', link: '/devops/k8s/'},
-            {text: '初始化', link: '/devops/k8s/01_init'},
-            {text: 'Docker', link: '/devops/k8s/02_docker'},
-            {text: 'Containerd', link: '/devops/k8s/03_containerd'},
-            {text: 'Kubelet', link: '/devops/k8s/04_kubelet'},
-            {text: 'Node', link: '/devops/k8s/05_node'},
-            {text: 'Calico', link: '/devops/k8s/06_calico'},
-            {text: 'Ingress', link: '/devops/k8s/07_ingress'},
-            {text: 'Cert', link: '/devops/k8s/08_cert'},
-            {text: 'Yaml', link: '/devops/k8s/10_yaml'},
-            {text: '命令', link: '/devops/k8s/11_ctl'},
-            {text: '镜像服务', link: '/devops/k8s/12_acr'},
-            {text: '组件', link: '/devops/k8s/13_components'},
-            {text: '应用', link: '/devops/k8s/14_apps'},
-            {text: '镜像', link: '/devops/k8s/21_docker_image'},
-            {text: 'K8s UI', link: '/devops/k8s/39_other_ui'},
-            {text: '其他', link: '/devops/k8s/99_others'},
-          ]
-        }
-      ],
+
       '/devops/server/': [
         {
-          text: '服务器',
+          text: '操作系统',
           items: [
-            {text: '服务器', link: '/devops/server/'},
+            {text: '操作系统', link: '/devops/server/'},
             {text: '常用命令', link: '/devops/server/command'},
-            {text: 'Centos7', link: '/devops/server/centos7'},
-            {text: 'Centos9', link: '/devops/server/centos9'},
+            {text: 'Centos7初始化', link: '/devops/server/centos7_init'},
+            {text: 'Centos9安装', link: '/devops/server/centos9_install'},
+            {text: 'Centos9初始化', link: '/devops/server/centos9_init'},
             {text: '内核', link: '/devops/server/kernel'},
-            {text: 'VuePress', link: '/devops/server/vuepress'},
           ]
         }
       ],
+
+      '/devops/comp_ser/': [
+        {
+          text: '服务器组件',
+          items: [
+            {text: '基础命令', link: '/devops/comp_ser/'},
+            {text: 'iptable', link: '/devops/comp_ser/iptales'},
+            {text: 'KVM', link: '/devops/comp_ser/kvm'},
+            {text: 'systemd', link: '/devops/comp_ser/systemd'},
+            {text: 'yum', link: '/devops/comp_ser/yum'},
+          ]
+        }
+      ],
+
+      '/devops/comp_app/': [
+        {
+          text: '应用器组件',
+          items: [
+            {text: '应用器组件', link: '/devops/comp_app/'},
+            {text: 'JDK', link: '/devops/comp_app/jdk'},
+            {text: 'Maven', link: '/devops/comp_app/maven'},
+            {text: 'Redis', link: '/devops/comp_app/redis'},
+            {text: 'Mysql', link: '/devops/comp_app/mysql'},
+            {text: 'Nacos', link: '/devops/comp_app/nacos'},
+            {text: 'MyBatis', link: '/devops/comp_app/mybatis'},
+            {text: 'MQTT', link: '/devops/comp_app/mqtt'},
+            {text: 'Rocketmq', link: '/devops/comp_app/rocketmq'},
+            {text: 'Job', link: '/devops/comp_app/job'},
+            {text: 'nginx', link: '/devops/comp_app/nginx'},
+            {text: 'Samba', link: '/devops/comp_app/samba'},
+            {text: 'Squid', link: '/devops/comp_app/squid'},
+            {text: 'SFTP', link: '/devops/comp_app/sftp'},
+            {text: 'MinIO', link: '/devops/comp_app/minio'},
+            {text: 'PHP', link: '/devops/comp_app/php'},
+            {text: 'CI/CD', link: '/devops/comp_app/cicd'},
+            {text: 'Git', link: '/devops/comp_app/git'},
+            {text: 'Cloudreve', link: '/devops/comp_app/cloudreve'},
+            {text: 'Wiki.js', link: '/devops/comp_app/wikijs'},
+            {text: 'VuePress', link: '/devops/comp_app/vuepress'},
+          ]
+        }
+      ],
+
+
+      '/devops/k8s_install/': [
+        {
+          text: 'Kubernetes 安装',
+          items: [
+            {text: 'K8s安装', link: '/devops/k8s_install/'},
+            {text: '初始化服务器', link: '/devops/k8s_install/01_init'},
+            {text: 'Docker', link: '/devops/k8s_install/02_docker'},
+            {text: 'Containerd', link: '/devops/k8s_install/03_containerd'},
+            {text: 'Kubelet', link: '/devops/k8s_install/04_kubelet'},
+            {text: 'Node', link: '/devops/k8s_install/05_node'},
+            {text: 'Calico', link: '/devops/k8s_install/06_calico'},
+            {text: 'Ingress', link: '/devops/k8s_install/07_ingress'},
+            {text: 'Cert', link: '/devops/k8s_install/08_cert'},
+            {text: '镜像服务', link: '/devops/k8s_install/09_acr'},
+            {text: 'Harbor', link: '/devops/k8s_install/10_harbor'},
+            {text: 'UI工具', link: '/devops/k8s_install/39_other_ui'},
+            {text: '其他', link: '/devops/k8s_install/99_others'},
+          ]
+        }
+      ],
+
+      '/devops/k8s_guide/': [
+        {
+          text: 'Kubernetes 使用',
+          items: [
+            {text: 'K8s使用', link: '/devops/k8s_guide/'},
+            {text: '基础命令', link: '/devops/k8s_guide/01_ctl'},
+            {text: '基础镜像', link: '/devops/k8s_guide/02_docker_image'},
+            {text: 'Yaml语法', link: '/devops/k8s_guide/03_yaml'},
+            {text: '应用打包', link: '/devops/k8s_guide/04_apps'},
+            {text: 'Ingress使用', link: '/devops/k8s_guide/05_ingress'},
+            {text: '组件', link: '/devops/k8s_guide/99_components'},
+          ]
+        }
+      ],
+
+
 
       '/base/common/': [
         {
