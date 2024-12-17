@@ -260,6 +260,8 @@ export default withMermaid({
             {text: '数据脱敏', link: '/ecology/micro/mask'},
             {text: '站内消息', link: '/ecology/micro/msg'},
             {text: '审计日志', link: '/ecology/micro/audit'},
+            {text: '序列生成', link: '/ecology/micro/seq'},
+            {text: '接口生成', link: '/ecology/micro/next'},
           ]
         }
       ],
