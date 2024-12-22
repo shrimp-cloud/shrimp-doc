@@ -126,3 +126,15 @@ iptables -t nat -L -nv  #  查看详细信息（IP 跟 端口会以数字形式�
 iptables -F             #  清除所有规则（如不指定表，则默认表为 filter）
 iptables -t nat -D INPUT 1  #  删除 nat 表 INPUT 链下的第一条规则
 ```
+
+- 清空所有规则 (在 iptables 工作异常时全尝试)
+```shell
+# 备份规则:
+iptables-save > ~/iptables_backup.txt
+# 清空规则:
+iptables -F
+iptables -t nat -F
+iptables -t mangle -F
+iptables -X
+# 自行重启可能影响的嗠，比如: docker, containerd
+```
