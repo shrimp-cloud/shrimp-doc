@@ -16,27 +16,16 @@ unzip arthas-bin.zip -d arthas
 ```shell
 vim Dockerfile
 tee ./Dockerfile <<-'EOF'
-FROM centos:latest
+FROM rockylinux:9
 MAINTAINER shrimp
 WORKDIR /apps
 
-RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
-  systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-  rm -f /lib/systemd/system/multi-user.target.wants/*;\
-  rm -f /etc/systemd/system/*.wants/*;\
-  rm -f /lib/systemd/system/local-fs.target.wants/*; \
-  rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-  rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-  rm -f /lib/systemd/system/basic.target.wants/*;\
-  rm -f /lib/systemd/system/anaconda.target.wants/*; \
-  sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/*.repo && \
-  sed -i s/^#.*baseurl=http/baseurl=https/g /etc/yum.repos.d/*.repo && \
-  sed -i s/^mirrorlist=http/#mirrorlist=https/g /etc/yum.repos.d/*.repo && \
-  yum makecache && \
-  yum update -y && yum install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
-  yum clean all && \
-  ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
-  fc-cache -fv
+RUN dnf makecache && \
+    dnf update -y && dnf install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
+    dnf clean all && \
+    ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    fc-cache -fv && \
+    echo "alias ll='ls -l'" >> ~/.bashrc
 
 VOLUME [ "/sys/fs/cgroup" ]
 
