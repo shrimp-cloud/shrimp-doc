@@ -262,6 +262,7 @@ export default withMermaid({
             {text: '审计日志', link: '/ecology/micro/audit'},
             {text: '序列生成', link: '/ecology/micro/seq'},
             {text: '接口生成', link: '/ecology/micro/next'},
+            {text: 'PDF模板', link: '/ecology/micro/pdf'},
           ]
         }
       ],
