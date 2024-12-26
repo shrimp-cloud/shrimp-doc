@@ -47,17 +47,20 @@ CREATE TABLE `mdm_change_log` (
 ## 功能使用
 
 ```java
+public class AuditDemo {
+  @Autowired
+  private AuditApi auditApi;
 
-@Autowired
-private AuditApi auditApi;
-
-// 数据创建(需要在 insert之后以保证有 id, 注意批量 insert 的 id 获取)
-auditApi.create(entity);
-// 数据变更
-auditApi.modify(hisEntity, newEntity);
-// 数据删除
-auditApi.delete(entity);
-// 查询变更历史
-entity.setClazz(Entity.class);
-auditApi.getLogPage(entity);
+  public void test() {
+    // 数据创建(需要在 insert之后以保证有 id, 注意批量 insert 的 id 获取)
+    auditApi.create(entity);
+    // 数据变更
+    auditApi.modify(hisEntity, newEntity);
+    // 数据删除
+    auditApi.delete(entity);
+    // 查询变更历史
+    entity.setClazz(Entity.class);
+    auditApi.getLogPage(entity);
+  }
+}
 ```

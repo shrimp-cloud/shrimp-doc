@@ -42,18 +42,23 @@ CREATE TABLE `mdm_sequence` (
 
 
 ```java
+public class SeqDemo {
+  @Autowired
+  private SeqApi seqAPi;
 
-@Autowired
-private SeqApi seqAPi;
+  public void test() {
+    // 生成单个
+    String seq = seqAPi.genSequence("PREFIX");
+    // 生成单个,指定长度
+    String seq = seqAPi.genSequence("PREFIX", 4);
+    // 生成多个
+    String seq = seqAPi.genSequences("PREFIX", 2);
+    // 生成多个，指定长度
+    String seq = seqAPi.genSequences("PREFIX", 2, 4);
+  }
 
-// 生成单个
-seqAPi.genSequence("PREFIX");
-// 生成单个,指定长度
-seqAPi.genSequence("PREFIX", 4);
-// 生成多个
-seqAPi.genSequences("PREFIX", 2);
-// 生成多个，指定长度
-seqAPi.genSequences("PREFIX", 2, 4);
+}
+
 ```
 
 ## 使用注意

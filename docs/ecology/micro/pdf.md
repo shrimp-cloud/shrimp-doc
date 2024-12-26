@@ -49,14 +49,17 @@ CREATE TABLE `mdm_pdf_template` (
 
 - 使用示例
 ```java
+public class PdfDemo {
+  @Autowired
+  private PdfApi pdfAPi;
 
-@Autowired
-private PdfApi pdfAPi;
-
-// 生成PDF文件，返回本地文件路径
-String pdfAPi.writePdf("templateCode", data);
-// 生成PDF文件，并通过响应流，响应到前端
-void pdfAPi.responsePdf("templateCode", data, response);
+  public void test() {
+    // 生成PDF文件，返回本地文件路径
+    String pdfPath = pdfAPi.writePdf("templateCode", data);
+    // 生成PDF文件，并通过响应流，响应到前端
+    pdfAPi.responsePdf("templateCode", data, response);
+  }
+}
 ```
 
 ## 使用注意

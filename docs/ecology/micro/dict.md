@@ -69,10 +69,15 @@ CREATE TABLE `mdm_dict_item` (
 ### 后端，枚举转中文含义
 
 ```java
-@Autowired
-private DictCache dictCache;
+public class DictDemo {
+  @Autowired
+  private DictCache dictCache;
 
-String dictValue = dictCache.get("DICT_TYPE", "DICT_KEY");
+  public void test() {
+    String dictValue = dictCache.get("DICT_TYPE", "DICT_KEY");
+  }
+}
+
 ```
 
 ### 前端，获取字典
