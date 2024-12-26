@@ -387,6 +387,7 @@ export default withMermaid({
             {text: 'Wiki.js', link: '/devops/comp_app/wikijs'},
             {text: 'VuePress', link: '/devops/comp_app/vuepress'},
             {text: 'WordPress', link: '/devops/comp_app/wordpress'},
+            {text: 'Shadowsocks', link: '/devops/comp_app/shadowsocks'},
           ]
         }
       ],
