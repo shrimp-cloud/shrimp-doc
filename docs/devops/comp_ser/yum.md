@@ -43,3 +43,14 @@
 yum clean all
 yum makecache
 ```
+
+## yum 离线安装
+
+```shell
+# 安装工具
+yum install yum-utils
+# 下载离线包
+yumdownloader --resolve htop
+# 传输到目标机器安装
+rpm -Uvh htop*.rpm
+```
