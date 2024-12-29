@@ -37,6 +37,7 @@ vim /etc/shadowsocks-libev/config.json
 - 启动
 
 ```shell
+systemctl status shadowsocks-libev
 systemctl start shadowsocks-libev
 systemctl enable shadowsocks-libev
 systemctl restart shadowsocks-libev
@@ -65,5 +66,47 @@ firewall-cmd --list-ports
 
 ## 连接
 
+
+### GUI
+
 - 客户端下载: https://shadowsocks.org/doc/getting-started.html
 - 本地 host 给 qqqq.com 做个解析
+
+
+## Command
+
+- 与服务端相同方式安装
+- 配置 shadowsocks-libev, 对应的配置为 local_port
+- 作为客户端启动
+
+- 配置文件
+
+```json
+{
+  "server":"qqqq.com",
+  "local_port": 1080,
+  "password": "改掉密码",
+  "method":"chacha20-ietf-poly1305"
+}
+```
+
+
+```shell
+ss-local -c /etc/shadowsocks-libev/config.json
+```
+
+- 使用 privoxy 将 socks5 代理转换为 http 代理
+
+- 安装
+```shell
+yum -y install privoxy
+```
+
+- 配置代理转换
+```shell
+# vim /etc/privoxy/config
+forward-socks5t / 127.0.0.1:1080 .
+# systemctl restart privoxy
+```
+
+- http 代理： `127.0.0.1:8118`
