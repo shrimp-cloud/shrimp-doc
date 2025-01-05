@@ -43,6 +43,31 @@ config_path = "/etc/containerd/certs.d"
   capabilities = ["pull"]
 ```
 
+- 设置代理
+
+```shell
+# 示例配置文件 /etc/containerd/config.toml
+
+[proxy_plugins]
+  [proxy_plugins."io.containerd.proxy.dockerhub"]
+    registry_mirrors = ["https://your-proxy-address:port"]
+    # 如果代理需要认证，可以在此处添加用户名和密码
+    # username = "your-proxy-username"
+    # password = "your-proxy-password"
+```
+
+- 临时代理
+
+```shell
+# 设置HTTP代理
+export HTTP_PROXY=http://<proxy_host>:<proxy_port>
+export HTTPS_PROXY=https://<proxy_host>:<proxy_port>
+
+# 拉取镜像
+crictl pull <image_name>
+```
+
+
 ### 启动
 ```shell
 systemctl enable containerd --now

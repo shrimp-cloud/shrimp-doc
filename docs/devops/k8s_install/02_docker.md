@@ -65,6 +65,15 @@ systemctl enable docker --now
 docker run hello-world
 ```
 
+代理
+```shell
+# 设置HTTP代理
+export HTTP_PROXY=http://<proxy_host>:<proxy_port>
+export HTTPS_PROXY=https://<proxy_host>:<proxy_port>
+
+# 拉取镜像
+docker pull <image_name>
+```
 
 ### 其他
 
