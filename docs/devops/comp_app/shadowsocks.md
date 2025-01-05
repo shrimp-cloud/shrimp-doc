@@ -123,7 +123,7 @@ nohup ss-local -c /etc/shadowsocks-libev/config.json &
 
 - 安装
 ```shell
-yum -y install privoxy
+dnf install -y privoxy
 ```
 
 - 配置代理转换
@@ -131,6 +131,11 @@ yum -y install privoxy
 # vim /etc/privoxy/config
 forward-socks5t / 127.0.0.1:1080 .
 # systemctl restart privoxy
+# systemctl enable privoxy
 ```
 
 - http 代理： `127.0.0.1:8118`
+
+```shell
+curl -v --proxy 127.0.0.1:8118 https://www.baidu.com
+```
