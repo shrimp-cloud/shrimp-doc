@@ -51,3 +51,9 @@ dnf update
 # 检查仓库状态
 dnf repolist
 ```
+
+- 常用工具
+
+```shell
+dnf install -y vim net-tools numactl fontconfig zip unzip wget git telnet
+```

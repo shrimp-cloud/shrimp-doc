@@ -1,7 +1,9 @@
 # shadowsocks 搭建
 
 
-## 安装 shadowsocks-libev
+## yum 安装
+
+> 适用于 CentOS 7
 
 - 安装 yum 源
 
@@ -15,7 +17,29 @@ wget -O /etc/yum.repos.d/librehat-shadowsocks-epel-7.repo https://copr.fedorainf
 yum -y install shadowsocks-libev
 ```
 
-- 配置
+
+## 编译安装
+
+> 理论上适用于任意 linux, 但要适配命令
+
+```shell
+# 安装依赖
+dnf install -y epel-release
+dnf install -y gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel
+
+# 拉取源码
+git clone https://github.com/shadowsocks/shadowsocks-libev.git
+cd shadowsocks-libev
+# 此代码使用了子模块，需要拉子模块
+git submodule update --init --recursive
+
+# 编译安装
+./autogen.sh && ./configure && make
+make install
+```
+
+
+## 配置
 
 ```shell
 vim /etc/shadowsocks-libev/config.json
@@ -27,14 +51,13 @@ vim /etc/shadowsocks-libev/config.json
   "server_port": 19499,
   "password": "改掉密码",
   "method":"chacha20-ietf-poly1305",
-  "other":"其他的按需修改",
-  "verbose":2,
-  "log_level":"info",
-  "log-file":"/var/log/shadowsocks.log"
+  "other":"其他的按需修改"
 }
 ```
 
-- 启动
+## 启动
+
+- 启停命令
 
 ```shell
 systemctl status shadowsocks-libev
@@ -63,7 +86,6 @@ firewall-cmd --list-ports
 - 运营商网络开放 19499 (文档略过)
 
 
-
 ## 连接
 
 
@@ -73,7 +95,7 @@ firewall-cmd --list-ports
 - 本地 host 给 qqqq.com 做个解析
 
 
-## Command
+### Command
 
 - 与服务端相同方式安装
 - 配置 shadowsocks-libev, 对应的配置为 local_port
@@ -84,6 +106,7 @@ firewall-cmd --list-ports
 ```json
 {
   "server":"qqqq.com",
+  "server_port": 19499,
   "local_port": 1080,
   "password": "改掉密码",
   "method":"chacha20-ietf-poly1305"
@@ -92,8 +115,9 @@ firewall-cmd --list-ports
 
 
 ```shell
-ss-local -c /etc/shadowsocks-libev/config.json
+nohup ss-local -c /etc/shadowsocks-libev/config.json &
 ```
+
 
 - 使用 privoxy 将 socks5 代理转换为 http 代理
 

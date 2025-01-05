@@ -6,7 +6,7 @@
 安装 docker repo
 ```shell
 yum install -y device-mapper-persistent-data lvm2
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+wget -O /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
 yum install -y docker-ce
 ```
