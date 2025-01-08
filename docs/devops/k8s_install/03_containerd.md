@@ -43,6 +43,23 @@ config_path = "/etc/containerd/certs.d"
   capabilities = ["pull"]
 ```
 
+- config_path 与 mirrors 不能同时存在，在要对 mirrors 做定制化时，更宜用以下方式:
+```shell
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+          endpoint = ["https://xxxx.xx.com"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."k8s.gcr.io"]
+          endpoint = ["https://xxxx.xx.com"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."gcr.io"]
+          endpoint = ["https://xxxx.xx.com"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."ghcr.io"]
+          endpoint = ["https://xxxx.xx.com"]
+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."quay.io"]
+          endpoint = ["https://xxxx.xx.com"]
+```
+
+
 - 设置代理
 
 ```shell

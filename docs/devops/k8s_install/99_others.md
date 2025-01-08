@@ -29,6 +29,9 @@ $ ./get_helm.sh
 3. 查看镜像：`crictl images`
 4. 使用镜像：`docker.io/anjia0532/google-containers.ingress-nginx.controller:v1.5.1`
 
+### 使用代理同步镜像
+
+- https://github.com/cmliu/CF-Workers-docker.io : 用户数量多，但好像不太安全(本人未测试)
 
 ### 创建 namespace 可能的异常及处理
 
