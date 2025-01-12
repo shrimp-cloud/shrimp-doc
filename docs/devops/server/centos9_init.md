@@ -45,6 +45,9 @@ enabled=1
 ```
 
 ```shell
+# 改个名
+hostnamectl set-hostname shrimp
+
 # 清理和更新软件仓库缓存
 dnf clean all
 dnf update
@@ -56,4 +59,27 @@ dnf repolist
 
 ```shell
 dnf install -y vim net-tools numactl fontconfig zip unzip wget git telnet
+```
+
+- 配置公钥
+
+```shell
+mkdir .ssh
+chmod 700 .ssh/
+cd .ssh
+vim authorized_keys
+chmod 600 authorized_keys
+```
+
+- 关闭 selinux
+```shell
+vim /etc/selinux/config
+SELINUX=disabled
+```
+
+- 关闭 swap
+
+```shell
+# vim /etc/fstab
+注释掉 swap
 ```

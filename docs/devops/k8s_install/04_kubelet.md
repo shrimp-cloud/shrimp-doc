@@ -67,7 +67,8 @@ kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 
 Tips:
 1. 初始化报 containerd 运行时错，可以重启一下 containerd
-2. kubeadm config images pull，可以提前拉取镜像
+2.
+3. ，可以提前拉取镜像
 
 初始化成功，按照提示，执行
 ```shell
