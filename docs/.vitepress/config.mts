@@ -409,6 +409,7 @@ export default withMermaid({
             {text: '镜像服务', link: '/devops/k8s_install/09_acr'},
             {text: 'Harbor', link: '/devops/k8s_install/10_harbor'},
             {text: 'UI工具', link: '/devops/k8s_install/39_other_ui'},
+            {text: '境外镜像获取', link: '/devops/k8s_install/98_pull_images'},
             {text: '其他', link: '/devops/k8s_install/99_others'},
           ]
         }
