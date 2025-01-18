@@ -4,9 +4,11 @@
 
 ## 购买按量服务器
 
-- 付费类型: 按量付费
+- 未直接说明的，保留默认值
+- 付费类型: 抢占式实例
 - 地域: 境外 (建议东南亚)
-- 实例: 2C2G (按实际情况调整，可更小，可顺畅安装 docker-ce 和执行少量命令即可)
+- 实例: 2C2G (按实际情况调整，可更小，可顺畅安装 containerd 和执行少量命令即可)
+- 实例使用时长: 无固定时长
 - 镜像: Rocky Linux 9.5 x64
 - 系统盘: 最小 (20G)
 - 带宽: 使用CDT计费, 带宽峰值调整至最高 (国内20G免费, 境外180G免费)
@@ -30,7 +32,7 @@ xxx.xxx.xxx.xxx out
 ```shell
 # 安装
 wget -O /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-dnf install -y docker-ce
+dnf install -y containerd
 systemctl start containerd
 ```
 
@@ -38,11 +40,11 @@ systemctl start containerd
 
 ```shell
 # 拉取镜像
-ctr -n k8s.io i pull -k hello-world
+ctr -n k8s.io i pull -k [hello-world]
 # 查看镜像
 ctr -n k8s.io images ls
 # 导出镜像
-ctr -n k8s.io i export hello-world.tar.gz hello-world
+ctr -n k8s.io i export [hello-world.tar.gz] [hello-world]
 ```
 
 ## 将镜像拉回到本地

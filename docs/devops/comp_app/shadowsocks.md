@@ -3,6 +3,7 @@
 
 ## yum 安装
 
+
 > 适用于 CentOS 7
 
 - 安装 yum 源
@@ -24,36 +25,55 @@ yum -y install shadowsocks-libev
 
 ```shell
 # 安装依赖
-dnf install -y epel-release
-dnf install -y gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel
+dnf -y install epel-release
+dnf -y install git gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel
 
-# 拉取源码
 git clone https://github.com/shadowsocks/shadowsocks-libev.git
 cd shadowsocks-libev
-# 此代码使用了子模块，需要拉子模块
 git submodule update --init --recursive
 
 # 编译安装
-./autogen.sh && ./configure && make
-make install
+./autogen.sh && ./configure --prefix=/usr --disable-documentation
+make && make install
 ```
 
 
 ## 配置
 
 ```shell
+mkdir /etc/shadowsocks-libev
 vim /etc/shadowsocks-libev/config.json
 ```
 
 ```json
 {
-  "server":"qqqq.com",
+  "server":"0.0.0.0",
   "server_port": 19499,
   "password": "改掉密码",
-  "method":"chacha20-ietf-poly1305",
-  "other":"其他的按需修改"
+  "method":"chacha20-ietf-poly1305"
 }
 ```
+
+
+配置 systemctl 操作
+ yum 安装会自动添加。源码安装才需要这一步
+
+```shell
+# vim /etc/systemd/system/shadowsocks-libev.service
+[Unit]
+Description=Shadowsocks-libev SOCKS5 Proxy Server
+After=network.target
+
+[Service]
+Type=simple
+User=nobody
+ExecStart=/usr/bin/ss-server -c /etc/shadowsocks-libev/config.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
 
 ## 启动
 
@@ -88,12 +108,10 @@ firewall-cmd --list-ports
 
 ## 连接
 
-
 ### GUI
 
 - 客户端下载: https://shadowsocks.org/doc/getting-started.html
 - 本地 host 给 qqqq.com 做个解析
-
 
 ### Command
 
@@ -137,5 +155,11 @@ forward-socks5t / 127.0.0.1:1080 .
 - http 代理： `127.0.0.1:8118`
 
 ```shell
+# 配置临时代理
+export HTTP_PROXY=http://127.0.0.1:8118
+export HTTPS_PROXY=http://127.0.0.1:8118
+
+# 单次任务使用代理
 curl -v --proxy 127.0.0.1:8118 https://www.baidu.com
 ```
+
