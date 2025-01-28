@@ -4,7 +4,22 @@ import { withMermaid } from 'vitepress-plugin-mermaid';
 export default withMermaid({
   title: 'Shrimp Workstudio',
   description: 'Shrimp Workstudio',
-  head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.svg' }],
+    [
+      'script',
+      {},
+      `
+      window._hmt = window._hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?cb7056be83473f171c3df62495c0e664";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+      `,
+    ],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/favicon.svg',
@@ -408,6 +423,7 @@ export default withMermaid({
             {text: 'Cert', link: '/devops/k8s_install/08_cert'},
             {text: '镜像服务', link: '/devops/k8s_install/09_acr'},
             {text: 'Harbor', link: '/devops/k8s_install/10_harbor'},
+            {text: 'MetricsServer', link: '/devops/k8s_install/11_metricsServer.md'},
             {text: 'UI工具', link: '/devops/k8s_install/39_other_ui'},
             {text: '境外镜像获取', link: '/devops/k8s_install/98_pull_images'},
             {text: '其他', link: '/devops/k8s_install/99_others'},
