@@ -369,7 +369,7 @@ export default withMermaid({
           text: '服务器组件',
           items: [
             {text: '基础命令', link: '/devops/comp_ser/'},
-            {text: 'iptables', link: '/devops/comp_ser/iptales'},
+            {text: 'iptables', link: '/devops/comp_ser/iptables'},
             {text: 'KVM', link: '/devops/comp_ser/kvm'},
             {text: 'systemd', link: '/devops/comp_ser/systemd'},
             {text: 'yum', link: '/devops/comp_ser/yum'},

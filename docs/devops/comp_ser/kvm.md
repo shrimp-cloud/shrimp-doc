@@ -6,9 +6,9 @@
 egrep -c '(vmx|svm)' /proc/cpuinfo
 
 # 安装必要的软件包
-dnf install @virtualization
-dnf install qemu-kvm libvirt virt-install virt-manager libguestfs-tools-c
+dnf -y install @virtualization
 # 这个命令会安装一组与虚拟化相关的软件包，包括 QEMU-KVM、libvirt、Virt-Manager 等等。@virtualization 用不了，就用下面的 install
+dnf -y install qemu-kvm libvirt virt-install virt-manager libguestfs-tools-c
 
 # 启动并启用 libvirtd 服务
 systemctl start libvirtd
@@ -22,11 +22,12 @@ systemctl enable libvirtd
 ### 安装
 ```shell
 # 安装 Cockpit
-dnf install cockpit cockpit-machines
+dnf -y install cockpit cockpit-machines
 
 # 启动并启用 Cockpit 服务
 systemctl start cockpit
 systemctl enable cockpit
+# ebable 失败，可在 /etc/rc.d/rc.local 添加启动命令
 ```
 
 ### 访问
@@ -49,6 +50,7 @@ systemctl enable cockpit
 | 预格式化的块设备 | 系统中可以随机访问（不需要按顺序）访问固定大小数据片(chunks)的设备称为块设备，磁盘、软盘驱动器、CD-ROM驱动器、闪存 |
 
 - 在使用 kvm 中，需要使用何种存储池，完全依赖于现有的资源是以什么样的形式存在。
+- 自己玩的情况，选择【文件系统目录】即可，将在当前系统创建一个目录，用于创建存储池
 
 #### 本地网络
 
@@ -66,6 +68,8 @@ systemctl enable cockpit
 - 不同的网络类型，用于不同的场景
 - 若要在 kvm 中使用本地网络，不能使用虚拟网络，而需要直接选择桥接到本地
 
+> 桥接网桥: 在物理机上创建一个网桥，然后让虚拟机使用这个网桥，这样，虚拟机就可以直接连接到物理网络了。
+
 #### 存储
 
 - 存储
@@ -82,4 +86,14 @@ systemctl enable cockpit
   - 虚拟机使用的任何主机资源，都依赖于 【存储池】
   - 若存储池不存在，则会自动创建。在创建虚拟机时，若不选择存储池，会创建默认存储池 【default】目标路径为：/var/lib/libvirt/images
   - 若要自定义系统安装的存储池，需要在创建虚拟机时，先不启动，添加自己【磁盘】，再移除默认关联的磁盘，此时，就可自定义存储位置了
+
+#### 虚拟机
+
+- 使用 ISO 安装，选择提前下载好的系统。
+- 选择提前创建的存储池和卷
+- 内存指定为 8G
+- 增加【桥网络接】，移除原有网络
+- 安装操作系统
+- 移除多余的系统镜像，正常启动
+
 

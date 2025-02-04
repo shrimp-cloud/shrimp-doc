@@ -50,7 +50,7 @@ hostnamectl set-hostname shrimp
 
 # 清理和更新软件仓库缓存
 dnf clean all
-dnf update
+dnf -y update
 # 检查仓库状态
 dnf repolist
 ```

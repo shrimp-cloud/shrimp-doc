@@ -16,9 +16,29 @@
 - 安装过程，可配置 yum 源，按需进行扩展安装
 - 可下载 dvd 全量包进行离线安装 (10G+)
 
+## 分区
+
+- 可快速配置之后再调整分区大小
+
+- /boot 1024M
+- /boot/efi 600M
+- /home 10G
+- / 1000G
+- /data 剩余所有
+- swap 4G (不用也得分配)
+
+
 ## 网络配置
 
-- 有线网络
+- 配置已有连接
+```shell
+cd /etc/NetworkManager/system-connections
+vim enpxxx.nmconnection
+
+# autoconnect=true # 其他配置按需修改
+```
+
+- 新建连接
 
 ```shell
 # 查看网络接口
