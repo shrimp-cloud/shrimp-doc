@@ -43,7 +43,7 @@ net.bridge.bridge-nf-call-ip6tables=1
 # sysctl -p /etc/sysctl.d/k8s.conf
 
 # 修改主机名
-hostnamectl set-hostname k8s-master01
+hostnamectl set-hostname master01
 
 # 以后补充时间同步
 # 若是低版本内核，需要考虑升级

@@ -9,11 +9,11 @@
 
 下载官方 yaml:
 ```shell
-wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.4/deploy/static/provider/cloud/deploy.yaml
+wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 修改内容
-1. 修改 nginx-ingress-controller 镜像地址为：registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.9.4
+1. 修改 nginx-ingress-controller 镜像地址为：registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.12.0
 2. 修改 kube-webhook-certgen (2处) 镜像地址为：registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.5.2
 3. 修改 nginx-ingress-controller 的网络模式为 hostNetwork
   - 在 nginx-ingress-controller image 的containers上方配置：`hostNetwork: true`

@@ -58,7 +58,7 @@ dnf repolist
 - 常用工具
 
 ```shell
-dnf install -y vim net-tools numactl fontconfig zip unzip wget git telnet
+dnf install -y tar vim net-tools numactl fontconfig zip unzip wget git telnet
 ```
 
 - 配置公钥

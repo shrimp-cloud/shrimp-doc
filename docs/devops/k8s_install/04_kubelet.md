@@ -67,8 +67,8 @@ kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 
 Tips:
 1. 初始化报 containerd 运行时错，可以重启一下 containerd
-2.
-3. ，可以提前拉取镜像
+2. kubeadm config images list, 可以查看需要拉取的镜像
+2. kubeadm config images pull, 可以提前拉取镜像
 
 初始化成功，按照提示，执行
 ```shell
@@ -79,6 +79,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 初始化完成，得到提示，之后可使用此命令将其他 k8s 加入到此集群中
 ```shell
+# kubeadm token create --print-join-command
 kubeadm join xxx.xxx.xxx.xxx:6443 --token abcdef.0123456789abcdef \
 --discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
