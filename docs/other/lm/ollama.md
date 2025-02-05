@@ -32,9 +32,36 @@
 
 ### Install on Rockylinux9
 
-- install:
-  - run: `curl -fsSL https://ollama.com/install.sh | sh`
+- install:`curl -fsSL https://ollama.com/install.sh | sh`
+- 配置：`vim /etc/systemd/system/ollama.service` (可以多个Environment共存)
+  - 配置访问地址：`Environment="OLLAMA_HOST=0.0.0.0:11434"`
+  - 配置模型路径：`Environment="OLLAMA_MODELS=/data/ollama/models"`
+  - 加载 service: `systemctl daemon-reload`
+- 使用 systemctl 管理 ollama
 
+```shell
+# curl -fsSL https://ollama.com/install.sh | sh
+>>> Installing ollama to /usr/local
+>>> Downloading Linux amd64 bundle
+######################################################################## 100.0%
+>>> Creating ollama user...
+>>> Adding ollama user to render group...
+>>> Adding ollama user to video group...
+>>> Adding current user to ollama group...
+>>> Creating ollama systemd service...
+>>> Enabling and starting ollama service...
+Created symlink /etc/systemd/system/default.target.wants/ollama.service → /etc/systemd/system/ollama.service.
+>>> The Ollama API is now available at 127.0.0.1:11434.
+>>> Install complete. Run "ollama" from the command line.
+WARNING: No NVIDIA/AMD GPU detected. Ollama will run in CPU-only mode.
+```
+
+- 下载模型：`ollama pull qwen2.5:7b`
+- 运行模型：`ollama run qwen2.5:7b`
+- 停止模型：`/bye`
+
+
+- 集显识别了也用不了。。以下 GPU 相关内容不做参考。。
 
 ### others
 

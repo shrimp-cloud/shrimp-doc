@@ -83,7 +83,8 @@ nmcli connection show
 # 安装工具包
 dnf -y install pciutils
 # 查看显卡信息
-lspci | grep -i vga
+lspci | grep -i "vga\|3d\|2d"
+lspci -vnn | grep -i VGA -A 12
 ```
 
 
