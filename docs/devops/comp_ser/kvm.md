@@ -25,9 +25,8 @@ systemctl enable libvirtd
 dnf -y install cockpit cockpit-machines
 
 # 启动并启用 Cockpit 服务
-systemctl start cockpit
-systemctl enable cockpit
-# ebable 失败，可在 /etc/rc.d/rc.local 添加启动命令
+systemctl start cockpit.socket
+systemctl enable cockpit.socket
 ```
 
 ### 访问
