@@ -58,7 +58,8 @@ dnf repolist
 - 常用工具
 
 ```shell
-dnf install -y tar vim net-tools numactl fontconfig zip unzip wget git telnet
+dnf -y install epel-release
+dnf -y install tar vim net-tools numactl fontconfig zip unzip wget git telnet htop
 ```
 
 - 配置公钥

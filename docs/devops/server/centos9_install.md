@@ -76,6 +76,17 @@ nmcli dev wifi connect <SSID> password <PASSWORD>
 nmcli connection show
 ```
 
+
+## 显卡
+
+```shell
+# 安装工具包
+dnf -y install pciutils
+# 查看显卡信息
+lspci | grep -i vga
+```
+
+
 ## 使用
 
 - 包管理工具： dnf 替代 yum
