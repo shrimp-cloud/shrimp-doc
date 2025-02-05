@@ -58,10 +58,20 @@ nmcli connection show
 - 无线网络
 
 ```shell
+# 安装 wifi 相关工具
+dnf -y install pciutils usbutils
+# 查看无线网卡
+lspci | grep -i network # 默认网络设备
+lsusb # usb 网络设备
+# 安装 wifi 管理工具
+dnf -y install NetworkManager-wifi # wireless-tools 没有这个工具
+# 重启网络服务
+systemctl restart NetworkManager
+
 # 查看可用的 Wi-Fi 网络
 nmcli dev wifi list
 # 连接到 Wi-Fi 网络
-nmcli dev wifi connect "MyWiFi" password "MyPassword"
+nmcli dev wifi connect <SSID> password <PASSWORD>
 # 检查连接状态
 nmcli connection show
 ```
