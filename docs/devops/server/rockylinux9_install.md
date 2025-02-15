@@ -1,20 +1,14 @@
-# CentOS Stream 9 安装
+# Rocky Linux 9
+
+> 为什么不是 CentOS 9 ? CentOS 8 以后，变成了 RHEL 的上游分支，不再是那个稳定可靠的 CentOS 了。 Rocky Linux 与 CentOS 同父，延续了 CentOS 的特性。
 
 ## 下载
 - 下载地址：
-  - 官网：https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/iso/
-  - 清华：https://mirrors.tuna.tsinghua.edu.cn/centos-stream/9-stream/BaseOS/x86_64/iso/
-  - 阿里云：https://mirrors.aliyun.com/centos-stream/9-stream/BaseOS/x86_64/iso/
-  - 阿里云镜像站，有丰富的镜像：https://mirrors.aliyun.com/
-- 若需要其他版本，请切换目录
+  - 官网：https://rockylinux.org/zh-CN/download
 
 ## 安装
 
-以下列举已经发现的，与 CentOS7 不一样的地方
-
-- 没有 Minimal包，只有 boot 包
-- 安装过程，可配置 yum 源，按需进行扩展安装
-- 可下载 dvd 全量包进行离线安装 (10G+)
+- 写 U 盘，U 盘启动 ...
 
 ## 分区
 
@@ -23,7 +17,7 @@
 - /boot 1024M
 - /boot/efi 600M
 - /home 10G
-- / 1000G
+- / 100G
 - /data 剩余所有
 - swap 4G (不用也得分配)
 
@@ -38,7 +32,7 @@ vim enpxxx.nmconnection
 # autoconnect=true # 其他配置按需修改
 ```
 
-- 新建连接
+- 新建连接 (正常情况下不需要此步骤)
 
 ```shell
 # 查看网络接口
@@ -58,13 +52,11 @@ nmcli connection show
 - 无线网络
 
 ```shell
-# 安装 wifi 相关工具
-dnf -y install pciutils usbutils
+# 安装 wifi 相关工具 pci 接口查询工具，usb 接口查询工具， wifi 管理工具
+dnf -y install pciutils usbutils NetworkManager-wifi
 # 查看无线网卡
 lspci | grep -i network # 默认网络设备
 lsusb # usb 网络设备
-# 安装 wifi 管理工具
-dnf -y install NetworkManager-wifi # wireless-tools 没有这个工具
 # 重启网络服务
 systemctl restart NetworkManager
 

@@ -357,8 +357,8 @@ export default withMermaid({
             {text: '操作系统', link: '/devops/server/'},
             {text: '常用命令', link: '/devops/server/command'},
             {text: 'Centos7初始化', link: '/devops/server/centos7_init'},
-            {text: 'Centos9安装', link: '/devops/server/centos9_install'},
-            {text: 'Centos9初始化', link: '/devops/server/centos9_init'},
+            {text: 'Rockylinux9安装', link: '/devops/server/rockylinux9_install'},
+            {text: 'Rockylinux9初始化', link: '/devops/server/rockylinux9_init'},
             {text: '内核', link: '/devops/server/kernel'},
           ]
         }
