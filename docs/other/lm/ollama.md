@@ -36,6 +36,7 @@
 - 配置：`vim /etc/systemd/system/ollama.service` (可以多个Environment共存)
   - 配置访问地址：`Environment="OLLAMA_HOST=0.0.0.0:11434"`
   - 配置模型路径：`Environment="OLLAMA_MODELS=/data/ollama/models"`
+  - 允许跨域访问：`Environment="OLLAMA_ORIGINS=*"`
   - 加载 service: `systemctl daemon-reload`
 - 使用 systemctl 管理 ollama
 
