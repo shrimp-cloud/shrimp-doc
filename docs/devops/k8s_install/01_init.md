@@ -4,7 +4,7 @@
 > 当前章节为 Linux 基础知识，只记录操作命令，若与 k8s 不紧密，将不讲解操作原因，而是只放命令
 
 ### 要求
-- 系统：Centos7.x
+- 系统：Rocky Linux 9
 - CPU: 2C+
 - 内存: 4G+
 
@@ -24,15 +24,15 @@ vim .ssh/authorized_keys
 ### 修改主机名
 - 建议按一定的规范设置主机名
 ```shell
-hostname k8s-master
-hostname k8s-node01
-hostname k8s-node02
+hostnamectl set-hostname master01
+hostnamectl set-hostname node01
+hostnamectl set-hostname node02
 ```
 
 ### 更新系统
 - 更新系统，是每个新系统都建议做的事
 ```shell
-yum update -y
+dnf update -y
 ```
 
 ### 关闭 selinux
@@ -63,7 +63,7 @@ systemctl disable firewalld
 
 ### 基础依赖安装
 ```shell
-yum install -y yum-utils epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make cmake curl curl-devel sudo ntp
+dnf -y install epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make cmake curl curl-devel sudo ntp
 ```
 
 ### 时间同步
@@ -128,13 +128,13 @@ vim /etc/hosts
 
 添加如下内容
 ```shell
-192.168.0.101 k8s-master01
-192.168.0.102 k8s-master02
-192.168.0.103 k8s-master03
+192.168.0.101 master01
+192.168.0.102 master02
+192.168.0.103 master03
 
-192.168.0.111 k8s-node01
-192.168.0.112 k8s-node02
-192.168.0.113 k8s-node03
+192.168.0.111 node01
+192.168.0.112 node02
+192.168.0.113 node03
 # 其他更多 node
 ```
 

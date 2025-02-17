@@ -9,7 +9,7 @@
 wget -O /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 # 安装 docker
-yum install -y docker-ce
+dnf -y install docker-ce
 ```
 Tips: device-mapper-persistent-data lvm2: 存储驱动
 

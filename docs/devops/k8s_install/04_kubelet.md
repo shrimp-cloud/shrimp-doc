@@ -5,7 +5,7 @@
 
 ### 基础依赖
 ```shell
-yum install -y nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack ipvsadm
+dnf -y install nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack ipvsadm
 ```
 
 ### 配置 repo
@@ -23,7 +23,7 @@ gpgcheck=0
 
 安装 kubelet kubeadm kubectl
 ```shell
-yum install -y kubelet kubeadm kubectl
+dnf -y install kubelet kubeadm kubectl
 ```
 Tips:
 - Kubeadm: 初始化集群的工具包
@@ -44,7 +44,7 @@ kubeadm config print init-defaults > kubeadm.yaml
 1. 修改控制节点的IP: advertiseAddress 为 master 地址
 2. 指定 containerd 容器运行时: criSocket: unix:///run/containerd/containerd.sock
 3. 修改 name: node 为自己的名字，示例: `k8s-master`
-3. 修改镜像仓库地址为阿里云：imageRepository:  registry.cn-hangzhou.aliyuncs.com/google_containers
+3. 修改镜像仓库地址为阿里云：imageRepository:  registry.cn-hangzhou.aliyuncs.com/google_containers #若能获取到镜像，则不需要
 4. 指定Pod网段（在dnsDomain下方添加）: podSubnet: 10.12.0.0/16
 5. 配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
 ```shell

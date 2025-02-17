@@ -6,7 +6,7 @@
 ### 安装 containerd 服务
 
 ```shell
-yum install -y containerd.io
+dnf -y install containerd.io
 mkdir -p /etc/containerd
 containerd config default > /etc/containerd/config.toml
 ```
@@ -17,6 +17,7 @@ containerd config default > /etc/containerd/config.toml
 ```shell
 # vim /etc/containerd/config.toml
 SystemdCgroup = true
+# 以下镜像若获取不了，才需要替换
 sandbox_image = "registry.aliyuncs.com/google_containers/pause:latest"
 ```
 
@@ -31,7 +32,7 @@ debug: false
 
 
 ### 配置 containerd 镜像加速
-- 阿里云镜像仓库不再提供给阿里云服务以外的应用使用
+- 阿里云镜像仓库不再提供给阿里云服务以外的应用使用 【若有其他镜像获取方法，可不配置】
 ```shell
 # vim /etc/containerd/config.toml
 config_path = "/etc/containerd/certs.d"
