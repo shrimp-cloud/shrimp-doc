@@ -41,7 +41,7 @@ export default withMermaid({
           { text: 'Java', link: '/backend/java/' },
           { text: 'Spring', link: '/backend/spring/' },
           { text: '框架', link: '/backend/framework/' },
-          { text: '组件', link: '/backend/comp_app/' },
+          { text: '组件', link: '/backend/component/' },
           { text: '逻辑设计', link: '/backend/design/' },
           { text: '三方服务集成', link: '/backend/third/' },
         ]
@@ -128,7 +128,7 @@ export default withMermaid({
             {text: 'RoutingDataSource', link: '/backend/spring/RoutingDataSource'},
             {text: 'String路径', link: '/backend/spring/path'},
             {text: 'Spring本地Jar', link: '/backend/spring/LocalJar'},
-            {text: '打包非Jara文件', link: '/backend/spring/NotOnlyJava'},
+            {text: '打包非Java文件', link: '/backend/spring/NotOnlyJava'},
             {text: '重写Bean', link: '/backend/spring/OverrideSpringBean'},
           ]
         }
