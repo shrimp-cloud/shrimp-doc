@@ -12,12 +12,17 @@
 
 ## 已建设的微模块
 
-| 组件名称                                  | 组件用途 |
-|---------------------------------------|------|
-| [shrimp-micro-audit](./audit.md)      | 字典   |
-| [shrimp-micro-dict](./dict.md)        | 字典   |
-| [shrimp-micro-file-system](./file.md) | 文件系统 |
-| [shrimp-micro-mask](./mask.md)        | 脱敏   |
-| [shrimp-micro-msg](./msg.md)          | 站内消息 |
-| [shrimp-micro-report](./report.md)    | 报表   |
+| 组件名称                                   | 组件用途       |
+|----------------------------------------|------------|
+| [shrimp-micro-audit](./audit.md)       | 审计日志       |
+| [shrimp-micro-dict](./dict.md)         | 字典         |
+| [shrimp-micro-file-system](./file.md)  | 文件系统       |
+| [shrimp-micro-form](./form.md)         | 动态表单       |
+| [shrimp-micro-liteflow](./liteflow.md) | LiteFlow流程 |
+| [shrimp-micro-mask](./mask.md)         | 脱敏         |
+| [shrimp-micro-msg](./msg.md)           | 站内消息       |
+| [shrimp-micro-next](./next.md)         | 智能接口       |
+| [shrimp-micro-pdf](./pdf.md)           | PDF模板      |
+| [shrimp-micro-report](./report.md)     | 报表         |
+| [shrimp-micro-seq](./seq.md)           | 序列生成       |
 

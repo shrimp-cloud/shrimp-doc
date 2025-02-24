@@ -26,6 +26,7 @@
 | cms  | 内容       | [文档](http://doc.wkclz.com/cms/)  |
 | oms  | 订单       | [文档](http://doc.wkclz.com/oms/)  |
 | pay  | 支付       | [文档](http://doc.wkclz.com/pay/)  |
+| flow | 流程       | [文档](http://doc.wkclz.com/flow/) |
 
 
 - [系统管理](./sys/sys.md)
