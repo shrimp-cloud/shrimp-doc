@@ -62,6 +62,9 @@ cgroupDriver: systemd
 ```shell
 systemctl enable kubelet --now
 systemctl restart containerd
+# 提前拉取镜像
+kubeadm config images pull
+# 初始化集群
 kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 ```
 
