@@ -23,7 +23,7 @@ CREATE TABLE `mdm_mask_rule` (
      `mask_json_path` varchar(127)  DEFAULT NULL COMMENT '脱敏数据路径',
      `mask_rule_regular` varchar(256) DEFAULT NULL COMMENT '脱敏正则',
      `mask_rule_script` varchar(4095) DEFAULT NULL COMMENT '脱敏函数',
-     `enable_flag` int DEFAULT NULL COMMENT '可用状态',
+     `enable_flag` int NOT NULL DEFAULT '1' COMMENT '可用状态',
      `mock_value` varchar(255) DEFAULT NULL COMMENT '示例值',
      `sort` int NOT NULL DEFAULT '0' COMMENT '排序',
      `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
