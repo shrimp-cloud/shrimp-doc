@@ -502,6 +502,8 @@ export default withMermaid({
           items: [
             {text: '大模型', link: '/ai/lm/'},
             {text: 'Ollama', link: '/ai/lm/ollama'},
+            {text: '设备', link: '/ai/lm/equipment'},
+            {text: '安装', link: '/ai/lm/install'},
           ]
         }
       ],
@@ -545,16 +547,6 @@ export default withMermaid({
             {text: '安装', link: '/other/opencv/install'},
             {text: '基础', link: '/other/opencv/base'},
             {text: '接口', link: '/other/opencv/apis'},
-          ]
-        }
-      ],
-      '/other/lm/': [
-        {
-          text: '大模型',
-          items: [
-            {text: '大模型', link: '/other/lm/'},
-            {text: '设备', link: '/other/lm/equipment'},
-            {text: '安装', link: '/other/lm/install'},
           ]
         }
       ],
