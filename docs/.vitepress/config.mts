@@ -502,6 +502,7 @@ export default withMermaid({
           items: [
             {text: '大模型', link: '/ai/lm/'},
             {text: 'Ollama', link: '/ai/lm/ollama'},
+            {text: 'MaxKB', link: '/ai/lm/MaxKB'},
             {text: '设备', link: '/ai/lm/equipment'},
           ]
         }
