@@ -17,7 +17,7 @@ yum install libaio.x86_64 -y
 ### 安装包下载
 
 - 官网下载地址：https://dev.mysql.com/downloads/mysql/
-- 选择RHEL7, x86_64版本 RPM Bundle包
+- 选择RHEL9, x86_64版本 RPM Bundle包
 
 
 ### mysql安装
