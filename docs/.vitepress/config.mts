@@ -89,13 +89,19 @@ export default withMermaid({
         ]
       },
       {
+        text: 'AI',
+        items: [
+          { text: '机器学习', link: '/ai/ml/' },
+          { text: '大模型', link: '/ai/lm/' },
+        ]
+      },
+      {
         text: '其他',
         items: [
           { text: 'GO基础', link: '/other/go/' },
           { text: 'Arduino', link: '/other/arduino/' },
           { text: 'Python', link: '/other/python/' },
           { text: 'OpenCV', link: '/other/opencv/' },
-          { text: 'LM 大模型', link: '/other/lm/' },
         ]
       },
     ],
@@ -192,7 +198,6 @@ export default withMermaid({
           ]
         }
       ],
-
 
       '/front/vue/': [
         {
@@ -350,7 +355,6 @@ export default withMermaid({
         }
       ],
 
-
       '/devops/server/': [
         {
           text: '操作系统',
@@ -364,7 +368,6 @@ export default withMermaid({
           ]
         }
       ],
-
       '/devops/comp_ser/': [
         {
           text: '服务器组件',
@@ -377,7 +380,6 @@ export default withMermaid({
           ]
         }
       ],
-
       '/devops/comp_app/': [
         {
           text: '应用器组件',
@@ -407,8 +409,6 @@ export default withMermaid({
           ]
         }
       ],
-
-
       '/devops/k8s_install/': [
         {
           text: 'Kubernetes 安装',
@@ -431,7 +431,6 @@ export default withMermaid({
           ]
         }
       ],
-
       '/devops/k8s_guide/': [
         {
           text: 'Kubernetes 使用',
@@ -446,7 +445,6 @@ export default withMermaid({
           ]
         }
       ],
-
 
       '/base/common/': [
         {
@@ -485,6 +483,25 @@ export default withMermaid({
           items: [
             {text: '前端规范', link: '/base/standard-frontend/'},
             {text: '框架', link: '/base/standard-frontend/framework'},
+          ]
+        }
+      ],
+
+      '/ai/ml/': [
+        {
+          text: 'ML',
+          items: [
+            {text: '机器学习', link: '/ai/ml/'},
+            {text: '未开始', link: '/ai/ml/init'},
+          ]
+        }
+      ],
+      '/ai/lm/': [
+        {
+          text: 'LM',
+          items: [
+            {text: '大模型', link: '/ai/lm/'},
+            {text: 'Ollama', link: '/ai/lm/ollama'},
           ]
         }
       ],
@@ -538,7 +555,6 @@ export default withMermaid({
             {text: '大模型', link: '/other/lm/'},
             {text: '设备', link: '/other/lm/equipment'},
             {text: '安装', link: '/other/lm/install'},
-            {text: 'Ollama', link: '/other/lm/ollama'},
           ]
         }
       ],
