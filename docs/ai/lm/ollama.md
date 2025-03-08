@@ -1,14 +1,60 @@
 # Ollama
 
-## Install
+Ollama 是一个用于管理和运行大型语言模型的工具。它提供了以下主要功能：
 
-### download
+1. 模型管理：支持下载、删除、拷贝和推送模型。
+2. 模型运行：可以运行本地或远程的模型，并与之交互。
+3. 跨平台支持：支持在 macOS 和 Linux 系统上安装和使用。
+4. 命令行工具：提供了一系列命令行工具来管理模型，如 ollama list、ollama pull、ollama run 等。
+
+Ollama 使得开发者能够更方便地使用和实验各种大型语言模型，如 GPT 等。
+
+## 基础信息
 
 - https://ollama.com/download
 - ollama 支持的所有模型: https://ollama.com/library
 
+## 在 Mac 上安装 Ollama
 
-### ollama 命令
+- visit: https://ollama.com/download
+- dowmload: 【Download for Mac】
+- unzip and move to Application
+
+## 在 Windows 上安装 Ollama
+
+- visit: https://ollama.com/download
+- dowmload: 【Download for Windows】
+- 使用安装向导进行安装即可
+
+## 在 Linux 上安装 Ollama
+
+- visit: https://ollama.com/download
+- install: `curl -fsSL https://ollama.com/install.sh | sh`
+- 配置：`vim /etc/systemd/system/ollama.service` (可以多个Environment共存)
+  - 配置访问地址：`Environment="OLLAMA_HOST=0.0.0.0:11434"`
+  - 配置模型路径：`Environment="OLLAMA_MODELS=/data/ollama/models"`
+  - 允许跨域访问：`Environment="OLLAMA_ORIGINS=*"`
+  - 加载 service: `systemctl daemon-reload`
+- 使用 systemctl 管理 ollama
+
+## 下载模型
+
+- run: `ollama pull qwen2.5:7b`
+
+## 启动/停止模型
+
+- run:  `ollama run qwen2.5:7b`
+- stp: `/bye`
+
+
+## 模型UI
+
+- enchanted: https://github.com/AugustDev/enchanted
+- Cherry Studio: https://cherry-ai.com/download
+  - 安装，添加模型
+
+
+## ollama 命令
 | 命令          | 用途      |
 |-------------|---------|
 | ollama      | 使用帮助    |
@@ -20,53 +66,12 @@
 | ollama rm   | 删除一个模型  |
 | ollama run  | 运行一个模型  |
 
-### Install on Mac
-
-- install:
-  - unzip and move to Application
-  - run:  `ollama run qwen2.5:7b` # 无则下载，有则安装
-  - stp: `/bye`
-
-- ui
-  - enchanted: https://github.com/AugustDev/enchanted
-
-### Install on Rockylinux9
-
-- install:`curl -fsSL https://ollama.com/install.sh | sh`
-- 配置：`vim /etc/systemd/system/ollama.service` (可以多个Environment共存)
-  - 配置访问地址：`Environment="OLLAMA_HOST=0.0.0.0:11434"`
-  - 配置模型路径：`Environment="OLLAMA_MODELS=/data/ollama/models"`
-  - 允许跨域访问：`Environment="OLLAMA_ORIGINS=*"`
-  - 加载 service: `systemctl daemon-reload`
-- 使用 systemctl 管理 ollama
-
-```shell
-# curl -fsSL https://ollama.com/install.sh | sh
->>> Installing ollama to /usr/local
->>> Downloading Linux amd64 bundle
-######################################################################## 100.0%
->>> Creating ollama user...
->>> Adding ollama user to render group...
->>> Adding ollama user to video group...
->>> Adding current user to ollama group...
->>> Creating ollama systemd service...
->>> Enabling and starting ollama service...
-Created symlink /etc/systemd/system/default.target.wants/ollama.service → /etc/systemd/system/ollama.service.
->>> The Ollama API is now available at 127.0.0.1:11434.
->>> Install complete. Run "ollama" from the command line.
-WARNING: No NVIDIA/AMD GPU detected. Ollama will run in CPU-only mode.
-```
-
-- 下载模型：`ollama pull qwen2.5:7b`
-- 运行模型：`ollama run qwen2.5:7b`
-- 停止模型：`/bye`
 
 
-- 集显识别了也用不了。。以下 GPU 相关内容不做参考。。
+## 其他(非重点)
 
-### others
 
-#### kvm gpu 虚拟化
+### kvm gpu 虚拟化
 
 ```shell
 # 安装 QEMU 的 VFIO（Virtual Function I/O）驱动
@@ -101,3 +106,7 @@ systemctl restart libvirtd
     </qemu:commandline>
   </host>
 ```
+
+- 不识别集显，没有独显，无法继续实验。
+
+

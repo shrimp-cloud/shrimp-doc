@@ -503,7 +503,6 @@ export default withMermaid({
             {text: '大模型', link: '/ai/lm/'},
             {text: 'Ollama', link: '/ai/lm/ollama'},
             {text: '设备', link: '/ai/lm/equipment'},
-            {text: '安装', link: '/ai/lm/install'},
           ]
         }
       ],
