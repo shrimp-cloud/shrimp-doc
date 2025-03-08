@@ -29,13 +29,44 @@ Ollama 使得开发者能够更方便地使用和实验各种大型语言模型�
 ## 在 Linux 上安装 Ollama
 
 - visit: https://ollama.com/download
-- install: `curl -fsSL https://ollama.com/install.sh | sh`
+- Install: `curl -fsSL https://ollama.com/install.sh | sh`
+- Manual install:
+  - `curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz`
+  - `tar -C /usr -xzf ollama-linux-amd64.tgz`
+  - `useradd -r -s /bin/false -U -m -d /usr/share/ollama ollama`
+  - `usermod -a -G ollama $(whoami)`
+  - 临时启动: `ollama serve`
+  - 添加 service, 使用 systemctl 管理: 【见下方脚本】
 - 配置：`vim /etc/systemd/system/ollama.service` (可以多个Environment共存)
   - 配置访问地址：`Environment="OLLAMA_HOST=0.0.0.0:11434"`
   - 配置模型路径：`Environment="OLLAMA_MODELS=/data/ollama/models"`
   - 允许跨域访问：`Environment="OLLAMA_ORIGINS=*"`
   - 加载 service: `systemctl daemon-reload`
+  - 若自义了 models 目录，需要给权限：`chown -R ollama:ollama /data/ollama/models/`
 - 使用 systemctl 管理 ollama
+
+
+```shell
+# vim /etc/systemd/system/ollama.service
+[Unit]
+Description=Ollama Service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ollama serve
+User=ollama
+Group=ollama
+Restart=always
+RestartSec=3
+Environment="PATH=$PATH"
+Environment="OLLAMA_HOST=0.0.0.0:11434
+Environment="OLLAMA_MODELS=/data/ollama/models"
+Environment="OLLAMA_ORIGINS=*"
+
+[Install]
+WantedBy=default.target
+```
+
 
 ## 下载模型
 
