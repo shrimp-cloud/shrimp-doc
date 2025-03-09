@@ -492,7 +492,7 @@ export default withMermaid({
           text: 'ML',
           items: [
             {text: '机器学习', link: '/ai/ml/'},
-            {text: '未开始', link: '/ai/ml/init'},
+            {text: '数据标注', link: '/ai/ml/ImageLabeling'},
           ]
         }
       ],
