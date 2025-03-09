@@ -396,6 +396,7 @@ export default withMermaid({
             {text: 'nginx', link: '/devops/comp_app/nginx'},
             {text: 'Samba', link: '/devops/comp_app/samba'},
             {text: 'Squid', link: '/devops/comp_app/squid'},
+            {text: 'frp', link: '/devops/comp_app/frp'},
             {text: 'SFTP', link: '/devops/comp_app/sftp'},
             {text: 'MinIO', link: '/devops/comp_app/minio'},
             {text: 'PHP', link: '/devops/comp_app/php'},
