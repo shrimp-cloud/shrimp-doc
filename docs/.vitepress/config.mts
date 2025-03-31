@@ -156,17 +156,17 @@ export default withMermaid({
           ]
         }
       ],
-      '/backend/comp_app/': [
+      '/backend/component/': [
         {
           text: '组件',
           items: [
-            {text: '组件', link: '/backend/comp_app/'},
-            {text: 'Redis', link: '/backend/comp_app/redis'},
-            {text: 'Spring', link: '/backend/comp_app/spring'},
-            {text: 'Cas', link: '/backend/comp_app/casStarter'},
-            {text: 'Mybatis', link: '/backend/comp_app/mybatis'},
-            {text: 'oss', link: '/backend/comp_app/oss'},
-            {text: 'mqtt', link: '/backend/comp_app/mqtt'},
+            {text: '组件', link: '/backend/component/'},
+            {text: 'Redis', link: '/backend/component/redis'},
+            {text: 'Spring', link: '/backend/component/spring'},
+            {text: 'Cas', link: '/backend/component/casStarter'},
+            {text: 'Mybatis', link: '/backend/component/mybatis'},
+            {text: 'oss', link: '/backend/component/oss'},
+            {text: 'mqtt', link: '/backend/component/mqtt'},
           ]
         }
       ],
