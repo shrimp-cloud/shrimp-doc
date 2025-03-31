@@ -336,6 +336,15 @@ export default withMermaid({
           ]
         }
       ],
+      '/ecology/flow/': [
+        {
+          text: 'Flow',
+          items: [
+            {text: 'Flow', link: '/ecology/flow/'},
+            {text: 'Camunda', link: '/ecology/flow/camunda'},
+          ]
+        }
+      ],
       '/ecology/report/': [
         {
           text: '报表',
