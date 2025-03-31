@@ -285,6 +285,8 @@ export default withMermaid({
             {text: '序列生成', link: '/ecology/micro/seq'},
             {text: '接口生成', link: '/ecology/micro/next'},
             {text: 'PDF模板', link: '/ecology/micro/pdf'},
+            {text: '微信小程序', link: '/ecology/micro/wxapp'},
+            {text: '微信公众号', link: '/ecology/micro/wxmp'},
           ]
         }
       ],
