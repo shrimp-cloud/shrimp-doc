@@ -65,6 +65,7 @@ export default withMermaid({
           { text: '权限管理', link: '/ecology/cas/' },
           { text: '内容管理', link: '/ecology/cms/' },
           { text: '商城管理', link: '/ecology/pms/' },
+          { text: '流程管理', link: '/ecology/flow/' },
           { text: '报表管理', link: '/ecology/report/' },
           { text: '博客系统', link: '/ecology/blog/' },
         ]
