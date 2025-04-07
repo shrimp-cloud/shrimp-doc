@@ -456,6 +456,7 @@ export default withMermaid({
             {text: 'Yaml语法', link: '/devops/k8s_guide/03_yaml'},
             {text: '应用打包', link: '/devops/k8s_guide/04_apps'},
             {text: 'Ingress使用', link: '/devops/k8s_guide/05_ingress'},
+            {text: 'SSL文件验证', link: '/devops/k8s_guide/06_ssl'},
             {text: '组件', link: '/devops/k8s_guide/99_components'},
           ]
         }
