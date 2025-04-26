@@ -511,6 +511,8 @@ export default withMermaid({
             {text: '数据标注', link: '/ai/ml/01_ImageLabeling'},
             {text: '标注转换为样本', link: '/ai/ml/02_Label2Samples'},
             {text: 'Yolo 参数配置', link: '/ai/ml/03_YoloConfig'},
+            {text: 'Yolo 训练', link: '/ai/ml/04_YoloStudy'},
+            {text: 'Yolo 图像检测', link: '/ai/ml/05_YoloLook'},
           ]
         }
       ],

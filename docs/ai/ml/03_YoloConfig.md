@@ -1,6 +1,8 @@
 # Yolo 参数配置
 
 
+## 配置清单
+
 | 参数名             | 类型      | 默认值    | 说明                                                                                                                                                                                                                                                                                                                                                                            |
 |-----------------|---------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | windowWidth     | int     | 90     | 设置移动检测窗口的宽度。该宽度通常取值范围为检测目标物平均宽度的0.6-1.5倍之间，且所有待检测物与其倍数方差越小越好。                                                                                                                                                                                                                                                                                                                 |
@@ -26,4 +28,28 @@
 | auto            | boolean | false  | 是否使用自适应学习率，当该参数为true时，则学习率会在学习中自适应梯度。                                                                                                                                                                                                                                                                                                                                         |
 | gaMa            | float   | 0.9    | 自适应学习率的衰减系数，该参数通常为0.9f，只有auto为true时该参数才生效。                                                                                                                                                                                                                                                                                                                                    |
 | GMaxTh          | float   | 0.9    | 梯度裁剪阈值，当梯度超过该阈值时，该梯度会被裁剪，防止突发性大梯度，引起梯度爆炸。只有auto为true时该参数才生效。                                                                                                                                                                                                                                                                                                                  |
+
+
+## 配置示例
+
+
+```java
+
+private static void yoloConfig() {
+  // 提前计算出 sampleInfo
+
+  // 训练配置
+  YoloConfig yc = new YoloConfig();
+  yc.setWindowWidth(sampleInfo.getWidthAvg());
+  yc.setWindowHeight(sampleInfo.getHeightAvg());
+  yc.setTypeNub(sampleInfo.getTypeCount());
+  yc.setEnhance(2);
+  yc.setContainIouTh(sampleInfo.getContainIouTh());
+  yc.setCoreNumber(Runtime.getRuntime().availableProcessors());
+  yc.setShowLog(true);
+  // 其他调优参数后续看情况补充
+}
+
+```
+
 
