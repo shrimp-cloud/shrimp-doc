@@ -508,7 +508,9 @@ export default withMermaid({
           text: 'ML',
           items: [
             {text: '机器学习', link: '/ai/ml/'},
-            {text: '数据标注', link: '/ai/ml/ImageLabeling'},
+            {text: '数据标注', link: '/ai/ml/01_ImageLabeling'},
+            {text: '标注转换为样本', link: '/ai/ml/02_Label2Samples'},
+            {text: 'Yolo 参数配置', link: '/ai/ml/03_YoloConfig'},
           ]
         }
       ],
