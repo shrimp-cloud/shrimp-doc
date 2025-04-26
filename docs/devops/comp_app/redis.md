@@ -3,8 +3,8 @@
 ## 主机安装单机版
 
 ```shell script
-yum install -y redis
-vim /etc/redis.conf
+dnf install -y redis
+vim /etc/redis/redis.conf
 daemonize yes  # 进程守护
 # bind 127.0.0.1	# 需要注释掉
 port 16380

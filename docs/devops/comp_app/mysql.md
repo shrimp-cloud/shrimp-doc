@@ -6,12 +6,12 @@
 
 移除mariadb的影响
 ```shell
-yum remove mariadb-libs -y
+dnf remove mariadb-libs -y
 ```
 
 安装 mysql依赖包
 ```shell
-yum install libaio.x86_64 -y
+dnf install libaio.x86_64 -y
 ```
 
 ### 安装包下载
