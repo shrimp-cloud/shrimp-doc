@@ -52,9 +52,36 @@ sysctl -p
 
 ### 关闭 firewalld
 ```shell
+# 关闭防火墙
 systemctl stop firewalld
 systemctl disable firewalld
+
+# 按需开放防火墙
+
+# 定义变量
+POD_CIDR="10.42.0.0/16"          # Pod 网段
+SERVICE_CIDR="10.43.0.0/16"      # Service 网段
+NODE_TCP_PORTS="6443,2379,2380,10250,30000-32767"
+
+# 添加 INPUT 链规则
+firewall-cmd --permanent --add-port=6443/tcp          # Kubernetes API Server
+firewall-cmd --permanent --add-port=2379-2380/tcp     # etcd
+firewall-cmd --permanent --add-port=10250/tcp         # Kubelet API
+firewall-cmd --permanent --add-port=30000-32767/tcp   # NodePort 服务范围
+firewall-cmd --permanent --add-port=179/tcp           # Calico BGP
+firewall-cmd --permanent --add-port=4789/udp          # Flannel VXLAN
+firewall-cmd --permanent --add-port=53/udp            # DNS
+firewall-cmd --permanent --add-port=53/tcp            # DNS
+
+# 添加 FORWARD 链规则
+firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 0 -s $POD_CIDR -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 0 -s $SERVICE_CIDR -j ACCEPT
+
+# 重启防火墙以应用更改
+firewall-cmd --reload
 ```
+
+
 
 ### 设置静态IP
 - 内容忽略，使用云服务器，默认静态 IP
