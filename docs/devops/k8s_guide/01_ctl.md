@@ -2,12 +2,14 @@
 
 > 常用命令
 
-| 命令                               | 含义          | 说明  |
-|----------------------------------|-------------|-----|
-| kubectl get nodes                | 查看 nodes 状态 | -   |
-| kubectl get pod --all-namespaces | 查看所有命名空间pod | -   |
-| kubectl get pod -A               | 同上          | -   |
-| crictl images                    | 查看 现有镜像     | -   |
+| 命令                                                    | 含义          | 说明 |
+|-------------------------------------------------------|-------------|----|
+| kubectl get nodes                                     | 查看 nodes 状态 | -  |
+| kubectl get pod --all-namespaces                      | 查看所有命名空间pod | -  |
+| kubectl get pod -A                                    | 同上          | -  |
+| kubectl edit deployment metrics-server -n kube-system | 编辑yaml      | -  |
+| crictl images                                         | 查看 现有镜像     | -  |
+
 
 ```shell
 # 列举已完成的 pod
