@@ -15,6 +15,12 @@ firewall-cmd --reload
 vim /etc/ssh/sshd_config
 # 将 Port 22 修改为 Port 22222
 
+# 禁用密码认证
+PasswordAuthentication no
+# 确保公钥认证已启用
+PubkeyAuthentication yes
+
+
 # 重启 sshd 让新端口生效
 systemctl restart sshd
 
