@@ -20,7 +20,7 @@ enabled=0
 gpgkey=https://nginx.org/keys/nginx_signing.key
 module_hotfixes=true
 
-yum install nginx -y
+dnf install nginx -y
 systemctl start nginx
 systemctl enable nginx
 
