@@ -16,7 +16,7 @@
 |----------------------------------------|------------|
 | [shrimp-micro-audit](./audit.md)       | 审计日志       |
 | [shrimp-micro-dict](./dict.md)         | 字典         |
-| [shrimp-micro-file-system](./file.md)  | 文件系统       |
+| [shrimp-micro-file](./file.md)         | 文件系统       |
 | [shrimp-micro-form](./form.md)         | 动态表单       |
 | [shrimp-micro-liteflow](./liteflow.md) | LiteFlow流程 |
 | [shrimp-micro-mask](./mask.md)         | 脱敏         |

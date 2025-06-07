@@ -6,7 +6,7 @@
 ```xml
 <dependency>
     <groupId>com.wkclz.micro</groupId>
-    <artifactId>micro-file-system</artifactId>
+    <artifactId>micro-file</artifactId>
     <version>${latest.version}</version>
 </dependency>
 ```
