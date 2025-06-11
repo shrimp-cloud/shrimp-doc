@@ -103,6 +103,7 @@ export default withMermaid({
           { text: 'Arduino', link: '/other/arduino/' },
           { text: 'Python', link: '/other/python/' },
           { text: 'OpenCV', link: '/other/opencv/' },
+          { text: '其他', link: '/other/other/' },
         ]
       },
     ],
@@ -571,6 +572,15 @@ export default withMermaid({
             {text: '安装', link: '/other/opencv/install'},
             {text: '基础', link: '/other/opencv/base'},
             {text: '接口', link: '/other/opencv/apis'},
+          ]
+        }
+      ],
+      '/other/other/': [
+        {
+          text: '其他',
+          items: [
+            {text: '其他', link: '/other/other/'},
+            {text: 'OCR', link: '/other/other/ocr'},
           ]
         }
       ],
