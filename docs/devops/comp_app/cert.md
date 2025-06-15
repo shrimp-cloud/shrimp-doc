@@ -67,6 +67,7 @@ kind: Ingress
 metadata:
   name: my-ingress
   annotations:
+    # 重点，需要与 ClusterIssuer 保持一致
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   tls:
@@ -85,3 +86,4 @@ spec:
                 port:
                   number: 80
 ```
+
