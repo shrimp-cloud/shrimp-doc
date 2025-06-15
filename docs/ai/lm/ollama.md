@@ -59,7 +59,7 @@ Group=ollama
 Restart=always
 RestartSec=3
 Environment="PATH=$PATH"
-Environment="OLLAMA_HOST=0.0.0.0:11434
+Environment="OLLAMA_HOST=0.0.0.0:11434"
 Environment="OLLAMA_MODELS=/data/ollama/models"
 Environment="OLLAMA_ORIGINS=*"
 

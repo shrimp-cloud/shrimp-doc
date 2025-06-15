@@ -526,6 +526,7 @@ export default withMermaid({
           items: [
             {text: '大模型', link: '/ai/lm/'},
             {text: 'Ollama', link: '/ai/lm/ollama'},
+            {text: 'Open WebUI', link: '/ai/lm/webui'},
             {text: 'Dify', link: '/ai/lm/Dify'},
             {text: 'MaxKB', link: '/ai/lm/MaxKB'},
             {text: '设备', link: '/ai/lm/equipment'},
