@@ -5,6 +5,8 @@
 ### 安装  Docker
 安装 docker repo
 ```shell
+# 安装驱动
+yum install -y device-mapper-persistent-data lvm2
 # 安装 repo,以下方式，地址，选择其一
 wget -O /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
