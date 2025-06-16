@@ -425,6 +425,7 @@ export default withMermaid({
             {text: 'VuePress', link: '/devops/comp_app/vuepress'},
             {text: 'WordPress', link: '/devops/comp_app/wordpress'},
             {text: 'Shadowsocks', link: '/devops/comp_app/shadowsocks'},
+            {text: 'Cert', link: '/devops/comp_app/cert'},
           ]
         }
       ],
