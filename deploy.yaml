@@ -1,0 +1,76 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # namespace: prod
+  name: shrimp-doc-ui
+  labels:
+    app: shrimp-doc-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shrimp-doc-ui
+  # 发布策略-平滑发布
+  strategy:
+    # type: Recreate
+    type: RollingUpdate # 资源不足，不能用滚动方式
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: shrimp-doc-ui
+    spec:
+      imagePullSecrets:
+        # 阿里云 Secrets
+        - name: aliyun
+      containers:
+        - name: shrimp-doc-ui
+          # 镜像， flow 会替换此变量
+          image: ${IMAGE}
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # namespace: prod
+  name: shrimp-doc-ui-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http-80
+  selector:
+    app: shrimp-doc-ui
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  # namespace: prod
+  name: shrimp-doc-ui-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: doc.wkclz.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: shrimp-doc-ui-svc
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - doc.wkclz.com
+      secretName: doc.wkclz.com
+
