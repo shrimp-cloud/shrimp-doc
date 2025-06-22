@@ -71,6 +71,52 @@ CREATE TABLE `mdm_fs_files` (
 - [shrimp-mdm-ui](https://github.com/shrimp-cloud/shrimp-mdm-ui) 项目中的 【文件系统】
 
 
+### 使用案例
+
+```java
+@Slf4j
+@Component
+public class FileDemo {
+
+  @Autowired
+  private FsApi fsApi;
+  public void test() {
+    /**
+     * 上传
+     */
+    MdmFsFilesDto result;
+    // 上传到默认分类
+    result = fsApi.upload(file);
+    // 上传到 businessType 分类
+    result = fsApi.upload(file, businessType);
+    // 上传到公共读(慎重，不受保护)
+    result = fsApi.uploadPublic(file);
+
+
+    /**
+     * 签名下载
+     */
+    // 单个签名(支持逗号分隔多个图片)
+    entity.setImage(fsApi.sign(dto.getImage()));
+    // 单个签名(支持逗号分隔多个图片)
+    fsApi.sign(dto, Entity::getImage, Entity::setImage);
+    // 批量签名(能批量就不要用单个)
+    fsApi.sign(list, Entity::getImage, Entity::setImage);
+    // 签名文本中出现的所有附件
+    fsApi.signContent(content);
+
+    /**
+     * 删除
+     */
+    // 删除单个
+    fsApi.delete(fileId);
+    // 删除批量
+    fsApi.delete(fileIds);
+  }
+}
+```
+
+
 
 ## 功能使用
 
