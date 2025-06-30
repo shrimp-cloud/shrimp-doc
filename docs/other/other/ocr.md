@@ -16,14 +16,14 @@ dnf install -y tesseract tesseract-langpack-chi-sim tesseract-langpack-eng
 - tesseract-langpack-chi-sim: 安装失败，提示不存在
 - 语言包位置：/usr/share/tesseract/tessdata
 - 手动下载: wget https://github.com/tesseract-ocr/tessdata/raw/main/chi_sim.traineddata
-
+- 各语言包下载：https://github.com/tesseract-ocr/tessdata
 
 ## 使用
 
 - OCR 识别
 
 ```shell
-tesseract image.png output -l chi-sim
+tesseract image.png output -l chi_sim
 
 ```
 
@@ -39,12 +39,14 @@ WORKDIR /apps
 
 RUN dnf makecache && \
     dnf update -y && dnf install -y epel-release zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
-    dnf install -y tesseract tesseract-langpack-chi-sim tesseract-langpack-eng && \
-    dnf config-manager --set-enabled crb && \\
     dnf clean all && \
     ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     fc-cache -fv && \
     echo "alias ll='ls -l'" >> ~/.bashrc
+
+RUN dnf install -y tesseract tesseract-devel leptonica leptonica-devel tesseract-langpack-eng && \
+    dnf config-manager --set-enabled crb
+
 
 VOLUME [ "/sys/fs/cgroup" ]
 
