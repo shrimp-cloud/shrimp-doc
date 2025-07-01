@@ -9,9 +9,43 @@
 - 主程序下载：https://github.com/cloudreve/Cloudreve/releases
 - `tar -zxvf cloudreve_*`
 - `chmod +x ./cloudreve`
-- `nohup ./cloudreve &` # 启动过程会打印初始 账号：admin@cloudreve.org,  密码: Z7Sbh1Ji
+- `nohup ./cloudreve > cloudreve.log 2>&1 &` # 启动过程会打印初始 账号：admin@cloudreve.org,  密码: Z7Sbh1Ji
+- 问题：一定时间之后自动挂了
 - systemctl 方式，见：https://docs.cloudreve.org/getting-started/install
 - 默认端口：`5212`, 使用 nginx 代理一层，以不需要记忆此端口
+-
+
+## 使用 systemctl 管理
+
+- 创建一个 systemd 服务文件
+```shell
+vim /etc/systemd/system/cloudreve.service
+```
+
+- 添加内容
+```shell
+[Unit]
+Description=Cloudreve
+After=network.target
+
+[Service]
+WorkingDirectory=/root/cloudreve
+ExecStart=/root/cloudreve/cloudreve
+Restart=always
+User=root
+Environment=PORT=5212
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- 运行
+```shell
+systemctl daemon-reload
+systemctl enable --now cloudreve
+systemctl start cloudreve
+systemctl status cloudreve
+```
 
 ## 使用
 
