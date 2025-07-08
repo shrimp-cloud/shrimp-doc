@@ -96,3 +96,15 @@ systemctl enable cockpit.socket
 - 移除多余的系统镜像，正常启动
 
 
+## 命令
+- 假设要操作的虚拟机为： rocky9-vm
+
+| 命令                       | 说明      |
+|--------------------------|---------|
+| virsh list --all         | 列举所有虚拟机 |
+| virsh start rocky9-vm    | 启动虚拟机   |
+| virsh shutdown rocky9-vm | 停止虚拟机   |
+| virsh destroy rocky9-vm  | 强制停止虚拟机 |
+| virsh undefine rocky9-vm | 删除虚拟机   |
+
+
