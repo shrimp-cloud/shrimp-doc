@@ -90,7 +90,7 @@ firewall-cmd --reload
 
 ### 基础依赖安装
 ```shell
-dnf -y install epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make cmake curl curl-devel sudo ntp
+dnf -y install epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make cmake curl curl-devel
 ```
 
 ### 时间同步

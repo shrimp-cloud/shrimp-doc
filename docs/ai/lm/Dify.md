@@ -3,11 +3,15 @@
 > Dify 是一款开源的大语言模型(LLM) 应用开发平台。它融合了后端即服务（Backend as Service）和 LLMOps 的理念，使开发者可以快速搭建生产级的生成式 AI 应用。即使你是非技术人员，也能参与到 AI 应用的定义和数据运营过程中。
 
 
-## OS X安装
+## 前置条件
+
+- 安装 Docker: 请参照 k8s 安装中的 Docker 章节
+
+## 安装过程
 
 ```shell
 # 拉取代码
-git clone https://github.com/langgenius/dify.git --branch 0.15.3
+git clone https://github.com/langgenius/dify.git
 # 进入 Docker 目录
 cd dify/docker
 # 配置文件
@@ -38,5 +42,9 @@ docker compose up -d
 - 报网络连接问题：请爬墙
 - 报没有docker-credential-desktop： 在 `~/.docker/config.json` 中将 credsStore 配置居空引号
 - 报：incorrect username or password：需要 `docker login`
+
+
+## 使用
+
 
 
