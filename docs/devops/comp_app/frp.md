@@ -62,3 +62,59 @@ customDomains = ["www.example.com"]
 ```
 
 - 启动: `nohup ./frpc -c ./frpc.toml &` (建议配置为 systemd)
+
+
+## 注册为服务
+
+##  创建 frps.service
+
+```shell
+# vim /etc/systemd/system/frps.service
+
+[Unit]
+# 服务名称，可自定义
+Description = frp server
+After = network.target syslog.target
+Wants = network.target
+
+[Service]
+Type = simple
+# 启动frps的命令，需修改为您的frps的安装路径
+ExecStart = /path/to/frps -c /path/to/frps.toml
+
+[Install]
+WantedBy = multi-user.target
+
+# 重新加载： systemctl daemon-reload
+```
+
+
+## frpc 配置ssh
+
+```toml
+serverAddr = "x.x.x.x"
+serverPort = 7000
+
+[[proxies]]
+name = "ssh"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 6000
+```
+
+
+## 操作命令
+
+```shell
+# 启动frp
+systemctl start frps
+# 停止frp
+systemctl stop frps
+# 重启frp
+systemctl restart frps
+# 查看frp状态
+systemctl status frps
+# 自启动
+systemctl enable frps
+```
