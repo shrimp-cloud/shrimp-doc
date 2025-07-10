@@ -94,6 +94,11 @@ dnf -y install epel-release vim net-tools numactl fontconfig lrzsz zip unzip wge
 ```
 
 ### 时间同步
+
+- 设置时区: `timedatectl set-timezone Asia/Shanghai`
+
+- RHEL 7
+
 ```shell
 yum install -y ntp
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -107,6 +112,22 @@ crontab -e
 systemctl restart rsyslog
 systemctl restart crond
 ```
+
+- Rocky Linux 9
+
+```shell
+# 安装chrony
+dnf install chrony
+# 自动启动
+systemctl enable chronyd
+# 启动
+systemctl start chronyd
+# 进行一次时间同步
+chronyc makestep
+# 查看时间同步状态
+chronyc sources -v
+```
+
 
 
 ### 修改内核参数
