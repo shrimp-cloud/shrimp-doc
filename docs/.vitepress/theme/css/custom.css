@@ -1,0 +1,8 @@
+
+:root {
+  --vp-layout-max-width: 100vw;
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: 100vw !important;
+}
