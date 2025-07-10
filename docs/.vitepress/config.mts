@@ -84,7 +84,6 @@ export default withMermaid({
         text: '运维',
         items: [
           { text: '操作系统', link: '/devops/server/' },
-          { text: '服务器组件', link: '/devops/comp_ser/' },
           { text: '应用组件', link: '/devops/comp_app/' },
           { text: 'k8s集群安装', link: '/devops/k8s_install/' },
           { text: 'k8s相关使用', link: '/devops/k8s_guide/' },
@@ -385,7 +384,7 @@ export default withMermaid({
         }
       ],
 
-      '/linux/system': [
+      '/linux/system/': [
         {
           text: '系统维护',
           items: [
@@ -393,20 +392,29 @@ export default withMermaid({
             {text: '内核', link: '/linux/system/kernel'},
           ]
         },
+      ],
+
+      '/linux/command/': [
         {
           text: '常用命令',
           items: [
             {text: '常用命令', link: '/linux/command/'},
+            {text: '基础命令', link: '/linux/command/base'},
             {text: 'Dnf', link: '/linux/command/dnf'},
             {text: 'Yum', link: '/linux/command/yum'},
             {text: 'Systemd', link: '/linux/command/systemd'},
             {text: 'Firewalld', link: '/linux/command/firewalld'},
+            {text: 'iptables', link: '/linux/command/iptables'},
           ]
         },
+      ],
+
+      '/linux/component/': [
         {
           text: '扩展组件',
           items: [
             {text: '扩展组件', link: '/linux/component/'},
+            {text: 'KVM', link: '/linux/component/kvm'},
           ]
         },
       ],
@@ -420,18 +428,6 @@ export default withMermaid({
             {text: 'Centos7初始化', link: '/devops/server/centos7_init'},
             {text: 'Rockylinux9安装', link: '/devops/server/rockylinux9_install'},
             {text: 'Rockylinux9初始化', link: '/devops/server/rockylinux9_init'},
-          ]
-        }
-      ],
-      '/devops/comp_ser/': [
-        {
-          text: '服务器组件',
-          items: [
-            {text: '基础命令', link: '/devops/comp_ser/'},
-            {text: 'iptables', link: '/devops/comp_ser/iptables'},
-            {text: 'KVM', link: '/devops/comp_ser/kvm'},
-            {text: 'systemd', link: '/devops/comp_ser/systemd'},
-            {text: 'yum', link: '/devops/comp_ser/yum'},
           ]
         }
       ],
