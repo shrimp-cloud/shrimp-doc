@@ -379,8 +379,8 @@ export default withMermaid({
         {
           text: '系统维护',
           items: [
-            {text: '系统', link: '/linux/system/'},
-            {text: '内核', link: '/linux/system/kernel'},
+            {text: 'Linux 介绍', link: '/linux/system/'},
+            {text: 'Linux 内核', link: '/linux/system/kernel'},
             {text: 'Centos7初始化', link: '/linux/system/centos7_init'},
             {text: 'Rockylinux9安装', link: '/linux/system/rockylinux9_install'},
             {text: 'Rockylinux9初始化', link: '/linux/system/rockylinux9_init'},
