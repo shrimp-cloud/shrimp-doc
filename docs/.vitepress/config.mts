@@ -101,9 +101,6 @@ export default withMermaid({
       {
         text: '其他',
         items: [
-          { text: 'GO基础', link: '/other/go/' },
-          { text: 'Arduino', link: '/other/arduino/' },
-          { text: 'Python', link: '/other/python/' },
           { text: 'OpenCV', link: '/other/opencv/' },
           { text: '其他', link: '/other/other/' },
         ]
