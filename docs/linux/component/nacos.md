@@ -8,7 +8,7 @@
 - 也可以下载源码自行编译
 
 ### 准备
-- JDK安装，见JDK章节：[JDK](jdk.md)
+- JDK安装，见JDK章节：[JDK](../../backend/lang/java/jdk.md)
 - MySQL安装，见MySQL章节：[MySQL](mysql.md)
 
 ### 安装

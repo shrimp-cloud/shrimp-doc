@@ -38,10 +38,10 @@ export default withMermaid({
       {
         text: '后端',
         items: [
-          { text: 'Java', link: '/backend/java/' },
-          { text: 'Spring', link: '/backend/spring/' },
+          { text: '语言', link: '/backend/lang/' },
           { text: '框架', link: '/backend/framework/' },
           { text: '组件', link: '/backend/component/' },
+          { text: 'Spring', link: '/backend/spring/' },
           { text: '逻辑设计', link: '/backend/design/' },
           { text: '三方服务集成', link: '/backend/third/' },
         ]
@@ -112,42 +112,45 @@ export default withMermaid({
 
 
     sidebar: {
-      '/backend/java/': [
+      '/backend/lang/': [
         {
-          text: '后端',
+          text: 'JAVA',
           items: [
-            { text: 'Java', link: '/backend/java' },
-            { text: '缓存', link: '/backend/java/cache' },
-            { text: 'JVM', link: '/backend/java/jvm' },
-            { text: 'GraalVM', link: '/backend/java/GraalVM' },
-            { text: 'Dubbo', link: '/backend/java/dubbo' },
-            { text: 'Camunda', link: '/backend/java/camunda' }
+            {text: 'JDK', link: '/backend/lang/java/jdk'},
+            { text: 'GraalVM', link: '/backend/lang/java/GraalVM' },
+            { text: 'JVM命令', link: '/backend/lang/java/jvm' },
+          ]
+        },
+        {
+          text: 'Go',
+          items: [
+            {text: '初始化', link: '/backend/lang/go/init'},
+            {text: '网页', link: '/backend/lang/go/web'},
+          ]
+        },
+        {
+          text: 'Python',
+          items: [
+            {text: '环境', link: '/backend/lang/python/env'},
+            {text: 'PyCharm', link: '/backend/lang/python/pycharm'},
+            {text: 'Django', link: '/backend/lang/python/django'},
+            {text: 'MicropPthon', link: '/backend/lang/python/micropython'},
+          ]
+        },
+        {
+          text: 'Arduino',
+          items: [
+            {text: '安装', link: '/backend/lang/arduino/install'},
+            {text: '代码片断', link: '/backend/lang/arduino/code_snippet'},
           ]
         }
       ],
 
-      '/backend/spring/': [
-        {
-          text: 'Spring',
-          items: [
-            {text: 'Spring', link: '/backend/spring/'},
-            {text: '反射', link: '/backend/spring/reflect'},
-            {text: 'PostConstruct', link: '/backend/spring/PostConstruct'},
-            {text: 'BeanPostProcessor', link: '/backend/spring/BeanPostProcessor'},
-            {text: 'IocBeanLifeCycle', link: '/backend/spring/IocBeanLifeCycle'},
-            {text: 'ApplicationListener', link: '/backend/spring/ApplicationListener'},
-            {text: 'RoutingDataSource', link: '/backend/spring/RoutingDataSource'},
-            {text: 'String路径', link: '/backend/spring/path'},
-            {text: 'Spring本地Jar', link: '/backend/spring/LocalJar'},
-            {text: '打包非Java文件', link: '/backend/spring/NotOnlyJava'},
-            {text: '重写Bean', link: '/backend/spring/OverrideSpringBean'},
-          ]
-        }
-      ],
       '/backend/framework/': [
         {
           text: '框架',
           items: [
+
             {text: '框架', link: '/backend/framework/'},
             {text: 'Bom', link: '/backend/framework/bom'},
             {text: 'Parent', link: '/backend/framework/parent'},
@@ -171,6 +174,26 @@ export default withMermaid({
             {text: 'Mybatis', link: '/backend/component/mybatis'},
             {text: 'oss', link: '/backend/component/oss'},
             {text: 'mqtt', link: '/backend/component/mqtt'},
+            { text: 'Dubbo', link: '/backend/component/dubbo' },
+            { text: 'Camunda', link: '/backend/component/camunda' },
+          ]
+        }
+      ],
+      '/backend/spring/': [
+        {
+          text: 'Spring',
+          items: [
+            {text: 'Spring', link: '/backend/spring/'},
+            {text: '反射', link: '/backend/spring/reflect'},
+            {text: 'PostConstruct', link: '/backend/spring/PostConstruct'},
+            {text: 'BeanPostProcessor', link: '/backend/spring/BeanPostProcessor'},
+            {text: 'IocBeanLifeCycle', link: '/backend/spring/IocBeanLifeCycle'},
+            {text: 'ApplicationListener', link: '/backend/spring/ApplicationListener'},
+            {text: 'RoutingDataSource', link: '/backend/spring/RoutingDataSource'},
+            {text: 'String路径', link: '/backend/spring/path'},
+            {text: 'Spring本地Jar', link: '/backend/spring/LocalJar'},
+            {text: '打包非Java文件', link: '/backend/spring/NotOnlyJava'},
+            {text: '重写Bean', link: '/backend/spring/OverrideSpringBean'},
           ]
         }
       ],
@@ -178,6 +201,7 @@ export default withMermaid({
         {
           text: '设计',
           items: [
+            { text: '缓存', link: '/backend/design/cache' },
             {text: '与或', link: '/backend/design/andor'},
             {text: '链路', link: '/backend/design/trace'},
             {text: '灰度发布', link: '/backend/design/gray_release'},
@@ -408,7 +432,6 @@ export default withMermaid({
           text: '扩展组件',
           items: [
             {text: '扩展组件', link: '/linux/component/'},
-            {text: 'JDK', link: '/linux/component/jdk'},
             {text: 'Maven', link: '/linux/component/maven'},
             {text: 'Redis', link: '/linux/component/redis'},
             {text: 'Mysql', link: '/linux/component/mysql'},
@@ -542,37 +565,6 @@ export default withMermaid({
         }
       ],
 
-      '/other/go/': [
-        {
-          text: 'Go',
-          items: [
-            {text: 'Go', link: '/other/go/'},
-            {text: '初始化', link: '/other/go/init'},
-            {text: '网页', link: '/other/go/web'},
-          ]
-        }
-      ],
-      '/other/python/': [
-        {
-          text: 'Python',
-          items: [
-            {text: 'Python', link: '/other/python/'},
-            {text: '环境', link: '/other/python/env'},
-            {text: 'PyCharm', link: '/other/python/pycharm'},
-            {text: 'Django', link: '/other/python/django'},
-            {text: 'MicropPthon', link: '/other/python/micropython'},
-          ]
-        }
-      ],
-      '/other/arduino/': [
-        {
-          text: 'Arduino',
-          items: [
-            {text: 'Arduino', link: '/other/arduino/'},
-            {text: '基础', link: '/other/arduino/base'},
-          ]
-        }
-      ],
       '/other/opencv/': [
         {
           text: 'OpenCV',

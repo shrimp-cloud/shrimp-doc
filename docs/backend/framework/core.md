@@ -36,7 +36,7 @@
         - exception  异常
           - BizException 自定义异常类
         - helper  系统辅助类【内容太多了，将一点点添加】
-          - cache 缓存方案，见[这里](../java/cache.md)
+          - cache 缓存方案，见[这里](../design/cache.md)
           - gen 生成器
             - RedisIdGenHelper 基于redis的ID生成器，可用于生成订单号
             - SystemClock 辅助生成器的锁
