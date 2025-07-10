@@ -74,7 +74,7 @@ export default withMermaid({
       {
         text: 'Linux',
         items: [
-          { text: '系统维护', link: '/linux/system/' },
+          { text: '操作系统', link: '/linux/system/' },
           { text: '常用命令', link: '/linux/command/' },
           { text: '扩展组件', link: '/linux/component/' },
           { text: 'k8s集群安装', link: '/linux/k8s_install/' },
@@ -377,17 +377,18 @@ export default withMermaid({
 
       '/linux/system/': [
         {
-          text: '系统维护',
+          text: '操作系统',
           items: [
             {text: 'Linux 介绍', link: '/linux/system/'},
             {text: 'Linux 内核', link: '/linux/system/kernel'},
-            {text: 'Centos7初始化', link: '/linux/system/centos7_init'},
-            {text: 'Rockylinux9安装', link: '/linux/system/rockylinux9_install'},
-            {text: 'Rockylinux9初始化', link: '/linux/system/rockylinux9_init'},
+            {text: 'RockyLinux9 安装', link: '/linux/system/rockylinux9_install'},
+            {text: 'RockyLinux9 初始化', link: '/linux/system/rockylinux9_init'},
+
+            {text: 'Centos7 初始化', link: '/linux/system/centos7_init'},
+            {text: '磁盘扩容', link: '/linux/system/disk_expansion'},
           ]
         },
       ],
-
       '/linux/command/': [
         {
           text: '常用命令',
@@ -402,7 +403,6 @@ export default withMermaid({
           ]
         },
       ],
-
       '/linux/component/': [
         {
           text: '扩展组件',
@@ -594,6 +594,7 @@ export default withMermaid({
         }
       ],
     },
+
     editLink: {
       text: '编辑此页面',
       pattern: 'https://github.com/shrimp-cloud/shrimp-doc/edit/main/docs/:path'
