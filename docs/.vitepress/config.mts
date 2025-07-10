@@ -77,19 +77,10 @@ export default withMermaid({
           { text: '系统维护', link: '/linux/system/' },
           { text: '常用命令', link: '/linux/command/' },
           { text: '扩展组件', link: '/linux/component/' },
+          { text: 'k8s集群安装', link: '/linux/k8s_install/' },
+          { text: 'k8s相关使用', link: '/linux/k8s_guide/' },
         ]
       },
-
-      {
-        text: '运维',
-        items: [
-          { text: '操作系统', link: '/devops/server/' },
-          { text: '应用组件', link: '/devops/comp_app/' },
-          { text: 'k8s集群安装', link: '/devops/k8s_install/' },
-          { text: 'k8s相关使用', link: '/devops/k8s_guide/' },
-        ]
-      },
-
 
       {
         text: '基础',
@@ -390,6 +381,9 @@ export default withMermaid({
           items: [
             {text: '系统', link: '/linux/system/'},
             {text: '内核', link: '/linux/system/kernel'},
+            {text: 'Centos7初始化', link: '/linux/system/centos7_init'},
+            {text: 'Rockylinux9安装', link: '/linux/system/rockylinux9_install'},
+            {text: 'Rockylinux9初始化', link: '/linux/system/rockylinux9_init'},
           ]
         },
       ],
@@ -414,89 +408,68 @@ export default withMermaid({
           text: '扩展组件',
           items: [
             {text: '扩展组件', link: '/linux/component/'},
+            {text: 'JDK', link: '/linux/component/jdk'},
+            {text: 'Maven', link: '/linux/component/maven'},
+            {text: 'Redis', link: '/linux/component/redis'},
+            {text: 'Mysql', link: '/linux/component/mysql'},
+            {text: 'Nacos', link: '/linux/component/nacos'},
+            {text: 'MQTT', link: '/linux/component/mqtt'},
+            {text: 'Rocketmq', link: '/linux/component/rocketmq'},
+            {text: 'Job', link: '/linux/component/job'},
+            {text: 'nginx', link: '/linux/component/nginx'},
+            {text: 'Samba', link: '/linux/component/samba'},
+            {text: 'Squid', link: '/linux/component/squid'},
+            {text: 'frp', link: '/linux/component/frp'},
+            {text: 'SFTP', link: '/linux/component/sftp'},
+            {text: 'MinIO', link: '/linux/component/minio'},
+            {text: 'PHP', link: '/linux/component/php'},
+            {text: 'CI/CD', link: '/linux/component/cicd'},
+            {text: 'Git', link: '/linux/component/git'},
+            {text: 'Cloudreve', link: '/linux/component/cloudreve'},
+            {text: 'Wiki.js', link: '/linux/component/wikijs'},
+            {text: 'VuePress', link: '/linux/component/vuepress'},
+            {text: 'WordPress', link: '/linux/component/wordpress'},
+            {text: 'Shadowsocks', link: '/linux/component/shadowsocks'},
+            {text: 'Cert', link: '/linux/component/cert'},
             {text: 'KVM', link: '/linux/component/kvm'},
           ]
         },
       ],
-
-      '/devops/server/': [
-        {
-          text: '操作系统',
-          items: [
-            {text: '操作系统', link: '/devops/server/'},
-            {text: '常用命令', link: '/devops/server/command'},
-            {text: 'Centos7初始化', link: '/devops/server/centos7_init'},
-            {text: 'Rockylinux9安装', link: '/devops/server/rockylinux9_install'},
-            {text: 'Rockylinux9初始化', link: '/devops/server/rockylinux9_init'},
-          ]
-        }
-      ],
-      '/devops/comp_app/': [
-        {
-          text: '应用器组件',
-          items: [
-            {text: '应用器组件', link: '/devops/comp_app/'},
-            {text: 'JDK', link: '/devops/comp_app/jdk'},
-            {text: 'Maven', link: '/devops/comp_app/maven'},
-            {text: 'Redis', link: '/devops/comp_app/redis'},
-            {text: 'Mysql', link: '/devops/comp_app/mysql'},
-            {text: 'Nacos', link: '/devops/comp_app/nacos'},
-            {text: 'MQTT', link: '/devops/comp_app/mqtt'},
-            {text: 'Rocketmq', link: '/devops/comp_app/rocketmq'},
-            {text: 'Job', link: '/devops/comp_app/job'},
-            {text: 'nginx', link: '/devops/comp_app/nginx'},
-            {text: 'Samba', link: '/devops/comp_app/samba'},
-            {text: 'Squid', link: '/devops/comp_app/squid'},
-            {text: 'frp', link: '/devops/comp_app/frp'},
-            {text: 'SFTP', link: '/devops/comp_app/sftp'},
-            {text: 'MinIO', link: '/devops/comp_app/minio'},
-            {text: 'PHP', link: '/devops/comp_app/php'},
-            {text: 'CI/CD', link: '/devops/comp_app/cicd'},
-            {text: 'Git', link: '/devops/comp_app/git'},
-            {text: 'Cloudreve', link: '/devops/comp_app/cloudreve'},
-            {text: 'Wiki.js', link: '/devops/comp_app/wikijs'},
-            {text: 'VuePress', link: '/devops/comp_app/vuepress'},
-            {text: 'WordPress', link: '/devops/comp_app/wordpress'},
-            {text: 'Shadowsocks', link: '/devops/comp_app/shadowsocks'},
-            {text: 'Cert', link: '/devops/comp_app/cert'},
-          ]
-        }
-      ],
-      '/devops/k8s_install/': [
+      '/linux/k8s_install/': [
         {
           text: 'Kubernetes 安装',
           items: [
-            {text: 'K8s安装', link: '/devops/k8s_install/'},
-            {text: '初始化服务器', link: '/devops/k8s_install/01_init'},
-            {text: 'Docker', link: '/devops/k8s_install/02_docker'},
-            {text: 'Containerd', link: '/devops/k8s_install/03_containerd'},
-            {text: 'Kubelet', link: '/devops/k8s_install/04_kubelet'},
-            {text: 'Node', link: '/devops/k8s_install/05_node'},
-            {text: 'Calico', link: '/devops/k8s_install/06_calico'},
-            {text: 'Ingress', link: '/devops/k8s_install/07_ingress'},
-            {text: 'Cert', link: '/devops/k8s_install/08_cert'},
-            {text: '镜像服务', link: '/devops/k8s_install/09_acr'},
-            {text: 'Harbor', link: '/devops/k8s_install/10_harbor'},
-            {text: 'MetricsServer', link: '/devops/k8s_install/11_metricsServer.md'},
-            {text: 'Helm', link: '/devops/k8s_install/12_helm.md'},
-            {text: 'UI工具', link: '/devops/k8s_install/39_other_ui'},
-            {text: '境外镜像获取', link: '/devops/k8s_install/98_pull_images'},
-            {text: '其他', link: '/devops/k8s_install/99_others'},
+            {text: 'K8s安装', link: '/linux/k8s_install/'},
+            {text: '初始化服务器', link: '/linux/k8s_install/01_init'},
+            {text: 'Docker', link: '/linux/k8s_install/02_docker'},
+            {text: 'Containerd', link: '/linux/k8s_install/03_containerd'},
+            {text: 'Kubelet', link: '/linux/k8s_install/04_kubelet'},
+            {text: 'Node', link: '/linux/k8s_install/05_node'},
+            {text: 'Calico', link: '/linux/k8s_install/06_calico'},
+            {text: 'Ingress', link: '/linux/k8s_install/07_ingress'},
+            {text: 'Cert', link: '/linux/k8s_install/08_cert'},
+            {text: '镜像服务', link: '/linux/k8s_install/09_acr'},
+            {text: 'Harbor', link: '/linux/k8s_install/10_harbor'},
+            {text: 'MetricsServer', link: '/linux/k8s_install/11_metricsServer.md'},
+            {text: 'Helm', link: '/linux/k8s_install/12_helm.md'},
+            {text: 'UI工具', link: '/linux/k8s_install/39_other_ui'},
+            {text: '境外镜像获取', link: '/linux/k8s_install/98_pull_images'},
+            {text: '其他', link: '/linux/k8s_install/99_others'},
           ]
         }
       ],
-      '/devops/k8s_guide/': [
+      '/linux/k8s_guide/': [
         {
           text: 'Kubernetes 使用',
           items: [
-            {text: 'K8s使用', link: '/devops/k8s_guide/'},
-            {text: '基础命令', link: '/devops/k8s_guide/01_ctl'},
-            {text: '基础镜像', link: '/devops/k8s_guide/02_docker_image'},
-            {text: 'Yaml语法', link: '/devops/k8s_guide/03_yaml'},
-            {text: '应用打包', link: '/devops/k8s_guide/04_apps'},
-            {text: 'Ingress使用', link: '/devops/k8s_guide/05_ingress'},
-            {text: 'SSL文件验证', link: '/devops/k8s_guide/06_ssl'},
-            {text: '组件', link: '/devops/k8s_guide/99_components'},
+            {text: 'K8s使用', link: '/linux/k8s_guide/'},
+            {text: '基础命令', link: '/linux/k8s_guide/01_ctl'},
+            {text: '基础镜像', link: '/linux/k8s_guide/02_docker_image'},
+            {text: 'Yaml语法', link: '/linux/k8s_guide/03_yaml'},
+            {text: '应用打包', link: '/linux/k8s_guide/04_apps'},
+            {text: 'Ingress使用', link: '/linux/k8s_guide/05_ingress'},
+            {text: 'SSL文件验证', link: '/linux/k8s_guide/06_ssl'},
+            {text: '组件', link: '/linux/k8s_guide/99_components'},
           ]
         }
       ],

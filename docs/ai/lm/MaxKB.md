@@ -9,7 +9,7 @@
 
 ## 安装
 
-- 安装 Docker: 见 [Docker](../../devops/k8s_install/02_docker.md)
+- 安装 Docker: 见 [Docker](../../linux/k8s_install/02_docker.md)
 - 安装 MaxKB:
 ```shell
 docker run -d --name=maxkb --restart=always -p 8080:8080 -v ~/.maxkb:/var/lib/postgresql/data -v ~/.python-packages:/opt/maxkb/app/sandbox/python-packages registry.fit2cloud.com/maxkb/maxkb
