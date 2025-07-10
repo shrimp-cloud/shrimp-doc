@@ -38,7 +38,7 @@ export default withMermaid({
       {
         text: '后端',
         items: [
-          { text: '语言', link: '/backend/lang/' },
+          { text: '编程语言', link: '/backend/lang/' },
           { text: '框架', link: '/backend/framework/' },
           { text: '组件', link: '/backend/component/' },
           { text: 'Spring', link: '/backend/spring/' },
