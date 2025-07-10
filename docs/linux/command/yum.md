@@ -39,9 +39,32 @@
 - yum 源配置目录：/etc/yum.repos.d/
 - 安装 yim 源 `yum -y install epel-release`
 - 变更 yum 后清空缓存和重新建立缓存
+
+
+## 更换yum源
+> aliyun
+
+
+安装 yum 源
+```shell
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
+```
+
+
+
+更新
+```shell
+yum update -y
+```
+
+
+
+清理，更新缓存
+
 ```shell
 yum clean all
 yum makecache
+yum makecache fast
 ```
 
 ## yum 离线安装
