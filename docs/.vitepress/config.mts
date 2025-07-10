@@ -70,6 +70,16 @@ export default withMermaid({
           { text: '博客系统', link: '/ecology/blog/' },
         ]
       },
+
+      {
+        text: 'Linux',
+        items: [
+          { text: '系统维护', link: '/linux/system/' },
+          { text: '常用命令', link: '/linux/command/' },
+          { text: '扩展组件', link: '/linux/component/' },
+        ]
+      },
+
       {
         text: '运维',
         items: [
@@ -80,6 +90,8 @@ export default withMermaid({
           { text: 'k8s相关使用', link: '/devops/k8s_guide/' },
         ]
       },
+
+
       {
         text: '基础',
         items: [
@@ -373,6 +385,32 @@ export default withMermaid({
         }
       ],
 
+      '/linux/system': [
+        {
+          text: '系统维护',
+          items: [
+            {text: '系统', link: '/linux/system/'},
+            {text: '内核', link: '/linux/system/kernel'},
+          ]
+        },
+        {
+          text: '常用命令',
+          items: [
+            {text: '常用命令', link: '/linux/command/'},
+            {text: 'Dnf', link: '/linux/command/dnf'},
+            {text: 'Yum', link: '/linux/command/yum'},
+            {text: 'Systemd', link: '/linux/command/systemd'},
+            {text: 'Firewalld', link: '/linux/command/firewalld'},
+          ]
+        },
+        {
+          text: '扩展组件',
+          items: [
+            {text: '扩展组件', link: '/linux/component/'},
+          ]
+        },
+      ],
+
       '/devops/server/': [
         {
           text: '操作系统',
@@ -382,7 +420,6 @@ export default withMermaid({
             {text: 'Centos7初始化', link: '/devops/server/centos7_init'},
             {text: 'Rockylinux9安装', link: '/devops/server/rockylinux9_install'},
             {text: 'Rockylinux9初始化', link: '/devops/server/rockylinux9_init'},
-            {text: '内核', link: '/devops/server/kernel'},
           ]
         }
       ],
