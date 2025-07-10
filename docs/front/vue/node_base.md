@@ -1,13 +1,6 @@
-# NODE 基础
+# node 基础
 
-## 安装  yarn 
+## 查看 node 版本
 ```shell
-npm install -g yarn
-```
-
-
-## 清除缓存
-```shell
-npm cache clean --force
-yarn cache clean
+node -v
 ```

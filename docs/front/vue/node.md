@@ -1,4 +1,4 @@
-# node 升级
+# node 使用
 
 ### 安装工具  n
 ```shell
@@ -23,4 +23,9 @@ n stable
 ### 升级 node 版本到指定版
 ```shell
 n 14.17.6
+```
+
+### 删除 node 的指定版本
+```shell
+n rm 14.17.6
 ```
