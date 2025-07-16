@@ -427,29 +427,51 @@ export default withMermaid({
       ],
       '/linux/component/': [
         {
-          text: '服务器组件，中间件',
+          text: '数据库',
           items: [
-            {text: '扩展组件', link: '/linux/component/'},
-            {text: 'Maven', link: '/linux/component/maven'},
             {text: 'Redis', link: '/linux/component/redis'},
             {text: 'Mysql', link: '/linux/component/mysql'},
-            {text: 'Nacos', link: '/linux/component/nacos'},
+          ]
+        },
+        {
+          text: '消息中间件',
+          items: [
             {text: 'MQTT', link: '/linux/component/mqtt'},
             {text: 'Rocketmq', link: '/linux/component/rocketmq'},
+          ]
+        },
+        {
+          text: '存储',
+          items: [
+            {text: 'Samba', link: '/linux/component/samba'},
+            {text: 'SFTP', link: '/linux/component/sftp'},
+          ]
+        },
+        {
+          text: '代理工具',
+          items: [
+            {text: 'frp', link: '/linux/component/frp'},
+            {text: 'Squid', link: '/linux/component/squid'},
+            {text: 'Shadowsocks', link: '/linux/component/shadowsocks'},
+          ]
+        },
+        {
+          text: 'CI/CD',
+          items: [
+            {text: 'Git', link: '/linux/component/git'},
+            {text: 'Maven', link: '/linux/component/maven'},
+            {text: 'Cert', link: '/linux/component/cert'},
+            {text: '流水线', link: '/linux/component/cicd'},
+          ]
+        },
+
+        {
+          text: '开发平台',
+          items: [
+            {text: 'Nacos', link: '/linux/component/nacos'},
             {text: 'Job', link: '/linux/component/job'},
             {text: 'nginx', link: '/linux/component/nginx'},
-            {text: 'Samba', link: '/linux/component/samba'},
-            {text: 'Squid', link: '/linux/component/squid'},
-            {text: 'frp', link: '/linux/component/frp'},
-            {text: 'SFTP', link: '/linux/component/sftp'},
             {text: 'PHP', link: '/linux/component/php'},
-            {text: 'CI/CD', link: '/linux/component/cicd'},
-            {text: 'Git', link: '/linux/component/git'},
-            {text: 'Wiki.js', link: '/linux/component/wikijs'},
-            {text: 'VuePress', link: '/linux/component/vuepress'},
-            {text: 'WordPress', link: '/linux/component/wordpress'},
-            {text: 'Shadowsocks', link: '/linux/component/shadowsocks'},
-            {text: 'Cert', link: '/linux/component/cert'},
           ]
         },
       ],
@@ -461,10 +483,13 @@ export default withMermaid({
             {text: 'KVM', link: '/linux/platform/kvm'},
             {text: 'MinIO', link: '/linux/platform/minio'},
             {text: 'Cloudreve', link: '/linux/platform/cloudreve'},
+            {text: 'Sonar', link: '/linux/platform/sonar'},
+            {text: 'Wiki.js', link: '/linux/component/wikijs'},
+            {text: 'VuePress', link: '/linux/component/vuepress'},
+            {text: 'WordPress', link: '/linux/component/wordpress'},
           ]
-        }
+        },
       ],
-
 
       '/linux/k8s_install/': [
         {
