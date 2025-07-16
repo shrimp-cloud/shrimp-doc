@@ -77,6 +77,7 @@ export default withMermaid({
           { text: '操作系统', link: '/linux/system/' },
           { text: '常用命令', link: '/linux/command/' },
           { text: '扩展组件', link: '/linux/component/' },
+          { text: '平台化工具', link: '/linux/platform/' },
           { text: 'k8s集群安装', link: '/linux/k8s_install/' },
           { text: 'k8s相关使用', link: '/linux/k8s_guide/' },
         ]
@@ -426,7 +427,7 @@ export default withMermaid({
       ],
       '/linux/component/': [
         {
-          text: '扩展组件',
+          text: '服务器组件，中间件',
           items: [
             {text: '扩展组件', link: '/linux/component/'},
             {text: 'Maven', link: '/linux/component/maven'},
@@ -441,20 +442,30 @@ export default withMermaid({
             {text: 'Squid', link: '/linux/component/squid'},
             {text: 'frp', link: '/linux/component/frp'},
             {text: 'SFTP', link: '/linux/component/sftp'},
-            {text: 'MinIO', link: '/linux/component/minio'},
             {text: 'PHP', link: '/linux/component/php'},
             {text: 'CI/CD', link: '/linux/component/cicd'},
             {text: 'Git', link: '/linux/component/git'},
-            {text: 'Cloudreve', link: '/linux/component/cloudreve'},
             {text: 'Wiki.js', link: '/linux/component/wikijs'},
             {text: 'VuePress', link: '/linux/component/vuepress'},
             {text: 'WordPress', link: '/linux/component/wordpress'},
             {text: 'Shadowsocks', link: '/linux/component/shadowsocks'},
             {text: 'Cert', link: '/linux/component/cert'},
-            {text: 'KVM', link: '/linux/component/kvm'},
           ]
         },
       ],
+
+      '/linux/platform/': [
+        {
+          text: '平台化工具，和服务',
+          items: [
+            {text: 'KVM', link: '/linux/platform/kvm'},
+            {text: 'MinIO', link: '/linux/platform/minio'},
+            {text: 'Cloudreve', link: '/linux/platform/cloudreve'},
+          ]
+        }
+      ],
+
+
       '/linux/k8s_install/': [
         {
           text: 'Kubernetes 安装',
