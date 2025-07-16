@@ -16,7 +16,7 @@ dnf install -y docker-ce
 Tips: device-mapper-persistent-data lvm2: 存储驱动
 
 
-### 配置docker ]镜像加速器
+### 配置docker镜像加速器
 
 ```shell
 # vim /etc/docker/daemon.json
