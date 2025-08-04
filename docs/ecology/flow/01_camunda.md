@@ -77,10 +77,45 @@ camunda:
       firstName: ${your_firstName}
     filter:
       create: All tasks
+
+cas:
+  sdk:
+    # 流程回调应用的 app-id [请参照 auth]
+    app-id: your_app_id
+    # 流程回调应用的 app-secret [请参照 auth]
+    app-secret: your_app_secret
+
+flow:
+  # 流程 task 回调应用地址
+  server-url: http://localhost:8080
+  process:
+    # 流程 task 回调应用 URI
+    callback-uri: /flow/callback
+
 ```
 
 
 ### 部署信息
 
 - 此项目使用 docker 打包，再推送到 kubernetes 中进行部署。但部署在此处不作为重点，不再展开
+
+
+
+### Service Task
+
+> 由于 camunda 没有直接镶嵌在应用系统中，故流程的 Service Task 调用无法到达应用系统。此处定义了逻辑，用于转发 Service Task 的调用。
+
+#### 方案
+
+- 过程
+  - shrimp-camunda 注册 bean: `commonDelegateService`
+  - camunda 在操作 Service Task 时，调用 `commonDelegateService`
+  - commonDelegateService 将请求封装，调用接口：`callback-uri`
+  - 应用系统实现 `callback-uri`, 接收参数，对流程进行分发，最后返回 Response
+  - `commonDelegateService` 接收 Response，将信息返回给 camunda
+
+- callback-uri 调用鉴权
+  - 使用了 cas 的 access token 方案
+  - 应用系统逻辑分发：待定义
+
 
