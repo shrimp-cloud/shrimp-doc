@@ -119,3 +119,152 @@ flow:
   - 应用系统逻辑分发：待定义
 
 
+# 应用接入流程
+
+> 应用接入流程，指应用系统通过 Camunda 的API, 进行流程的维护和使用的过程。此处使用了 openfeign 组件来简化 API 接口的调用。
+
+
+## 依赖 openfeign
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+```
+
+## 添加配置项
+
+```yaml
+feign:
+  client:
+    config:
+      # 注意，要改成自己的 camunda 服务地址
+      url: http://localhost:8080/engine-rest
+      # 超时时间，单位毫秒
+      timeout: 30000
+      # 用户名
+      username: camunda_username
+      # 密码
+      password: camunda_password
+
+```
+
+- 此处的配置使用了 camunda-platform-7-rest-client-spring-boot-starter 的配置空间。但由于这个 starter 有太多的不完善，故全面舍弃了，全部使用 openfeign 来实现。
+
+
+## Feign 示例代码
+
+```java
+// Feign
+package com.example.flow.feign;
+
+import com.example.flow.config.CamundaConfig;
+import com.example.flow.pojo.camunda.DeploymentEntity;
+import com.example.flow.pojo.camunda.ProcessDefinitionEntity;
+import com.example.flow.pojo.camunda.ProcessDefinitionXmlEntity;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Map;
+
+@FeignClient(
+    name = "camundaRepositoryFeign",
+    url = "${feign.client.config.default.url:http://localhost:8080/engine-rest}",
+    configuration = CamundaConfig.class
+)
+public interface CamundaRepositoryFeign {
+
+    /**
+     * 获取流程定义列表
+     */
+    @GetMapping("/process-definition")
+    List<ProcessDefinitionEntity> processDefinitionList(@RequestParam(required = false) Map<String, Object> queryParams);
+
+    // 其他接口省略
+}
+
+// CamundaConfig
+
+
+```
+
+# BPMN
+
+
+## BPMN 设计
+
+| 节点名称      | 节点描述        |
+|-----------|-------------|
+| 发起        | 创建流程实例      |
+| 撤回        | 撤销流程实例      |
+| 废弃        | 删除流程实例      |
+| 通过        | 通过流程实例      |
+| 驳回        | 驳回流程实例      |
+| 驳回上一步     | 驳回上一步       |
+| 驳回起点      | 驳回起点        |
+| 驳回任意节点    | 驳回任意节点      |
+| 转办        | 转办流程实例      |
+| 会签-并行     | 并行会签        |
+| 会签-串行     | 串行会签        |
+| 会签-竞争     | 竞争会签        |
+| 会签结束-自动通过 | 会签结束自动通过    |
+| 会签结束-返回当前 | 会签结束返回当前节点  |
+| 结束        | 结束流程实例      |
+
+
+
+# 流程节点设计
+
+
+## 流程分支
+
+```xml
+  <bpmn:sequenceFlow id="自动生成ID" name="分支名称" sourceRef="Gateway_源" targetRef="Activity_目标">
+    <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${key == 'value'}</bpmn:conditionExpression>
+  </bpmn:sequenceFlow>
+```
+
+- 流程分支匹配成功，将走向相关分支
+- 指定默认分支，在网关指定默认 sequenceFlow 的ID：`<bpmn:exclusiveGateway id="Gateway_ID" default="Flow_默认分支">`
+
+
+## 审批人节点
+
+- 添加审批人节点：`<bpmn:userTask id="自动生成的ID" name="审批节点说明" camunda:assignee="固定审批人">`
+  - camunda:assignee: 业务系统中存在的用户作为审批人。此用户无需在 camunda 中进行配置。
+
+
+## 服务任务
+
+- 添加服务任务节点： `<bpmn:serviceTask id="自动生成的ID" name="节点名称" camunda:delegateExpression="${commonDelegateService}">`
+  - camunda:delegateExpression: Camunda 服务的 Bean
+
+
+
+- delegateExpression 示例
+```java
+package com.example.camunda.service;
+
+@Slf4j
+@Component("commonDelegateService")
+public class CommonDelegateService implements JavaDelegate {
+    @Override
+    public void execute(DelegateExecution execution) throws Exception {
+        try {
+            log.info("notice execution: {}", execution);
+            // TODO 可以获取流程中的各项参数，用于业务逻辑
+            // 可进一步调用应用系统完成业务逻辑
+            // TODO 可以向流程中设置参数
+            execution.setVariable("new_key", "new_value");
+        } catch (Exception e) {
+            log.error("Error occurred in CommonDelegateService execute method", e);
+            throw e;
+        }
+    }
+}
+```
+
+

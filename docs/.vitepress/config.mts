@@ -371,9 +371,7 @@ export default withMermaid({
           items: [
             {text: 'Flow', link: '/ecology/flow/'},
             {text: 'Camunda', link: '/ecology/flow/01_camunda'},
-            {text: '应用接入流程', link: '/ecology/flow/02_flow_app'},
-            {text: 'BPMN', link: '/ecology/flow/03_bpmn'},
-            {text: '流程节点', link: '/ecology/flow/04_node'},
+            {text: 'Flowable', link: '/ecology/flow/02_flowable'},
           ]
         }
       ],
