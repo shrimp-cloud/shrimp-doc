@@ -77,103 +77,21 @@
 
 数据源配置没有使用默认的配置空间，目的是让 flowable 使用自己的数据源，而不是使用 springboot 默认的数据源，与业务数据做区分
 
-- 数据源配置
+####  数据源配置
 
 ```yaml
 spring:
-  flowable:
-    datasource:
-      url: jdbc:mysql://localhost:3306/flowable_db?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
-      username: username
-      password: password
+  datasource:
+    url: jdbc:mysql://localhost:3306/flowable_db?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+    username: username
+    password: password
 ```
 
-- 数据源使用
-
-```java
-package com.example.flowable.config;
-
-import com.alibaba.druid.pool.DruidDataSource;
-import org.flowable.common.engine.impl.history.HistoryLevel;
-import org.flowable.engine.*;
-import org.flowable.spring.SpringProcessEngineConfiguration;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.sql.DataSource;
-
-@Configuration
-public class FlowableDataSourceConfig {
-
-    private DataSource dataSource;
-    private PlatformTransactionManager flowableTransactionManager;
-    private SpringProcessEngineConfiguration springProcessEngineConfiguration;
-    private ProcessEngine processEngine;
-
-    // 创建 Flowable 专用数据源
-    @Bean(name = "flowableDataSource")
-    @ConfigurationProperties(prefix = "spring.flowable.datasource")
-    public DataSource flowableDataSource() {
-        return dataSource = new DruidDataSource();
-    }
-
-    // 配置 Flowable 的 TransactionManager
-    @Bean(name = "flowableTransactionManager")
-    public PlatformTransactionManager flowableTransactionManager() {
-        return flowableTransactionManager = new DataSourceTransactionManager(dataSource);
-    }
-
-    // 配置 Flowable Engine 使用独立数据源
-    @Bean
-    public SpringProcessEngineConfiguration processEngineConfiguration() {
-        SpringProcessEngineConfiguration config = new SpringProcessEngineConfiguration();
-        config.setDataSource(dataSource);
-        config.setTransactionManager(flowableTransactionManager);
-        // 自动建表
-        config.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-        config.setDatabaseType("mysql");
-        // 历史级别（可选）
-        config.setHistoryLevel(HistoryLevel.AUDIT);
-        // 关闭 job 执行器（开发环境）
-        config.setAsyncExecutorActivate(false);
-        return springProcessEngineConfiguration = config;
-    }
-
-    // 创建 ProcessEngine
-    @Bean
-    public ProcessEngine processEngine() {
-        return processEngine = springProcessEngineConfiguration.buildProcessEngine();
-    }
-    @Bean
-    public RepositoryService repositoryService() {
-        return processEngine.getRepositoryService();
-    }
-    @Bean
-    public RuntimeService runtimeService() {
-        return processEngine.getRuntimeService();
-    }
-    @Bean
-    public TaskService taskService() {
-        return processEngine.getTaskService();
-    }
-    @Bean
-    public HistoryService historyService() {
-        return processEngine.getHistoryService();
-    }
-    @Bean
-    public ManagementService managementService() {
-        return processEngine.getManagementService();
-    }
-
-}
-```
 
 ## 初始化
 
 - 启动应用，若数据库内没包含相关的表，将会自动创建
+  - 坑：数据源配置需要加参数：`nullCatalogMeansCurrent=true`, 否则会导致表创建失败
 
 
 ## 设计器
