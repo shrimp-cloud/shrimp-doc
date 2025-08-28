@@ -39,8 +39,8 @@ export default withMermaid({
         text: '后端',
         items: [
           { text: '编程语言', link: '/backend/lang/' },
-          { text: '框架', link: '/backend/framework/' },
           { text: '组件', link: '/backend/component/' },
+          { text: '框架', link: '/backend/framework/' },
           { text: 'Spring', link: '/backend/spring/' },
           { text: '逻辑设计', link: '/backend/design/' },
           { text: '三方服务集成', link: '/backend/third/' },
@@ -144,6 +144,23 @@ export default withMermaid({
         }
       ],
 
+      '/backend/component/': [
+        {
+          text: '组件',
+          items: [
+            {text: '组件', link: '/backend/component/'},
+            {text: 'Maven', link: '/backend/component/maven'},
+            {text: 'Redis', link: '/backend/component/redis'},
+            {text: 'Spring', link: '/backend/component/spring'},
+            {text: 'Cas', link: '/backend/component/casStarter'},
+            {text: 'Mybatis', link: '/backend/component/mybatis'},
+            {text: 'oss', link: '/backend/component/oss'},
+            {text: 'mqtt', link: '/backend/component/mqtt'},
+            { text: 'Dubbo', link: '/backend/component/dubbo' },
+            { text: 'Camunda', link: '/backend/component/camunda' },
+          ]
+        }
+      ],
       '/backend/framework/': [
         {
           text: '框架',
@@ -158,22 +175,6 @@ export default withMermaid({
             {text: '核心', link: '/backend/framework/core'},
             {text: '注解', link: '/backend/framework/annotation'},
             {text: '分页', link: '/backend/framework/page'},
-          ]
-        }
-      ],
-      '/backend/component/': [
-        {
-          text: '组件',
-          items: [
-            {text: '组件', link: '/backend/component/'},
-            {text: 'Redis', link: '/backend/component/redis'},
-            {text: 'Spring', link: '/backend/component/spring'},
-            {text: 'Cas', link: '/backend/component/casStarter'},
-            {text: 'Mybatis', link: '/backend/component/mybatis'},
-            {text: 'oss', link: '/backend/component/oss'},
-            {text: 'mqtt', link: '/backend/component/mqtt'},
-            { text: 'Dubbo', link: '/backend/component/dubbo' },
-            { text: 'Camunda', link: '/backend/component/camunda' },
           ]
         }
       ],
