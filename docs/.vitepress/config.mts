@@ -39,9 +39,9 @@ export default withMermaid({
         text: '后端',
         items: [
           { text: '编程语言', link: '/backend/lang/' },
+          { text: 'Spring', link: '/backend/spring/' },
           { text: '组件', link: '/backend/component/' },
           { text: '框架', link: '/backend/framework/' },
-          { text: 'Spring', link: '/backend/spring/' },
           { text: '逻辑设计', link: '/backend/design/' },
           { text: '三方服务集成', link: '/backend/third/' },
         ]
@@ -144,6 +144,24 @@ export default withMermaid({
         }
       ],
 
+      '/backend/spring/': [
+        {
+          text: 'Spring',
+          items: [
+            {text: 'Spring', link: '/backend/spring/'},
+            {text: '反射', link: '/backend/spring/reflect'},
+            {text: 'PostConstruct', link: '/backend/spring/PostConstruct'},
+            {text: 'BeanPostProcessor', link: '/backend/spring/BeanPostProcessor'},
+            {text: 'IocBeanLifeCycle', link: '/backend/spring/IocBeanLifeCycle'},
+            {text: 'ApplicationListener', link: '/backend/spring/ApplicationListener'},
+            {text: 'RoutingDataSource', link: '/backend/spring/RoutingDataSource'},
+            {text: 'String路径', link: '/backend/spring/path'},
+            {text: 'Spring本地Jar', link: '/backend/spring/LocalJar'},
+            {text: '打包非Java文件', link: '/backend/spring/NotOnlyJava'},
+            {text: '重写Bean', link: '/backend/spring/OverrideSpringBean'},
+          ]
+        }
+      ],
       '/backend/component/': [
         {
           text: '组件',
@@ -175,24 +193,6 @@ export default withMermaid({
             {text: '核心', link: '/backend/framework/core'},
             {text: '注解', link: '/backend/framework/annotation'},
             {text: '分页', link: '/backend/framework/page'},
-          ]
-        }
-      ],
-      '/backend/spring/': [
-        {
-          text: 'Spring',
-          items: [
-            {text: 'Spring', link: '/backend/spring/'},
-            {text: '反射', link: '/backend/spring/reflect'},
-            {text: 'PostConstruct', link: '/backend/spring/PostConstruct'},
-            {text: 'BeanPostProcessor', link: '/backend/spring/BeanPostProcessor'},
-            {text: 'IocBeanLifeCycle', link: '/backend/spring/IocBeanLifeCycle'},
-            {text: 'ApplicationListener', link: '/backend/spring/ApplicationListener'},
-            {text: 'RoutingDataSource', link: '/backend/spring/RoutingDataSource'},
-            {text: 'String路径', link: '/backend/spring/path'},
-            {text: 'Spring本地Jar', link: '/backend/spring/LocalJar'},
-            {text: '打包非Java文件', link: '/backend/spring/NotOnlyJava'},
-            {text: '重写Bean', link: '/backend/spring/OverrideSpringBean'},
           ]
         }
       ],
