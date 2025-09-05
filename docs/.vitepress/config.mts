@@ -50,8 +50,8 @@ export default withMermaid({
       {
         text: '前端',
         items: [
-          { text: 'VUE', link: '/front/vue/' },
           { text: '前端规范', link: '/front/standard-frontend/' },
+          { text: 'VUE', link: '/front/vue/' },
           { text: 'Ruoyi', link: '/front/ruoyi/' },
           { text: 'vant-weapp', link: '/front/vant-weapp/' },
           { text: '客户端', link: '/front/client/' },
@@ -228,7 +228,7 @@ export default withMermaid({
             {text: 'OSS', link: '/backend/third/oss'},
             {text: '服务器', link: '/backend/third/server'},
             {text: '短信', link: '/backend/third/sms'},
-            {text: '微信', link: '/backend/third/wechat'},
+            {text: '微信公众号', link: '/backend/third/wechat'},
             {text: '微信支付', link: '/backend/third/wxpay'},
             {text: 'MQTT', link: '/backend/third/mqtt'},
           ]
