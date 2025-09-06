@@ -39,8 +39,8 @@
 - 配置内容及说明
   - 状态: 启用
   - 服务器地址(URL): https://api.example.com/public/wxmp/portal/{appId} (已脱敏,实际配置请联系开发者)
-  - 令牌(Token): 随便生成 32 位长度的token, 并配置到服务内
-  - 消息加解密密钥 (EncodingAESKey): 随便生成
+  - 令牌(Token): 随机生成 32 位长度的token, 并配置到服务内
+  - 消息加解密密钥 (EncodingAESKey): 随机生成
   - 消息加解密方式: 安全模式
 - 配置过程
   - 以上信息预填写之后，需要在应用内配置，上述内容才能验证通过
