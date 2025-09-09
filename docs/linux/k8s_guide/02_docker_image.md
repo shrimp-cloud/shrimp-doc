@@ -21,7 +21,7 @@ MAINTAINER shrimp
 WORKDIR /apps
 
 RUN dnf makecache && \
-    dnf update -y && dnf install -y zsh vim less openssh-clients net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
+    dnf update -y && dnf install -y zsh vim less openssh-clients iputils net-tools numactl fontconfig zip unzip wget telnet bind-utils && \
     dnf clean all && \
     ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     fc-cache -fv && \

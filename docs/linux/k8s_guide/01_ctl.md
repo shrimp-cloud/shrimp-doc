@@ -91,11 +91,3 @@ kubectl delete pod --field-selector=status.phase==Succeeded -A
 | Failed    | 异常停止 | Pod 中的所有容器都已终止了，并且至少有一个容器是因为失败终止。也就是说，容器以非0状态退出或者被系统终止。                           |
 | Unkonwn   | 未知状态 | API Server无法正常获取到Pod对象的状态信息，通常是由于其无法与所在工作节点的kubelet通信所致。                          |
 
-
-### 其他
-
-#### 镜像从 docker 导入到 containerd
-
-- `docker save my-image:tag > my-image-tag.tar`
-- `ctr -n=k8s.io images import my-image-tag.tar`
-- `crictl images`

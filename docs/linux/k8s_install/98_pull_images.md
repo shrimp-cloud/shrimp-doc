@@ -38,14 +38,28 @@ systemctl start containerd
 
 ## 拉取镜像并导出
 
+### ctr 拉取，导出镜像
+
 ```shell
 # 拉取镜像
-ctr -n k8s.io i pull -k [hello-world]
+ctr -n k8s.io i pull -k [hello-world:tag]
 # 查看镜像
 ctr -n k8s.io images ls
 # 导出镜像
-ctr -n k8s.io i export [hello-world.tar.gz] [hello-world]
+ctr -n k8s.io i export [hello-world.tag.tar] [hello-world:tag]
 ```
+
+### docker 拉取，导出镜像
+
+```shell
+# 拉取镜像
+docker pull [hello-world:tag]
+# 查看镜像
+docker images
+# 导出镜像
+docker save [hello-world:tag] > [hello-world.tag.tar]
+```
+
 
 ## 将镜像拉回到本地
 
@@ -56,5 +70,10 @@ scp root@out:/root/hello-world.tar.gz ./
 ## 导入镜像
 
 ```shell
-ctr -n k8s.io i import hello-world.tar.gz
+# 导入镜像
+ctr -n k8s.io images import hello-world.tag.tar
+# 查看镜像
+ctr -n k8s.io images list
+# 查看镜像
+crictl images
 ```
