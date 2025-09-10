@@ -38,6 +38,7 @@ export default withMermaid({
       {
         text: '后端',
         items: [
+          { text: '后端规范', link: '/backend/standard-backend/' },
           { text: '编程语言', link: '/backend/lang/' },
           { text: 'Spring', link: '/backend/spring/' },
           { text: '组件', link: '/backend/component/' },
@@ -49,6 +50,7 @@ export default withMermaid({
       {
         text: '前端',
         items: [
+          { text: '前端规范', link: '/front/standard-frontend/' },
           { text: 'VUE', link: '/front/vue/' },
           { text: 'Ruoyi', link: '/front/ruoyi/' },
           { text: 'vant-weapp', link: '/front/vant-weapp/' },
@@ -84,15 +86,6 @@ export default withMermaid({
       },
 
       {
-        text: '基础',
-        items: [
-          { text: '常用', link: '/base/common/' },
-          { text: '基础规范', link: '/base/standard-base/' },
-          { text: '前端规范', link: '/base/standard-frontend/' },
-          { text: '后端规范', link: '/base/standard-backend/' },
-        ]
-      },
-      {
         text: 'AI',
         items: [
           { text: '机器学习', link: '/ai/ml/' },
@@ -102,6 +95,8 @@ export default withMermaid({
       {
         text: '其他',
         items: [
+          { text: '常用', link: '/other/common/' },
+          { text: '基础规范', link: '/other/standard-base/' },
           { text: 'OpenCV', link: '/other/opencv/' },
           { text: '其他', link: '/other/other/' },
         ]
@@ -110,6 +105,19 @@ export default withMermaid({
 
 
     sidebar: {
+
+      '/backend/standard-backend/': [
+        {
+          text: '后端规范',
+          items: [
+            {text: '后端规范', link: '/backend/standard-backend/'},
+            {text: '接口', link: '/backend/standard-backend/api'},
+            {text: '数据库', link: '/backend/standard-backend/database'},
+            {text: '命名规范', link: '/backend/standard-backend/named'},
+          ]
+        }
+      ],
+
       '/backend/lang/': [
         {
           text: 'JAVA',
@@ -220,9 +228,19 @@ export default withMermaid({
             {text: 'OSS', link: '/backend/third/oss'},
             {text: '服务器', link: '/backend/third/server'},
             {text: '短信', link: '/backend/third/sms'},
-            {text: '微信', link: '/backend/third/wechat'},
+            {text: '微信公众号', link: '/backend/third/wechat'},
             {text: '微信支付', link: '/backend/third/wxpay'},
             {text: 'MQTT', link: '/backend/third/mqtt'},
+          ]
+        }
+      ],
+
+      '/front/standard-frontend/': [
+        {
+          text: '前端规范',
+          items: [
+            {text: '前端规范', link: '/front/standard-frontend/'},
+            {text: '框架', link: '/front/standard-frontend/framework'},
           ]
         }
       ],
@@ -529,47 +547,6 @@ export default withMermaid({
         }
       ],
 
-      '/base/common/': [
-        {
-          text: '常用',
-          items: [
-            {text: '常用', link: '/base/common/'},
-            {text: '正则', link: '/base/common/regular'},
-            {text: '代理', link: '/base/common/forwardProxy'},
-          ]
-        }
-      ],
-      '/base/standard-base/': [
-        {
-          text: '基规范',
-          items: [
-            {text: '基规范', link: '/base/standard-base/'},
-            {text: 'Git', link: '/base/standard-base/git'},
-            {text: '原则', link: '/base/standard-base/principle'},
-          ]
-        }
-      ],
-      '/base/standard-backend/': [
-        {
-          text: '后端规范',
-          items: [
-            {text: '后端规范', link: '/base/standard-backend/'},
-            {text: '接口', link: '/base/standard-backend/api'},
-            {text: '数据库', link: '/base/standard-backend/database'},
-            {text: '命名规范', link: '/base/standard-backend/named'},
-          ]
-        }
-      ],
-      '/base/standard-frontend/': [
-        {
-          text: '前端规范',
-          items: [
-            {text: '前端规范', link: '/base/standard-frontend/'},
-            {text: '框架', link: '/base/standard-frontend/framework'},
-          ]
-        }
-      ],
-
       '/ai/ml/': [
         {
           text: 'ML',
@@ -593,6 +570,27 @@ export default withMermaid({
             {text: 'Dify', link: '/ai/lm/Dify'},
             {text: 'MaxKB', link: '/ai/lm/MaxKB'},
             {text: '设备', link: '/ai/lm/equipment'},
+          ]
+        }
+      ],
+
+      '/other/common/': [
+        {
+          text: '常用',
+          items: [
+            {text: '常用', link: '/other/common/'},
+            {text: '正则', link: '/other/common/regular'},
+            {text: '代理', link: '/other/common/forwardProxy'},
+          ]
+        }
+      ],
+      '/other/standard-base/': [
+        {
+          text: '基规范',
+          items: [
+            {text: '基规范', link: '/other/standard-base/'},
+            {text: 'Git', link: '/other/standard-base/git'},
+            {text: '原则', link: '/other/standard-base/principle'},
           ]
         }
       ],
