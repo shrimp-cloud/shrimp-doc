@@ -500,6 +500,7 @@ export default withMermaid({
             {text: 'KVM', link: '/linux/platform/kvm'},
             {text: 'MinIO', link: '/linux/platform/minio'},
             {text: 'Cloudreve', link: '/linux/platform/cloudreve'},
+            {text: 'FnOs', link: '/linux/platform/fnos'},
             {text: 'Sonar', link: '/linux/platform/sonar'},
             {text: 'Wiki.js', link: '/linux/component/wikijs'},
             {text: 'VuePress', link: '/linux/component/vuepress'},
