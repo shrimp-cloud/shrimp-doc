@@ -41,8 +41,8 @@ export default withMermaid({
           { text: '后端规范', link: '/backend/standard-backend/' },
           { text: '编程语言', link: '/backend/lang/' },
           { text: 'Spring', link: '/backend/spring/' },
+          { text: '后端框架', link: '/backend/framework/' },
           { text: '组件', link: '/backend/component/' },
-          { text: '框架', link: '/backend/framework/' },
           { text: '逻辑设计', link: '/backend/design/' },
           { text: '三方服务集成', link: '/backend/third/' },
         ]
@@ -170,6 +170,24 @@ export default withMermaid({
           ]
         }
       ],
+      '/backend/framework/': [
+        {
+          text: '后端框架',
+          items: [
+
+            {text: '后端框架介绍', link: '/backend/framework/'},
+            {text: '依赖仓库', link: '/backend/framework/repo'},
+            {text: 'Bom', link: '/backend/framework/bom'},
+            {text: 'Parent', link: '/backend/framework/parent'},
+            {text: 'Common', link: '/backend/framework/common'},
+
+            {text: '启动器', link: '/backend/framework/starter'},
+            {text: '核心', link: '/backend/framework/core'},
+            {text: '注解', link: '/backend/framework/annotation'},
+            {text: '分页', link: '/backend/framework/page'},
+          ]
+        }
+      ],
       '/backend/component/': [
         {
           text: '组件',
@@ -184,23 +202,6 @@ export default withMermaid({
             {text: 'mqtt', link: '/backend/component/mqtt'},
             { text: 'Dubbo', link: '/backend/component/dubbo' },
             { text: 'Camunda', link: '/backend/component/camunda' },
-          ]
-        }
-      ],
-      '/backend/framework/': [
-        {
-          text: '框架',
-          items: [
-
-            {text: '框架', link: '/backend/framework/'},
-            {text: 'Bom', link: '/backend/framework/bom'},
-            {text: 'Parent', link: '/backend/framework/parent'},
-            {text: '仓库', link: '/backend/framework/repo'},
-            {text: '常用工具', link: '/backend/framework/common'},
-            {text: '启动器', link: '/backend/framework/starter'},
-            {text: '核心', link: '/backend/framework/core'},
-            {text: '注解', link: '/backend/framework/annotation'},
-            {text: '分页', link: '/backend/framework/page'},
           ]
         }
       ],
