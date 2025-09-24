@@ -164,8 +164,5 @@
 | `<properties>`        | `maven.compiler.target`       | 确定 java 的目标版本                 | 可被 maven-compiler-plugin 自动识别                 |
 | `<properties>`        | `maven.compiler.release`      | 确定 java 的版本                   | Java 9 开始，推荐使用 <release> 参数代替 source 和 target |
 | maven-compiler-plugin | `configuration>source/target` | 同 properties 中的 source/target | 优先级高于 properties 中的 source/target             |
-
-
-
-
+| maven-compiler-plugin | `configuration>release`       | 同 properties 中的 release       | 优先级高于 properties 中的 release                   |
 
