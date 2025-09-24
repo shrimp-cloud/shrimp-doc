@@ -176,15 +176,16 @@ export default withMermaid({
           items: [
 
             {text: '后端框架介绍', link: '/backend/framework/'},
-            {text: '依赖仓库', link: '/backend/framework/repo'},
+            {text: '依赖仓库', link: '/backend/framework/nexus'},
             {text: 'Bom', link: '/backend/framework/bom'},
             {text: 'Parent', link: '/backend/framework/parent'},
             {text: 'Common', link: '/backend/framework/common'},
 
-            {text: '启动器', link: '/backend/framework/starter'},
-            {text: '核心', link: '/backend/framework/core'},
-            {text: '注解', link: '/backend/framework/annotation'},
-            {text: '分页', link: '/backend/framework/page'},
+            {text: 'Redis', link: '/backend/framework/redis'},
+            {text: 'MyBatis', link: '/backend/framework/mybatis'},
+            {text: 'Gen', link: '/backend/framework/gen'},
+            {text: 'Spring', link: '/backend/framework/spring'},
+            {text: 'XXL-Job', link: '/backend/framework/xxljob'},
           ]
         }
       ],

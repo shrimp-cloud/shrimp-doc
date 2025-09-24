@@ -1,6 +1,73 @@
-# 分页
+# MyBatis
 
-> 分页查询，要写那么多代码，看着就烦。。此处，提供了一些快捷的分页查询方案
+> 此模块基于 MyBatis, 扩展了一些对数据库的常规操作，以简化开发。
+
+
+## 集成
+
+### 添加依赖
+
+```xml
+<dependency>
+    <groupId>com.wkclz.mybatis</groupId>
+    <artifactId>shrimp-cloud-mybatis</artifactId>
+    <version>${lastVersion}</version>
+</dependency>
+```
+
+### 配置
+
+- 参照 druid-spring-boot-3-starter 与 mybatis-spring-boot-starter 配置 的官方配置即可
+
+
+
+## 核心逻辑
+
+
+### BaseMapper
+
+> BaseMapper 定义了单表的基本操作 (需配合代码生成器)
+
+| 方法名                        | 描述            | 参数                             | 返回值          |
+|----------------------------|---------------|--------------------------------|--------------|
+| count                      | 统计            | Entity e                       | Long         |
+| getById                    | 用ID查找         | @Param("id") Long id           | Entity       |
+| getByEntity                | 用 Entity 查找   | Entity e                       | Entity       |
+| list                       | 查询列表，不包含Blobs | Entity e                       | List<Entity> |
+| insert                     | (选择性)插入       | Entity e                       | Long         |
+| insertBatch                | 全量批量插入        | @Param("list") List<Entity> es | Integer      |
+| updateAll                  | 更新(带乐观锁)      | Entity e                       | Integer      |
+| updateSelective            | 选择性更新(带乐观锁)   | Entity e                       | Integer      |
+| updateSelectiveWithoutLock | 选择性更新(不带乐观锁)  | Entity e                       | Integer      |
+| updateBatch                | 批量更新(不带乐观锁)   | @Param("list") List<E> es      | Integer      |
+| delete                     | 删除            | Entity e                       | Integer      |
+
+
+### BaseService
+
+> BaseService 对 Mapper 进一步封装。同时，Service 是完成业务逻辑的主要场所。
+
+
+
+
+
+
+
+## 辅助逻辑
+
+### DaoAop
+
+- 当数据库操作是 Select 时，将所有参数进行过滤，去除参数前后的空内容，若去除后，无真实内容，将置为 null
+- 若是多数据源，在完成  Dao 执行后，将清空线程变量，防止对后续的 sql 动作千万影响
+- 对 OrderBy 参数进行检测，若存在注入风险，将拦截。同时，规范化 OrderBy 参数
+
+
+
+
+
+
+
+
 
 ## 单表极简分页
 ```java
@@ -33,7 +100,7 @@ PageData<Entity> pageData = entityService.page(entity)
           t1.sort ASC,
           t1.id DESC
   </select>
-  
+
 ```
 - 定义 mapper: 只需要定义  list 接口
 ```java
