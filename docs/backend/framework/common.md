@@ -3,6 +3,19 @@
 > 框架全局类的定义，工具包
 
 
+## 集成
+
+
+```xml
+<dependency>
+    <groupId>com.wkclz.common</groupId>
+    <artifactId>shrimp-cloud-common</artifactId>
+    <version>${lastVersion}</version>
+</dependency>
+```
+
+
+
 ## annotation 注解
 
 

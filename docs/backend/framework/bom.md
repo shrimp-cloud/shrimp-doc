@@ -7,15 +7,17 @@
 > BOM 代表物料清单。BOM是一种特殊的POM，用于控制项目依赖项的版本，并提供定义和更新这些版本的中心位置。BOM提供了向我们的模块添加依赖项的灵活性，而不用担心我们应该依赖的版本。
 
 
-## 坐标
+## 集成
+
 
 ```xml
 <dependency>
     <groupId>com.wkclz.bom</groupId>
     <artifactId>shrimp-cloud-bom</artifactId>
-    <version>${shrimp-bom.version}</version>
+    <version>${lastVersion}</version>
 </dependency>
 ```
+
 
 
 ## 管理

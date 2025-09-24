@@ -10,9 +10,9 @@
 
 ```xml
 <dependency>
-  <name>shrimp-cloud-xxljob</name>
-  <description>shrimp-cloud-xxljob</description>
-  <version>${lastVersion}</version>
+    <name>shrimp-cloud-xxljob</name>
+    <description>shrimp-cloud-xxljob</description>
+    <version>${lastVersion}</version>
 </dependency>
 ```
 
