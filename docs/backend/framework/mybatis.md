@@ -47,8 +47,37 @@
 
 > BaseService 对 Mapper 进一步封装。同时，Service 是完成业务逻辑的主要场所。
 
+| 方法名                        | 描述                           | 参数              | 返回值              |
+|----------------------------|------------------------------|-----------------|------------------|
+| count                      | 统计                           | Entity e        | Long             |
+| get(Long id)               | 用ID查找                        | Long id         | Entity           |
+| getWithCheck(Long id)      | 用ID查找, 若不存在则报错               | Long id         | Entity           |
+| get(Entity e)              | 用 Entity 查找                  | Entity e        | Entity           |
+| getWithCheck(Entity e)     | 用 Entity 查找, 若不存在则报错         | Entity e        | Entity           |
+| list                       | 查询列表，不包含Blobs                | Entity e        | List<Entity>     |
+| page                       | 查询列分页，不包含Blobs               | Entity e        | PageData<Entity> |
+| insert(Entity e)           | (选择性)插入                      | Entity e        | Long             |
+| insert(List<E> es)         | 全量批量插入                       | List<E> es      | Integer          |
+| updateAll                  | 更新(带乐观锁)                     | Entity e        | Integer          |
+| updateSelective            | 选择性更新(带乐观锁)                  | Entity e        | Integer          |
+| updateSelectiveWithoutLock | 选择性更新(不带乐观锁)                 | Entity e        | Integer          |
+| update(List<E> es)         | 批量更新(不带乐观锁)                  | List<E> es      | Integer          |
+| saveWithCheck              | 保存，无id则新增，有id则修改，带乐观锁, 选择性更新 | Entity e        | Entity           |
+| deleteByEntitys            | 批量删除                         | List<Entity> es | Integer          |
+| delete(Long id)            | 删除                           | Long id         | Integer          |
+| deleteWithCheck(Long id)   | 删除，若成功，返回删除前的对象              | Long id         | Entity           |
+| delete(List<Long> ids)     | 删除                           | List<Long> ids  | Integer          |
+| delete(Entity e)           | 批量删除                         | Entity e        | Integer          |
 
 
+
+### 实体
+
+
+
+| 实体名      | 用途   |
+|----------|------|
+| PageData | 分页数据 |
 
 
 
