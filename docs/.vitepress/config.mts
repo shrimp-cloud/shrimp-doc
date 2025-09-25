@@ -450,6 +450,7 @@ export default withMermaid({
           items: [
             {text: 'Redis', link: '/linux/component/redis'},
             {text: 'Mysql', link: '/linux/component/mysql'},
+            {text: 'Milvus', link: '/linux/component/milvus'},
           ]
         },
         {
