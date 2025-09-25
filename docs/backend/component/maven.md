@@ -157,12 +157,12 @@
 > 为指定 java 的版本，可在 pom 中的多个地方，多个位置指定. 购买以下清单
 
 
-| 位置                    | 配置内容                          | 含义                            | 备注                                            |
-|-----------------------|-------------------------------|-------------------------------|-----------------------------------------------|
-| `<properties>`        | `java.version`                | 自行指定的变量                       | 若不被引用，将不产生作用                                  |
-| `<properties>`        | `maven.compiler.source`       | 指定 java 的源代码版本                | 可被 maven-compiler-plugin 自动识别                 |
-| `<properties>`        | `maven.compiler.target`       | 确定 java 的目标版本                 | 可被 maven-compiler-plugin 自动识别                 |
-| `<properties>`        | `maven.compiler.release`      | 确定 java 的版本                   | Java 9 开始，推荐使用 <release> 参数代替 source 和 target |
-| maven-compiler-plugin | `configuration>source/target` | 同 properties 中的 source/target | 优先级高于 properties 中的 source/target             |
-| maven-compiler-plugin | `configuration>release`       | 同 properties 中的 release       | 优先级高于 properties 中的 release                   |
+| 位置                    | 配置内容                           | 含义                            | 备注                                             |
+|-----------------------|--------------------------------|-------------------------------|------------------------------------------------|
+| `<properties\>`       | `java.version`                 | 自行指定的变量                       | 若不被引用，将不产生作用                                   |
+| `<properties\>`       | `maven.compiler.source`        | 指定 java 的源代码版本                | 可被 maven-compiler-plugin 自动识别                  |
+| `<properties\>`       | `maven.compiler.target`        | 确定 java 的目标版本                 | 可被 maven-compiler-plugin 自动识别                  |
+| `<properties\>`       | `maven.compiler.release`       | 确定 java 的版本                   | Java 9 开始，推荐使用 <release\> 参数代替 source 和 target |
+| maven-compiler-plugin | `configuration\>source/target` | 同 properties 中的 source/target | 优先级高于 properties 中的 source/target              |
+| maven-compiler-plugin | `configuration\>release`       | 同 properties 中的 release       | 优先级高于 properties 中的 release                    |
 
