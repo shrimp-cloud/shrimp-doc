@@ -121,13 +121,46 @@
 
 
 
-## 工具类
+## 辅助类
 
-| 类名              | 用途                              |
-|-----------------|---------------------------------|
-| JdbcUtil        | SQL 较为原生的执行方法                   |
-| MySqlUtil       | MySQL 语句的分析方法(考虑与 SqlHelper 合并) |
-| ResultSetMapper | SQL 执行返回结果的处理方法                 |
+
+
+### SqlHelper SQL 解析工具
+
+
+| 方法             | 用途                        |
+|----------------|---------------------------|
+| getTables      | 获取数据库表                    |
+| getColumnInfos | 获取数据库字段                   |
+| toMapList      | SQL执行返回结果集转 LinkedHashMap |
+
+
+
+### JdbcHelper JDBC SQL 执行工具
+
+
+| 方法                 | 用途           |
+|--------------------|--------------|
+| jdbcExecutor       | Sql 执行工具     |
+| jdbcQueryExecutor  | Sql 查询工具     |
+| jdbcUpdateExecutor | Sql 更新工具     |
+| sqlInj             | Sql 注入风险检测工具 |
+
+
+
+### MyBatisHelper 基于 MyBatis 的 SQL 解析工具和执行工具
+
+
+| 方法                | 用途                                     |
+|-------------------|----------------------------------------|
+| getParams         | 获取满足 MyBatis 语法的 SQL 的参数               |
+| getResults        | 获取满足 MyBatis 语法的 SQL 中的返回列举结果集         |
+| selectList        | 执行 List 查询                             |
+| selectListToCamel | 执行 List 查询, 返回值带驼峰转换                   |
+| selectPage        | 执行 Page 查询                             |
+| selectPageToCamel | 执行 Page 查询, 返回值带驼峰转换                   |
+| reloadSql         | 将 SQL 加载到 SqlSession 中去，并返回  statement |
+| getXmlStr         | 辅助拼装满足 MyBatis 语法的 XML 语句              |
 
 
 
@@ -193,42 +226,5 @@ public class DemoService {
 1. MyBatis-Plus 可以不用自己写一套CRUD套件。集成相当简单
 2. MyBatis-Plus 维护者非常多，也有丰富的特性，如多数据源【自己的框架也搞了多数据源啊】
 3. 广大开发者掌握 MyBatis-Plus 的人非常多，存在即是合理
-
-
-### TableInfoMapper
-
-> 此 Mapper 的设计，是辅助获取 MySQL 最基本的信息，以辅助完成一些自动化过程
-
-| 方法             | 用途      |
-|----------------|---------|
-| getTables      | 获取数据库表  |
-| getColumnInfos | 获取数据库字段 |
-
-
-### SqlHelper
-
-> SQL 语句的分析工具
-
-| 方法        | 用途                             |
-|-----------|--------------------------------|
-| getParams | 获取满足 MyBatis 语法的 SQL 的参数       |
-| getResults | 获取满足 MyBatis 语法的 SQL 中的返回列举结果集 |
-| sqlExecutor | Sql 执行工具                       |
-| linkedHashMap2List | Map 转 List                           |
-
-
-
-### MyBatisHelper
-
-> MyBatis 的辅助工具
-
-| 方法                | 用途                                     |
-|-------------------|----------------------------------------|
-| selectList        | 执行 List 查询                             |
-| selectListToCamel | 执行 List 查询, 返回值带驼峰转换                   |
-| selectPage        | 执行 Page 查询                             |
-| selectPageToCamel | 执行 Page 查询, 返回值带驼峰转换                   |
-| reloadSql         | 将 SQL 加载到 SqlSession 中去，并返回  statement |
-| getXmlStr         | 辅助拼装满足 MyBatis 语法的 XML 语句              |
 
 
