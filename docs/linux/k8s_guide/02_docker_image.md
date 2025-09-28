@@ -4,10 +4,10 @@
 ### 打包[JDK基础镜像]
 准备JDK
 ```shell
-wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
-tar -zxvf jdk-21_linux-x64_bin.tar.gz
-mv jdk-21* jdk21
-wget https://github.com/alibaba/arthas/releases/download/arthas-all-3.7.2/arthas-bin.zip
+wget https://download.oracle.com/java/25/latest/jdk-25_linux-x64_bin.tar.gz
+tar -zxvf jdk-25_linux-x64_bin.tar.gz
+mv jdk-25 jdk25
+wget https://github.com/alibaba/arthas/releases/download/arthas-all-4.0.5/arthas-bin.zip
 unzip arthas-bin.zip -d arthas
 
 ```
@@ -30,14 +30,14 @@ RUN dnf makecache && \
 VOLUME [ "/sys/fs/cgroup" ]
 
 # JDK & arthas
-ADD jdk21 jdk21
+ADD jdk25 jdk25
 ADD arthas arthas
 ADD simsun.ttf /usr/share/fonts/zh/simsun.ttf
 
 # 环境变量
 ENV TZ=Asia/Shanghai
-ENV JAVA_HOME=/apps/jdk21
-ENV PATH=/apps/jdk21/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV JAVA_HOME=/apps/jdk25
+ENV PATH=$JAVA_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV LANG=en_US.utf8
 
 EOF

@@ -19,6 +19,16 @@
 
 - 参照 druid-spring-boot-3-starter 与 mybatis-spring-boot-starter 配置 的官方配置即可
 
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://host:port/schema?useUnicode=true&characterEncoding=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: username
+    password: password
+    driverClassName: com.mysql.cj.jdbc.Driver
+```
+
+
 
 ## 核心逻辑
 
@@ -97,6 +107,147 @@
 ## MyBatis 插件
 
 
+### 执行SQL过程
+Mybatis执行SQL的完整过程， 参考：https://www.bbsmax.com/A/B0zqre03Jv/
+
+
+### 组件
+- Executor：一个 SqlSession 对应一个 Executor 对象，这个对象负责增删改查的具体操作
+- ParameterHandler：mybatis 提供的 参数处理器, 没有过多的类关联关系, 只有一个默认的实现类
+- StatementHandler：StatementHandler 是 mybatis 创建 Statement 的处理器, 会负责 Statement 的创建工作, 在 JDBC 中 Statement 执行 SQL 语句时主要分为两个主要对象。 一个是平常大家都知道的 Statement 和 PrepareStatement, 都是在 java.sql 包下提供的对象
+- ResultSetHandler：同 ParameterHandler 一致, 都只有一个默认的实现类。ResultSetHandler 作用域只有一个, 那就是负责处理 Statement 返回的结果, 根据定义返回类型进行封装返回
+- 参考：https://zhuanlan.zhihu.com/p/186261260
+
+
+
+### 拦截参数处理
+
+```java
+import org.apache.ibatis.executor.parameter.ParameterHandler;
+import org.apache.ibatis.plugin.*;
+
+import java.sql.PreparedStatement;
+import java.util.Properties;
+
+@Intercepts({@Signature(type = ParameterHandler.class, method = "setParameters", args = PreparedStatement.class)})
+public class MybatisParameterInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截参数设置
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+
+
+
+#### 拦截查询执行
+```java
+import org.apache.ibatis.cache.CacheKey;
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.mapping.BoundSql;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.session.ResultHandler;
+import org.apache.ibatis.session.RowBounds;
+
+import java.util.Properties;
+
+@Intercepts({
+    @Signature(type = Executor.class,method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+    @Signature(type = Executor.class,method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})
+})
+public class MybatisQueryInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截查询执行
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+#### 拦截入库执行
+```java
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.plugin.*;
+
+import java.util.Properties;
+
+@Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})})
+public class MybatisUpdateInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截入库执行
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+#### 拦截结果处理
+```java
+import org.apache.ibatis.executor.resultset.ResultSetHandler;
+import org.apache.ibatis.plugin.*;
+
+import java.sql.Statement;
+import java.util.Properties;
+
+@Intercepts({@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})})
+public class MybatisResultSetInterceptor implements Interceptor {
+
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        // 拦截查询结果
+        return invocation.proceed();
+    }
+
+    @Override
+    public Object plugin(Object target) {
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+    }
+}
+```
+
+
+
+
+### 插件清单
+
 | 插件名                     | 描述               | 状态                           |
 |-------------------------|------------------|------------------------------|
 | ParameterInterceptor    | 参数处理插件           | 不好用，未启用                      |
@@ -105,6 +256,25 @@
 | QueryInterceptor        | SQL 在执行前，进行拦截和处理 | 已启用(功能与 DaoAop 有重叠，需要考虑去留问题) |
 | SqlInjInterceptor       | SQL 注入风险检测       | 已启用                          |
 | UpdateInterceptor       | SQL 执行更新方法时的拦截器  | 已启用，注入创建人，更新人信息              |
+
+
+### MybatisUpdateInterceptor
+
+
+功能说明：
+1. 拦截 DML 语句（在拦截器中全部会被当成query 处理）
+2. 搜索 请求参数的直接对象，或 List 中的对象，若继承了 BaseModel, 将做下一步处理
+3. 修改动作过程，需要附加 最后更新人，最后更新时间，确保 ID 存在，
+4. 新建时追回创建人，创建时间信息，排序。
+5. 删除时校验id 存在性
+6. 乐观锁校验：结合 service 使用。强制使用乐观锁场景将校验 version 字段
+7. 将校验异常结果转换为更友好的提示
+
+
+
+#### 拦截其他
+- 指定 Signature 的 类型，方法，和参数。即可完成拦截
+  拦截器执行顺序参考：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/Interceptor.md
 
 
 
@@ -167,6 +337,25 @@
 
 ## 动态数据源
 
+- 初始化数据源
+
+```java
+@Component
+public class DynamicDataSourceInit implements DynamicDataSourceFactory {
+
+    @Autowired
+    private GenDatasourceService genDatasourceService;
+
+    @SneakyThrows
+    @Override
+    public DataSource createDataSource(String key) {
+        // 获取数据源并参数 map 化
+        return DruidDataSourceFactory.createDataSource(map);
+    }
+}
+```
+
+- 使用动态数据源
 
 ```java
 package com.example.demo;
@@ -199,7 +388,40 @@ public class DemoService {
 - 若是多数据源，在完成  Dao 执行后，将清空线程变量，防止对后续的 sql 动作千万影响
 - 对 OrderBy 参数进行检测，若存在注入风险，将拦截。同时，规范化 OrderBy 参数
 
+
+
+> 查询参数的 "" 自动处理成 null, 可简化 mybatis xml 的 if 判断
+
+1. 拦截 Mapper 注解，在第一次进入此 AOP 时，获取所有 mappedStatement，并筛选出 DQL,DML 操作。为后续操作提供参照
+2. 对于 DQL 语句，确认参数是否继承了BaseModel， 若有继承，截取参数进行分析
+3. 查询参数包含 "" 时，将其置为 null, 以简化 xml 动态语法的编写
+4. order by 条件，需要使用 ${} 方式拼接，在此处校验注入风险。
+5. 对 order by  的内容做驼峰转换处理，增强对 order by 参数的兼容度
+6. 给 keyword 关键词加上 前后百分号处理，方便使用过程直接 LIKE
+7. 对 dateRangeType 字段转换成确切的时间范围 timeFrom, timeTo 两个字段，方便在数据库中直接使用
+8. 乐观锁控制
+9. 更新人，更新时间，修改人，修改时间处理【需要 cas 将用户信息放到 ThreadLocal 中】
+
+
+
 ### PageQuery
+
+
+> xml 只写 list 查询，java 中一句话完成分页查询
+
+```java
+@Service
+public class DemoService {
+
+    @Autowired
+    private DemoTypesMapper demoTypesMapper;
+
+    public PageData selectPage(DemoTypes demoTypes){
+        return PageQuery.page(demoTypes, demoTypesMapper::list);
+    }
+
+}
+```
 
 - 分页查询封装对象
 - 入参：查询参数; List 查询接口

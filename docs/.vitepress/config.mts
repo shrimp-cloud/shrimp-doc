@@ -186,6 +186,7 @@ export default withMermaid({
             {text: 'Gen', link: '/backend/framework/gen'},
             {text: 'Spring', link: '/backend/framework/spring'},
             {text: 'XXL-Job', link: '/backend/framework/xxljob'},
+            {text: 'Mqtt', link: '/backend/framework/mqtt'},
           ]
         }
       ],
@@ -194,13 +195,8 @@ export default withMermaid({
           text: '组件',
           items: [
             {text: '组件', link: '/backend/component/'},
-            {text: 'Maven', link: '/backend/component/maven'},
-            {text: 'Redis', link: '/backend/component/redis'},
-            {text: 'Spring', link: '/backend/component/spring'},
             {text: 'Cas', link: '/backend/component/casStarter'},
-            {text: 'Mybatis', link: '/backend/component/mybatis'},
             {text: 'oss', link: '/backend/component/oss'},
-            {text: 'mqtt', link: '/backend/component/mqtt'},
             { text: 'Dubbo', link: '/backend/component/dubbo' },
             { text: 'Camunda', link: '/backend/component/camunda' },
           ]

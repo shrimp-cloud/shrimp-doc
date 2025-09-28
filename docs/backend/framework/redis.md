@@ -19,6 +19,16 @@
 
 - 参照 spring-boot-starter-data-redis 的官方配置即可
 
+```
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: pwd
+    timeout: 3000
+```
+
 
 
 ## 特性
@@ -43,6 +53,20 @@ public class ResetRedisTemplateSerializer {
 
 
 ## 工具
+
+
+### 日常使用
+
+```java
+
+@Component
+public class CustomComponent {
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    // redis 的其他操作
+}
+```
 
 
 ### Redis 锁
