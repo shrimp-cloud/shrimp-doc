@@ -216,17 +216,11 @@ export default withMermaid({
           text: '三方',
           items: [
             {text: '三方', link: '/backend/third/'},
-            {text: '支付宝', link: '/backend/third/alipay'},
             {text: '数据库', link: '/backend/third/database'},
             {text: '域名', link: '/backend/third/domain'},
             {text: '邮箱', link: '/backend/third/email'},
-            {text: '小程序', link: '/backend/third/miniapp'},
-            {text: 'OSS', link: '/backend/third/oss'},
             {text: '服务器', link: '/backend/third/server'},
             {text: '短信', link: '/backend/third/sms'},
-            {text: '微信公众号', link: '/backend/third/wechat'},
-            {text: '微信支付', link: '/backend/third/wxpay'},
-            {text: 'MQTT', link: '/backend/third/mqtt'},
           ]
         }
       ],
@@ -329,6 +323,8 @@ export default withMermaid({
             {text: '删除检查项', link: '/ecology/micro/rmckeck'},
             {text: '微信小程序', link: '/ecology/micro/wxapp'},
             {text: '微信公众号', link: '/ecology/micro/wxmp'},
+            {text: '支付宝支付', link: '/ecology/micro/alipay'},
+            {text: '微信支付', link: '/ecology/micro/wxpay'},
           ]
         }
       ],
