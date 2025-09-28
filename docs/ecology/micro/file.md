@@ -75,11 +75,12 @@ CREATE TABLE `mdm_fs_files` (
 
 ```java
 @Slf4j
-@Component
+@RestController
 public class FileDemo {
 
   @Autowired
   private FsApi fsApi;
+
   public void test() {
     /**
      * 上传
@@ -113,6 +114,12 @@ public class FileDemo {
     // 删除批量
     fsApi.delete(fileIds);
   }
+
+    @PostMapping("/public/file/upload")
+    public Result fileUpload(@RequestParam("file") MultipartFile file, String busnessType){
+      String dd = fsApi.upload(file, busnessType);
+      return Result.data(dd);
+    }
 }
 ```
 

@@ -195,8 +195,6 @@ export default withMermaid({
           text: '组件',
           items: [
             {text: '组件', link: '/backend/component/'},
-            {text: 'Cas', link: '/backend/component/casStarter'},
-            {text: 'oss', link: '/backend/component/oss'},
             { text: 'Dubbo', link: '/backend/component/dubbo' },
             { text: 'Camunda', link: '/backend/component/camunda' },
           ]
@@ -353,14 +351,14 @@ export default withMermaid({
           ]
         }
       ],
-      '/ecology/cas/': [
+      '/ecology/auth/': [
         {
-          text: 'Cas',
+          text: '授权管理',
           items: [
-            {text: 'Cas', link: '/ecology/cas/'},
-            {text: 'Cass模块', link: '/ecology/cas/cas'},
-            {text: 'RBAC', link: '/ecology/cas/rbac'},
-            {text: 'Token', link: '/ecology/cas/access_token'},
+            {text: '简介', link: '/ecology/auth/'},
+            {text: 'RBAC', link: '/ecology/auth/rbac'},
+            {text: 'Token', link: '/ecology/auth/access_token'},
+            {text: 'Cas', link: '/ecology/auth/cas'},
           ]
         }
       ],

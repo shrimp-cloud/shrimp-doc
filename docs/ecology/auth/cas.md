@@ -1,12 +1,12 @@
-# cas-starter
+# 模块接入
 
-> cas 单点登录-权限验证-用户信息获取
+> 若项目集成部署，无需此接入过程。若为微服务部署，各部署的模块，需要与 cas 交互，才需要按此文档集成
 
 ## 依赖
 ```xml
 <dependency>
-    <groupId>com.wkclz.cas</groupId>
-    <artifactId>shrimp-cloud-cas-starter</artifactId>
+    <groupId>com.wkclz.auth</groupId>
+    <artifactId>auth-sdk</artifactId>
 </dependency>
 ```
 
@@ -20,5 +20,4 @@ cas:
     user-default-roles: 用户默认角色【用于赋予默认权限】
 
 ```
-
 
