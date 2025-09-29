@@ -313,6 +313,7 @@ export default withMermaid({
             {text: '报表模块', link: '/ecology/micro/report'},
             {text: '文件模块', link: '/ecology/micro/file'},
             {text: '表单模块', link: '/ecology/micro/form'},
+            {text: '函数库', link: '/ecology/micro/fun'},
             {text: 'LiteFlow', link: '/ecology/micro/liteflow'},
             {text: '数据脱敏', link: '/ecology/micro/mask'},
             {text: '站内消息', link: '/ecology/micro/msg'},
