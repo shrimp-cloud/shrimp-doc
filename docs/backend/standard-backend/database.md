@@ -46,6 +46,35 @@
 
 - 要点
   - 基础字段必需全局一致，其他字段不可冲突
+  - 布尔类型的含义，均用 1,0 表示。1是0否
+  - 作为索引的字段，必需 NOT NULL
+
+
+- 建表语句示例
+
+```sql
+CREATE TABLE `auth_user` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+
+  -- 以下是业务字段
+  `user_code` varchar(31) NOT NULL DEFAULT '' COMMENT '用户编码',
+  `username` varchar(63) NOT NULL DEFAULT '' COMMENT '用户名',
+  `nickname` varchar(63) DEFAULT NULL COMMENT '昵称',
+  -- 以上是业务字段
+
+  `sort` int NOT NULL DEFAULT '0' COMMENT '排序',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_by` varchar(31) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_by` varchar(31) DEFAULT NULL COMMENT '更新人',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `version` int NOT NULL DEFAULT '0' COMMENT '版本号',
+  `status` bigint unsigned NOT NULL DEFAULT '1' COMMENT 'status',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `user_code` (`user_code`) USING BTREE,
+  KEY `username` (`username`) USING BTREE
+) ENGINE=InnoDB COMMENT='用户';
+```
 
 
 ## 其他规范
