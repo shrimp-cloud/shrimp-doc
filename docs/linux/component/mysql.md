@@ -6,12 +6,12 @@
 
 移除mariadb的影响
 ```shell
-dnf remove mariadb-libs -y
+dnf remove mariadb-libs mariadb-connector-c-config -y
 ```
 
 安装 mysql依赖包
 ```shell
-dnf install libaio.x86_64 -y
+dnf install libaio.x86_64 libtirpc -y
 ```
 
 ### 安装包下载
@@ -25,12 +25,13 @@ dnf install libaio.x86_64 -y
 # 解压
 tar -xvf mysql-*
 # 安装
-rpm -ivh mysql-community-common-8.0.29-1.el7.x86_64.rpm
-rpm -ivh mysql-community-client-plugins-8.0.29-1.el7.x86_64.rpm
-rpm -ivh mysql-community-libs-8.0.29-1.el7.x86_64.rpm
-rpm -ivh mysql-community-client-8.0.29-1.el7.x86_64.rpm
-rpm -ivh mysql-community-icu-data-files-8.0.29-1.el7.x86_64.rpm
-rpm -ivh mysql-community-server-8.0.29-1.el7.x86_64.rpm
+
+dnf install -y ./mysql-community-common-9.4.0-1.el9.x86_64.rpm
+dnf install -y ./mysql-community-client-plugins-9.4.0-1.el9.x86_64.rpm
+dnf install -y ./mysql-community-libs-9.4.0-1.el9.x86_64.rpm
+dnf install -y ./mysql-community-client-9.4.0-1.el9.x86_64.rpm
+dnf install -y ./mysql-community-icu-data-files-9.4.0-1.el9.x86_64.rpm
+dnf install -y ./mysql-community-server-9.4.0-1.el9.x86_64.rpm
 # 启动和自启动
 systemctl start mysqld
 systemctl enable mysqld
