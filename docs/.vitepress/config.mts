@@ -492,6 +492,7 @@ export default withMermaid({
           text: '平台化工具，和服务',
           items: [
             {text: 'KVM', link: '/linux/platform/kvm'},
+            {text: 'Docker', link: '/linux/platform/docker'},
             {text: 'MinIO', link: '/linux/platform/minio'},
             {text: 'Cloudreve', link: '/linux/platform/cloudreve'},
             {text: 'FnOs', link: '/linux/platform/fnos'},
