@@ -148,7 +148,6 @@ docker pull <image_name>
 |            | `docker run --platform linux/amd64 <镜像>`  | 指定运行平台（如 ARM Mac 上运行 x86） | `docker run --platform linux/amd64 ubuntu`        |
 
 
-
 ### 跨平台拉取镜像
 
 - 本地有梯子，但本地为 arm。服务器无梯子(复杂)，但服务器为 amd64, 无法本地拉镜像到服务器
@@ -185,5 +184,7 @@ docker volume prune
 docker image prune -af
 # 清理悬空的资源(容器/镜像/网络/缓存)
 docker system prune -f
+# 清理编译缓存
+docker builder prune --all
 ```
 
