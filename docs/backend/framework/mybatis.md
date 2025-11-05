@@ -99,12 +99,43 @@ spring:
 
 ### 配置类
 
-> 全辅助配置，略过
+
+| 配置 key                                 | 含义           | 类型      | 必需 | 默认值      | 可选     | 备注           |
+|----------------------------------------|--------------|---------|----|----------|--------|--------------|
+| db-script.init.enabled                 | 脚本初始化开关      | Integer | 否  | 0        | 0 or 1 | 默认关闭         |
+| db-script.init.auto-create-table       | 是否自动创建表      | Integer | 否  | 1        | 0 or 1 | 生产环境建议手动提前创建 |
+| db-script.init.auto-insert-data        | 新表是否自动插入示例数据 | Integer | 否  | 1        | 0 or 1 | 生产环境建议手动提前插入 |
+| db-script.init.auto-exec-add-column    | 是否自动添加新字段    | Integer | 否  | 0        | 0 or 1 | 生产环境建议手动提前添加 |
+| db-script.init.auto-exec-modify-column | 是否自动修改字段     | Integer | 否  | 0        | 0 or 1 | 生产环境建议手动提前修改 |
+| db-script.init.auto-exec-drop-column   | 是否自动移除字段     | Integer | 否  | 0        | 0 or 1 | 生产环境建议手动提前移除 |
+| db-script.init.auto-exec-add-index     | 是否自动添加新索引    | Integer | 否  | 0        | 0 or 1 | 生产环境建议手动提前添加 |
+| db-script.init.auto-exec-drop-index    | 是否自动移除旧索引    | Integer | 否  | 0        | 0 or 1 | 生产环境建议手动提前移除 |
+| db-script.init.rest-prefix             | 管理端接口前缀      | String  | 否  | /sql2api | /      | rest 前缀，上下文  |
 
 
 
 
 ## MyBatis 插件
+
+
+### SQL 脚本初始化
+
+- 初始化逻辑
+
+1. 应用启动初次对数据库进行 CRUD 操作时，将拦截，并执行初始化动作
+2. 扫描 `db-script` 包下的所有 `.sql` 文件，并解析，对象化
+3. 搜索当前表结构（表，字段，索引），并对象化
+4. 脚本与现存表结构进行对比，得到新建表 DDL，字段变更，索引变更DDL
+5. 获取所有 DML(insert) 语句，并筛选出新表的 DML
+6. 执行建表 DDL
+7. 执行新表的数据插入 DML(insert)
+8. 执行字段添加 DDL
+9. 执行字段移除 DDL
+10. 执行索引添加 DDL
+11. 执行索引移除 DDL
+12. 以上过程为开关全部打开情况下的执行逻辑，若某个过程开关已关闭，将不会自动执行相关逻辑，只打印玍执行的 DDL/DML 语句
+
+
 
 
 ### 执行SQL过程
