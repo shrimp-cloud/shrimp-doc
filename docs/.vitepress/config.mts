@@ -497,9 +497,9 @@ export default withMermaid({
             {text: 'Cloudreve', link: '/linux/platform/cloudreve'},
             {text: 'FnOs', link: '/linux/platform/fnos'},
             {text: 'Sonar', link: '/linux/platform/sonar'},
-            {text: 'Wiki.js', link: '/linux/component/wikijs'},
-            {text: 'VuePress', link: '/linux/component/vuepress'},
-            {text: 'WordPress', link: '/linux/component/wordpress'},
+            {text: 'Wiki.js', link: '/linux/platform/wikijs'},
+            {text: 'VuePress', link: '/linux/platform/vuepress'},
+            {text: 'WordPress', link: '/linux/platform/wordpress'},
           ]
         },
       ],
