@@ -565,6 +565,7 @@ export default withMermaid({
             {text: 'Open WebUI', link: '/ai/lm/webui'},
             {text: 'Dify', link: '/ai/lm/Dify'},
             {text: 'MaxKB', link: '/ai/lm/MaxKB'},
+            {text: 'MindFormers10', link: '/ai/lm/mindformers10'},
             {text: '设备', link: '/ai/lm/equipment'},
           ]
         }
