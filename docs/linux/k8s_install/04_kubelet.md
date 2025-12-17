@@ -44,9 +44,10 @@ kubeadm config print init-defaults > kubeadm.yaml
 1. 修改控制节点的IP: advertiseAddress 为 master 地址
 2. 指定 containerd 容器运行时: criSocket: unix:///run/containerd/containerd.sock
 3. 修改 name: node 为自己的名字，示例: `k8s-master`
-3. 修改镜像仓库地址为阿里云：imageRepository:  registry.aliyuncs.com/google_containers #若能获取到镜像，则不需要
-4. 指定Pod网段（在dnsDomain下方添加）: podSubnet: 10.12.0.0/16
-5. 配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
+4. 修改镜像仓库地址为阿里云：imageRepository:  registry.aliyuncs.com/google_containers #若能获取到镜像，则不需要
+5. 注意 kubernetesVersion 的版本, 需要与 `kubeadm config images list` 返回的镜像版本一致，否则无法使用手动导入的镜像
+6. 指定Pod网段（在dnsDomain下方添加）: podSubnet: 10.12.0.0/16
+7.配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
 ```shell
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -66,6 +67,8 @@ systemctl restart containerd
 kubeadm config images pull
 # 初始化集群
 kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
+# 初始化出现意外，可重置 kubeadm, 方便再次初始化
+kubeadm reset --force
 ```
 
 Tips:

@@ -90,3 +90,5 @@ crictl pull <image_name>
 ```shell
 systemctl enable containerd --now
 ```
+
+- 启动后需检查启动状态，若有失败信息，需要解决
