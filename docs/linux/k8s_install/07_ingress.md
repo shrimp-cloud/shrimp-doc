@@ -27,6 +27,7 @@ wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12
 $ kubectl get validatingwebhookconfigurations
 # 输出：ingress-nginx-admission
 $ kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+# 新版本不用删除了
 ```
 
 安装  ingress

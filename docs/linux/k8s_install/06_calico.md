@@ -27,6 +27,23 @@ kubectl get nodes
   - `Back-off restarting failed container install-cni in pod calico-node-xxxx`: 从 `calico.yaml` 中移除 upgrade-ipam 相关内容
 
 
+- 若开启了 firewalld, 可能会拦截 pod 到主机的流程，需要放行
+
+```shell
+# 信任 cali+ 接口（通配符）
+firewall-cmd --permanent --zone=trusted --add-interface='cali+'
+# 信任 tunl0（如果使用 IPIP）
+firewall-cmd --permanent --zone=trusted --add-interface=tunl0
+# 信任 vxlan.calico（如果使用 VXLAN）
+firewall-cmd --permanent --zone=trusted --add-interface=vxlan.calico
+# 重载 firewall
+firewall-cmd --reload
+# 验证配置
+firewall-cmd --zone=trusted --list-interfaces
+```
+
+
+
 
 ### 加速
 若 Calico 初始化时间太长，可先导入镜像
