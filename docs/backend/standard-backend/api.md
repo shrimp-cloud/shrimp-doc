@@ -6,9 +6,8 @@
   - POST 用于请求逻辑。需要考虑幂等
 - uri 规范
   - 接口需要自解释。从接口的命名，即可猜测接口的用途。
-  - 一级为后端模块名，如：sys,cas,cms
-  - 二级为前端模块名，如：cuatomer, admin, manager
-  - 二级为 public 的，为免鉴权接口，三级为前端模块名。
+  - 一级为后端模块名，如：sys,iam,cms 等
+  - 免鉴权接口：二级为 public
   - 特殊用途接口可不按一级二级三级规范，但建议按此规范
   - 后缀规范：
     - /page 分页查询
@@ -19,6 +18,12 @@
     - /update 修改（仅有修改需求时）
     - /remove 删除（需要考虑单个及批量）
     - /options 列表查询（返回信息很简洁，一般用于生成下拉菜单）
+  - 去除一级，public 级，和后缀，其余部分可视为接口组
+- uri 示例
+  - 获取用户分页: GET /iam/user/page
+  - 修改用户信息: POST /iam/user/update
+  - 登录界面获取验图片证码: GET /iam/public/picture/captcha
+
 
 
 ## 接口参数规范
