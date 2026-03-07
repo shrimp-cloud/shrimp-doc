@@ -413,8 +413,8 @@ export default withMermaid({
           items: [
             {text: 'Linux 介绍', link: '/linux/system/'},
             {text: 'Linux 内核', link: '/linux/system/kernel'},
-            {text: 'RockyLinux9 安装', link: '/linux/system/rockylinux9_install'},
-            {text: 'RockyLinux9 初始化', link: '/linux/system/rockylinux9_init'},
+            {text: 'RockyLinux10 安装', link: '/linux/system/rockylinux10_install'},
+            {text: 'RockyLinux10 初始化', link: '/linux/system/rockylinux10_init'},
 
             {text: 'Centos7 初始化', link: '/linux/system/centos7_init'},
             {text: '磁盘扩容', link: '/linux/system/disk_expansion'},

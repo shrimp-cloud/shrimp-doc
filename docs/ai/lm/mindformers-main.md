@@ -1,6 +1,6 @@
 # mindformers
 
-> MindSpore Transformers套件的目标是构建一个大模型预训练、微调、推理、部署的全流程开发套件，提供业内主流的Transformer类大语言模型（Large Language Models, LLMs）和多模态理解模型（Multimodal Models, MMs）。期望帮助用户轻松地实现大模型全流程开发。
+> 使用MindFormers大模型套件进行Llama2-7B模型的LoRA微调和推理，MindSpore Transformers套件的目标是构建一个大模型训练、微调、评估、推理、部署的全流程开发套件：提供业内主流的Transformer类预训练模型和SOTA下游任务应用，涵盖丰富的并行特性，期望帮助用户轻松的实现大模型训练和创新研发。
 
 
 ## 概念
@@ -25,16 +25,20 @@
 
 ## 环境准备
 
+### 基础环境
+
+```shell
+# 安装 python3, python3-pip
+dnf install -y python3 python3-pip
+```
+
+### 应用环境
 
 ```shell
 # 拉取代码
 cd ~
-git clone -b master https://gitee.com/mindspore/mindformers.git
+git clone https://gitee.com/mindspore/mindformers.git
 cd mindformers
-bash build.sh
-
-
-
 
 # 创建虚拟环境
 python -m venv .venv && source .venv/bin/activate
@@ -42,7 +46,7 @@ python -m venv .venv && source .venv/bin/activate
 
 # 安装基础依赖
 # sh build.sh 安装依赖失败，使用如下方式先安装依赖
-pip install --upgrade pip -i https://repo.huaweicloud.com/repository/pypi/simple/
+pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple/
 pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 pip install mindspore -i https://mirrors.aliyun.com/pypi/simple/
 sh build.sh
@@ -105,24 +109,11 @@ python novelset2alpaca.py
 
 ```shell
 
-python ~/mindformers/mindformers/tools/dataset_preprocess/llama/alpaca_converter.py \
-  --data_path ~/mindformers/datasets/novelset/novelset.json \
-  --output_path ~/mindformers/datasets/novelset/novelset-conversation.json.json
-
-```
-
-- 分词器预处理并保存成Mindrecord格式
-
-> 执行llama_preprocess.py，进行数据预处理、Mindrecord数据生成，将带有prompt模板的数据转换为Mindrecord格式。
-
-
-```shell
-python ~/mindformers/mindformers/tools/dataset_preprocess/llama/llama_preprocess.py \
-  --dataset_type qa \
-  --input_glob ~/mindformers/datasets/novelset/novelset-conversation.json \
-  --model_file ~/mindformers/models/llama2/tokenizer.model \
-  --seq_length 2048 \
-  --output_file ~/mindformers/datasets/novelset/novelset.mindrecord
-
-# 报错，版本不匹配
+python ~/mindformers/toolkit/data_preprocess/huggingface/datasets_preprocess.py \
+  --config ~/mindformers/configs/convert_config/run_convert.yaml \
+  --input ~/mindformers/datasets/novelset/novelset.json \
+  --tokenizer-type SentencePieceTokenizer \
+  --tokenizer-model ~/mindformers/models/llama2/tokenizer.model \
+  --output-prefix ~/mindformers/datasets/novelset/conversation
+# 不成功，参数不正确
 ```

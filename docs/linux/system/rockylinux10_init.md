@@ -1,4 +1,4 @@
-# Rocky Linux 9 初始化
+# Rocky Linux 10 初始化
 
 
 ## 常用配置

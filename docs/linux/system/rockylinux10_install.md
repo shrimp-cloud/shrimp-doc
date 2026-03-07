@@ -1,4 +1,4 @@
-# Rocky Linux 9
+# Rocky Linux 10
 
 > 为什么不是 CentOS 9 ? CentOS 8 以后，变成了 RHEL 的上游分支，不再是那个稳定可靠的 CentOS 了。 Rocky Linux 与 CentOS 同父，延续了 CentOS 的特性。
 
@@ -23,6 +23,15 @@
 
 
 ## 网络配置
+
+
+- 启用网络
+```shell
+# 启用连接 (临时)
+ip addr # 网络连接名
+nmcli connection up enpxxx
+```
+
 
 - 配置已有连接
 ```shell
