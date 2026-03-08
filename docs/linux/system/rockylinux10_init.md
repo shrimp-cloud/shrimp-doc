@@ -23,6 +23,7 @@ chmod 600 authorized_keys
 
 ```shell
 # 清理和更新软件仓库缓存
+dnf config-manager --set-enabled crb
 dnf -y install epel-release
 dnf -y update
 dnf -y install tar vim net-tools numactl fontconfig zip unzip wget git telnet htop

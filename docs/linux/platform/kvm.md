@@ -8,7 +8,7 @@ egrep -c '(vmx|svm)' /proc/cpuinfo
 # 安装必要的软件包
 dnf -y install @virtualization
 # 这个命令会安装一组与虚拟化相关的软件包，包括 QEMU-KVM、libvirt、Virt-Manager 等等。@virtualization 用不了，就用下面的 install
-dnf -y install qemu-kvm libvirt virt-install virt-manager libguestfs-tools-c
+dnf -y install qemu-kvm virt-manager virt-viewer libvirt-daemon-kvm
 
 # 启动并启用 libvirtd 服务
 systemctl start libvirtd
