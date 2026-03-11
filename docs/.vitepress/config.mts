@@ -501,6 +501,7 @@ export default withMermaid({
             {text: 'Wiki.js', link: '/linux/platform/wikijs'},
             {text: 'VuePress', link: '/linux/platform/vuepress'},
             {text: 'WordPress', link: '/linux/platform/wordpress'},
+            {text: 'OpenClaw', link: '/linux/platform/opwnclaw'},
           ]
         },
       ],
