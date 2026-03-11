@@ -462,6 +462,7 @@ export default withMermaid({
           text: '代理工具',
           items: [
             {text: 'frp', link: '/linux/component/frp'},
+            {text: 'Tailscale', link: '/linux/component/tailscale'},
             {text: 'Squid', link: '/linux/component/squid'},
             {text: 'Shadowsocks', link: '/linux/component/shadowsocks'},
           ]
