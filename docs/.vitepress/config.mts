@@ -502,6 +502,7 @@ export default withMermaid({
             {text: 'VuePress', link: '/linux/platform/vuepress'},
             {text: 'WordPress', link: '/linux/platform/wordpress'},
             {text: 'OpenClaw', link: '/linux/platform/opwnclaw'},
+            {text: 'JumpServer', link: '/linux/platform/jumpserver'},
           ]
         },
       ],
