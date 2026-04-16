@@ -141,3 +141,26 @@ public class FileDemo {
   - 访问：将 fileId 经过 签名处理，将获得临时可访问的 url。可单个操作，和批量操作，可指定过期时间。默认访问过期时间为 10 分钟。多个 fileId 请走批量方式。
   - 删除：调用 delete 方法，即可将对象存储内的文件删除，同时也会将本地记录删除，删除的文件将永远无法恢复。使用删除时请自行检查 fileId 的关联性
 
+
+
+## 扩展
+
+
+### 阿里云 OSS 授权说明
+
+```json
+{
+  "Version": "1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "oss:PutObject",
+        "oss:GetObject",
+        "oss:DeleteObject"
+      ],
+      "Resource": "acs:oss:oss-cn-shenzhen:*:your-bucket/*"
+    }
+  ]
+}
+```

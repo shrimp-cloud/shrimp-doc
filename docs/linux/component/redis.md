@@ -16,9 +16,9 @@ systemctl enable redis
 ### 防火墙
 
 ```shell script
-# 检查防火墙是否包含 3306端口
+# 检查防火墙是否包含 6379端口
 firewall-cmd --list-ports
-# 防火墙开放3306
+# 防火墙开放6379
 firewall-cmd --permanent --zone=public --add-port=6379/tcp
 # reload防火墙
 firewall-cmd --reload
