@@ -112,10 +112,29 @@ kubeadm certs check-expiration
 # 更新证书：
 kubeadm certs renew all
 
-# 使用新读书：
+# 使用新证书：
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 
 # 证书还可能用在 cd 流水线，或服务治理平台中，需要同步更新
+
+#集群仍然缓存着旧证书：
+
+# 备份 manifests 目录
+mv /etc/kubernetes/manifests /etc/kubernetes/manifests.bak
+# 创建一个新的空目录
+mkdir /etc/kubernetes/manifests
+# 检查 Pod 是否已经消失 (或重启)
+crictl ps | grep -E "apiserver|controller|scheduler"
+# 停止 Kubelet 以确保环境干净（可选，但推荐）
+systemctl stop kubelet
+# 将备份的文件移回
+mv /etc/kubernetes/manifests.bak/* /etc/kubernetes/manifests/
+# 启动 Kubelet
+systemctl start kubelet
+# 查看 Pod 状态
+kubectl get pods -n kube-system | grep -E "kube-apiserver|kube-controller|kube-scheduler|etcd"
+# 查看节点状态
+kubectl get nodes
 ```
 
 
