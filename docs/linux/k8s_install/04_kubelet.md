@@ -13,9 +13,10 @@ dnf -y install nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurse
 # vim /etc/yum.repos.d/k8s.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+baseurl=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.36/rpm/
 enabled=1
-gpgcheck=0
+gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.36/rpm/repodata/repomd.xml.key
 ```
 
 
@@ -24,6 +25,10 @@ gpgcheck=0
 安装 kubelet kubeadm kubectl
 ```shell
 dnf -y install kubelet kubeadm kubectl
+```
+> 新仓库中 kubeadm 不再声明对 cri-tools 的依赖，crictl 不会随安装自动带上，需单独安装：
+```shell
+dnf -y install cri-tools
 ```
 Tips:
 - Kubeadm: 初始化集群的工具包
@@ -47,7 +52,7 @@ kubeadm config print init-defaults > kubeadm.yaml
 4. 修改镜像仓库地址为阿里云：imageRepository:  registry.aliyuncs.com/google_containers #若能获取到镜像，则不需要
 5. 注意 kubernetesVersion 的版本, 需要与 `kubeadm config images list` 返回的镜像版本一致，否则无法使用手动导入的镜像
 6. 指定Pod网段（在dnsDomain下方添加）: podSubnet: 10.12.0.0/16
-7.配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
+7. 配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
 ```shell
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -63,8 +68,10 @@ cgroupDriver: systemd
 ```shell
 systemctl enable kubelet --now
 systemctl restart containerd
+# 查看初期需要获取的镜像
+kubeadm config images list --config=kubeadm.yaml
 # 提前拉取镜像
-kubeadm config images pull
+kubeadm config images pull --config=kubeadm.yaml
 # 初始化集群
 kubeadm init --config=kubeadm.yaml --ignore-preflight-errors=SystemVerification
 # 初始化出现意外，可重置 kubeadm, 方便再次初始化
