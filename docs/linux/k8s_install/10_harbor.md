@@ -40,6 +40,8 @@ docker-compose up -d
 
 ## 镜像拉取和推送
 
+> 思路：先从原始仓库拉取镜像 → 打上 Harbor 的标签 → 推送到 Harbor
+
 ```shell
 # 登录本地仓库
 docker login -u admin harbor.base
@@ -54,9 +56,9 @@ docker push your_registry/repo:tag
 
 
 ```shell
-# 上墙
+# 验证拉取（从公网拉取一个测试镜像）
 docker pull hello-world
-# 下墙
+# 验证推送（打上 Harbor 的标签后推送，再运行验证）
 docker tag hello-world:latest harbor.base/library/hello-world:latest
 docker push harbor.base/library/hello-world:latest
 docker run harbor.base/library/hello-world:latest
@@ -64,7 +66,8 @@ docker run harbor.base/library/hello-world:latest
 
 ## 解决地址信任问题
 
-- 待添加信息
+> 原因：Harbor 使用 HTTP 或自签证书时，Docker/containerd 默认不信任该仓库，会报"http: server gave HTTP response to HTTPS client"等错误
+> 在客户端配置 insecure-registries 即可绕过校验
 ```shell
 {
   "insecure-registries": ["harbor.base"]

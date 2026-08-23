@@ -1,7 +1,7 @@
 # 服务器初始化
 
-> 当前章节记录为 k8s 准备的服务器的初始化过程，不包含 k8s 相关组件.
-> 当前章节为 Linux 基础知识，只记录操作命令，若与 k8s 不紧密，将不讲解操作原因，而是只放命令
+> 当前章节记录为 k8s 准备服务器的初始化过程，不包含 k8s 相关组件
+> 本章为 Linux 基础操作，关键步骤会说明原因；与 k8s 关系不大的步骤只放命令
 
 ## 要求
 - 系统：Rocky Linux 9
@@ -12,14 +12,21 @@
 - 云服务器重装太简单了，虚拟机重装自行处理
 
 ## 免密 ssh
-本地获取公钥：
+> 目的：让本机能免密登录服务器，后续执行操作更方便（强烈建议配置）
+
+方式一：一键复制公钥（推荐）
 ```shell
-cat .ssh/id_rsa.pub
+ssh-copy-id root@服务器IP
 ```
-将本地公钥放到远程服务器中：
+
+方式二：手动放置公钥
 ```shell
-vim .ssh/authorized_keys
+# 1. 本地查看公钥内容（若无公钥，先执行 ssh-keygen 一路回车生成）
+cat ~/.ssh/id_rsa.pub
+# 2. 将上面输出的公钥内容，追加到服务器的 ~/.ssh/authorized_keys 文件末尾
+vim ~/.ssh/authorized_keys
 ```
+> 配置完成后，`ssh root@服务器IP` 不再需要输入密码即表示成功
 
 ## 修改主机名
 - 建议按一定的规范设置主机名
@@ -36,21 +43,31 @@ dnf update -y
 ```
 
 ## 关闭 selinux
+> 原因：k8s 相关组件与 SELinux 兼容性不佳，常导致权限类报错，安装前一般将其关闭
 ```shell
+# 修改配置文件，永久关闭（重启后依然生效）
 # vim /etc/selinux/config
 SELINUX=disabled
-# setenforce 0
+# 立即生效（临时，无需重启）
+setenforce 0
+# 验证状态，输出 Disabled 即成功
+getenforce
 ```
 
 ## 关闭 swap
+> 原因：kubeadm 初始化默认会检查 swap，未关闭会直接报错；开启 swap 也会干扰 pod 的内存统计
 ```shell
+# 注释掉 /etc/fstab 中 swap 相关的行（永久生效，重启后不再挂载）
 vim /etc/fstab
-# 注释掉 swap
-swapoff -a && swapon -a
-sysctl -p
+# 立即关闭当前 swap（临时）
+swapoff -a
+# 验证：输出为空表示已关闭
+free -h
 ```
 
 ## 关闭 firewalld
+> 说明：本地 firewalld 可能拦截 k8s 组件间通信；云服务器一般通过"安全组"管理端口，因此这里直接关闭
+> 若不想关闭，可按下方"按需开放防火墙"仅放行必要端口
 ```shell
 # 关闭防火墙
 systemctl stop firewalld
@@ -91,11 +108,13 @@ firewall-cmd --reload
 
 
 ## 基础依赖安装
+> 安装常用工具，其中 `numactl`、`gcc`、`cmake` 等为部分中间件/组件编译或运行所需
 ```shell
 dnf -y install epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make cmake curl curl-devel
 ```
 
 ## 时间同步
+> 原因：k8s 证书、日志、分布式组件协调都依赖准确的时钟，节点间时间偏差会导致证书校验失败等异常
 
 - 设置时区: `timedatectl set-timezone Asia/Shanghai`
 
@@ -133,14 +152,18 @@ chronyc sources -v
 
 
 ## 修改内核参数
+> 原因：k8s 集群网络（如 Calico/Flannel）依赖 Linux 内核的转发与桥接过滤能力，需开启以下参数
+
 关键参数
 ```shell
 # vim /etc/sysctl.d/k8s.conf
-net.ipv4.ip_forward=1
-net.bridge.bridge-nf-call-iptables=1
+net.ipv4.ip_forward=1                # 开启 IP 转发，允许宿主机转发 pod 之间的流量
+net.bridge.bridge-nf-call-iptables=1 # 让 iptables 能过滤网桥流量（k8s 网络组件必需）
 net.bridge.bridge-nf-call-ip6tables=1
-# modprobe br_netfilter
-# sysctl -p /etc/sysctl.d/k8s.conf
+# 加载网桥过滤内核模块（bridge-nf 参数依赖它）
+modprobe br_netfilter
+# 使配置生效
+sysctl -p /etc/sysctl.d/k8s.conf
 ```
 
 所有可能需要修改的参数
@@ -168,10 +191,10 @@ sysctl -p /etc/sysctl.d/k8s.conf
 
 
 ## 配置免密访问
-> 存在疑问，是否只是为了方便？后面若真遇到问题再回来补充操作
+> 节点间的免密并非 k8s 必需，主要为了方便管理员在各节点间操作，配置方法与"免密 ssh"小节一致
 
 ## 配置 hosts
-- 原因：若不添加 hosts， 在初始化 kubelet 时会收到警告，但不影响
+> 原因：让集群内各节点能用主机名互相访问；不配置时 kubeadm 初始化会收到相关警告（不影响功能）
 ```shell
 vim /etc/hosts
 ```

@@ -1,6 +1,7 @@
 # 境外镜像拉取
 
-> 一个可靠的，花点小钱，但尽可能少花钱的从境外拉取镜像的方式
+> 思路：购买一台境外临时服务器（按量计费）→ 在上面拉取并导出镜像 → 拷回本地 → 导入集群
+> 适合拉取 gcr.io、quay.io、ghcr.io 等国内无法访问的镜像，用完即释放，整体成本很低
 
 ## 购买按量服务器
 
@@ -41,23 +42,23 @@ systemctl start containerd
 ### ctr 拉取，导出镜像
 
 ```shell
-# 拉取镜像
-ctr -n k8s.io i pull -k [hello-world:tag]
+# 拉取镜像（示例用 hello-world，按需替换为 [仓库/镜像:标签]，-k 表示跳过证书校验）
+ctr -n k8s.io i pull -k hello-world:latest
 # 查看镜像
 ctr -n k8s.io images ls
 # 导出镜像
-ctr -n k8s.io i export [hello-world.tag.tar] [hello-world:tag]
+ctr -n k8s.io i export hello-world.tar hello-world:latest
 ```
 
 ### docker 拉取，导出镜像
 
 ```shell
 # 拉取镜像
-docker pull [hello-world:tag]
+docker pull hello-world:latest
 # 查看镜像
 docker images
 # 导出镜像
-docker save [hello-world:tag] > [hello-world.tag.tar]
+docker save hello-world:latest > hello-world.tar
 ```
 
 
@@ -70,10 +71,9 @@ scp root@out:/root/hello-world.tar.gz ./
 ## 导入镜像
 
 ```shell
-# 导入镜像
-ctr -n k8s.io images import hello-world.tag.tar
-# 查看镜像
+# 导入镜像（在目标集群节点上执行）
+ctr -n k8s.io images import hello-world.tar
+# 查看镜像（ctr 与 crictl 均可查看）
 ctr -n k8s.io images list
-# 查看镜像
 crictl images
 ```

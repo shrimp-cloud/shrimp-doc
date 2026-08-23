@@ -1,9 +1,13 @@
 # 安装 kubelet
 
-> kubelet kubeadm kubectl 安装
+> 本章安装 k8s 的三个核心命令行工具：
+> - **kubeadm**：初始化集群、将节点加入集群的工具
+> - **kubelet**：每个节点上都运行的系统服务，负责真正启动 pod 中的容器（跟随 systemd 开机自启）
+> - **kubectl**：管理集群的命令行客户端（查看/创建/删除集群资源）
 
 
 ## 基础依赖
+> 用途说明：`socat`、`conntrack`、`ipvsadm` 是 kube-proxy 与 kubeadm 运行所需的；`nfs-utils` 用于挂载 NFS 存储卷；其余为常见编译/开发库
 ```shell
 dnf -y install nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack
 ```
@@ -46,12 +50,12 @@ kubeadm config print init-defaults > kubeadm.yaml
 ```
 
 修改 kubeadm.yaml 配置
-1. 修改控制节点的IP: advertiseAddress 为 master 地址
-2. 指定 containerd 容器运行时: criSocket: unix:///run/containerd/containerd.sock
-3. 修改 name: node 为自己的名字，示例: `k8s-master`
-4. 修改镜像仓库地址为阿里云：imageRepository:  registry.aliyuncs.com/google_containers #若能获取到镜像，则不需要
-5. 注意 kubernetesVersion 的版本, 需要与 `kubeadm config images list` 返回的镜像版本一致，否则无法使用手动导入的镜像
-6. 指定Pod网段（在dnsDomain下方添加）: podSubnet: 10.12.0.0/16
+1. 修改控制节点的 IP: `advertiseAddress` 为 master 地址（kubeadm 默认取内网 IP，多网卡时需显式指定）
+2. 指定容器运行时为 containerd: `criSocket: unix:///run/containerd/containerd.sock`（默认值指向 docker 的 socket，必须改）
+3. 修改 `name` 为自己的节点名，示例: `k8s-master`
+4. 修改镜像仓库地址为阿里云：`imageRepository: registry.aliyuncs.com/google_containers`（若能直接获取官方镜像，则不需要）
+5. 注意 `kubernetesVersion` 的版本，需要与 `kubeadm config images list` 返回的镜像版本一致，否则无法使用手动导入的镜像
+6. 指定 Pod 网段（在 dnsDomain 下方添加）: `podSubnet: 10.12.0.0/16`（需与 01_init.md 防火墙 FORWARD 规则中的 POD_CIDR 保持一致）
 7. 配置 proxy 为 ipvs，指定 cgroupDriver 为 systemd（在文件末尾追加，用 `---` 分隔）:
 ```shell
 ---
@@ -101,10 +105,10 @@ kubeadm join xxx.xxx.xxx.xxx:6443 --token abcdef.0123456789abcdef \
 
 
 ## 加速
-若 k8s 集群初始化时间太长，可先导入镜像
+若 k8s 集群初始化时间太长，可先在外网机器上把镜像打包并导入（镜像包获取方式见 98_pull_images.md 或 99_others.md 的镜像同步方案）
 ```shell
-# 导入镜像：
-ctr -n=k8s.io images import k8s_1.25.0.tar.gz
+# 导入镜像（k8s_<版本>.tar.gz 替换为实际的镜像包文件名）
+ctr -n=k8s.io images import k8s_<版本>.tar.gz
 # 查看镜像
 crictl images
 ```

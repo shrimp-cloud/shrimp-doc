@@ -13,7 +13,9 @@
 
 
 ## 在 k8s 中使用阿里云镜像
-创建Secret绑定镜像仓库账号
+> 私有仓库的镜像需要登录凭证，k8s 通过 Secret（类型 docker-registry）保存账号密码，Deployment 里用 `imagePullSecrets` 引用即可免密拉取
+
+创建 Secret 绑定镜像仓库账号
 ```shell
 kubectl create secret docker-registry aliyun --docker-server=registry.cn-shenzhen.aliyuncs.com --docker-username=XXX --docker-password=XXX --namespace=default
 ```

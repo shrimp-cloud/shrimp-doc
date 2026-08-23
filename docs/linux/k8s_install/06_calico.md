@@ -1,6 +1,7 @@
 # 安装 calico
 
-> k8s 有多个网络组件可选择，这里使用 Calico
+> k8s 本身不提供 pod 之间的网络，需要安装网络插件（CNI）让各节点上的 pod 互通
+> Calico 是常用网络插件之一，提供高性能网络（BGP/IPIP/VXLAN）和网络策略（NetworkPolicy）能力
 
 
 ## 安装 k8s 网络组件 - Calico
@@ -13,6 +14,9 @@ kubectl get nodes
 ```
 
 ## 无法拉取镜像
+
+> 思路：在外网可访问的机器上拉取镜像并导出，拷贝到目标服务器后再导入
+> 更完整的方案见 [98_pull_images.md](98_pull_images.md)
 
 - 查看镜像: `kubectl describe pod calico-node-xxxx -n kube-system`
 - 得到镜像: `quay.io/calico/cni:v3.32.1`, `quay.io/calico/node:v3.32.1`, 均需要同步
@@ -48,7 +52,7 @@ firewall-cmd --zone=trusted --list-interfaces
 ## 加速
 若 Calico 初始化时间太长，可先导入镜像
 ```shell
-# 导入镜像：
+# 导入镜像（calico.tar.gz 替换为实际的镜像包文件名）
 ctr -n=k8s.io images import calico.tar.gz
 # 查看镜像
 crictl images

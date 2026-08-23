@@ -2,6 +2,10 @@
 
 > Helm 是 Kubernetes 的包管理器，帮助您管理 Kubernetes 应用
 > 官网：https://helm.sh/zh/docs/intro/install/
+> 三个核心概念：
+> - **Chart**：打包好的应用模板（类似"安装包"，一个 Chart 对应一套应用，如 GitLab）
+> - **Repo（仓库）**：存放 Chart 的仓库，用 `helm repo add` 添加
+> - **Release**：Chart 安装到集群后的运行实例，用 `helm install/upgrade/delete` 管理
 
 ## 官方脚本安装
 
