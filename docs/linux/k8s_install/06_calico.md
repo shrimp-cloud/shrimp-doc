@@ -3,7 +3,7 @@
 > k8s 有多个网络组件可选择，这里使用 Calico
 
 
-### 安装k8s网络组件-Calico
+## 安装 k8s 网络组件 - Calico
 ```shell
 # master:
 wget https://raw.githubusercontent.com/projectcalico/calico/v3.32.1/manifests/calico.yaml
@@ -12,7 +12,7 @@ kubectl apply -f calico.yaml
 kubectl get nodes
 ```
 
-### 无法拉取镜像
+## 无法拉取镜像
 
 - 查看镜像: `kubectl describe pod calico-node-xxxx -n kube-system`
 - 得到镜像: `quay.io/calico/cni:v3.32.1`, `quay.io/calico/node:v3.32.1`, 均需要同步
@@ -45,7 +45,7 @@ firewall-cmd --zone=trusted --list-interfaces
 
 
 
-### 加速
+## 加速
 若 Calico 初始化时间太长，可先导入镜像
 ```shell
 # 导入镜像：

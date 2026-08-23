@@ -2,7 +2,7 @@
 
 
 
-### Dashboard UI
+## Dashboard UI
 - [官方安装文档](https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/web-ui-dashboard/)
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.6.1/aio/deploy/recommended.yaml
@@ -11,15 +11,15 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.6.1/a
 
 
 
-### kuboard
+## kuboard
 > Kuboard, 快速在 Kubernetes 落地微服务,官网 https://kuboard.cn/
 
-#### 安装 kuboard
+### 安装 kuboard
 ```shell
 kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 ```
 
-#### 卸载 kuboard
+### 卸载 kuboard
 ```shell
 kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 ```
@@ -27,24 +27,23 @@ kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml
 
 
 
-### rancher:docker
+## rancher: docker
 
-#### 前提
+### 前提
 - 安装 iptables, 若在 docker 之后安装，要重启docker
 - [安装Docker](02_docker.md)
 - 版本选择：Rancher v2.7.1 才支持 k8s 1.26, 若使用新版本k8s, 请使用新版本 rancher!
 - 版本问题：版本匹配非常混乱，也没找到官方宣称的支持清单。
 - rancher 版本: https://ranchermanager.docs.rancher.com/zh/versions
 
-#### 安装
+### 安装
 
 ```shell
-# v2.7.8
 docker run --privileged -d \
   --restart=unless-stopped  \
   -v /data/rancher:/var/lib/rancher \
   -p 7080:80 -p 7443:443 \
-  rancher/rancher:v2.8-head
+  rancher/rancher:v2.7.8
 
 # with ssl
 docker run -d \
@@ -54,7 +53,7 @@ docker run -d \
   -v /opt/rancher/ssl/cert.pem:/etc/rancher/ssl/cert.pem \
   -v /opt/rancher/ssl/key.pem:/etc/rancher/ssl/key.pem \
   --privileged \
-  rancher/rancher:v2.8-head \
+  rancher/rancher:v2.7.8 \
   --no-cacerts
 
 # 找密码
@@ -65,10 +64,10 @@ docker logs [container-id] 2>&1 | grep "Bootstrap Password:"
 # 新密码 即时设置
 ```
 
-#### 更换自定义证书
+### 更换自定义证书
 1. 操作前请备份数据，[查看官方文档](https://ranchermanager.docs.rancher.com/zh/v2.6/getting-started/installation-and-upgrade/other-installation-methods/rancher-on-a-single-node-with-docker/upgrade-docker-installed-rancher)
 2. 准备证书
-2. 修改启动命令 【rancher-data 是1中导出的数据】
+3. 修改启动命令 【rancher-data 是 1 中导出的数据】
 ```shell
 docker run -d --volumes-from rancher-data \
   --restart=unless-stopped \
@@ -81,19 +80,19 @@ docker run -d --volumes-from rancher-data \
 ```
 
 
-#### 导入集群
+### 导入集群
 - 集群管理，导入集群，导入已有集群
-- 到目标集群所在机器，下载 yaml: wget --no-check-certificate https://rancher.expmple.com/v3/import/xxxx.yaml
-- 【k8s 版本问题】修改 ymal: `beta.kubernetes.io/os` -> `kubernetes.io/os`
+- 到目标集群所在机器，下载 yaml: wget --no-check-certificate https://rancher.example.com/v3/import/xxxx.yaml
+- 【k8s 版本问题】修改 yaml: `beta.kubernetes.io/os` -> `kubernetes.io/os`
 - 导入：`kubectl apply -f xxxx.yaml`
 - 异常处理
   - 查看 pod 日志：`kubectl logs -n cattle-system cattle-cluster-agent-xxxx-xx`
   - 异常：looking up cattle-system/cattle ca/token: no secret exists for service account cattle-system/cattle
-    - Rancher2.6.x 不支持 k8s 1.26, 升级到 rancher 2.7.1 解决
+    - Rancher 2.6.x 不支持 k8s 1.26, 升级到 rancher 2.7.1 解决
 
 
 
-### rancher: k8s
+## rancher: k8s
 
 > 官方文档： https://docs.ranchermanager.rancher.io/zh/
 
@@ -150,7 +149,7 @@ helm install rancher ./rancher-<VERSION>.tgz \
 ```
 
 
-# 卸载 Rancher
+## 卸载 Rancher
 
 - MutatingWebhookConfiguration
 

@@ -3,15 +3,15 @@
 > 当前章节记录为 k8s 准备的服务器的初始化过程，不包含 k8s 相关组件.
 > 当前章节为 Linux 基础知识，只记录操作命令，若与 k8s 不紧密，将不讲解操作原因，而是只放命令
 
-### 要求
+## 要求
 - 系统：Rocky Linux 9
 - CPU: 2C+
 - 内存: 4G+
 
-### 重装
+## 重装
 - 云服务器重装太简单了，虚拟机重装自行处理
 
-### 免密 ssh
+## 免密 ssh
 本地获取公钥：
 ```shell
 cat .ssh/id_rsa.pub
@@ -21,7 +21,7 @@ cat .ssh/id_rsa.pub
 vim .ssh/authorized_keys
 ```
 
-### 修改主机名
+## 修改主机名
 - 建议按一定的规范设置主机名
 ```shell
 hostnamectl set-hostname master01
@@ -29,20 +29,20 @@ hostnamectl set-hostname node01
 hostnamectl set-hostname node02
 ```
 
-### 更新系统
+## 更新系统
 - 更新系统，是每个新系统都建议做的事
 ```shell
 dnf update -y
 ```
 
-### 关闭 selinux
+## 关闭 selinux
 ```shell
 # vim /etc/selinux/config
 SELINUX=disabled
 # setenforce 0
 ```
 
-### 关闭 swap
+## 关闭 swap
 ```shell
 vim /etc/fstab
 # 注释掉 swap
@@ -50,7 +50,7 @@ swapoff -a && swapon -a
 sysctl -p
 ```
 
-### 关闭 firewalld
+## 关闭 firewalld
 ```shell
 # 关闭防火墙
 systemctl stop firewalld
@@ -58,9 +58,9 @@ systemctl disable firewalld
 
 # 按需开放防火墙
 
-# 定义变量
-POD_CIDR="10.42.0.0/16"          # Pod 网段
-SERVICE_CIDR="10.43.0.0/16"      # Service 网段
+# 定义变量（需与 kubeadm 配置的网段保持一致，见 04_kubelet.md 的 podSubnet）
+POD_CIDR="10.12.0.0/16"          # Pod 网段
+SERVICE_CIDR="10.96.0.0/12"      # Service 网段（kubeadm 默认值）
 NODE_TCP_PORTS="6443,2379,2380,10250,30000-32767"
 
 # 添加 INPUT 链规则
@@ -85,17 +85,17 @@ firewall-cmd --reload
 
 
 
-### 设置静态IP
+## 设置静态IP
 - 内容忽略，使用云服务器，默认静态 IP
 
 
 
-### 基础依赖安装
+## 基础依赖安装
 ```shell
 dnf -y install epel-release vim net-tools numactl fontconfig lrzsz zip unzip wget htop telnet gcc automake autoconf libtool make cmake curl curl-devel
 ```
 
-### 时间同步
+## 时间同步
 
 - 设置时区: `timedatectl set-timezone Asia/Shanghai`
 
@@ -132,7 +132,7 @@ chronyc sources -v
 
 
 
-### 修改内核参数
+## 修改内核参数
 关键参数
 ```shell
 # vim /etc/sysctl.d/k8s.conf
@@ -167,10 +167,10 @@ sysctl -p /etc/sysctl.d/k8s.conf
 ```
 
 
-### 配置免密访问
+## 配置免密访问
 > 存在疑问，是否只是为了方便？后面若真遇到问题再回来补充操作
 
-### 配置 hosts
+## 配置 hosts
 - 原因：若不添加 hosts， 在初始化 kubelet 时会收到警告，但不影响
 ```shell
 vim /etc/hosts
@@ -188,7 +188,7 @@ vim /etc/hosts
 # 其他更多 node
 ```
 
-### 外部防火墙
+## 外部防火墙
 | 端口   | 用途         |
 |------|------------|
 | 22   | ssh 远程     |

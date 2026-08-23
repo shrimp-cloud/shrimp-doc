@@ -11,7 +11,7 @@
 ## 安装过程
 
 
-- 解压: `tar -xcvf harbor-offline-installer-v2.11.2.tgz`
+- 解压: `tar -xzvf harbor-offline-installer-v2.11.2.tgz`
 - 配置: `cp harbor.yml.tmpl harbor.yml`
   - 按需修改配置
   - hostname: harbor.base #或改为本地 IP
@@ -62,7 +62,7 @@ docker push harbor.base/library/hello-world:latest
 docker run harbor.base/library/hello-world:latest
 ```
 
-### 解决地址信任问题:
+## 解决地址信任问题
 
 - 待添加信息
 ```shell
@@ -73,12 +73,12 @@ docker run harbor.base/library/hello-world:latest
 - macOS: Docker Desktop -> Settings -> Docker Engine -> 添加上述内容
 - Linux: /etc/docker/daemon.json -> 添加上述内容
 
-### 完犊子了啧
+## 常见问题
 
 > WARNING: The requested image's platform (linux/arm64) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested
 
 
-### 生成  ssl 证书
+## 生成 SSL 证书
 
 ```shell
 
@@ -94,7 +94,7 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 
 
-### Mac OS 下添加证书
+## Mac OS 下添加证书
 ```shell
 # 添加
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/your-self-signed-cert.crt

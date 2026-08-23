@@ -3,7 +3,7 @@
 > 2022 年 4 月 dockershim 将会从 Kubernetes 1.24 中完全移除, 运行需要是 containerd
 
 
-### 安装 containerd 服务
+## 安装 containerd 服务
 
 ```shell
 dnf -y install containerd.io
@@ -11,7 +11,7 @@ mkdir -p /etc/containerd
 containerd config default > /etc/containerd/config.toml
 ```
 
-### 修改配置
+## 修改配置
 
 启用 cgroup, 修改镜像源
 ```shell
@@ -31,7 +31,7 @@ debug: false
 ```
 
 
-### 配置 containerd 镜像加速
+## 配置 containerd 镜像加速
 - 阿里云镜像仓库不再提供给阿里云服务以外的应用使用 【若有其他镜像获取方法，可不配置】
 ```shell
 # vim /etc/containerd/config.toml
@@ -86,7 +86,7 @@ crictl pull <image_name>
 ```
 
 
-### 启动
+## 启动
 ```shell
 systemctl enable containerd --now
 ```

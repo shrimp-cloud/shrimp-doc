@@ -1,5 +1,7 @@
 # Helm
 
+> Helm 是 Kubernetes 的包管理器，帮助您管理 Kubernetes 应用
+> 官网：https://helm.sh/zh/docs/intro/install/
 
 ## 官方脚本安装
 
@@ -8,6 +10,13 @@
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 # 验证安装
 helm version
+```
+
+> 也可先下载脚本，再执行安装：
+```shell
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
 ```
 
 
@@ -22,16 +31,16 @@ helm version
 ```
 
 
-## 使用（以 gitlab 作为示例）
+## 使用（以 GitLab 为例）
 
-- 添加 GitLab 的 Helm 仓库
+### 添加仓库
+
 ```shell
 helm repo add gitlab https://charts.gitlab.io/
 helm repo update
 ```
 
-- 安装 GitLab Helm Chart
-
+### 安装 Chart
 
 ```shell
 # 使用 gitlib 的 certmanager 管理证书
@@ -41,7 +50,7 @@ helm install gitlab gitlab/gitlab \
   --set global.ingress.tls.autoGenerateCertificate=true \
   --set certmanager.email=admin@example.com
 
-# 使用k8s现有的 certmanager
+# 使用 k8s 现有的 certmanager
 helm install gitlab gitlab/gitlab \
   --set global.host=git.example.com \
   --set global.ingress.tls.enabled=true \
@@ -52,8 +61,8 @@ helm install gitlab gitlab/gitlab \
 helm install gitlab gitlab/gitlab -f gitlab-values.yaml
 ```
 
+### 配置 gitlab-values.yaml
 
-- 配置 gitlab-values.yaml
 ```yaml
 global:
   host: git.example.com

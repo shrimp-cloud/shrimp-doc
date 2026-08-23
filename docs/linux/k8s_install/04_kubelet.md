@@ -3,12 +3,12 @@
 > kubelet kubeadm kubectl 安装
 
 
-### 基础依赖
+## 基础依赖
 ```shell
-dnf -y install nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack ipvsadm
+dnf -y install nfs-utils gcc-c++ libxml2-devel openssl-devel libaio-devel ncurses-devel zlib-devel python-devel epel-release openssh-server socat ipvsadm conntrack
 ```
 
-### 配置 repo
+## 配置 repo
 ```shell
 # vim /etc/yum.repos.d/k8s.repo
 [kubernetes]
@@ -20,7 +20,7 @@ gpgkey=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.36/rpm/repodata/
 ```
 
 
-### 安装初始化 k8s
+## 安装初始化 k8s
 
 安装 kubelet kubeadm kubectl
 ```shell
@@ -35,7 +35,7 @@ Tips:
 - kubelet: 安装在集群节点上，用于启动 Pod
 - kubectl: 命令行工具
 
-### master 配置初始化参数
+## master 配置初始化参数
 
 配置
 ```shell
@@ -52,7 +52,7 @@ kubeadm config print init-defaults > kubeadm.yaml
 4. 修改镜像仓库地址为阿里云：imageRepository:  registry.aliyuncs.com/google_containers #若能获取到镜像，则不需要
 5. 注意 kubernetesVersion 的版本, 需要与 `kubeadm config images list` 返回的镜像版本一致，否则无法使用手动导入的镜像
 6. 指定Pod网段（在dnsDomain下方添加）: podSubnet: 10.12.0.0/16
-7. 配置 proxy为ipvs，指定cgroupDriver 为systemd（在末尾添加，整数上 ---）:
+7. 配置 proxy 为 ipvs，指定 cgroupDriver 为 systemd（在文件末尾追加，用 `---` 分隔）:
 ```shell
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -64,7 +64,7 @@ kind: KubeletConfiguration
 cgroupDriver: systemd
 ```
 
-### master 初始化k8s
+## master 初始化 k8s
 ```shell
 systemctl enable kubelet --now
 systemctl restart containerd
@@ -81,7 +81,7 @@ kubeadm reset --force
 Tips:
 1. 初始化报 containerd 运行时错，可以重启一下 containerd
 2. kubeadm config images list, 可以查看需要拉取的镜像
-2. kubeadm config images pull, 可以提前拉取镜像
+3. kubeadm config images pull, 可以提前拉取镜像
 
 初始化成功，按照提示，执行
 ```shell
@@ -100,7 +100,7 @@ kubeadm join xxx.xxx.xxx.xxx:6443 --token abcdef.0123456789abcdef \
 可以在node上执行，将 node 加入集群了
 
 
-### 加速
+## 加速
 若 k8s 集群初始化时间太长，可先导入镜像
 ```shell
 # 导入镜像：
@@ -110,7 +110,7 @@ crictl images
 ```
 
 
-### 证书更新
+## 证书更新
 SSL 证书有效期一年，若 apiserver 无法通信，需要更新证书
 ```shell
 # 查询证书过期时间：
