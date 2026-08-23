@@ -9,8 +9,8 @@ kubectl create namespace <namespace-name>
 ## Deployment
 ```yaml
 apiVersion: apps/v1		# 指定api版本，此值必须在kubectl api-versions中。业务场景一般首选”apps/v1“
-kind: Deployment		# 指定创建资源的角色/类型   
-metadata:  		# 资源的元数据/属性 
+kind: Deployment		# 指定创建资源的角色/类型
+metadata:  		# 资源的元数据/属性
   name: demo  	# 资源的名字，在同一个namespace中必须唯一
   namespace: default 	# 部署在哪个namespace中。不指定时默认为default命名空间
   labels:  		# 自定义资源的标签
@@ -31,7 +31,7 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
       maxSurge: 1 			# 滚动升级时最大额外可以存在的副本数，可以为百分比，也可以为整数
       maxUnavailable: 0 	# 在更新过程中进入不可用状态的 Pod 的最大值，可以为百分比，也可以为整数
   template: 	# 定义业务模板，如果有多个副本，所有副本的属性会按照模板的相关配置进行匹配
-    metadata: 	# 资源的元数据/属性 
+    metadata: 	# 资源的元数据/属性
       annotations: 		# 自定义注解列表
         sidecar.istio.io/inject: "false" 	# 自定义注解名字
       labels: 	# 自定义资源的标签
@@ -46,10 +46,10 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
       nodeSelector:   	# 设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定
         caas_cluster: work-node
       containers:		# Pod中容器列表
-      - name: demo 		# 容器的名字   
-        image: demo:v1 		# 容器使用的镜像地址   
+      - name: demo 		# 容器的名字
+        image: demo:v1 		# 容器使用的镜像地址
         imagePullPolicy: IfNotPresent 	# 每次Pod启动拉取镜像策略
-                                      	  # IfNotPresent ：如果本地有就不检查，如果没有就拉取。默认 
+                                      	  # IfNotPresent ：如果本地有就不检查，如果没有就拉取。默认
                                       	  # Always : 每次都检查
                                       	  # Never : 每次都不检查（不管本地是否有）
         command: [string] 	# 容器的启动命令列表，如不指定，使用打包时使用的启动命令
@@ -71,7 +71,7 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
               path: string
         ports:	# 需要暴露的端口库号列表
           - name: http 	# 端口号名称
-            containerPort: 8080 	# 容器开放对外的端口 
+            containerPort: 8080 	# 容器开放对外的端口
           # hostPort: 8080	# 容器所在主机需要监听的端口号，默认与Container相同
             protocol: TCP 	# 端口协议，支持TCP和UDP，默认TCP
         env:    # 容器运行前需设置的环境变量列表
@@ -93,12 +93,12 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
             # host: 127.0.0.1 	# 主机地址
         # 也可以用这两种方法进行pod内容器的健康检查
         # exec: 		# 在容器内执行任意命令，并检查命令退出状态码，如果状态码为0，则探测成功，否则探测失败容器重启
-        #   command:   
-        #     - cat   
-        #     - /tmp/health   
-        # 也可以用这种方法   
+        #   command:
+        #     - cat
+        #     - /tmp/health
+        # 也可以用这种方法
         # tcpSocket: # 对Pod内容器健康检查方式设置为tcpSocket方式
-        #   port: number 
+        #   port: number
           initialDelaySeconds: 30 	# 容器启动完成后首次探测的时间，单位为秒
           timeoutSeconds: 5 	# 对容器健康检查等待响应的超时时间，单位秒，默认1秒
           periodSeconds: 30 	# 对容器监控检查的定期探测间隔时间设置，单位秒，默认10秒一次
@@ -114,14 +114,14 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
           periodSeconds: 10
           successThreshold: 1
           failureThreshold: 5
-        lifecycle:		# 生命周期管理  
-          postStart:	# 容器运行之前运行的任务  
-            exec:  
-              command:  
-                - 'sh'  
-                - 'yum upgrade -y'  
-          preStop:		# 容器关闭之前运行的任务  
-            exec:  
+        lifecycle:		# 生命周期管理
+          postStart:	# 容器运行之前运行的任务
+            exec:
+              command:
+                - 'sh'
+                - 'yum upgrade -y'
+          preStop:		# 容器关闭之前运行的任务
+            exec:
               command: ['service httpd stop']
       initContainers:		# 初始化容器
       - command:
@@ -143,8 +143,8 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
           path: string    # Pod所在宿主机的目录，将被用于同期中mount的目录
       - name: string
         secret: 			# 类型为secret的存储卷，挂载集群与定义的secre对象到容器内部
-          scretname: string  
-          items:     
+          scretname: string
+          items:
           - key: string
             path: string
       imagePullSecrets: 	# 镜像仓库拉取镜像时使用的密钥，以key：secretkey格式指定
@@ -171,7 +171,7 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
         key: "key1"
         value: "value1"
         effect: "NoSchedule"		# 污点类型：[NoSchedule | PreferNoSchedule | NoExecute]
-        								# NoSchedule ：不会被调度 
+        								# NoSchedule ：不会被调度
 										# PreferNoSchedule：尽量不调度
 										# NoExecute：驱逐节点
 
@@ -179,8 +179,8 @@ spec: 	# 资源规范字段，定义deployment资源需要的参数属性，诸�
 
 ## Service
 ```yaml
-apiVersion: v1 	# 指定api版本，此值必须在kubectl api-versions中 
-kind: Service 	# 指定创建资源的角色/类型 
+apiVersion: v1 	# 指定api版本，此值必须在kubectl api-versions中
+kind: Service 	# 指定创建资源的角色/类型
 metadata: 	# 资源的元数据/属性
   name: demo 	# 资源的名字，在同一个namespace中必须唯一
   namespace: default 	# 部署在哪个namespace中。不指定时默认为default命名空间
@@ -203,17 +203,40 @@ spec: 	# 资源规范字段
       name: http 	# 端口名称
   selector: 	# 选择器。选择具有指定label标签的pod作为管理范围
     app: demo
-status:	# 当type=LoadBalancer时，设置外部负载均衡的地址，用于公有云环境    
-  loadBalancer:	# 外部负载均衡器    
+status:	# 当type=LoadBalancer时，设置外部负载均衡的地址，用于公有云环境
+  loadBalancer:	# 外部负载均衡器
     ingress:
       ip: string	# 外部负载均衡器的IP地址
       hostname: string	# 外部负载均衡器的主机名
 
 ```
 
+## EndpointSlice
+```yaml
+apiVersion: discovery.k8s.io/v1 	# 指定 api 版本
+kind: EndpointSlice 	# 指定创建资源的角色/类型
+metadata:
+  name: redis-svc-endpoint 	# 资源的名字，在同一个 namespace 中必须唯一
+  namespace: uat 	# 部署在哪个 namespace 中
+  labels:
+    kubernetes.io/service-name: redis-svc 	# 关联的 Service 名称，k8s 根据该标签关联 Service 与 EndpointSlice
+addressType: IPv4 	# 端点地址类型，支持 IPv4 / IPv6 / FQDN
+ports:
+  - name: redis 	# 端口名称
+    port: 16380 	# 端口号
+    protocol: TCP 	# 端口协议，支持 TCP 或 UDP
+endpoints:
+  - addresses: 	# 端点 IP 地址列表
+      - "10.12.12.12"
+    conditions: 	# 端点状态
+      ready: true 	# Pod 是否就绪（Service 只将流量转发给 ready=true 的端点）
+      serving: true 	# 端点是否正在提供服务
+      terminating: false 	# 端点是否正在终止
+```
+
 ## Ingress
 ```yaml
-apiVersion: extensions/v1beta1 		# 创建该对象所使用的 Kubernetes API 的版本     
+apiVersion: extensions/v1beta1 		# 创建该对象所使用的 Kubernetes API 的版本
 kind: Ingress 		# 想要创建的对象的类别，这里为Ingress
 metadata:
   name: showdoc		# 资源名字，同一个namespace中必须唯一
