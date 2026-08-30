@@ -2,11 +2,11 @@
 
 ## 主机安装单机版
 
-```shell script
+```shell
 dnf install -y redis
 vim /etc/redis/redis.conf
 daemonize yes  # 进程守护
-# bind 127.0.0.1	# 需要注释掉
+# bind 127.0.0.1 # 需要注释掉
 port 16380
 requirepass redispassword # 需要密码
 systemctl start redis
@@ -15,20 +15,21 @@ systemctl enable redis
 
 ### 防火墙
 
-```shell script
-# 检查防火墙是否包含 6379端口
+```shell
+# 检查防火墙是否包含 16380端口
 firewall-cmd --list-ports
-# 防火墙开放6379
-firewall-cmd --permanent --zone=public --add-port=6379/tcp
+# 防火墙开放16380
+firewall-cmd --permanent --zone=public --add-port=16380/tcp
 # reload防火墙
 firewall-cmd --reload
 ```
 
-
-## Docker安装单机版
+## Docker 安装单机版
 
 ### 目录准备
+
 - 以/opt/redis为例
+
 ```shell
 mkdir -p /opt/docker/redis
 mkdir -p /opt/docker/redis/data
@@ -37,6 +38,7 @@ touch /opt/docker/redis/redis.sh
 ```
 
 ### 配置文件准备
+
 ```shell
 # vim /opt/docker/redis/redis.conf
 # Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程
@@ -45,7 +47,7 @@ daemonize no
 port 6379
 # 绑定的主机地址，不要绑定容器的本地127.0.0.1地址，因为这样就无法在容器外部访问
 bind 0.0.0.0
-#需要密码则打开
+# 需要密码则打开
 requirepass your_redis_password
 # 持久化
 appendonly yes
@@ -69,6 +71,7 @@ redis-server /etc/redis/redis.conf # 在容器内启动redis-server的命令，�
 ```
 
 ### 启动
+
 ```shell
 sh /opt/docker/redis/redis.sh
 # 查看是否已启动
@@ -81,12 +84,13 @@ docker exec -it redis bash
 docker exec -it redis redis-cli [-a your_redis_password]
 ```
 
-
-### redis 使用
+### Redis 使用
 
 redis-cli 连接
+
 ```shell
 # 直接在连接时附加密码
+# -a 明文携带密码，会暴露在进程列表中，生产环境建议使用下方的 auth 方式
 redis-cli -h 127.0.0.1 -p 6379 -a 12345
 # 连接后附加密码
 redis-cli -h 127.0.0.1 -p 6379
@@ -94,6 +98,7 @@ auth 12345
 ```
 
 telnet 连接
+
 ```shell
 telnet 127.0.0.1 6379
 auth 12345

@@ -1,12 +1,11 @@
 # Git
 
+## 下载
 
-## Download
 - https://git-scm.com/downloads
-- but not for RHEL
+- 官方安装包不适用于 RHEL 系（如 CentOS/Rocky），需源码编译安装
 
-
-## make install
+## 编译安装
 
 ```shell
 yum update -y

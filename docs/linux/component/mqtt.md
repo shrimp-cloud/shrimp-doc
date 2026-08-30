@@ -1,13 +1,15 @@
 # MQTT
 
-## 安装EMQX
+## 安装 EMQX
 
 > 官网：https://www.emqx.com/zh
 > 安装包：https://www.emqx.io/zh/downloads
-> 官方文档： https://www.emqx.io/docs/zh/v4.4/
+> 官方文档：https://www.emqx.io/docs/zh/v4.4/
+> 生产环境建议使用 rpm 或 docker 方式安装，zip 方式适合临时测试
 
-### zip 解压方式安装
+### ZIP 解压方式安装
 在这里选中了 ZIP 包解压使用的方式
+
 ```shell
 wget https://www.emqx.com/zh/downloads/broker/4.4.1/emqx-4.4.1-otp24.1.5-3-el7-amd64.zip
 unzip emqx-4.4.1-otp24.1.5-3-el7-amd64.zip
@@ -17,12 +19,14 @@ vim etc/acl.conf
 # {allow, {ipaddr, "10.12.0.0/16"}, subscribe, ["$SYS/#"]}.
 ./bin/emqx start/stop/restart
 # 修改控制台密码
-./bin/emqx_ctl admins passwd admin adminPassword #(自行修改密码，重要！)
+./bin/emqx_ctl admins passwd admin adminPassword # (自行修改密码，重要！)
 # 查看 emqx 启动的端口：
 netstat -ntlp | grep emqx
 ```
+
 - 本地连接使用 11883
 - 非本地连接使用 1883
+- （端口可在 etc/emqx.conf 中调整；常用端口：1883 MQTT、8083/8084 WebSocket、18083 控制台）
 
 ### 控制台
 > http://127.0.0.1:18083 (用户名密码在安装之后使用 emqx_ctl设定)
@@ -34,6 +38,7 @@ netstat -ntlp | grep emqx
 - Http 认证【新版本没成功】
 
 认证接口
+
 ```java
 public class MqttLoginRest {
     @PostMapping(Routes.MQTT_LOGIN)

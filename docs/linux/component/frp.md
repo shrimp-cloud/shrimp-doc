@@ -1,8 +1,5 @@
 # FRP
 
-> 说明
-
-
 ## 基础信息
 
 - 源码: https://github.com/fatedier/frp
@@ -16,7 +13,6 @@
 - 运营商防火墙: 自行开启
 - 配置 nginx 转发等
 
-
 ## 启动
 
 ### 直接启动
@@ -27,9 +23,8 @@
 # 启动服务端
 nohup ./frps -c ./frps.toml &
 # 启动客户端
-nohup ./frps -c ./frps.toml &
+nohup ./frpc -c ./frpc.toml &
 ```
-
 
 ### 注册为系统服务启动
 
@@ -60,9 +55,6 @@ WantedBy = multi-user.target
 
 - 作为客户端，service 名称应当为 frpc, 启动命令修正一下即可
 - 后续就可用 systemctl 进行管理了
-
-
-
 
 ## Server服务端配置
 
@@ -95,9 +87,7 @@ localIP = "127.0.0.1"
 customDomains = ["www.example.com"]
 ```
 
-
 ### 配置 ssh
-
 
 ```toml
 serverAddr = "x.x.x.x"

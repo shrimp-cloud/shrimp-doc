@@ -1,10 +1,10 @@
 # NACOS
 
-## NACOS安装
+## NACOS 安装
 
 ### 下载
 - 下载地址：https://github.com/alibaba/nacos/releases
-- 解压： tar -zxvf nacos-server*
+- 解压：tar -zxvf nacos-server*
 - 也可以下载源码自行编译
 
 ### 准备
@@ -12,9 +12,10 @@
 - MySQL安装，见MySQL章节：[MySQL](mysql.md)
 
 ### 安装
-1. 导入数据库： nacos/conf/nacos-mysql.sql
+1. 导入数据库：nacos/conf/nacos-mysql.sql
 
-2. 修改数据库配置： vim nacos/conf/application.properties
+2. 修改数据库配置：vim nacos/conf/application.properties
+
 ```shell
 spring.datasource.platform=mysql
 db.num=1
@@ -23,20 +24,21 @@ db.user.0=root
 db.password.0=root_password
 ```
 
-3. 调整jvm:
-- 可自行编辑  startup.sh 进行修改
+3. 调整 jvm：
+   - 可自行编辑 startup.sh 进行修改
 
+4. 单实例启动
 
-4. 单实实例启动
 ```shell
 sh startup.sh -m standalone
 ```
 
 5. 防火墙
-```shell script
-# 检查防火墙是否包含 3306端口
+
+```shell
+# 检查防火墙是否包含 8848端口
 firewall-cmd --list-ports
-# 防火墙开放3306
+# 防火墙开放8848
 firewall-cmd --permanent --zone=public --add-port=8848/tcp
 # reload防火墙
 firewall-cmd --reload
@@ -44,28 +46,29 @@ firewall-cmd --reload
 
 ### 集群
 - 至少三个节点
+
 ```shell
 cp cluster.conf.example cluster.conf
-# 只需要维护 it is ip 的集群清单即可
+# 只需要维护集群节点的 IP 清单即可
 ```
-- 在第四个节点上，执行启动
+
+- 在其余各节点上，分别执行启动
+
 ```shell
 sh startup.sh
 ```
 
 - 在nacos上层配置nginx的upstream完成nacos的负载均衡。
 
-
 ### 控制台
 - 地址：http://ip:8848/nacos/index.html
 - 默认用户名密码：nacos/nacos
-
 
 ### 异常处理
 - Caused by: java.net.UnknownHostException: jmenv.tbsite.net
 > 是因为nacos-server-2.X.X的conf目录下的cluster.conf.example导致，需要手动改为cluster.conf
 
-- Nacos Server did not start because dumpservice bean construction failure : No DataSource set】
+- Nacos Server did not start because dumpservice bean construction failure : No DataSource set]
 > 数据库连接失败导致。需要确认数据库连接失败的原因
 
 - 密码带#号导致识别错误
@@ -73,8 +76,9 @@ sh startup.sh
 
 ## NACOS 使用
 
-### Springcloud集成
+### Spring Cloud 集成
 1. 依赖
+
 ```xml
 <!-- 启动配置管理 -->
 <dependency>
@@ -89,7 +93,9 @@ sh startup.sh
     <version>${latest.version}</version>
 </dependency>
 ```
+
 2. 配置
+
 ```yaml
 spring:
   application:
@@ -104,13 +110,13 @@ spring:
       discovery:
         # 发现
         server-addr: http://ip:port
-
 ```
 
 3. 开启注册发现
 - main 函数加上：@EnableDiscoveryClient
 
 4. 获取配置
+
 ```java
 package com.your.pkg.path;
 
@@ -127,6 +133,7 @@ public class TourConfig {
 ```
 
 5. 服务消费
+
 ```java
 package com.your.pkg.path;
 
@@ -162,10 +169,10 @@ public class DemoRest {
 }
 ```
 
-### 比eureka的优势
-0. 自带配置中心
-1. 自带基于RBAC的权限
-2. 自带订阅者查询
-3. 支持命名空间
-4. 控制台自带集群管理
-5. 为什么还用 Eureka 呢
+### 相比 Eureka 的优势
+1. 自带配置中心
+2. 自带基于RBAC的权限
+3. 自带订阅者查询
+4. 支持命名空间
+5. 控制台自带集群管理
+6. 为什么还用 Eureka 呢

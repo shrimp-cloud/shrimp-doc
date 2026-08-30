@@ -1,7 +1,6 @@
-# milvus 向量数据库
+# Milvus 向量数据库
 
 > Milvus 是一个为 GenAI 应用程序构建的开源向量数据库。使用 pip 安装，执行高速搜索，并在性能损失最小的情况下扩展到数十亿个向量。
-
 
 ## 基本信息
 
@@ -10,9 +9,7 @@
 - Github: [https://github.com/milvus-io/milvus](https://github.com/milvus-io/milvus)
 - 语言: Python
 
-
 ## 安装
-
 
 ### Milvus Lite
 
@@ -20,12 +17,12 @@
 - 安装 Milvus Lite: `pip install -U pymilvus`
 - 创建向量数据库: `MilvusClient("./demo.db")`
 - 尽情的使用
+- Milvus Lite 适用于本地开发与小规模场景（pymilvus 内置），需要 Python 3.8+
 
-```jupyter
+```python
 from pymilvus import MilvusClient
 client = MilvusClient("./milvus_demo.db")
 ```
-
 
 ### Milvus Standalone
 
@@ -43,11 +40,11 @@ bash standalone_embed.sh restart
 - 界面: http://127.0.0.1:9091/webui/
 - 使用
 
-```jupyter
+```python
 from pymilvus import MilvusClient
 client = MilvusClient(uri="http://localhost:19530", token="username:password")
+# 若未开启认证，可省略 token 参数
 ```
-
 
 ### Milvus Distributed
 
@@ -56,14 +53,14 @@ client = MilvusClient(uri="http://localhost:19530", token="username:password")
 - [搭建 k8s 集群](../k8s_install/index.md)
 - 安装 StorageClass: https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/
 - 安装 Milvus: `kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml`
-- 创建 Milvus 集群: `kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml`
+- 创建 Milvus 集群: `kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml`
 - 创建 svc 开放入口给应用使用 (略)
 - 使用 node_port 开放端口到主机，或外部网络 (略)
 - 使用 Ingress 开放 WebUI 用于日常维护
 
 ## 使用
 
-```jupyter
+```python
 # 引入包
 from pymilvus import MilvusClient
 
@@ -74,4 +71,3 @@ client = MilvusClient("./milvus_demo.db")
 client = MilvusClient(uri="http://localhost:19530", token="username:password")
 
 ```
-

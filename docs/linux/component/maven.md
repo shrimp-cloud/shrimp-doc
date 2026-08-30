@@ -7,6 +7,7 @@
 - 使用 wget 下载到服务器中
 
 ## 安装
+
 - 建议安装目录：`/opt/maven`
 
 ## 环境变量
@@ -14,11 +15,10 @@
 ```shell
 # vim /etc/profile.d/maven.sh
 export M2_HOME=/opt/maven
-export PATH=M2_HOME/bin:$PATH
+export PATH=$M2_HOME/bin:$PATH
 
 # source /etc/profile
 ```
-
 
 ## 使用
 
