@@ -19,5 +19,50 @@
   - 首次登录，改密码 (默认为 `admin / ChangeMe`)
 
 
+## 常用技巧
+
+
+### 查看运行状态
+
+```shell
+./jmsctl.sh status
+```
+
+
+### 查看日志
+
+```shell
+# 查看 Redis 运行日志
+docker logs jms_redis --tail 200
+# 持续跟踪日志
+docker logs -f jms_redis
+```
+
+
+### 配置使用默认 redis
+
+```
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=YourSecurePassword
+REDIS_DB=0
+```
+
+
+### 查看数据库配置(环境变量)
+
+```shell
+docker exec jms_core env | grep -E '^DB_'
+```
+
+
+### 使配置生效
+
+```shell
+# 使配置生效（必须完整重建）
+./jmsctl.sh down
+./jmsctl.sh start
+```
+
 
 
