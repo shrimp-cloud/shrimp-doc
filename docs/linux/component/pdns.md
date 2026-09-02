@@ -1,14 +1,11 @@
 # PowerDNS
 
-
 ## 前置步骤
 
 - 以 RockyLinux 9 为例，需提前安装 RockyLinux 9
-- 更新系统，安装源: `dnf update -y && dnf install epel-release -y`
-- 准备数据库 mysql (其他可选: MySQL/MariaDB/PostgreSQL/SQLite3)
-- 创建 pdns 库，并导入 DDL: https://github.com/PowerDNS/pdns/blob/master/modules/gmysqlbackend/schema.mysql.sql
-
-
+- 更新系统，安装源：`dnf update -y && dnf install epel-release -y`
+- 准备数据库 MySQL（其他可选：MySQL/MariaDB/PostgreSQL/SQLite3）
+- 创建 pdns 库，并导入 DDL：https://github.com/PowerDNS/pdns/blob/master/modules/gmysqlbackend/schema.mysql.sql
 
 ## 安装 PowerDNS
 
@@ -29,7 +26,7 @@ daemon=yes
 local-address=0.0.0.0
 local-port=53
 
-# 设置后端为 gmysql (Generic MySQL) (注意移除  launch=bind)
+# 设置后端为 gmysql (Generic MySQL) (注意移除 launch=bind)
 launch=gmysql
 
 # MySQL 连接参数
@@ -58,9 +55,7 @@ api=yes
 api-key=your_very_secure_api_key_here
 # （可选）允许的 API 访问来源（CIDR 格式）
 # webserver-allow-from=127.0.0.1,192.168.1.0/24
-
 ```
-
 
 ### 启动
 
@@ -77,11 +72,7 @@ firewall-cmd --add-service=dns --permanent
 firewall-cmd --reload
 ```
 
-
-
 ## 安装 PowerDNS Admin
-
-
 
 ```shell
 docker run -d \
@@ -97,8 +88,8 @@ docker run -d \
   powerdnsadmin/pda-legacy:latest
 ```
 
-- 注册  admin 账号
+- 注册 admin 账号
 
 - 以上无法使用 mysql, 移除后自动使用 sqlite3
 - 缺少 pymysql 驱动。。
-
+- 解决方式：在镜像内自行安装 pymysql 后重新打包，或改用内置 SQLite3

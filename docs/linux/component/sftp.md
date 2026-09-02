@@ -4,46 +4,56 @@
 
 ## 配置
 
-### 确认 openssl 版本
+### 确认 OpenSSH 版本
+
 ```shell
 ssh -V
 ```
-> 版本必须大于4.8p1,低于这个版本需要升级。
 
-### 创建sftp组
+> 版本必须大于4.8p1，低于这个版本需要升级。
+
+### 创建 SFTP 组
+
 ```shell
 groupadd sftp
 ```
 
-### 创建sftp用户
+### 创建 SFTP 用户
+
 ```shell
-# 该用户不能登陆到系统, 不同系统可能存在差异
-useradd -g sftp -s /bin/false sftpuser
+# 该用户不能登录到系统（两种写法二选一，不同系统存在差异）
+# useradd -g sftp -s /bin/false sftpuser
 useradd -g sftp -s /bin/nologin sftpuser
 
 # 为sftpuser用户设置密码
 passwd sftpuser
 ```
 
-### 创建sftp指定Chroot目录
+### 创建 SFTP 指定 Chroot 目录
+
 ```shell
 mkdir -p /opt/sftp/
 ```
 
-### 配置 sftp
+### 配置 SFTP
+
 - `vim /etc/ssh/sshd_config`
+
 注释：
+
 ```shell
 # Subsystem sftp /usr/libexec/openssh/sftp-server
 ```
+
 增加：
+
 ```shell
 # 配置一个外部子系统，值是子系统的名字和对应的命令行
 Subsystem sftp internal-sftp
-# 限定只有sftp组的才能访问      
-Match Group sftp 
+# 限定只有sftp组的才能访问
+Match Group sftp
 # 设置属于用户组sftp的用户访问的根文件夹
-ChrootDirectory /opt/sftp/ 
+ChrootDirectory /opt/sftp/
 # 强制执行这里指定的命令而忽略客户端提供的任何命令
 ForceCommand internal-sftp
 # 是否允许TCP转发
@@ -51,13 +61,16 @@ AllowTcpForwarding no
 # 是否允许进行 X11 转发
 X11Forwarding no
 ```
-### 修改Chroot目录权限
+
+### 修改 Chroot 目录权限
+
 ```shell
 chown -R root:sftp /opt/sftp/
 chmod -R 755 /opt/sftp/
 ```
 
-### 建立sftp用户写入权限目录
+### 建立 SFTP 用户写入权限目录
+
 ```shell
 cd /opt/sftp/
 mkdir upload
@@ -65,14 +78,16 @@ chown sftpuser:sftp upload
 chmod 755 upload
 ```
 
-### 重启sshd服务
+### 重启 sshd 服务
+
 ```shell
 systemctl restart sshd
 ```
 
-## 使用 sftp
+## 使用 SFTP
 
 ### 登录
+
 ```shell
 sftp sftpuser@sftp.example.com
 ```
@@ -92,5 +107,3 @@ sftp sftpuser@sftp.example.com
 | put test.txt | 把本地文件当前目录下test.txt上传到ftp服务器当前目录   |
 | rm           | 删除文件                              |
 | rmdir        | 删除目录                              |
-
-

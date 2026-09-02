@@ -6,11 +6,10 @@
 
 ## 部署
 
-- 初始化数据库, 并将数据连接信息使用在下方 yaml 中
-- 容器部署，使用以下 yaml 直接在 k8s 部署
+- 初始化数据库，并将数据连接信息使用在下方 YAML 中
+- 容器部署，使用以下 YAML 直接在 k8s 部署
 
 ```yaml
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,7 +21,7 @@ spec:
   selector:
     matchLabels:
       app: xxl-job
-  # 发布策略-平滑发布
+  # 发布策略-重建发布（Recreate 会先停止旧实例再创建新实例，非平滑滚动）
   strategy:
     type: Recreate
   template:
@@ -58,7 +57,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-      app: xxl-job
+    app: xxl-job
   ports:
     - port: 8080
       targetPort: 8080
@@ -88,17 +87,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
- name: xxl-job-node-port-svc
- namespace: uat
+  name: xxl-job-node-port-svc
+  namespace: uat
 spec:
- type: NodePort
- selector:
-  app: xxl-job
- ports:
-  - nodePort: 38080
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-
+  type: NodePort
+  selector:
+    app: xxl-job
+  ports:
+    - nodePort: 38080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
 ```
-

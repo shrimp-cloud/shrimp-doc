@@ -1,12 +1,14 @@
-# samba
+# Samba
 
 > SMB协议的文件及打印机等资源共享服务
 
-### 安装
+## 安装
+
 - 系统： centos 7
 
 步骤：
-```
+
+```shell
 yum install samba -y # 安装 samba
 yum install samba-client -y # 安装 centos 的客户端，用于测试
 yum install cifs-utils -y # 用于测试挂载
@@ -33,17 +35,16 @@ vim /etc/sysconfig/iptables
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 445 -j ACCEPT
 -A INPUT -p udp -m state --state NEW -m udp --dport 137 -j ACCEPT
 -A INPUT -p udp -m state --state NEW -m udp --dport 138 -j ACCEPT
-service restart iptables
+service iptables restart
 # centos 7
 firewall-cmd --zone=public --add-port=137-139/tcp --permanent
 firewall-cmd --zone=public --add-port=137-139/udp --permanent
 firewall-cmd --zone=public --add-port=445/tcp --permanent
 firewall-cmd --reload
 
-
 # 创建共享目录
 mkdir /opt/share
-修改用户，组，及权限
+# 修改用户，组，及权限
 chown -R smb:smb /opt/share
 chmod -R 777 /opt/share
 
@@ -62,28 +63,30 @@ smbclient -L 127.0.0.1 -U smb # 可看到详情
 
 # 测试挂载
 mkdir /mnt/samba_test
-mount -t cifs -o username=smb,password=你的密码 //127.0.0.1/share
+mount -t cifs -o username=smb,password=你的密码 //127.0.0.1/share /mnt/samba_test
 cd /mnt/samba_test
 
 ```
 
+## 使用【Linux】
 
-### 使用【Linux】
-```
+```shell
 yum install cifs-utils -y
 mkdir /mnt/samba_test
-mount -t cifs -o username=smb,password=你的密码 //127.0.0.1/share
+mount -t cifs -o username=smb,password=你的密码 //127.0.0.1/share /mnt/samba_test
 cd /mnt/samba_test
 
 ```
 
-### 使用【Mac】
+## 使用【Mac】
+
 - 打开 Finder
 - Cmd + K
 - 输入地址：smb://服务器IP/share
 - 客人方式访问即可
 
-### 【Windows】使用方法【任选其一】
+## 【Windows】使用方法【任选其一】
+
 1.  SMB client 访问
     - 安装  SMB 1 client
     - 重启电脑

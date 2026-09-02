@@ -1,8 +1,7 @@
 # Nginx
 
-
 ## yum 安装
-```shell script
+```shell
 vim /etc/yum.repos.d/nginx.repo
 [nginx-stable]
 name=nginx stable repo
@@ -28,11 +27,10 @@ systemctl enable nginx
 
 ## 源码安装
 
-
 ### 系统,基础依赖
 
 - CentOS 7.x
-```shell script
+```shell
 yum install -y epel-release yum-utils
 yum install -y vim net-tools numactl lrzsz zip unzip wget htop git telnet
 yum install -y gcc automake autoconf libtool make
@@ -45,7 +43,7 @@ yum install -y pcre-devel openssl openssl-devel
 
 > 若不需要 lua 支持，可忽略此过程
 
-```shell script
+```shell
 
 wget http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 tar -zxvf  LuaJIT-2.0.5.tar.gz
@@ -59,14 +57,13 @@ export LUAJIT_INC=/usr/local/luajit/include/luajit-2.0
 
 source /etc/profile
 ```
- ---
-
+---
 
 ### lua 环境处理
 
 > 若不需要 lua 支持，可忽略此过程
 
-```shell script
+```shell
 # vim /etc/ld.so.conf.d/lua.conf
 /usr/local/luajit/lib
 # ldconfig
@@ -77,8 +74,8 @@ source /etc/profile
 ###  ngx_devel_kit 和 lua-nginx-module
 
 > 若不需要 lua 支持，可忽略此过程
->
-```shell script
+
+```shell
 cd /opt/download
 
 wget https://github.com/simpl/ngx_devel_kit/archive/v0.3.1.tar.gz
@@ -91,13 +88,10 @@ tar -zxvf lua-nginx-module-0.10.9rc7.tar.gz
 ```
 > 这里有一个大坑, lua-nginx-module-v0.10.17.tar.gz 安装会报错。更换 0.10.9rc7 后解决
 
-
 ---
 
-
-
 ### 源码安装 nginx
-```shell script
+```shell
 
 mkdir /opt/download
 cd /opt/download
@@ -153,7 +147,7 @@ cd /opt/download/nginx-1.18.0
 
 make && make install
 
-mkdir /opt/nginx/cache # 这个傻x 居然不会自己创建 cache 目录
+mkdir /opt/nginx/cache # nginx 不会自动创建 cache 目录
 
 # 权限
 chown -R apps:apps /opt/nginx/
@@ -165,7 +159,7 @@ chmod u+s /opt/nginx/sbin/nginx
 ---
 
 ### 操作
-```shell script
+```shell
 cd /opt/nginx/sbin
 启动： ./nginx
 重载： ./nginx -s reload
@@ -173,9 +167,8 @@ cd /opt/nginx/sbin
 
 ---
 
-
 ### 测试
-```shell script
+```text
 server {
     listen       80;
     server_name lua.test.wkclz.com;
@@ -189,14 +182,13 @@ server {
 }
 
 ```
- ---
 
-
+---
 
 ### 其他处理
-```shell script
+```shell
 # 查看动态连接库
- ldd $(which /otp/nginx/sbin/nginx)
+ ldd $(which /opt/nginx/sbin/nginx)
 ```
 
 ---
@@ -204,8 +196,8 @@ server {
 ### nginx 自动部署
 > 为方便完成 nginx 的自动部署，需要配置规范化，并放置脚本到 git 仓库中，下属服务器后自动化部署。具体规范过一次sh 脚本即可
 
-##### 跟随nginx的脚本【nginx 操作】：
-```shell script
+#### 跟随nginx的脚本【nginx 操作】：
+```shell
 #!/bin/sh
 
 # 参数
@@ -231,8 +223,8 @@ cd ../sbin
 exit
 ```
 
-##### 跟随服务器的脚本【服务器内nginx 配置下发操作】：
-```shell script
+#### 跟随服务器的脚本【服务器内nginx 配置下发操作】：
+```shell
 #!/bin/sh
 
 # 参数
@@ -269,7 +261,6 @@ cd ~
 
 ```
 
-
 ---
 
 ## Docker 安装
@@ -300,8 +291,6 @@ CMD ["nginx", "-g", "daemon off;"]
 1. 项目根目录需要维护 nginx.conf
 2. nginx location 的静态文件，需要指向 /home/apps
 
-
-
 ## Nginx 常用配置
 
 ### 配置
@@ -310,9 +299,8 @@ CMD ["nginx", "-g", "daemon off;"]
 - 后端接口做跨域支持
 - 此处提供多个配置 demo，需要组合使用
 
-
 ### 全局配置
-```
+```text
 user apps apps;
 
 #error_log  logs/error.log;
@@ -418,9 +406,8 @@ http {
 }
 ```
 
-
 ### gzip压缩
-```
+```text
 # 开启 gzip 压缩
 gzip                on;
 gzip_vary           on;
@@ -435,7 +422,7 @@ gzip_http_version   1.1; # 部分早期的 HTTP/1.0 客户端在处理 GZip 时�
 > 可独立成 gzip.conf 再 include 到 nginx.conf 内
 
 ### 纯静态文件
-```
+```text
 server {
     listen       80;
     server_name  static.wkclz.com;
@@ -446,9 +433,8 @@ server {
 }
 ```
 
-
 ### 读取文件列表
-```
+```text
 server {
     listen       80;
     server_name  static.wkclz.com;
@@ -461,9 +447,8 @@ server {
 }
 ```
 
-
 ### 纯反向代理配置
-```
+```text
 server {
     listen       80;
     server_name eureka.wkclz.com;
@@ -478,9 +463,8 @@ server {
 }
 ```
 
-
 ### 纯301跳转配置
-```
+```text
 server {
     listen       80;
     server_name  www.wkclz.com api.wkclz.com;
@@ -491,7 +475,7 @@ server {
 ```
 
 ### 重写实现 301
-```
+```text
 server {
     listen       80;
     server_name jenkins.wkclz.com;
@@ -501,9 +485,8 @@ server {
 }
 ```
 
-
 ### 单页面应用配置
-```
+```text
 server {
     listen       80;
     server_name  mobile.wkclz.com;
@@ -518,9 +501,8 @@ server {
 }
 ```
 
-
 ### SSL 配置
-```
+```text
 server {
     listen       443 ssl;
     server_name  api.wkclz.com;
@@ -549,7 +531,7 @@ server {
 ```
 
 ### 跨域配置
-```
+```text
 server {
     listen       80;
     server_name  api.wkclz.com;
@@ -581,7 +563,7 @@ server {
 
 ### nginx 域名验证
 
-```
+```text
 server {
     listen       80;
     server_name  api.example.com;
@@ -592,9 +574,8 @@ server {
 }
 ```
 
-
 ### nginx 微信服务器校验
-```
+```text
 server {
     listen       80;
     server_name  api.example.com;
@@ -605,9 +586,8 @@ server {
 }
 ```
 
-
 ###  开启 base 认证
-```
+```text
 server {
     listen       80;
     server_name admin.wkclz.com;
@@ -630,9 +610,8 @@ admin:xxxxxxxxx
 
 ```
 
-
 ### 拦截指定请求
-```
+```text
 location ~* .\.(php|rar|gz|bak|7z|py|cgi|pl|sh|git|aspx|env)$ {
     return 403;
 }
@@ -641,9 +620,8 @@ if ($request_uri = / ) {
 }
 ```
 
-
 ### TCP转发
-```
+```text
 # 在 http 之外配置
 stream {
     server {
@@ -665,7 +643,7 @@ upstream proxy_2_8809 {
 ```
 
 ### UDP转发
-```
+```text
 # 在 http 之外配置
 stream {
     server {
@@ -674,7 +652,6 @@ stream {
     }
 }
 ```
-
 
 ### 安全配置
 | 注解标签                    | 注解值                | 可选值                            | 说明                                                            |
@@ -685,13 +662,12 @@ stream {
 | Content-Security-Policy | default-src 'self' | 可选值有点多，需要再查询                   | 定义一套页面资源加载白名单规则，浏览器使用csp规则去匹配所有资源，禁止加载不符合规则的资源，同时将非法资源请求进行上报。 |
 
 #### 配置示例
-```
+```text
 add_header X-Frame-Options "SAMEORIGIN" always;
 add_header X-XSS-Protection "1; mode=block" always;
 add_header X-Content-Type-Options "nosniff" always;
 add_header Content-Security-Policy "default-src 'self'" always;
 ```
-
 
 ---
 
@@ -710,7 +686,6 @@ add_header Content-Security-Policy "default-src 'self'" always;
 1. 在 vue 或 react 内，若 router 使用了 hash 模式，最好配置 try_files 来确保请求能找到处理文件。同时内部要自行解决路由匹配的404问题
 2. 若服务没法使用 try_files, 则必需配置默认页面，并且需要引导用户，不能访问到其他 uri
 
-
 ### location
 
 | 匹配符 | 含义                   | 配置示例              | 匹配示例                   |
@@ -718,7 +693,7 @@ add_header Content-Security-Policy "default-src 'self'" always;
 |     | 不加任何规则，默认是大小写敏感，前缀匹配 | location /abc/    | http://abc.com/abc/    |
 | =   | 精确匹配                 | location = /abc/  | http://abc.com/abc/    |
 | ~   | 执行正则匹配，区分大小写         | location ~ /Abc/  | http://abc.com/Abc/xxx |
-| ~*  | 执行正则匹配，忽略大小写         | location ~ /Abc/  | http://abc.com/abc/xxx |
+| ~*  | 执行正则匹配，忽略大小写         | location ~* /Abc/  | http://abc.com/abc/xxx |
 | ^~  | 普通字符串匹配上以后不再进行正则匹配   | location ^~ /abc/ | http://abc.com/abc/xxx |
 
 匹配顺序：
@@ -753,7 +728,6 @@ add_header Content-Security-Policy "default-src 'self'" always;
 
 另外，像`http://localhost:8379/` 这个地址很特别，因为去除掉协议、主机、端口后，就只剩下 / 了，这大概就是，以斜杠结尾的配置会去除location配置内容这个错误说法的源头了。事实上，像`http://localhost:8379/foo`这个地址，uri为/foo，它并没有以 / 结尾，但在生成新的转发uri时，同样会去除掉location的配置内容。
 
-
 ### root&alias
 
 - [root]
@@ -772,5 +746,3 @@ add_header Content-Security-Policy "default-src 'self'" always;
 2. alias可以指定任何名称。
 3. alias在使用正则匹配时，必须捕捉要匹配的内容并在指定的内容处使用。
 4. alias只能位于location块中。
-
-

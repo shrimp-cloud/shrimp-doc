@@ -1,8 +1,6 @@
 # shadowsocks 搭建
 
-
 ## yum 安装
-
 
 > 适用于 CentOS 7
 
@@ -17,7 +15,6 @@ wget -O /etc/yum.repos.d/librehat-shadowsocks-epel-7.repo https://copr.fedorainf
 ```shell
 yum -y install shadowsocks-libev
 ```
-
 
 ## 编译安装
 
@@ -37,7 +34,6 @@ git submodule update --init --recursive
 make && make install
 ```
 
-
 ## 配置
 
 ```shell
@@ -54,9 +50,8 @@ vim /etc/shadowsocks-libev/config.json
 }
 ```
 
-
 配置 systemctl 操作
- yum 安装会自动添加。源码安装才需要这一步
+yum 安装会自动添加。源码安装才需要这一步
 
 ```shell
 # vim /etc/systemd/system/shadowsocks-libev.service
@@ -73,7 +68,6 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 ```
-
 
 ## 启动
 
@@ -105,13 +99,12 @@ firewall-cmd --list-ports
 
 - 运营商网络开放 19499 (文档略过)
 
-
 ## 连接
 
 ### GUI
 
 - 客户端下载: https://shadowsocks.org/doc/getting-started.html
-- 本地 host 给 qqqq.com 做个解析
+- 修改本地 hosts 文件，将 qqqq.com 解析到你的服务器 IP（可选，仅当使用自定义域名时）
 
 ### Command
 
@@ -131,11 +124,9 @@ firewall-cmd --list-ports
 }
 ```
 
-
 ```shell
 nohup ss-local -c /etc/shadowsocks-libev/config.json &
 ```
-
 
 - 使用 privoxy 将 socks5 代理转换为 http 代理
 
@@ -162,4 +153,3 @@ export HTTPS_PROXY=http://127.0.0.1:8118
 # 单次任务使用代理
 curl -v --proxy 127.0.0.1:8118 https://www.baidu.com
 ```
-

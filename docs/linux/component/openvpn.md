@@ -1,6 +1,6 @@
 # OpenVPN
 
-> 申明: 此处只从技术讨论如何安装。请确认安装合法合规后再实践!
+> 声明: 此处只从技术讨论如何安装。请确认安装合法合规后再实践!
 
 ## 安装
 
@@ -10,9 +10,7 @@
 
 ### 安装源
 
-
 - 安装源:  `yum install -y epel-release`
-
 
 ### 生成证书
 
@@ -75,7 +73,6 @@ cd /opt/easy-rsa/
 /opt/easy-rsa/easyrsa sign client client
 ```
 
-
 ### 安装 OpenVPN
 
 - 安装openvpn软件
@@ -87,7 +84,6 @@ yum install -y openvpn
 ```shell
 openvpn --genkey --secret /etc/openvpn/ta.key
 ```
-
 
 ### 配置
 ```shell
@@ -101,7 +97,7 @@ key server.key #服务端私钥名称
 dh dh.pem #交换证书
 server 10.8.0.0 255.255.255.0 #给客户端分配地址池，注意：不能和VPN服务器内网网段有相同
 push "route 192.168.0.0 255.255.0.0" #允许客户端访问内网192.168.0.0网段
-push "redirect-gateway def1 bypass-dhcp"  #是否翻墙
+push "redirect-gateway def1 bypass-dhcp"  # 是否将客户端默认网关指向 VPN（全局代理）
 push "dhcp-option DNS 114.114.114.114"  #设置客户端DNS
 ifconfig-pool-persist ipp.txt #地址池记录文件位置
 cipher AES-256-CBC
@@ -133,7 +129,6 @@ systemctl restart openvpn@server.service
 systemctl status openvpn@server.service
 ```
 
-
 - 查看端口情况
 ```shell
 netstat -tunlp | grep openvpn
@@ -157,11 +152,7 @@ iptables -A INPUT -p tcp --dport 11195 -j ACCEPT
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 
-
-
 ```
-
-
 
 ## 客户端使用
 
@@ -178,7 +169,8 @@ iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 client #指定当前VPN是客户端
 dev tun #使用tun隧道传输协议
 proto udp #根据openvpnserver端决定使用的是udp协议传输数据，还是tcp协议
-remote 192.168.31.168 1195 #openvpn服务器IP地址端口号
+remote 192.168.31.168 11195 #openvpn服务器IP地址端口号
+# remote 后的 IP 需替换为你的服务器公网 IP
 resolv-retry infinite #断线自动重新连接，在网络不稳定的情况下非常有用
 nobind #不绑定本地特定的端口号
 ca ca.crt #指定CA证书的文件路径

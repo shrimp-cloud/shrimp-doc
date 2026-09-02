@@ -5,11 +5,13 @@
 ### 环境准备
 
 移除mariadb的影响
+
 ```shell
 dnf remove mariadb-libs mariadb-connector-c-config -y
 ```
 
 安装 mysql依赖包
+
 ```shell
 dnf install libaio.x86_64 libtirpc -y
 ```
@@ -19,8 +21,8 @@ dnf install libaio.x86_64 libtirpc -y
 - 官网下载地址：https://dev.mysql.com/downloads/mysql/
 - 选择RHEL9, x86_64版本 RPM Bundle包
 
+### MySQL 安装
 
-### mysql安装
 ```shell
 # 解压
 tar -xvf mysql-*
@@ -36,20 +38,23 @@ dnf install -y ./mysql-community-server-9.4.0-1.el9.x86_64.rpm
 systemctl start mysqld
 systemctl enable mysqld
 # 初始密码，初始化
-初始密码在 /var/log/mysqld.log 里面
-初始化：mysql_secure_installation
+# 初始密码在 /var/log/mysqld.log 里面
+# 初始化：mysql_secure_installation
 # 创建用户
 CREATE USER 'user_name'@'%' IDENTIFIED BY 'password';
 # 给用户授权
 GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%'  WITH GRANT OPTION;
-# 创建并授权用户
+# 创建并授权用户（MySQL 5.7 及以下支持此写法）
 GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%' IDENTIFIED BY 'user_password' WITH GRANT OPTION;
+# MySQL 8.0+ 已移除 GRANT 建用户，需先 CREATE USER 再 GRANT：
+# CREATE USER 'user_name'@'%' IDENTIFIED BY 'user_password';
+# GRANT ALL PRIVILEGES ON database_name.* TO 'user_name'@'%' WITH GRANT OPTION;
 # 刷新权限
 FLUSH PRIVILEGES;
 ```
 
-
 ### 自定义配置
+
 ```shell
 # vim /etc/my.cnf
 [mysqld]
@@ -65,10 +70,9 @@ default-character-set=utf8mb4 # 设置 mysql 命令行客户端的默认字符�
 
 ```
 
-
 ### 防火墙
 
-```shell script
+```shell
 # 检查防火墙是否包含 3306端口
 firewall-cmd --list-ports
 # 防火墙开放3306
@@ -77,31 +81,32 @@ firewall-cmd --permanent --zone=public --add-port=3306/tcp
 firewall-cmd --reload
 ```
 
-
 ### 编译安装
+
+> 注意：以下为 MySQL 5.6 时代的编译安装方式，仅作参考；新版本请使用上方的 RPM Bundle 方式安装。
+
 ```shell
 # 安装依赖
-yum install gcc gcc‐c++ make cmake ncurses‐devel  autoconf
+yum install gcc gcc-c++ make cmake ncurses-devel  autoconf
 # 新建MySQL用户
 groupadd mysql
-useradd ‐r ‐g mysql ‐s /bin/false mysql
+useradd -r -g mysql -s /bin/false mysql
 # 安装
-tar ‐xf mysql‐5.6.26.tar.gz
-cd mysql‐5.6.26
-cmake . ‐DENABLED_LOCAL_INFILE=1 ‐DCMAKE_INSTALL_PREFIX=/usr/local/mysql && make && make install
+tar -xf mysql-5.6.26.tar.gz
+cd mysql-5.6.26
+cmake . -DENABLED_LOCAL_INFILE=1 -DCMAKE_INSTALL_PREFIX=/usr/local/mysql && make && make install
 # 目录规划
-数据目录:$lvm分区/$项目名称/data
-日志目录:$lvm分区/$项目名称/log
-tmp目录:$lvm分区/$项目名称/tmp
+# 数据目录:$lvm分区/$项目名称/data
+# 日志目录:$lvm分区/$项目名称/log
+# tmp目录:$lvm分区/$项目名称/tmp
 ```
-
 
 ## 运维
 
 ### 常用命令
 
 - 查询是否锁表: show OPEN TABLES where In_use > 0;
-- 查询进程:show processlist
+- 查询进程: show processlist
 - kill 进程: kill    id
 - 查看进行中的事务: SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;
 - 查看正在锁的事务: SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS;
@@ -111,6 +116,7 @@ tmp目录:$lvm分区/$项目名称/tmp
 - 锁等待的对应关系: information_schema.innodb_lock_waits
 
 ### 慢查询记录
+
 ```shell
 [mysqld]
 slow_query_log = ON
@@ -123,12 +129,14 @@ select sleep(2);
 ## 配置
 
 ### 修改密码
+
 ```shell
 ALTER USER `root`@`%` IDENTIFIED BY 'new_password';
 FLUSH PRIVILEGES;
 ```
 
 ### 强制修改密码
+
 ```shell
 # vim /etc/my.cnf
 [mysqld]
@@ -136,22 +144,27 @@ skip-grant-tables
 
 # 登录并修改密码
 # MySQL 5.6 及以下
-UPDATE user SET Password = password ( ‘new-password’ ) WHERE User = ‘root’ ;
+UPDATE user SET Password = password('new-password') WHERE User = 'root';
 
 # MySQL:5.7
 UPDATE mysql.user set authentication_string=password('123qwe') where user='root' and Host = 'localhost';
 
 flush privileges;
+# MySQL 8.0+ 修改方式
+# ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
 ```
 
 ### only_full_group_by
+
 > 建议更严格的模式
+
 ```shell
 [mysqld]
 sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
 ```
 
 ### 安装 Mariadb
+
 ```shell
 yum install mariadb-server -y
 systemctl enable/start/stop/restart mariadb
@@ -159,6 +172,7 @@ mysql_secure_installation # 初始化
 ```
 
 ### 大小写敏感
+
 ```shell
 [mysqld]
 lower_case_table_names=1 # 【1不敏感，0敏感】
@@ -166,35 +180,39 @@ lower_case_table_names=1 # 【1不敏感，0敏感】
 
 ### 导入导出
 
-####  导出
+#### 导出
+
 ```shell
 # 按 schema 维度导出
+# 执行后会提示输入密码，schema_name 替换为实际库名
 mysqldump -P 3306 -uroot -p [schema_name] > /path/to/backup_date.sql
 zip -r /path/to/backup_date.zip /path/to/backup_date.sql
-
-# 导入
-mysql -P 3306 -uroot -p [schema_name] < /path/to/backup_date.sql
 ```
 
 #### 导入
 
-
+```shell
+# 导入
+mysql -P 3306 -uroot -p [schema_name] < /path/to/backup_date.sql
+```
 
 ## 使用
 
 ### 生成随机数
 
 sql 生成
+
 ```sql
 SELECT
-	(@i :=@i + 1) i,
-	table_name.*
+  (@i :=@i + 1) i,
+  table_name.*
 FROM
-    table_name,
-	(SELECT @i := 0) AS it
+  table_name,
+  (SELECT @i := 0) AS it
 ```
 
 存储过程生成
+
 ```sql
 CREATE DEFINER= CURRENT_USER FUNCTION `rand_string`(n INT) RETURNS varchar(255) CHARSET utf8
     COMMENT '获取随机数'
@@ -212,11 +230,12 @@ END
 ```
 
 ### 生成时间 序列
+
 ```sql
 WITH recursive time_sequence(year_time) AS (
     SELECT CAST('2020-01-01 00:00:00' as datetime)
     UNION ALL
     SELECT year_time + INTERVAL 1 YEAR FROM time_sequence WHERE year_time < NOW()
 )
-SELECT * FROM sequence;
+SELECT * FROM time_sequence;
 ```

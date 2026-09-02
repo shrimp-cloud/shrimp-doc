@@ -2,16 +2,16 @@
 
 > LNMP 安装，只讲述 Nginx 配置， php 安装，及 Wordpress 安装
 
-- 说明: 本文指在安装 php, 和 wordpress, 没提及 nginx, mysql 的安装
+- 说明: 本文旨在安装 php, 和 wordpress, 没提及 nginx, mysql 的安装
   - nginx: [点我](nginx.md)
   - mysql: [点我](mysql.md)
-
 
 ## php 安装
 ```shell
 # 安装源
 yum install -y epel-release
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+# 注意：webtatic 源已停止维护（php72w 对应 PHP 7.2），仅适用老环境；新环境建议使用 Remi 源
 
 # 清除历史
 yum remove -y php*
@@ -21,9 +21,8 @@ yum install -y php72w php72w-cli php72w-fpm php72w-common php72w-devel php72w-em
 
 # 启动 php, 并自动启动
 systemctl start php-fpm
-systemctl start php-fpm
+systemctl enable php-fpm
 ```
-
 
 ## 下载 wordpress
 
@@ -34,7 +33,6 @@ tar -zxvf latest-zh_CN.tar.gz
 
 # 得到  /opt/wordpress 代码
 ```
-
 
 ## 配置 nginx
 
@@ -72,16 +70,12 @@ server {
 2. 配置站点信息
 3. 登录
 
-
-
-
 ## 坑
 
 - Q: 配置数据库提示：数据库密码正确，也提示【建立数据库连接时出错】
 - A: 再次确认密码是否正确，若无误，手动创建 wp-config.php, 并配置 debug = true
 
-***
+---
 
 - Q: 以上异常提示了具体 debug 信息 【The server requested authentication method unknown to the client】
 - A: 在 mysql 8.0 以后，caching_sha2_password是默认的身份验证插件，而不是以往的mysql_native_password。解决(注意替换关键信息):`ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY '12345678';`
-
