@@ -110,9 +110,6 @@ export default withMermaid({
         {
           text: '后端规范',
           items: [
-            {text: '后端规范', link: '/backend/standard-backend/'},
-            {text: '接口', link: '/backend/standard-backend/api'},
-            {text: '数据库', link: '/backend/standard-backend/database'},
             {text: '命名规范', link: '/backend/standard-backend/named'},
           ]
         }
@@ -180,10 +177,8 @@ export default withMermaid({
             {text: 'Bom', link: '/backend/framework/bom'},
             {text: 'Parent', link: '/backend/framework/parent'},
             {text: 'Common', link: '/backend/framework/common'},
-
             {text: 'Redis', link: '/backend/framework/redis'},
             {text: 'MyBatis', link: '/backend/framework/mybatis'},
-            {text: 'Gen', link: '/backend/framework/gen'},
             {text: 'Spring', link: '/backend/framework/spring'},
             {text: 'XXL-Job', link: '/backend/framework/xxljob'},
             {text: 'Mqtt', link: '/backend/framework/mqtt'},
