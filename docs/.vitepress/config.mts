@@ -62,9 +62,7 @@ export default withMermaid({
         items: [
           { text: 'DEMO', link: '/ecology/demo/' },
           { text: '微模块', link: '/ecology/micro/' },
-          { text: '系统管理', link: '/ecology/sys/' },
-          { text: '代码生成', link: '/ecology/gen/' },
-          { text: '权限管理', link: '/ecology/cas/' },
+          { text: '权限管理', link: '/ecology/auth/' },
           { text: '内容管理', link: '/ecology/cms/' },
           { text: '商城管理', link: '/ecology/pms/' },
           { text: '流程管理', link: '/ecology/flow/' },
@@ -174,14 +172,6 @@ export default withMermaid({
 
             {text: '后端框架介绍', link: '/backend/framework/'},
             {text: '依赖仓库', link: '/backend/framework/nexus'},
-            {text: 'Bom', link: '/backend/framework/bom'},
-            {text: 'Parent', link: '/backend/framework/parent'},
-            {text: 'Common', link: '/backend/framework/common'},
-            {text: 'Redis', link: '/backend/framework/redis'},
-            {text: 'MyBatis', link: '/backend/framework/mybatis'},
-            {text: 'Spring', link: '/backend/framework/spring'},
-            {text: 'XXL-Job', link: '/backend/framework/xxljob'},
-            {text: 'Mqtt', link: '/backend/framework/mqtt'},
           ]
         }
       ],
@@ -304,42 +294,17 @@ export default withMermaid({
           text: '微模块',
           items: [
             {text: '微模块', link: '/ecology/micro/'},
-            {text: '字典模块', link: '/ecology/micro/dict'},
             {text: '报表模块', link: '/ecology/micro/report'},
-            {text: '文件模块', link: '/ecology/micro/file'},
             {text: '表单模块', link: '/ecology/micro/form'},
             {text: '函数库', link: '/ecology/micro/fun'},
             {text: 'LiteFlow', link: '/ecology/micro/liteflow'},
-            {text: '数据脱敏', link: '/ecology/micro/mask'},
             {text: '站内消息', link: '/ecology/micro/msg'},
-            {text: '审计日志', link: '/ecology/micro/audit'},
-            {text: '序列生成', link: '/ecology/micro/seq'},
             {text: '接口生成', link: '/ecology/micro/next'},
-            {text: 'PDF模板', link: '/ecology/micro/pdf'},
             {text: '删除检查项', link: '/ecology/micro/rmckeck'},
             {text: '微信小程序', link: '/ecology/micro/wxapp'},
             {text: '微信公众号', link: '/ecology/micro/wxmp'},
             {text: '支付宝支付', link: '/ecology/micro/alipay'},
             {text: '微信支付', link: '/ecology/micro/wxpay'},
-          ]
-        }
-      ],
-      '/ecology/sys/': [
-        {
-          text: '系统管理模块',
-          items: [
-            {text: 'Sys', link: '/ecology/sys/'},
-            {text: '系统管理', link: '/ecology/sys/sys'},
-          ]
-        }
-      ],
-      '/ecology/gen/': [
-        {
-          text: 'Gen',
-          items: [
-            {text: 'Gen', link: '/ecology/gen/'},
-            {text: 'SQL转代码', link: '/ecology/gen/sql2code'},
-            {text: '代码生成', link: '/ecology/gen/gen'},
           ]
         }
       ],
@@ -350,7 +315,6 @@ export default withMermaid({
             {text: '简介', link: '/ecology/auth/'},
             {text: 'RBAC', link: '/ecology/auth/rbac'},
             {text: 'Token', link: '/ecology/auth/access_token'},
-            {text: 'Cas', link: '/ecology/auth/cas'},
           ]
         }
       ],
