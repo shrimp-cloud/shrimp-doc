@@ -54,7 +54,6 @@ export default withMermaid({
           { text: 'VUE', link: '/front/vue/' },
           { text: 'Ruoyi', link: '/front/ruoyi/' },
           { text: 'vant-weapp', link: '/front/vant-weapp/' },
-          { text: '客户端', link: '/front/client/' },
         ]
       },
       {
@@ -66,8 +65,6 @@ export default withMermaid({
           { text: '内容管理', link: '/ecology/cms/' },
           { text: '商城管理', link: '/ecology/pms/' },
           { text: '流程管理', link: '/ecology/flow/' },
-          { text: '报表管理', link: '/ecology/report/' },
-          { text: '博客系统', link: '/ecology/blog/' },
         ]
       },
 
@@ -269,16 +266,6 @@ export default withMermaid({
           ]
         }
       ],
-      '/front/client/': [
-        {
-          text: '客户端',
-          items: [
-            {text: '客户端', link: '/front/client/'},
-            {text: '小程序', link: '/front/client/miniapp'},
-          ]
-        }
-      ],
-
       '/ecology/demo/': [
         {
           text: 'Demo',
@@ -341,31 +328,10 @@ export default withMermaid({
           text: 'Flow',
           items: [
             {text: 'Flow', link: '/ecology/flow/'},
-            {text: 'Camunda', link: '/ecology/flow/01_camunda'},
             {text: 'Flowable', link: '/ecology/flow/02_flowable'},
           ]
         }
       ],
-      '/ecology/report/': [
-        {
-          text: '报表',
-          items: [
-            {text: '报表', link: '/ecology/report/'},
-            {text: '报表设计', link: '/ecology/report/report'},
-          ]
-        }
-      ],
-      '/ecology/blog/': [
-        {
-          text: 'Blog',
-          items: [
-            {text: 'Blog', link: '/ecology/blog/'},
-            {text: '服务端', link: '/ecology/blog/server'},
-            {text: 'Blog', link: '/ecology/blog/blog'},
-          ]
-        }
-      ],
-
       '/linux/system/': [
         {
           text: '操作系统',
