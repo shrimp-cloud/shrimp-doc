@@ -59,7 +59,6 @@ export default withMermaid({
       {
         text: '生态',
         items: [
-          { text: 'DEMO', link: '/ecology/demo/' },
           { text: '微模块', link: '/ecology/micro/' },
           { text: '权限管理', link: '/ecology/auth/' },
           { text: '内容管理', link: '/ecology/cms/' },
@@ -263,16 +262,6 @@ export default withMermaid({
             {text: '请求', link: '/front/vant-weapp/request'},
             {text: '组件', link: '/front/vant-weapp/components'},
             {text: 'Shit', link: '/front/vant-weapp/shit'},
-          ]
-        }
-      ],
-      '/ecology/demo/': [
-        {
-          text: 'Demo',
-          items: [
-            {text: 'Demo', link: '/ecology/demo/'},
-            {text: '选型', link: '/ecology/demo/lectotype'},
-            {text: '示例', link: '/ecology/demo/demo'},
           ]
         }
       ],
