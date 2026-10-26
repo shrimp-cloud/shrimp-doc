@@ -265,25 +265,6 @@ export default withMermaid({
           ]
         }
       ],
-      '/ecology/micro/': [
-        {
-          text: '微模块',
-          items: [
-            {text: '微模块', link: '/ecology/micro/'},
-            {text: '报表模块', link: '/ecology/micro/report'},
-            {text: '表单模块', link: '/ecology/micro/form'},
-            {text: '函数库', link: '/ecology/micro/fun'},
-            {text: 'LiteFlow', link: '/ecology/micro/liteflow'},
-            {text: '站内消息', link: '/ecology/micro/msg'},
-            {text: '接口生成', link: '/ecology/micro/next'},
-            {text: '删除检查项', link: '/ecology/micro/rmckeck'},
-            {text: '微信小程序', link: '/ecology/micro/wxapp'},
-            {text: '微信公众号', link: '/ecology/micro/wxmp'},
-            {text: '支付宝支付', link: '/ecology/micro/alipay'},
-            {text: '微信支付', link: '/ecology/micro/wxpay'},
-          ]
-        }
-      ],
       '/ecology/auth/': [
         {
           text: '授权管理',
