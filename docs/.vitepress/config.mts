@@ -59,7 +59,6 @@ export default withMermaid({
       {
         text: '生态',
         items: [
-          { text: '微模块', link: '/ecology/micro/' },
           { text: '权限管理', link: '/ecology/auth/' },
           { text: '内容管理', link: '/ecology/cms/' },
           { text: '商城管理', link: '/ecology/pms/' },
