@@ -20,9 +20,7 @@
 | demo | 示例项目     | [文档](http://doc.wkclz.com/demo/) |
 | gen  | 代码生成     | [文档](http://doc.wkclz.com/gen/)  |
 | gov  | 服务管理     | [文档](http://doc.wkclz.com/gov/)  |
-| sys  | 系统管理     | [文档](http://doc.wkclz.com/sys/)  |
 | cas  | 用户/权限/资源 | [文档](http://doc.wkclz.com/cas/)  |
-| pms  | 产品       | [文档](http://doc.wkclz.com/pms/)  |
 | cms  | 内容       | [文档](http://doc.wkclz.com/cms/)  |
 | oms  | 订单       | [文档](http://doc.wkclz.com/oms/)  |
 | pay  | 支付       | [文档](http://doc.wkclz.com/pay/)  |
